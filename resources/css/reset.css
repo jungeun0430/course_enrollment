@@ -1,0 +1,7 @@
+body{height:auto;overflow-y:auto;position:relative;}
+body.on{overflow-y:hidden;}
+ul{list-style:none;}
+a{text-decoration:none;}
+span{display:inline-block;}
+img{max-width:100%;object-fit:cover;}
+button {border:0;background:none;padding:0;}
