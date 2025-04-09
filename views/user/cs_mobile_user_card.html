@@ -18,7 +18,7 @@
     <!-- js -->
     <script src="../../resources/js/main.js"></script>
 
-    <title>메인 페이지</title>
+    <title>모바일 회원카드</title>
 </head>
 <body data-text-size="normal">
 <!-- [웹 접근성] : 본문 바로가기 -->
@@ -29,6 +29,26 @@
     <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
     <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
     <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+</div>
+
+<!-- [모달 팝업] : 모바일 회원카드 -->
+<div id="modal-onlineUserCard" class="modal">
+    <div class="modal-content mobile-rotate">
+        <div class="title-wrap">
+            <h3>모바일 회원카드</h3>
+            <button type="button" onclick="hideModal('modal-onlineUserCard')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+        </div>
+        <div class="modal-body">
+            <div class="flex-wrap col-ver bc-box gap-auto">
+                <p class="bc-pl-tit">올림픽수영장</p>
+                <p class="bc-user-name">홍길동</p>
+                <p class="bc-user-num">회원번호: 2506002455</p>
+                <div class="bc-img-box">
+                    <img src="../../resources/img/subPage/bgimg.png" alt="바코드 임시 이미지"/>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- 헤더 -->
@@ -81,69 +101,53 @@
 
 <!-- 메인 -->
 <main id="main">
-    <section id="sec1" class="sec">
-        <div class="content-wrap">
-            <div class="flex-wrap mo-col">
-                <div class="flex-wrap col-ver first">
-                    <div class="title-wrap">
-                        <p>한국체육산업개발 스포츠센터</p>
-                        <h2>온라인 수강신청 시스템</h2>
-                    </div>
-                    <a href="../user/cs_course_registration.html" class="main-con-box blue type1" aria-label="수강신청 페이지 이동">
-                        <div class="title-wrap">
-                            <p class="txt-md">수강신청</p>
-                            <h4 class="txt-big">원하는 수업을 바로<br>신청하세요.</h4>
-                            <span class="link-btn"></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="flex-wrap col-ver">
-                    <div class="flex-wrap">
-                        <a href="#" class="main-con-box orange type2" aria-label="수강신청 안내 페이지로 이동">
-                            <div class="title-wrap">
-                                <h4>이용안내</h4>
-                                <p class="txt-sm pc-only">수강신청이 어려우신가요?<br>안내 페이지에서 자세하게<br>설명드립니다.</p>
-                                <span class="link-btn"></span>
-                            </div>
-                        </a>
-                        <a href="#" class="main-con-box green type3" aria-label="센터가입 페이지 이동">
-                            <div class="title-wrap">
-                                <h4>센터가입</h4>
-                                <span class="link-btn"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="flex-wrap">
-                        <a href="../user/cs_shopping_cart.html" class="main-con-box skyblue type4" aria-label="장바구니 페이지 이동">
-                            <div class="title-wrap">
-                                <h4>장바구니</h4>
-                                <span class="link-btn"></span>
-                            </div>
-                        </a>
-                        <a href="../user/cs_payment_history.html" class="main-con-box purple type5" aria-label="결제내역 페이지 이동">
-                            <div class="title-wrap">
-                                <h4>결제내역</h4>
-                                <span class="link-btn"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="flex-wrap">
-                        <a href="https://www.ksponco.or.kr/sports/" target="_blank" class="main-con-box gray type6" aria-label="스포츠 센터 홈페이지 이동">
-                            <div class="flex-wrap between al-center">
-                                <div class="title-wrap">
-                                    <h4 class="txt-sm">스포츠 센터 홈페이지 바로가기</h4>
-                                    <p class="txt-sm">공지사항을 확인하고, 궁금한 점을 문의할 수 있습니다.</p>
-                                </div>
-                                <span class="link-btn"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+    <div class="inner-wrap">
+        <div class="title-wrap sub-ver">
+            <h2>모바일 회원카드</h2>
+            <p>센터 이름을 클릭하시면 모바일 회원카드를 확인하실 수 있습니다.</p>
+        </div>
+        <div class="content-box lg">
+            <div class="flex-wrap mo-col online-card-wrap">
+                <button type="button" class="main-con-box blue type7" onclick="showModal('modal-onlineUserCard')">
+                    <span class="title-wrap">
+                        <span class="h4">스포츠 교실</span>
+                        <span class="link-btn"></span>
+                    </span>
+                </button>
+                <button type="button" class="main-con-box orange type8" onclick="showModal('modal-onlineUserCard')">
+                    <span class="title-wrap">
+                        <span class="h4">일산스포츠센터</span>
+                        <span class="link-btn"></span>
+                    </span>
+                </button>
+                <button type="button" class="main-con-box green type9" onclick="showModal('modal-onlineUserCard')">
+                    <span class="title-wrap">
+                        <span class="h4">분당스포츠센터</span>
+                        <span class="link-btn"></span>
+                    </span>
+                </button>
+                <button type="button" class="main-con-box purple type10" onclick="showModal('modal-onlineUserCard')">
+                    <span class="title-wrap">
+                        <span class="h4">올림픽수영장</span>
+                        <span class="link-btn"></span>
+                    </span>
+                </button>
+                <button type="button" class="main-con-box red type11" onclick="showModal('modal-onlineUserCard')">
+                    <span class="title-wrap">
+                        <span class="h4">축구장</span>
+                        <span class="link-btn"></span>
+                    </span>
+                </button>
+            </div>
+            <div class="flex-wrap mo-j-start end al-end">
+                <p class="txt-gray">원하시는 센터가<br>목록에 없으신가요?</p>
+                <a href="#" class="arrow_link">센터가입하기</a>
             </div>
         </div>
-    </section>
+    </div>
 </main>
 <script>
+  /* 모바일 */
   $(document).ready(function () {
     const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
     const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
@@ -186,6 +190,53 @@
       $('body').removeClass('no-scroll'); // 스크롤 가능하게
     }
   });
+
+  /* 2. 모달관련 함수 */
+  // 모달 관련 함수
+  function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'block';
+
+      // 모바일 화면일 경우 (-90도 회전 클래스 추가)
+      if (window.innerWidth <= 768) {
+        modal.querySelector('.modal-content').classList.add('mobile-rotate');
+      }
+      // 스크롤 막기
+      document.body.classList.add('no-scroll'); // body에 스크롤 방지 클래스 추가
+
+    }
+  }
+
+  function hideModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.style.display = 'none';
+
+      // 모바일 화면 회전 클래스 제거
+      modal.querySelector('.modal-content').classList.remove('mobile-rotate');
+      // 스크롤 막기
+      document.body.classList.remove('no-scroll'); // body에 스크롤 허용
+
+    }
+  }
+
+  /* 외부 클릭시 팝업 닫힘 */
+  let openModalName = '' // 열린 팝업이름 저장
+  window.onclick = function (event) {
+    const modals = document.querySelectorAll('.modal'); // 모든 모달 탐색
+
+    for (let modal of modals) {
+      // 클릭된 요소가 현재 모달 요소인 경우
+      if (event.target === modal) {
+        // 해당 모달 숨기기
+        modal.style.display = 'none';
+
+        // 열린 팝업 이름과 연결된 추가 로직 처리
+        hideModal(openModalName);
+      }
+    }
+  };
 
 </script>
 </body>
