@@ -192,20 +192,70 @@
 
   /* 2. 모달관련 함수 */
   // 모달 관련 함수
+  // function showModal(modalId) {
+  //   const modal = document.getElementById(modalId);
+  //   if (modal) {
+  //     modal.style.display = 'block';
+  //
+  //     // 모바일 화면일 경우 (-90도 회전 클래스 추가)
+  //     if (window.innerWidth <= 768) {
+  //       modal.querySelector('.modal-content').classList.add('mobile-rotate');
+  //     }
+  //     // 스크롤 막기
+  //     document.body.classList.add('no-scroll'); // body에 스크롤 방지 클래스 추가
+  //
+  //   }
+  // }
+
+  /* 2. 모달관련 함수 */
+  // 모달 크기 조정 및 회전 처리
+  function adjustModalSize(modalId) {
+    const modal = document.getElementById(modalId);
+    const modalContent = modal.querySelector('.modal-content');
+
+    if (modalContent) {
+      const viewportHeight = window.innerHeight; // 화면 높이
+      const viewportWidth = window.innerWidth;   // 화면 너비
+
+      if (viewportWidth <= 768) {
+        // 모바일 화면: 가로/세로 교차 및 회전 적용
+        modalContent.style.width = `${viewportHeight - 32}px`; // 여백 포함
+        modalContent.style.height = `${viewportWidth - 32}px`; // 여백 포함
+        modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)'; // 모바일은 회전 적용
+        modalContent.style.transformOrigin = 'center'; // 회전 중심
+        modalContent.style.borderRadius = '8px'; // 둥근 모서리 제거
+        modalContent.style.padding = '60px 0 0 0'; // 모바일에서 추가 여백
+      } else {
+        // PC 화면: 스타일 초기화 및 기존 설정
+        modalContent.style.width = '90%'; // 기본 너비
+        modalContent.style.maxWidth = '800px'; // 최대 너비
+        modalContent.style.height = 'auto'; // 높이 자동
+        modalContent.style.transform = 'translate(-50%, -50%)'; // 기본 위치
+        modalContent.style.borderRadius = '8px'; // 둥근 모서리 추가
+        modalContent.style.padding = '64px 0 0 0'; // 기존 여백 유지
+      }
+    }
+  }
+
+  // 창 크기 변경 시 모달 크기 재조정
+  window.addEventListener('resize', () => {
+    const openModal = document.querySelector('.modal[style*="block"]'); // 현재 열린 모달 찾기
+    if (openModal) {
+      adjustModalSize(openModal.id); // 크기 재조정 호출
+    }
+  });
+
+
+  // 모달 띄우기 함수
   function showModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
-      modal.style.display = 'block';
-
-      // 모바일 화면일 경우 (-90도 회전 클래스 추가)
-      if (window.innerWidth <= 768) {
-        modal.querySelector('.modal-content').classList.add('mobile-rotate');
-      }
-      // 스크롤 막기
-      document.body.classList.add('no-scroll'); // body에 스크롤 방지 클래스 추가
-
+      adjustModalSize(modalId); // 크기 조정 로직 호출
+      modal.style.display = 'block'; // 모달 표시
+      document.body.classList.add('no-scroll'); // 스크롤 방지
     }
   }
+
 
   function hideModal(modalId) {
     const modal = document.getElementById(modalId);

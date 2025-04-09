@@ -355,13 +355,13 @@ span.title-wrap > .h4,
     /*임시*/
     .bc-box {max-width:480px;margin:0 auto;}
     .bc-img-box {height:128px;}
-    .bc-img-box img {height:100%;}
-    .bc-user-name {font-size:32px;margin-top:12px!important;}
+    .bc-img-box img {}
+    .bc-user-name {font-size:32px;margin-top:0px!important;}
     .bc-user-num {font-weight: var(--fw-medium)!important;}
 
 
     /* 모달 */
-    .modal-body {padding: 16px 44px;height:100%;display:flex;align-items:center;}
+    .modal-body {padding: 0;height:100%;display:flex;align-items:center;}
     .modal-content {
         max-width: none;
         transform: translate(-50%, -50%) rotate(-90deg); /* -90도 회전 */
