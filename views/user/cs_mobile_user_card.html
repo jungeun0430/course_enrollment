@@ -44,7 +44,7 @@
                 <p class="bc-user-name">홍길동</p>
                 <p class="bc-user-num">회원번호: 2506002455</p>
                 <div class="bc-img-box">
-                    <img src="../../resources/img/subPage/bgimg.png" alt="바코드 임시 이미지"/>
+                    <img src="../../resources/images/subPage/bgimg.png" alt="바코드 임시 이미지"/>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
     <div class="content-wrap">
         <h1>
             <a href="../user/main.html">
-                <img src="../../resources/img/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
+                <img src="../../resources/images/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
             </a>
         </h1>
         <nav class="sidebar">
@@ -145,148 +145,5 @@
         </div>
     </div>
 </main>
-<script>
-  /* 모바일 */
-  $(document).ready(function () {
-    const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
-    const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
-    const $sidebar = $('.sidebar'); // 사이드바 메뉴
-    const $closeBtn = $('.close-btn'); // 닫기 버튼
-    const breakpoint = 1200; // PC와 모바일을 구분할 기준 너비
-
-    // 햄버거 버튼 클릭 이벤트
-    $hamburgerBtn.on('click', function () {
-      if ($(window).width() < breakpoint) {
-        // 모바일 화면일 때만 active 클래스 추가
-        $dimOverlay.addClass('active');
-        $sidebar.addClass('active');
-        $('body').addClass('no-scroll'); // 뒷배경 스크롤 방지
-      }
-    });
-
-    // 사이드바 닫기 버튼 클릭 이벤트
-    $closeBtn.on('click', function () {
-      removeActiveClasses();
-    });
-
-    // Dim 영역 클릭 시 사이드바 닫기
-    $dimOverlay.on('click', function () {
-      removeActiveClasses();
-    });
-
-    // 윈도우 리사이즈 이벤트
-    $(window).on('resize', function () {
-      if ($(window).width() >= breakpoint) {
-        // PC 모드로 전환되면 초기화
-        removeActiveClasses();
-      }
-    });
-
-    // 상태 초기화 함수
-    function removeActiveClasses() {
-      $dimOverlay.removeClass('active');
-      $sidebar.removeClass('active');
-      $('body').removeClass('no-scroll'); // 스크롤 가능하게
-    }
-  });
-
-  /* 2. 모달관련 함수 */
-  // 모달 관련 함수
-  // function showModal(modalId) {
-  //   const modal = document.getElementById(modalId);
-  //   if (modal) {
-  //     modal.style.display = 'block';
-  //
-  //     // 모바일 화면일 경우 (-90도 회전 클래스 추가)
-  //     if (window.innerWidth <= 768) {
-  //       modal.querySelector('.modal-content').classList.add('mobile-rotate');
-  //     }
-  //     // 스크롤 막기
-  //     document.body.classList.add('no-scroll'); // body에 스크롤 방지 클래스 추가
-  //
-  //   }
-  // }
-
-  /* 2. 모달관련 함수 */
-  // 모달 크기 조정 및 회전 처리
-  function adjustModalSize(modalId) {
-    const modal = document.getElementById(modalId);
-    const modalContent = modal.querySelector('.modal-content');
-
-    if (modalContent) {
-      const viewportHeight = window.innerHeight; // 화면 높이
-      const viewportWidth = window.innerWidth;   // 화면 너비
-
-      if (viewportWidth <= 768) {
-        // 모바일 화면: 가로/세로 교차 및 회전 적용
-        modalContent.style.width = `${viewportHeight - 32}px`; // 여백 포함
-        modalContent.style.height = `${viewportWidth - 32}px`; // 여백 포함
-        modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)'; // 모바일은 회전 적용
-        modalContent.style.transformOrigin = 'center'; // 회전 중심
-        modalContent.style.borderRadius = '8px'; // 둥근 모서리 제거
-        modalContent.style.padding = '60px 0 0 0'; // 모바일에서 추가 여백
-      } else {
-        // PC 화면: 스타일 초기화 및 기존 설정
-        modalContent.style.width = '90%'; // 기본 너비
-        modalContent.style.maxWidth = '800px'; // 최대 너비
-        modalContent.style.height = 'auto'; // 높이 자동
-        modalContent.style.transform = 'translate(-50%, -50%)'; // 기본 위치
-        modalContent.style.borderRadius = '8px'; // 둥근 모서리 추가
-        modalContent.style.padding = '64px 0 0 0'; // 기존 여백 유지
-      }
-    }
-  }
-
-  // 창 크기 변경 시 모달 크기 재조정
-  window.addEventListener('resize', () => {
-    const openModal = document.querySelector('.modal[style*="block"]'); // 현재 열린 모달 찾기
-    if (openModal) {
-      adjustModalSize(openModal.id); // 크기 재조정 호출
-    }
-  });
-
-
-  // 모달 띄우기 함수
-  function showModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      adjustModalSize(modalId); // 크기 조정 로직 호출
-      modal.style.display = 'block'; // 모달 표시
-      document.body.classList.add('no-scroll'); // 스크롤 방지
-    }
-  }
-
-
-  function hideModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-      modal.style.display = 'none';
-
-      // 모바일 화면 회전 클래스 제거
-      modal.querySelector('.modal-content').classList.remove('mobile-rotate');
-      // 스크롤 막기
-      document.body.classList.remove('no-scroll'); // body에 스크롤 허용
-
-    }
-  }
-
-  /* 외부 클릭시 팝업 닫힘 */
-  let openModalName = '' // 열린 팝업이름 저장
-  window.onclick = function (event) {
-    const modals = document.querySelectorAll('.modal'); // 모든 모달 탐색
-
-    for (let modal of modals) {
-      // 클릭된 요소가 현재 모달 요소인 경우
-      if (event.target === modal) {
-        // 해당 모달 숨기기
-        modal.style.display = 'none';
-
-        // 열린 팝업 이름과 연결된 추가 로직 처리
-        hideModal(openModalName);
-      }
-    }
-  };
-
-</script>
 </body>
 </html>

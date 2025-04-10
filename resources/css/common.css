@@ -1,0 +1,77 @@
+/* 공통으로 사용하는 컴포넌트가 담겨 있습니다. */
+
+/* 리스트 종류 */
+/* 1-1. ※ 리스트 */
+.reference-list {}
+.reference-list > li {padding-left:12px;position:relative;font-size:var(--txt-size01);font-weight:var(--fw-medium);color:var(--color-gray);}
+.reference-list > li + li {margin-top:2px;}
+.reference-list > li::before {content:'※';font-size:inherit;position:absolute;left:0;top:0;}
+
+/* 1-2. * 리스트 */
+.star-list {}
+.star-list > li {padding-left:12px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-gray);}
+.star-list > li + li {margin-top:2px;}
+.star-list > li::before {content:'*';font-size:inherit;position:absolute;left:0;top:2px;}
+
+/* ------------------------------------------------------- */
+/* 버튼 : 기본 (배경색 존재) */
+.btn {padding:16px;font-size:var(--txt-size04);border:2px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);transition:all 0.3s;}
+.btn:hover {background-color: var(--color-primary-dark);}
+.btn.outlined {border-color:var(--border-color);color:var(--color-gray);font-weight:var(--fw-medium);background-color:var(--color-white);}
+.btn.outlined:hover {font-weight:var(--fw-bold);color:var(--color-primary);border-color:var(--color-primary);}
+
+/* 버튼 너비 관련 */
+.btn.size-sm {min-width:120px;}
+.btn.size-nm {min-width:200px;}
+
+/* 버튼 전체적 크기 관련 */
+.btn.sm {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
+.btn.c-red {color:var(--color-red);}
+.btn.c-red:hover {color:var(--color-red);}
+
+.btn:disabled,
+.btn.outlined:disabled {color:var(--color-gray2);background-color:var(--color-light-gray);font-weight:var(--fw-medium);cursor: default;transition:none;border-color:var(--color-transparent);}
+.btn:disabled:hover,
+.btn.outlined:disabled:hover {color:var(--color-gray2);background-color:var(--color-light-gray);border-color:var(--color-transparent);}
+
+@media (max-width: 768px) {
+  /* 버튼 : 기본 (배경색 존재) */
+  .btn {padding:12px 14px;border-width:1px;}
+
+  /* 버튼 너비 관련 */
+  .btn.size-sm {min-width:auto; max-width:140px;width:100%;}
+  .btn.size-nm {min-width:auto; max-width:140px;width:100%;}
+}
+
+/* 아이콘 버튼 */
+.ico-btn {display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;border:2px solid var(--border-color);transition:border-color 0.3s;cursor:pointer;}
+.ico-btn:hover {border-color:var(--color-primary);}
+.ico-btn.shop {background:var(--color-white) url('../images/ico/ico_shop_plus.svg') no-repeat center center;background-size:28px;}
+
+/* 해당 아이콘은 모바일에서만 존재하여 고정함 */
+.ico-btn.ico-bc{width:28px;height:28px;background:url(../images/ico/ico_bc.svg) center top no-repeat;background-size:28px;}
+.ico-btn.ico-hamburger{width:28px;height:28px;background:url(../images/ico/ico_menu.svg) center top no-repeat;background-size:28px;}
+
+/* ------------------------------------------------------- */
+/* 체크박스 */
+/* 체크박스 숨기기 */
+.custom-checkbox input {position: absolute;width: 1px;height: 1px;overflow: hidden;clip: rect(0 0 0 0);white-space: nowrap;clip-path: inset(50%);}
+/* 체크박스 스타일 */
+.custom-checkbox {display:inline-flex;align-items: center;gap: 8px;cursor: pointer;}
+/* 체크박스 비주얼 */
+.custom-checkbox .checkmark {width: 24px;height: 24px;background: url('../images/ico/ico_checked_empty.svg') no-repeat center / contain;display: inline-block;transition: all 0.3s;}
+/* 체크된 상태 */
+.custom-checkbox input:focus:checked + .checkmark,
+.custom-checkbox input:checked + .checkmark {
+  background: url('../images/ico/ico_checked_active.svg') no-repeat center / contain;
+}
+/* 포커스 스타일 */
+.custom-checkbox input:focus + .checkmark {  background: url('../images/ico/ico_checked_focus.svg') no-repeat center / contain;}
+
+/* ------------------------------------------------------- */
+/* 뱃지 */
+.badge {display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
+.badge.red {background-color:var(--bg-light-red);color:var(--color-red);}
+.badge.blue {background-color:var(--bg-light-blue);color:var(--color-primary-dark);}
+
+

@@ -38,7 +38,7 @@
     <div class="content-wrap">
         <h1>
             <a href="../user/main.html">
-                <img src="../../resources/img/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
+                <img src="../../resources/images/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
             </a>
         </h1>
         <nav class="sidebar">
@@ -143,48 +143,6 @@
     </section>
 </main>
 <script>
-  $(document).ready(function () {
-    const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
-    const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
-    const $sidebar = $('.sidebar'); // 사이드바 메뉴
-    const $closeBtn = $('.close-btn'); // 닫기 버튼
-    const breakpoint = 1200; // PC와 모바일을 구분할 기준 너비
-
-    // 햄버거 버튼 클릭 이벤트
-    $hamburgerBtn.on('click', function () {
-      if ($(window).width() < breakpoint) {
-        // 모바일 화면일 때만 active 클래스 추가
-        $dimOverlay.addClass('active');
-        $sidebar.addClass('active');
-        $('body').addClass('no-scroll'); // 뒷배경 스크롤 방지
-      }
-    });
-
-    // 사이드바 닫기 버튼 클릭 이벤트
-    $closeBtn.on('click', function () {
-      removeActiveClasses();
-    });
-
-    // Dim 영역 클릭 시 사이드바 닫기
-    $dimOverlay.on('click', function () {
-      removeActiveClasses();
-    });
-
-    // 윈도우 리사이즈 이벤트
-    $(window).on('resize', function () {
-      if ($(window).width() >= breakpoint) {
-        // PC 모드로 전환되면 초기화
-        removeActiveClasses();
-      }
-    });
-
-    // 상태 초기화 함수
-    function removeActiveClasses() {
-      $dimOverlay.removeClass('active');
-      $sidebar.removeClass('active');
-      $('body').removeClass('no-scroll'); // 스크롤 가능하게
-    }
-  });
 
 </script>
 </body>
