@@ -16,6 +16,7 @@
   --color-primary-dark: #076DC5;
   --color-primary-light: #F0F6FF;
   --color-transparent: transparent;
+  --color-disabled:#DEDEDE;
 
   /* 보더 컬러 */
   --border-color:#D8DCE2;
@@ -46,6 +47,13 @@ body[data-text-size='lg'] {
   header .btn-wrap > a.ico-user {min-width:56px;}
   header .btn-wrap > a.ico-bag {min-width:64px;}
   header .btn-wrap > a.ico-pay {min-width:64px;}
+
+  /* custom-info-table */
+  .body-lg-only-tc {display:table-column!important;}
+
+  @media (max-width:1200px) {
+    .body-lg-only-tc {display:none!important;}
+  }
   @media (max-width: 767px) {
     --txt-size01 : 14px;
     --txt-size02 : 18px;

@@ -6,12 +6,7 @@
 *  */
 
 /* 1. 사이드바 */
-// 상태 초기화 함수
-function removeActiveClasses() {
-  $dimOverlay.removeClass('active');
-  $sidebar.removeClass('active');
-  $('body').removeClass('no-scroll'); // 스크롤 가능하게
-}
+
 
 /* 2. 상단 글씨크기 변경 (작성한 함수는 없음) */
 
@@ -28,7 +23,7 @@ function adjustModalSize(modalId) {
     if (viewportWidth <= 768) {
       // 모바일 화면: 가로/세로 교차 및 회전 적용
       if(modalId === 'modal-onlineUserCard') {
-        /* 1. 모바일 회원카드 */
+        /* 1. 온라인 회원카드 */
         modalContent.style.width = `${viewportHeight - 32}px`; // 여백 포함
         modalContent.style.height = `${viewportWidth - 32}px`; // 여백 포함
         modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)'; // 모바일은 회전 적용
@@ -39,7 +34,7 @@ function adjustModalSize(modalId) {
     } else {
       // PC 화면: 스타일 초기화 및 기존 설정
       if(modalId === 'modal-onlineUserCard') {
-        /* 1. 모바일 회원카드 */
+        /* 1. 온라인 회원카드 */
         modalContent.style.width = '90%'; // 기본 너비
         modalContent.style.maxWidth = '800px'; // 최대 너비
         modalContent.style.height = 'auto'; // 높이 자동
@@ -303,7 +298,12 @@ $(document).ready(function(){
       removeActiveClasses();
     }
   });
-
+  // 상태 초기화 함수
+  function removeActiveClasses() {
+    $dimOverlay.removeClass('active');
+    $sidebar.removeClass('active');
+    $('body').removeClass('no-scroll'); // 스크롤 가능하게
+  }
 
   /* 2. 상단 글자크기 변경 */
   const $buttons = $('.txt-size-btn'); // 모든 버튼 선택
@@ -354,12 +354,14 @@ $(document).ready(function(){
   let openModalName = '' // 열린 팝업이름 저장
   window.onclick = function (event) {
     const modals = document.querySelectorAll('.modal'); // 모든 모달 탐색
+    const body = document.querySelector('body');
 
     for (let modal of modals) {
       // 클릭된 요소가 현재 모달 요소인 경우
       if (event.target === modal) {
         // 해당 모달 숨기기
         modal.style.display = 'none';
+        body.classList.remove('no-scroll'); // 스크롤 가능하게
 
         // 열린 팝업 이름과 연결된 추가 로직 처리
         hideModal(openModalName);

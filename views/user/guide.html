@@ -18,7 +18,7 @@
     <!-- js -->
     <script src="../../resources/js/main.js"></script>
 
-    <title>센터가입</title>
+    <title>가이드</title>
     <style>
       .inner-wrap {width:100%;max-width:1570px;margin:0 auto;}
       .guide-comment {font-size:18px;color:red;margin-bottom:24px;}
@@ -56,7 +56,7 @@
             <ul class="pc-only-f">
                 <li><a href="../user/cs_center_join.html">센터가입</a></li>
                 <li><a href="../user/cs_course_registration.html">수강신청</a></li>
-                <li><a href="../user/cs_mobile_user_card.html">모바일 회원카드</a></li>
+                <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
                 <li><a href="#">이용안내</a></li>
             </ul>
             <!-- mobile 에서의 gnb -->
@@ -66,7 +66,7 @@
             </div>
             <div class="sidebar-menu-wrap">
                 <ul class="sidebar-list mobile-only">
-                    <li><a href="../user/cs_mobile_user_card.html">모바일 회원카드</a></li>
+                    <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
                     <li><a href="../user/cs_center_join.html">센터가입</a></li>
                     <li><a href="../user/cs_course_registration.html">수강신청</a></li>
                     <li><a href="../user/cs_shopping_cart.html">장바구니</a></li>
@@ -98,7 +98,7 @@
       <div class="box">
         <div class="title-wrap sub-ver">
           <h2>센터가입</h2>
-          <p>센터 이름을 클릭하시면 모바일 회원카드를 확인하실 수 있습니다.</p>
+          <p>센터 이름을 클릭하시면 온라인 회원카드를 확인하실 수 있습니다.</p>
         </div>
       </div>
 
@@ -107,7 +107,7 @@
         <div class="sub-content-box">
           <h3 class="sub-title">서브타이틀 제목 : 단독으로 쓰일 경우 margin bottom없음</h3>
         </div>
-        <h4 class="sub-title2">[수영 수준별 진도표></h4>
+        <h4 class="sub-title2 c-gray">[수영 수준별 진도표></h4>
       </div>
 
       <h5>1-3. 테이블에 들어가는 텍스트 관련</h5>
@@ -168,6 +168,15 @@
           <li>예시 입니다.</li>
         </ul>
       </div>
+
+      <h5>2-4. 리스트 관련<span>(- ver)</span></h5>
+      <div class="box">
+        <p style="font-size:18px;margin-bottom:4px;">a. 가로 나열</p>
+        <ul class="dash-list">
+          <li>예시 입니다.</li>
+          <li>예시 입니다.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="guide-box">
@@ -175,7 +184,7 @@
       <h5>1. 강습 수준별 진도표</h5>
       <div class="box">
         <div class="sub-content-box">
-          <h4 class="sub-title2">[수영 수준별 진도표]</h4>
+          <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
           <div class="custom-info-table-wrap" style="max-width:702px;">
             <div class="flex-wrap gap-auto col-ver">
               <div class="flex-wrap mo-col gap-auto">
@@ -184,7 +193,10 @@
                     <caption class="visually-hidden">수영 수준별 진도표: 주5회, 주3회 강습반</caption>
                     <colgroup>
                       <col style="width:50px;"/>
+                      <col style="width:55px" class="body-lg-only-tc" />
                       <col style="width:92px;" class="mobile-only-tc"/>
+                      <col class="body-lg-only-tc"/>
+                      <col style="width:70px" class="body-lg-only-tc" />
                     </colgroup>
                     <thead>
                     <tr>
@@ -389,111 +401,285 @@
         <div class="sub-content-box">
           <h4 class="sub-title2">[스케이트 수준별 진도표]</h4>
           <div class="custom-info-table-wrap" style="max-width:702px;">
-            <div class="flex1 custom-info-table">
-              <table>
-                <caption class="visually-hidden">스케이트 수준별 진도표: 주5회, 주3회 강습반</caption>
-                <colgroup>
-                  <col style="width:80px;"/>
-                  <col style="width:190px;"/>
-                  <col style="width:70px;"/>
-                  <col style=""/>
-                  <col style="width: 70px;"/>
-                </colgroup>
-                <thead>
-                <tr>
-                  <th rowspan="2"><div class="th-wrap">구분</div></th>
-                  <th colspan="2"><div class="th-wrap">스피드 스케이팅</div></th>
-                  <th colspan="3" class="no-br"><div class="th-wrap">피겨스키이팅</div></th>
-                </tr>
-                <tr>
-                  <th><div class="th-wrap">강습내용</div></th>
-                  <th><div class="th-wrap">강습기간</div></th>
-                  <th><div class="th-wrap">강습내용</div></th>
-                  <th class="no-br"><div class="th-wrap">강습기간</div></th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- 1. 초급 -->
-                <tr>
-                  <th rowspan="3"><div class="th-wrap">초급</div></th>
-                  <td rowspan="3">
-                    <div class="td-wrap">
-                      걷기,발밀고 모으기, 찍기
-                    </div>
-                  </td>
-                  <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                  <td class="pd-sm"><div class="td-wrap">얼음적응, 넘어지기, 일어나기, 걷기, 밀기</div></td>
-                  <td class="no-br"><div class="td-wrap">2개월</div></td>
-                </tr>
-                <tr>
-                  <td class="pd-sm">
-                    <div class="td-wrap">
-                      양팔들고 밀어서 한반 들고 가기(반원),양팔 들고
-                      앞/뒤 반달 밀기,양팔 들고 옆으로 걸으며
-                      크로스오버(코너연습)
-                    </div>
-                  </td>
-                  <td class="no-br"><div class="td-wrap">2개월</div></td>
-                </tr>
-                <tr>
-                  <td class="pd-sm">
-                    <div class="td-wrap">
-                      양팔들고 원위에서 앞/뒤로 크로스오버(코너연습),
-                      반원위에서 앞으로 인/아웃사이드
-                      한발 들고 가기(초급과제항목)
-                    </div>
-                  </td>
-                  <td class="no-br"><div class="td-wrap">2개월</div></td>
-                </tr>
-                <!-- 2. 중급 -->
-                <tr>
-                  <th rowspan="3"><div class="th-wrap">중급</div></th>
-                  <td rowspan="3" class="pd-sm">
-                    <div class="td-wrap">
-                      찍기(직선동작),
-                      코너 발넘기기,손동작 코너
-                    </div>
-                  </td>
-                  <td rowspan="3"><div class="td-wrap">4개월</div></td>
-                  <td><div class="td-wrap">8자 크로스오버 앞/뒤로 팔동작 및 여러 엣지동작</div></td>
-                  <td class="no-br"><div class="td-wrap">1개월</div></td>
-                </tr>
-                <tr>
-                  <td class="pd-sm">
-                    <div class="td-wrap">
-                      토스텝, 펜스잡고 런지, 스케이팅하며
-                      런지 버니홉, 체크아웃
-                    </div>
-                  </td>
-                  <td class="no-br"><div class="td-wrap">1개월</div></td>
-                </tr>
-                <tr>
-                  <td class="pd-sm">
-                    <div class="td-wrap">
-                      한발 원스핀, 제자리 왈츠점프
-                      모학스텝, 스텝응용
-                    </div>
-                  </td>
-                  <td class="no-br"><div class="td-wrap">1개월</div></td>
-                </tr>
-                <!-- 3. 상급 -->
-                <tr>
-                  <th><div class="th-wrap">상급</div></th>
-                  <td><div class="td-wrap">손동작 코너, 직선코너 활주, 활주 위주 강습, 스타트</div></td>
-                  <td><div class="td-wrap">5개월</div></td>
-                  <td class="pd-sm"><div class="td-wrap">모학스텝 연결 왈츠 점프 원스핀, 모학스텝, 왈츠점프, 여러 엣지스케이팅</div></td>
-                  <td class="no-br"><div class="td-wrap">지속</div></td>
-                </tr>
-                <!-- 4. 마스터반 -->
-                <tr>
-                  <th class="no-bb"><div class="th-wrap">마스터반<br>(특별반)</div></th>
-                  <td class="no-bb"><div class="td-wrap">담당선생님 상담 후 수업 진행</div></td>
-                  <td class="no-bb"><div class="td-wrap">-</div></td>
-                  <td class="pd-sm no-bb"><div class="td-wrap">고난이도 기술 및 국가자격증 취득 요망시 담당선생님 상담 후 수업 진행</div></td>
-                  <td class="no-br no-bb"><div class="td-wrap">-</div></td>
-                </tr>
-                </tbody>
-              </table>
+            <div class="flex-wrap col-ver gap-auto">
+              <!-- 1. pc에서만! -->
+              <div class="flex1 custom-info-table pc-only">
+                <table>
+                  <caption class="visually-hidden">스케이트 수준별 진도표: 주5회, 주3회 강습반</caption>
+                  <colgroup>
+                    <col style="width:80px;"/>
+                    <col style="width:190px;"/>
+                    <col style="width:70px;"/>
+                    <col style=""/>
+                    <col style="width: 70px;"/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th rowspan="2"><div class="th-wrap">구분</div></th>
+                    <th colspan="2"><div class="th-wrap">스피드 스케이팅</div></th>
+                    <th colspan="3" class="no-br"><div class="th-wrap">피겨스키이팅</div></th>
+                  </tr>
+                  <tr>
+                    <th><div class="th-wrap">강습내용</div></th>
+                    <th><div class="th-wrap">강습기간</div></th>
+                    <th><div class="th-wrap">강습내용</div></th>
+                    <th class="no-br"><div class="th-wrap">강습기간</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <!-- 1. 초급 -->
+                  <tr>
+                    <th rowspan="3"><div class="th-wrap">초급</div></th>
+                    <td rowspan="3">
+                      <div class="td-wrap">
+                        걷기,발밀고 모으기, 찍기
+                      </div>
+                    </td>
+                    <td rowspan="3"><div class="td-wrap">3개월</div></td>
+                    <td class="pd-sm"><div class="td-wrap">얼음적응, 넘어지기, 일어나기, 걷기, 밀기</div></td>
+                    <td class="no-br"><div class="td-wrap">2개월</div></td>
+                  </tr>
+                  <tr>
+                    <td class="pd-sm">
+                      <div class="td-wrap">
+                        양팔들고 밀어서 한반 들고 가기(반원),양팔 들고
+                        앞/뒤 반달 밀기,양팔 들고 옆으로 걸으며
+                        크로스오버(코너연습)
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">2개월</div></td>
+                  </tr>
+                  <tr>
+                    <td class="pd-sm">
+                      <div class="td-wrap">
+                        양팔들고 원위에서 앞/뒤로 크로스오버(코너연습),
+                        반원위에서 앞으로 인/아웃사이드
+                        한발 들고 가기(초급과제항목)
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">2개월</div></td>
+                  </tr>
+                  <!-- 2. 중급 -->
+                  <tr>
+                    <th rowspan="3"><div class="th-wrap">중급</div></th>
+                    <td rowspan="3" class="pd-sm">
+                      <div class="td-wrap">
+                        찍기(직선동작),
+                        코너 발넘기기,손동작 코너
+                      </div>
+                    </td>
+                    <td rowspan="3"><div class="td-wrap">4개월</div></td>
+                    <td><div class="td-wrap">8자 크로스오버 앞/뒤로 팔동작 및 여러 엣지동작</div></td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+                  <tr>
+                    <td class="pd-sm">
+                      <div class="td-wrap">
+                        토스텝, 펜스잡고 런지, 스케이팅하며
+                        런지 버니홉, 체크아웃
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+                  <tr>
+                    <td class="pd-sm">
+                      <div class="td-wrap">
+                        한발 원스핀, 제자리 왈츠점프
+                        모학스텝, 스텝응용
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+                  <!-- 3. 상급 -->
+                  <tr>
+                    <th><div class="th-wrap">상급</div></th>
+                    <td><div class="td-wrap">손동작 코너, 직선코너 활주, 활주 위주 강습, 스타트</div></td>
+                    <td><div class="td-wrap">5개월</div></td>
+                    <td class="pd-sm"><div class="td-wrap">모학스텝 연결 왈츠 점프 원스핀, 모학스텝, 왈츠점프, 여러 엣지스케이팅</div></td>
+                    <td class="no-br"><div class="td-wrap">지속</div></td>
+                  </tr>
+                  <!-- 4. 마스터반 -->
+                  <tr>
+                    <th class="no-bb"><div class="th-wrap">마스터반<br>(특별반)</div></th>
+                    <td class="no-bb"><div class="td-wrap">담당선생님 상담 후 수업 진행</div></td>
+                    <td class="no-bb"><div class="td-wrap">-</div></td>
+                    <td class="pd-sm no-bb"><div class="td-wrap">고난이도 기술 및 국가자격증 취득 요망시 담당선생님 상담 후 수업 진행</div></td>
+                    <td class="no-br no-bb"><div class="td-wrap">-</div></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- 2. 모바일 에서만! -->
+              <div class="flex1 custom-info-table mobile-only">
+                <table>
+                  <caption class="visually-hidden">스케이트 수준별 진도표: 주5회, 주3회 강습반</caption>
+                  <colgroup>
+                    <col style="width:80px;"/>
+                    <col style=""/>
+                    <col style="width: 80px;"/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th rowspan="2"><div class="th-wrap">구분</div></th>
+                    <th colspan="2" class="no-br"><div class="th-wrap">스피드 스케이팅</div></th>
+                  </tr>
+                  <tr>
+                    <th><div class="th-wrap">강습내용</div></th>
+                    <th class="no-br"><div class="th-wrap">강습기간</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <!-- 1. 초급 -->
+                  <tr>
+                    <th><div class="th-wrap">초급</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        걷기,발밀고 모으기, 찍기
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">3개월</div></td>
+                  </tr>
+                  <!-- 2. 중급 -->
+                  <tr>
+                    <th><div class="th-wrap">중급</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        찍기(직선동작),<br>
+                        코너 발넘기기,손동작 코너
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">4개월</div></td>
+                  </tr>
+
+                  <!-- 3. 상급 -->
+                  <tr>
+                    <th><div class="th-wrap">상급</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        손동작 코너, 직선코너 활주,
+                        활주 위주 강습, 스타트
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">5개월</div></td>
+                  </tr>
+
+                  <!-- 4. 마스터반 -->
+                  <tr>
+                    <th><div class="th-wrap">마스터즈반<br>(특별반)</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        담당선생님 상담 후 수업 진행
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">-</div></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="flex1 custom-info-table mobile-only">
+                <table>
+                  <caption class="visually-hidden">피겨 스케이트 수준별 진도표</caption>
+                  <colgroup>
+                    <col style="width:80px;"/>
+                    <col style=""/>
+                    <col style="width: 80px;"/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th rowspan="2"><div class="th-wrap">구분</div></th>
+                    <th colspan="2" class="no-br"><div class="th-wrap">피겨 스케이팅</div></th>
+                  </tr>
+                  <tr>
+                    <th><div class="th-wrap">강습내용</div></th>
+                    <th class="no-br"><div class="th-wrap">강습기간</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <!-- 1. 초급 -->
+                  <tr>
+                    <th rowspan="3"><div class="th-wrap">초급</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        얼음적응, 넘어지기, 일어나기, 걷기, 밀기
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">2개월</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        양팔들고 밀어서 한반 들고 가기(반원),양팔 들고
+                        앞/뒤 반달 밀기,양팔 들고 옆으로 걸으며
+                        크로스오버(코너연습)
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">2개월</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        양팔들고 원위에서 앞/뒤로 크로스오버(코너연습),
+                        반원위에서 앞으로 인/아웃사이드
+                        한발 들고 가기(초급과제항목)
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+                  <!-- 2. 중급 -->
+                  <tr>
+                    <th rowspan="3"><div class="th-wrap">중급</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        8자 크로스오버 앞/뒤로 팔동작 및 여러 엣지동작
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        토스텝, 펜스잡고 런지, 스케이팅하며
+                        런지 버니홉, 체크아웃
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        한발 원스핀, 제자리 왈츠점프
+                        모학스텝, 스텝응용
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">1개월</div></td>
+                  </tr>
+
+                  <!-- 3. 상급 -->
+                  <tr>
+                    <th><div class="th-wrap">상급</div></th>
+                    <td>
+                      <div class="td-wrap">
+                        모학스텝 연결 왈츠 점프 원스핀,
+                        모학스텝, 왈츠점프, 여러 엣지스케이팅
+                      </div>
+                    </td>
+                    <td class="no-br"><div class="td-wrap">지속</div></td>
+                  </tr>
+
+                  <!-- 4. 마스터반 -->
+                  <tr>
+                    <th class="no-bb"><div class="th-wrap">마스터즈반<br>(특별반)</div></th>
+                    <td class="no-bb">
+                      <div class="td-wrap">
+                        고난이도 기술 및 국가자격증 취득 요망시
+                        담당선생님 상담 후 수업 진행
+                      </div>
+                    </td>
+                    <td class="no-br no-bb"><div class="td-wrap">-</div></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -519,7 +705,15 @@
             </colgroup>
             <thead>
             <tr>
-              <th><div class="th-wrap"><span class="visually-hidden">선택</span></div></th>
+              <th>
+                <div class="th-wrap">
+                  <span class="visually-hidden">선택</span>
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </th>
               <th><div class="th-wrap">내용</div></th>
               <th><div class="th-wrap">강습반</div></th>
               <th><div class="th-wrap">강사</div></th>
@@ -531,7 +725,7 @@
             <tr>
               <td>
                 <div class="td-wrap center">
-                  <label class="custom-checkbox">
+                  <label class="checkbox-wrap">
                     <input type="checkbox" aria-checked="false">
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
@@ -583,7 +777,7 @@
             <tr>
               <td>
                 <div class="td-wrap center">
-                  <label class="custom-checkbox">
+                  <label class="checkbox-wrap">
                     <input type="checkbox" aria-checked="false">
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
@@ -635,7 +829,7 @@
             <tr>
               <td>
                 <div class="td-wrap center">
-                  <label class="custom-checkbox">
+                  <label class="checkbox-wrap">
                     <input type="checkbox" aria-checked="false">
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
@@ -728,7 +922,7 @@
               <th>
                 <div class="th-wrap">
                   <span class="visually-hidden">선택</span>
-                  <label class="custom-checkbox">
+                  <label class="checkbox-wrap">
                     <input type="checkbox" aria-checked="false">
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
@@ -741,7 +935,7 @@
             <tr>
               <td class="al-start">
                 <div class="td-wrap center">
-                  <label class="custom-checkbox">
+                  <label class="checkbox-wrap">
                     <input type="checkbox" aria-checked="false">
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
@@ -798,6 +992,32 @@
               </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="2">
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <div class="flex-wrap al-center between mb-6">
+                      <span class="txt-md fw-medium c-gray">총 강좌수 1건</span>
+                      <span class="txt-md fw-bold">62,000원</span>
+                    </div>
+                    <div class="flex-wrap al-center between mb-6">
+                      <span class="txt-md fw-medium c-gray">강좌할인금액</span>
+                      <span class="txt-md fw-bold">- 20,000원</span>
+                    </div>
+                    <div class="flex-wrap al-center between mb-6">
+                      <span class="txt-md fw-medium c-gray">입회비</span>
+                      <span class="txt-md fw-bold">+ 10,000원</span>
+                    </div>
+                    <div class="flex-wrap al-center between mt-12">
+                      <span class="txt-xlg fw-bold">총 수강료</span>
+                      <span class="txt-xlg fw-bold c-blue">160,000원</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tfoot>
           </table>
         </div>
 
@@ -821,7 +1041,69 @@
       <hr style="margin:20px 0">
       <h5>2. 아이콘형 버튼</h5>
       <div class="box">
-        <button type="button" class="ico-btn shop"><span class="visually-hidden">버튼</span></button>
+        <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">버튼</span></button>
+      </div>
+
+      <hr style="margin:20px 0">
+      <h5>3. 모달 안 버튼</h5>
+      <div class="box">
+        <p style="font-size:18px;margin-bottom:4px;">a. 기본</p>
+        <button type="button" class="custom-btn">
+          <span class="float txt-xs fw-bold">미사용</span>
+          <span class="flex-wrap gap-auto col-ver">
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray">회원번호</span>
+              <span class="txt-sm fw-medium">1603000002</span>
+            </span>
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray">가입일자</span>
+              <span class="txt-sm fw-medium">2016.03.01</span>
+            </span>
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray">최근수강이력</span>
+              <span class="txt-sm fw-medium">(25년 3월) 기구필라/일반인반</span>
+            </span>
+          </span>
+        </button>
+
+        <p style="font-size:18px;margin-top:16px;margin-bottom:4px;">b. 활성화(active)</p>
+        <button type="button" class="custom-btn active">
+          <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용가능">사용가능</span>
+          <span class="flex-wrap gap-auto col-ver">
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+              <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+            </span>
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+              <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+            </span>
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+              <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+            </span>
+          </span>
+        </button>
+
+
+        <p style="font-size:18px;margin-top:16px;margin-bottom:4px;">c. 비활성화(disabled)</p>
+        <button type="button" class="custom-btn" disabled>
+          <span class="float txt-xs fw-bold c-blue">사용가능</span>
+          <span class="flex-wrap gap-auto col-ver">
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray">회원번호</span>
+              <span class="txt-sm fw-medium">1603000002</span>
+            </span>
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray">가입일자</span>
+              <span class="txt-sm fw-medium">2016.03.01</span>
+            </span>
+            <span class="vertical-bar-list">
+              <span class="txt-sm fw-medium c-gray">최근수강이력</span>
+              <span class="txt-sm fw-medium">(25년 3월) 기구필라/일반인반</span>
+            </span>
+          </span>
+        </button>
       </div>
     </div>
 
@@ -829,7 +1111,7 @@
       <h2>라. 폼 관련 (input, textarea, radio, checkbox)</h2>
       <h5>1-1. 체크박스 (글자 존재)</h5>
       <div class="box">
-        <label class="custom-checkbox">
+        <label class="checkbox-wrap">
           <input type="checkbox" aria-checked="false">
           <span class="checkmark" aria-hidden="true"></span>
           <span>동의합니다</span>
@@ -837,11 +1119,67 @@
       </div>
       <h5>1-2. 체크박스 (글자 X)</h5>
       <div class="box">
-        <label class="custom-checkbox">
+        <label class="checkbox-wrap">
           <input type="checkbox" aria-checked="false">
           <span class="checkmark" aria-hidden="true"></span>
         </label>
       </div>
+
+      <hr style="margin:20px 0"/>
+
+      <h5>2-1. 라디오 버튼 (글자 존재)</h5>
+      <div class="box">
+        <label class="radio-wrap">
+          <input type="radio" aria-checked="false">
+          <span class="radiomark" aria-hidden="true"></span>
+          <span>라디오다</span>
+        </label>
+      </div>
+      <h5>2-2. 라디오 버튼 (글자 X)</h5>
+      <div class="box">
+        <label class="radio-wrap">
+          <input type="radio" aria-checked="false">
+          <span class="radiomark" aria-hidden="true"></span>
+        </label>
+      </div>
+      <h5>2-3. 라디오 버튼 (탭 디자인)</h5>
+      <div class="box">
+        <div class="radio-tab-wrap">
+          <label class="radio-tab">
+            <input type="radio" aria-checked="true" checked="true" name="radioGroup">
+            <span>남자</span>
+          </label>
+          <label class="radio-tab">
+            <input type="radio" aria-checked="false" name="radioGroup">
+            <span>여자</span>
+          </label>
+        </div>
+      </div>
+
+      <hr style="margin:20px 0"/>
+      <h5>3-1. 인풋</h5>
+      <div class="box">
+        <p style="font-size:18px;margin-bottom:4px;">a. 기본사이즈</p>
+        <label class="input-wrap">
+          <input type="text" placeholder="예) 01오0000">
+        </label>
+
+        <p style="font-size:18px;margin-top:16px;margin-bottom:4px;">b. 작은 사이즈(size-sm)</p>
+        <label class="input-wrap size-sm">
+          <input type="text" placeholder="예) 01오0000">
+        </label>
+
+        <p style="font-size:18px;margin-top:16px;margin-bottom:4px;">c. 꽉차는 사이즈(size-full)</p>
+        <label class="input-wrap size-full">
+          <input type="text" placeholder="예) 01오0000">
+        </label>
+      </div>
+
+      <hr style="margin:20px 0"/>
+      <h5>4-1. 데이트 피커</h5>
+      <div class="box">데이트피커..</div>
+
+
     </div>
 
     <div class="guide-box">
@@ -861,10 +1199,12 @@
         <button type="button" class="btn outlined" onclick="showModal('modal2');">[X]2. 센터가입 정보입력을 중단하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal3');">[물음표]3. 정말 선택하신 회원번호를 사용하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal4');">[체크]4. 강좌가 장바구니에 담겼습니다.</button>
-        <button type="button" class="btn outlined" onclick="showModal('modal-onlineUserCard');">[바코드]4. 모바일 회원카드</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal5');">[X]5. 선택한 강좌를 삭제하시겠습니까?</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-onlineUserCard');">[바코드]5. 온라인 회원카드</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-centerJoin');">7. 센터 중복 가입 안내</button>
       </div>
       <!-- [모달] 1. 가입하신 센터가 없습니다. -->
-      <div id="modal1" class="modal">
+      <div id="modal1" class="modal" data-modal-type="confirm-ver">
         <div class="modal-content sm pd-auto">
           <div class="confirm-box">
             <img src="../../resources/images/ico/ico_exp.svg" alt="" />
@@ -879,7 +1219,7 @@
       </div>
 
       <!-- [모달] 2. 센터가입 정보입력을 중단하시겠습니까? -->
-      <div id="modal2" class="modal">
+      <div id="modal2" class="modal" data-modal-type="confirm-ver">
         <div class="modal-content sm pd-auto">
           <div class="confirm-box">
             <img src="../../resources/images/ico/ico_error.svg" alt="" />
@@ -894,7 +1234,7 @@
       </div>
 
       <!-- [모달] 3. 정말 선택하신 회원번호를 사용하시겠습니까? -->
-      <div id="modal3" class="modal">
+      <div id="modal3" class="modal" data-modal-type="confirm-ver">
         <div class="modal-content sm pd-auto">
           <div class="confirm-box">
             <img src="../../resources/images/ico/ico_question.svg" alt="" />
@@ -909,7 +1249,7 @@
       </div>
 
       <!-- [모달] 4. 강좌가 장바구니에 담겼습니다. -->
-      <div id="modal4" class="modal" role="dialog" aria-labelledby="modal4-title" aria-describedby="modal4-desc" aria-hidden="true">
+      <div id="modal4" class="modal"  data-modal-type="confirm-ver" role="dialog" aria-labelledby="modal4-title" aria-describedby="modal4-desc" aria-hidden="true">
         <div class="modal-content sm pd-auto" tabindex="-1">
           <div class="confirm-box">
             <img src="../../resources/images/ico/ico_checked.svg" alt="">
@@ -923,12 +1263,26 @@
         </div>
       </div>
 
+      <!-- [모달] 4. 강좌가 장바구니에 담겼습니다. -->
+      <div id="modal5" class="modal"  data-modal-type="confirm-ver" role="dialog" aria-labelledby="modal5-title" aria-describedby="modal5-desc" aria-hidden="true">
+        <div class="modal-content sm pd-auto" tabindex="-1">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_error.svg" alt="">
+            <p class="c-em">선택한 강좌를 삭제하시겠습니까?</p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn outlined size-nm" onclick="hideModal('modal5')">취소</button>
+            <button type="button" class="btn size-nm" onclick="hideModal('modal5')">확인</button>
+          </div>
+        </div>
+      </div>
 
-      <!-- [모달] 5. 모바일 회원카드 -->
-      <div id="modal-onlineUserCard" class="modal">
+
+      <!-- [모달] 5. 온라인 회원카드 -->
+      <div id="modal-onlineUserCard" class="modal" data-modal-type="rotate-ver">
         <div class="modal-content mobile-rotate">
           <div class="title-wrap">
-            <h3>모바일 회원카드</h3>
+            <h3>온라인 회원카드</h3>
             <button type="button" onclick="hideModal('modal-onlineUserCard')" class="close-btn"><span class="visually-hidden">닫기</span></button>
           </div>
           <div class="modal-body">
@@ -943,10 +1297,146 @@
           </div>
         </div>
       </div>
+
+      <!-- [모달] 7. 센터 중복 가입 안내 -->
+      <div id="modal-centerJoin" class="modal" data-modal-type="fixed-btn-ver">
+        <div class="modal-content">
+          <div class="title-wrap">
+            <h3>센터 중복 가입 안내</h3>
+            <button type="button" onclick="hideModal('modal-centerJoin')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <p class="txt-md fw-medium">동일 센터에 중복가입내역이 확인되었습니다.사용하실 회원번호를 선택해주세요.</p>
+            <ul class="dash-list">
+              <li>선택하지 않은 회원번호는 삭제됩니다.</li>
+              <li>수강 중 또는 예정된 강좌가 있다면, 반드시 해당 강좌를 등록한 회원번호를 사용해주셔야 합니다.</li>
+            </ul>
+            <div class="sub-content-box">
+              <h4 class="sub-title2">일산스포츠센터</h4>
+              <div class="flex-wrap col-ver">
+                <button type="button" class="custom-btn active">
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용가능">사용가능</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
+                <button type="button" class="custom-btn" disabled>
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용불가">사용불가</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="sub-content-box">
+              <h4 class="sub-title2">분당스포츠센터</h4>
+              <div class="flex-wrap col-ver">
+                <button type="button" class="custom-btn active">
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용가능">사용가능</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
+                <button type="button" class="custom-btn" disabled>
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용불가">사용불가</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="sub-content-box">
+              <h4 class="sub-title2">분당스포츠센터</h4>
+              <div class="flex-wrap col-ver">
+                <button type="button" class="custom-btn active">
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용가능">사용가능</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
+                <button type="button" class="custom-btn" disabled>
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용불가">사용불가</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="guide-box">
-      <h2>사. 탭 관련</h2>
+      <h2>사. 탭 관련(진행중)</h2>
       <h5>1. 탭</h5>
       <div class="box">
         <div class="tab-wrap">
@@ -1013,6 +1503,88 @@
           </ul>
           <div class="clear"></div>
         </div>
+      </div>
+    </div>
+
+    <div class="guide-box">
+      <h2>아. 개인정보</h2>
+      <h5>1. 개인정보</h5>
+      <div class="box">
+        <div class="sub-content-box">
+          <h3 class="sub-title">[개인정보 수집, 이용 등에 대한 안내 및 동의서]</h3>
+          <div class="gray-box">
+<pre>
+'한국체육산업개발(주)’(이하 ‘회사’는)은 고객님의 개인정보를 중요시하며, 관련 법률을 준수하고 있습니다.
+이에 따라 회사는 개인정보 처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보 보호를 위해 어떠한 조치가 취해지고
+있는지 아래와 같이 알려드리오며, 개인정보 수집 및 이용을 위한 고객님의 동의를 구하오니 적극 협조하여 주시기 바랍니다.
+※ 자세한 개인정보 처리방침은 한국체육산업개발 홈페이지 www.ksponco.or.kr에서 확인하시기 바랍니다.
+ 
+  ◰ 수집하여 처리하는 개인정보의 항목
+ 
+ 회사는 회원가입, 상담, 서비스 신청 등을 위하여 아래와 같은 개인정보 항목을 수집 및 처리하고 있습니다.
+ ◦개인정보 항목 : 이름, 생년월일, 성별,  휴대전화번호, 14세 미만 아동의 경우 법정대리인 휴대전화번호 및 관계, 수강 결제에 필요한 개인정보,
+            신용카드정보(카드번호 및 유효기간, 카드자동이체 신청자에 한함), 차량번호, 스포츠센터에서 안내 및 이벤트 목적으로 발송하는 SMS 수신여부, 차량번호
+ ◦인터넷 서비스 이용 과정에서 IP주소, 쿠키, MAC주소, 서비스 이용기록, 방문기록 등이 자동으로 생성되어 수집될 수 있습니다.                        
+ ◦개인정보 수집방법 : 홈페이지(회원가입), 회원관리시스템, 서면양식
+ 
+  ◰ 개인정보의 처리 목적
+ 
+ 회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보
+ 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+ ◦회원관리 - 회원제 서비스 이용에 따른 본인확인, 개인식별, 불량회원의 부정이용 방지와 비인가 사용 방지, 가입의사 확인, 연령확인, 만 14세 미만 아동 개인정보 수집 시
+법정대리인 동의여부 확인, 불만 처리 등 민원처리, 고지사항 전달, 구매 및 요금 결재, 물품배송, 금융거래시 본인 인증 및 금융 서비스 등을 목적으로 개인정보를
+</pre>
+          </div>
+          <div class="agree-box">
+            <div class="flex-wrap al-center between">
+              <p class="txt-sm fw-medium c-gray">(필수)개인정보 수집 및 이용</p>
+              <div class="flex-wrap w-auto agree-radio-wrap ">
+                <label class="radio-wrap">
+                  <input type="radio" name="type1" aria-checked="false">
+                  <span class="radiomark" aria-hidden="true"></span>
+                  <span>동의안함</span>
+                </label>
+                <label class="radio-wrap">
+                  <input type="radio" name="type1"  aria-checked="false">
+                  <span class="radiomark" aria-hidden="true"></span>
+                  <span>동의함</span>
+                </label>
+              </div>
+            </div>
+            <div class="flex-wrap al-center between">
+              <p class="txt-sm fw-medium c-gray">(필수) 개인정보 취급 위탁(시스템 유지관리)</p>
+              <div class="flex-wrap w-auto agree-radio-wrap">
+                <label class="radio-wrap">
+                  <input type="radio" name="type1" aria-checked="false">
+                  <span class="radiomark" aria-hidden="true"></span>
+                  <span>동의안함</span>
+                </label>
+                <label class="radio-wrap">
+                  <input type="radio" name="type1"  aria-checked="false">
+                  <span class="radiomark" aria-hidden="true"></span>
+                  <span>동의함</span>
+                </label>
+              </div>
+            </div>
+            <div class="flex-wrap al-center between">
+              <p class="txt-sm fw-medium c-gray">(선택) 이벤트 및 안내 서비스를 위한 SMS 및 이메일 발송</p>
+              <div class="flex-wrap w-auto agree-radio-wrap">
+                <label class="radio-wrap">
+                  <input type="radio" name="type1" aria-checked="false">
+                  <span class="radiomark" aria-hidden="true"></span>
+                  <span>동의안함</span>
+                </label>
+                <label class="radio-wrap">
+                  <input type="radio" name="type1"  aria-checked="false">
+                  <span class="radiomark" aria-hidden="true"></span>
+                  <span>동의함</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
 
