@@ -8,11 +8,13 @@
   --color-white: #ffffff;
   --color-black: #333333;
   --color-red:#FF4343;
+  --color-green:#18972B;
   --color-light-gray: #C2C2C2;
   --color-gray: #666666;
   --color-gray2: #888888;
   --color-primary: #0189FF;
   --color-primary-dark: #076DC5;
+  --color-primary-light: #F0F6FF;
   --color-transparent: transparent;
 
   /* 보더 컬러 */

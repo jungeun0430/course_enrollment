@@ -110,6 +110,16 @@
         <h4 class="sub-title2">[수영 수준별 진도표></h4>
       </div>
 
+      <h5>1-3. 테이블에 들어가는 텍스트 관련</h5>
+      <div class="box">
+        <span class="txt-xs fw-bold c-blue">검도</span>
+        <span class="txt-xs fw-bold c-green">사물함 대여</span>
+        <p class="txt-rgl fw-bold">검도 06:00~07:30(월화목금)성인</p>
+        <span class="txt-sm fw-medium c-gray">강습일정</span>
+        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+        <span class="txt-lg fw-bold">62,000원</span>
+      </div>
+
       <hr style="margin:20px 0;"/>
 
       <h5>2-1. 리스트 관련 <span>(※ ver)</span></h5>
@@ -149,6 +159,15 @@
         <p style="font-size:18px;margin-bottom:4px;margin-top:12px;">b. 단독일 경우</p>
         <p class="rf-txt"></p>
       </div>
+
+      <h5>2-3. 리스트 관련<span>(| ver)</span></h5>
+      <div class="box">
+        <p style="font-size:18px;margin-bottom:4px;">a. 가로 나열</p>
+        <ul class="vertical-bar-list">
+          <li>예시 입니다.</li>
+          <li>예시 입니다.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="guide-box">
@@ -157,14 +176,15 @@
       <div class="box">
         <div class="sub-content-box">
           <h4 class="sub-title2">[수영 수준별 진도표]</h4>
-          <div class="custom-table-wrap" style="max-width:702px;">
+          <div class="custom-info-table-wrap" style="max-width:702px;">
             <div class="flex-wrap gap-auto col-ver">
-              <div class="flex-wrap gap-auto">
-                <div class="flex1 custom-table">
+              <div class="flex-wrap mo-col gap-auto">
+                <div class="flex1 custom-info-table">
                   <table>
                     <caption class="visually-hidden">수영 수준별 진도표: 주5회, 주3회 강습반</caption>
                     <colgroup>
                       <col style="width:50px;"/>
+                      <col style="width:92px;" class="mobile-only-tc"/>
                     </colgroup>
                     <thead>
                     <tr>
@@ -219,16 +239,37 @@
                       <th class="col1-3-4"><div class="th-wrap">중급3</div></th>
                       <td><div class="td-wrap">접영 종합동작/자유형 팔꺾기</div></td>
                     </tr>
+
+                    <!-- [모바일에서만] 4. 상급 -->
+                    <tr class="mobile-only-tr">
+                      <th><div class="th-wrap">상급</div></th>
+                      <td><div class="td-wrap">6개월</div></td>
+                      <td colspan="2" class="no-br"><div class="td-wrap">각 영법 숙달 및 지구력 강화, 자세교정, 턴, 스타트, 응용영법,
+                        각 영법별 물잡기 훈련, 핀수영 운동량 1000M 이상</div></td>
+                    </tr>
+
+                    <!-- [모바일에서만] 5. 연수 -->
+                    <tr class="mobile-only-tr">
+                      <th class=""><div class="th-wrap">연수</div></th>
+                      <td class=""><div class="td-wrap">24개월</div></td>
+                      <td colspan="2" class="no-br"><div class="td-wrap">잠영, 입영, 스타트, 핀수영 운동량 1400M 이상</div></td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
-                <div class="flex1 custom-table">
+                <div class="flex1 custom-info-table">
                   <table>
+                    <colgroup>
+                      <col style="width:50px;" class="mobile-only-tc"/>
+                      <col style="width:92px;" class="mobile-only-tc"/>
+                    </colgroup>
                     <thead>
                     <tr>
-                      <th class="no-br" colspan="3"><div class="th-wrap">수영 수준별 진도표: 주 2회 강습반</div></th>
+                      <th class="no-br pc-only-cell" colspan="3"><div class="th-wrap">수영 수준별 진도표: 주 2회 강습반</div></th>
+                      <th class="no-br mobile-only-cell" colspan="4"><div class="th-wrap">수영 수준별 진도표: 주 2회 강습반</div></th>
                     </tr>
                     <tr>
+                      <th class="mobile-only-cell"><div class="th-wrap">구분</div></th>
                       <th><div class="th-wrap">반명</div></th>
                       <th><div class="th-wrap">강습내용</div></th>
                       <th class="no-br"><div class="th-wrap">강습기간</div></th>
@@ -237,6 +278,7 @@
                     <tbody>
                     <!-- 1. 기초 -->
                     <tr>
+                      <th class="mobile-only-cell" rowspan="3"><div class="th-wrap">기초</div></th>
                       <th><div class="th-wrap">신기초</div></th>
                       <td><div class="td-wrap">자유형</div></td>
                       <td rowspan="3" class="no-br"><div class="td-wrap">3개월</div></td>
@@ -252,6 +294,7 @@
 
                     <!-- 2. 초급 -->
                     <tr>
+                      <th class="mobile-only-cell" rowspan="4"><div class="th-wrap">초급</div></th>
                       <th><div class="th-wrap">초급1</div></th>
                       <td><div class="td-wrap">평영 발차기</div></td>
                       <td rowspan="4" class="no-br"><div class="td-wrap">4개월</div></td>
@@ -271,6 +314,7 @@
 
                     <!-- 3. 중급 -->
                     <tr>
+                      <th class="mobile-only-cell" rowspan="4"><div class="th-wrap">중급</div></th>
                       <th><div class="th-wrap">중급1</div></th>
                       <td><div class="td-wrap">접영 발차기</div></td>
                       <td rowspan="4" class="no-br"><div class="td-wrap">4개월</div></td>
@@ -287,11 +331,26 @@
                       <th><div class="th-wrap">중급4</div></th>
                       <td><div class="td-wrap">접영 숙달/자융형 팔꺾기</div></td>
                     </tr>
+
+                    <!-- [모바일에서만] 4. 상급 -->
+                    <tr class="mobile-only-tr">
+                      <th><div class="th-wrap">상급</div></th>
+                      <td><div class="td-wrap">6개월</div></td>
+                      <td colspan="2" class="no-br"><div class="td-wrap">각 영법 숙달 및 지구력 강화, 자세교정, 턴, 스타트, 응용영법,
+                        각 영법별 물잡기 훈련, 핀수영 운동량 1000M 이상</div></td>
+                    </tr>
+
+                    <!-- [모바일에서만] 5. 연수 -->
+                    <tr class="mobile-only-tr">
+                      <th class="no-bb"><div class="th-wrap">연수</div></th>
+                      <td class="no-bb"><div class="td-wrap">24개월</div></td>
+                      <td colspan="2" class="no-br"><div class="td-wrap">잠영, 입영, 스타트, 핀수영 운동량 1400M 이상</div></td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-              <div class="flex1 custom-table">
+              <div class="flex1 custom-info-table pc-only">
                 <table aria-describedby="table-description">
                   <caption class="visually-hidden">수영 수준별 진도표: 주5회, 주3회 강습반, 주2회 강습반의 상금 연수에 관한 표</caption>
                   <colgroup>
@@ -329,8 +388,8 @@
         </div>
         <div class="sub-content-box">
           <h4 class="sub-title2">[스케이트 수준별 진도표]</h4>
-          <div class="custom-table-wrap" style="max-width:702px;">
-            <div class="flex1 custom-table">
+          <div class="custom-info-table-wrap" style="max-width:702px;">
+            <div class="flex1 custom-info-table">
               <table>
                 <caption class="visually-hidden">스케이트 수준별 진도표: 주5회, 주3회 강습반</caption>
                 <colgroup>
@@ -438,127 +497,310 @@
             </div>
           </div>
         </div>
+      </div>
 
+      <h5>2. 장바구니 등 공통 테이블 디자인</h5>
+      <div class="box">
+        <div class="flex-wrap between al-center mb-12">
+          <p class="txt-md fw-medium c-gray"><em class="txt-md fw-bold c-blue">10</em>개의 강좌가 있습니다.</p>
+          <button type="button" class="btn sm outlined c-red">선택 삭제</button>
+        </div>
 
-        <!--<div class="custom-table">
+        <div class="custom-table pc-only">
           <table>
+            <caption class="visually-hidden">장바구니 표</caption>
+            <colgroup>
+              <col style="width:50px;"/>
+              <col style=""/>
+              <col style="width:80px;"/>
+              <col style="width:100px;"/>
+              <col style="width:100px;"/>
+              <col style="width:200px;"/>
+            </colgroup>
             <thead>
             <tr>
-              <th rowspan="2"><div class="th-wrap">구분</div></th>
-              <th colspan="3" class="no-br"><div class="th-wrap">주5회, 주3회 강습반</div></th>
-            </tr>
-            <tr>
-              <th><div class="th-wrap">반명</div></th>
-              <th><div class="th-wrap">강습내용</div></th>
-              <th class="no-br"><div class="th-wrap">강습기간</div></th>
+              <th><div class="th-wrap"><span class="visually-hidden">선택</span></div></th>
+              <th><div class="th-wrap">내용</div></th>
+              <th><div class="th-wrap">강습반</div></th>
+              <th><div class="th-wrap">강사</div></th>
+              <th><div class="th-wrap">인원수<br>(인원/정원)</div></th>
+              <th><div class="th-wrap">수강료(원)</div></th>
             </tr>
             </thead>
             <tbody>
-            &lt;!&ndash; 1. 기초 &ndash;&gt;
             <tr>
-              <th rowspan="2"><div class="th-wrap">기초</div></th>
-              <th><div class="th-wrap">신기초</div></th>
-              <td><div class="td-wrap">자유형</div></td>
-              <td rowspan="2" class="no-br"><div class="td-wrap">2개월</div></td>
+              <td>
+                <div class="td-wrap center">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium c-blue">29/30</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                      <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                      <span class="txt-rgl fw-medium">55,800</span>
+                    </div>
+                    <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <th><div class="th-wrap">기초1</div></th>
-              <td><div class="td-wrap">배영</div></td>
+              <td>
+                <div class="td-wrap center">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium c-blue">29/30</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                      <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                      <span class="txt-rgl fw-medium">55,800</span>
+                    </div>
+                    <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                  </div>
+                </div>
+              </td>
             </tr>
-            &lt;!&ndash; 2. 초급 &ndash;&gt;
             <tr>
-              <th rowspan="3"><div class="th-wrap">초급</div></th>
-              <th><div class="th-wrap">초급1</div></th>
-              <td><div class="td-wrap">평영 발차기</div></td>
-              <td rowspan="3" class="no-br"><div class="td-wrap">3개월</div></td>
+              <td>
+                <div class="td-wrap center">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium c-blue">29/30</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                      <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                      <span class="txt-rgl fw-medium">55,800</span>
+                    </div>
+                    <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                  </div>
+                </div>
+              </td>
             </tr>
+            </tbody>
+            <tfoot>
             <tr>
-              <th><div class="th-wrap">초급2</div></th>
-              <td><div class="td-wrap">평영 발동작</div></td>
+              <td colspan="6">
+                <div class="td-wrap">
+                  <div class="total-wrap">
+                    <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                      <p class="txt-rgl fw-medium c-gray">총 강좌수 1건</p>
+                      <span class="txt-lg fw-bold">62,000원</span>
+                    </div>
+                    <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
+                    <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                      <p class="txt-rgl fw-medium c-gray">강좌할인금액</p>
+                      <span class="txt-lg fw-bold c-red">20,000원</span>
+                    </div>
+                    <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                    <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                      <p class="txt-rgl fw-medium c-gray">입회비</p>
+                      <span class="txt-lg fw-bold">10,000원</span>
+                    </div>
+                    <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                    <div class="flex-wrap center gap12">
+                      <span class="txt-lg fw-bold">총 수강료</span>
+                      <span class="txt-lg fw-bold c-blue">160,000원</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
             </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="custom-table mobile-only">
+          <table>
+            <caption class="visually-hidden">장바구니 표</caption>
+            <colgroup>
+              <col style="width:50px;"/>
+              <col style=""/>
+            </colgroup>
+            <thead>
             <tr>
-              <th><div class="th-wrap">초급3</div></th>
-              <td><div class="td-wrap">평영 종합동작</div></td>
+              <th>
+                <div class="th-wrap">
+                  <span class="visually-hidden">선택</span>
+                  <label class="custom-checkbox">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </th>
+              <th><div class="th-wrap">강좌명</div></th>
             </tr>
-            &lt;!&ndash; 3. 중급 &ndash;&gt;
+            </thead>
+            <tbody>
             <tr>
-              <th rowspan="3"><div class="th-wrap">중급</div></th>
-              <th><div class="th-wrap">중급1</div></th>
-              <td><div class="td-wrap">접영 발차기</div></td>
-              <td rowspan="3" class="no-br"><div class="td-wrap">3개월</div></td>
-            </tr>
-            <tr>
-              <th><div class="th-wrap">중급2</div></th>
-              <td><div class="td-wrap">접영 발동작</div></td>
-            </tr>
-            <tr>
-              <th><div class="th-wrap">중급3</div></th>
-              <td><div class="td-wrap">접영 종합동작/자유형 팔꺾기</div></td>
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="custom-checkbox">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap end">
+                      <div class="flex-wrap col-ver al-end gap-auto">
+                        <div class="flex-wrap al-center end gap-auto gap4 mb-4">
+                          <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                          <span class="txt-rgl fw-medium">55,800</span>
+                        </div>
+                        <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
             </tr>
             </tbody>
           </table>
         </div>
-        <div role="table" class="table" data-colums="7" data-rows="12" aria-label="결제 내역">
-          &lt;!&ndash; 테이블 헤더 &ndash;&gt;
-          <div role="rowgroup" class="table-header">
-            <div role="columnheader" class="rowspan-2 no-bl">구분</div>
-            <div role="columnheader" class="colspan-3">주5회, 주3회 강습반</div>
-            <div role="columnheader" class="colspan-3">주2회 강습반</div>
-          </div>
 
-          <div role="rowgroup" class="table-header">
-            <div role="columnheader">반명</div>
-            <div role="columnheader">강습내용</div>
-            <div role="columnheader">강습기간</div>
-            <div role="columnheader">반명</div>
-            <div role="columnheader">강습내용</div>
-            <div role="columnheader">강습기간</div>
-          </div>
-
-          &lt;!&ndash; 테이블 본문 &ndash;&gt;
-          &lt;!&ndash; 1. 기초 &ndash;&gt;
-          <div class="table-row">
-            <div role="columnheader" class="rowspan-3 no-bl">기초</div>
-            <div role="cell" class="rowspan-1-5">신기초</div>
-            <div role="cell" class="rowspan-1-5">자유형</div>
-            <div role="cell" class="rowspan-3">2개월</div>
-            <div role="columnheader">신기초</div>
-            <div role="cell">자유형</div>
-            <div role="cell" class="rowspan-3">3개월</div>
-          </div>
-          <div class="table-row">
-            <div role="columnheader" class="rowspan-1-5">기초1</div>
-            <div role="cell" class="rowspan-1-5">배영</div>
-            <div role="cell">배영 발차기, 배영 팔 동작</div>
-            <div role="cell">자유형 및 배영 숙달</div>
-          </div>
-          &lt;!&ndash; 2. 초급 &ndash;&gt;
-          <div class="table-row">
-            <div role="columnheader" class="rowspan-12">초급</div>
-            <div role="columnheader" class="rowspan-4">초급1</div>
-            <div role="cell" class="rowspan-4">평영 발차기</div>
-            <div role="cell" class="rowspan-12">3개월</div>
-            <div role="columnheader" class="rowspan-3">초급1</div>
-            <div role="cell" class="rowspan-3">평영발차기</div>
-            <div role="cell" class="rowspan-12">4개월</div>
-          </div>
-          <div class="table-row">
-            <div role="columnheader" class="rowspan-4">초급2</div>
-            <div role="cell" class="rowspan-4">평영 팔동작</div>
-            <div role="columnheader" class="rowspan-3">초급3</div>
-            <div role="cell" class="rowspan-3">평영 팔동작</div>
-          </div>
-          <div class="table-row">
-            <div role="columnheader" class="rowspan-4">초급3</div>
-            <div role="cell" class="rowspan-4">평영 종합동작</div>
-            <div role="columnheader" class="rowspan-3">초급3</div>
-            <div role="cell" class="rowspan-3">평영 종합동작</div>
-          </div>
-          <div class="table-row">
-            <div role="columnheader" class="rowspan-3">초급4</div>
-            <div role="cell" class="rowspan-3">평영 숙달</div>
-          </div>
-        </div>-->
       </div>
     </div>
 
