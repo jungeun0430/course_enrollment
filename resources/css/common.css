@@ -167,7 +167,7 @@
 
 @media (max-width: 767px) {
   .date {flex:1;}
-  .date > input {width:100%;height:40px;}
+  .date > input {width:100%;height:40px;padding:8px;background:url('../images/ico/ico_calendar.svg') right 8px center no-repeat;background-size:16px;}
 }
 
 
