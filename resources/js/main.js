@@ -18,22 +18,82 @@
 function adjustModalSize(modalId) {
   const modal = document.getElementById(modalId);
   const modalContent = modal.querySelector('.modal-content');
+  const modalBody = modalContent.querySelector('.modal-body');
 
   if (modalContent) {
+    // 실제 사용 가능한 뷰포트 높이 계산 (모바일 브라우저 UI 고려)
     const viewportHeight = window.innerHeight; // 화면 높이
     const viewportWidth = window.innerWidth;   // 화면 너비
+
+    // 사파리 등 모바일 브라우저에서의 실제 높이 계산을 위한 함수
+    const getActualViewportHeight = () => {
+      // 임시 div로 100vh 측정
+      let test = document.createElement('div');
+      test.style.position = 'fixed';
+      test.style.height = '100vh';
+      test.style.width = '0';
+      test.style.top = '0';
+      document.documentElement.appendChild(test);
+
+      const vh = test.offsetHeight;
+      document.documentElement.removeChild(test);
+
+      return vh;
+    };
+
+    // 실제 뷰포트 높이 (모바일 UI 고려)
+    const actualVH = getActualViewportHeight();
+
+    // 안전 영역 계산 (접근 가능한 스크린 영역)
+    const safeAreaHeight = Math.min(viewportHeight, actualVH);
 
     if (viewportWidth <= 768) {
       // 모바일 화면: 가로/세로 교차 및 회전 적용
       if(modalId === 'modal-onlineUserCard') {
         /* 1. 온라인 회원카드 */
-        modalContent.style.width = `${viewportHeight - 32}px`; // 여백 포함
+        // 모바일 UI 요소를 고려한 크기 계산
+        modalContent.style.width = `${safeAreaHeight - 32}px`; // 여백 포함
         modalContent.style.height = `${viewportWidth - 32}px`; // 여백 포함
         modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)'; // 모바일은 회전 적용
         modalContent.style.transformOrigin = 'center'; // 회전 중심
         modalContent.style.borderRadius = '8px'; // 둥근 모서리 제거
         modalContent.style.padding = '60px 0 0 0'; // 모바일에서 추가 여백
+      } else if (modalId === 'modal-centerJoin') {
+        // 안전 영역 고려한 높이 계산
+        const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
+        const vhWidth = viewportWidth * 1; // 약간의 여백 추가
+
+        modalContent.style.width = `${vhWidth}px`;
+        modalContent.style.height = `${vhHeight}px`;
+
+        // 내용이 넘칠 경우를 대비한 스크롤 설정
+        if (modalBody) {
+          // 헤더/패딩 등 고려한 계산
+          const headerHeight = 96; // 헤더 높이 (필요에 따라 조정)
+          modalBody.style.height = `${vhHeight - headerHeight}px`;
+          modalBody.style.overflow = 'auto';
+          modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
+        }
+      } else if (modalId === 'modal-curriculum') {
+        // 안전 영역 고려한 높이 계산
+        const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
+        const vhWidth = viewportWidth * 1; // 약간의 여백 추가
+
+        modalContent.style.width = `${vhWidth}px`;
+        modalContent.style.height = `${vhHeight}px`;
+
+        // 내용이 넘칠 경우를 대비한 스크롤 설정
+        if (modalBody) {
+          // 헤더/패딩 등 고려한 계산
+          const headerHeight = 48; // 헤더 높이 (필요에 따라 조정)
+          modalBody.style.height = `${vhHeight - headerHeight}px`;
+          modalBody.style.overflow = 'auto';
+          modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
+        }
       }
+
+      // 디버깅용 - 실제 계산된 높이 확인 (개발 중 참고용, 나중에 제거)
+      console.log(`Actual VH: ${actualVH}, Window Height: ${viewportHeight}, SafeArea: ${safeAreaHeight}`);
     } else {
       // PC 화면: 스타일 초기화 및 기존 설정
       if(modalId === 'modal-onlineUserCard') {
@@ -44,10 +104,22 @@ function adjustModalSize(modalId) {
         modalContent.style.transform = 'translate(-50%, -50%)'; // 기본 위치
         modalContent.style.borderRadius = '8px'; // 둥근 모서리 추가
         modalContent.style.padding = '64px 0 0 0'; // 기존 여백 유지
+      } else if (modalId === 'modal-centerJoin' || modalId === 'modal-curriculum') {
+        // PC 스타일 초기화
+        modalContent.style.width = '90%';
+        modalContent.style.maxWidth = '800px';
+        modalContent.style.height = 'auto';
+
+        if (modalBody) {
+          modalBody.style.height = 'auto';
+          modalBody.style.maxHeight = '80vh'; // PC에서는 최대 높이만 제한
+          modalBody.style.overflow = 'auto';
+        }
       }
     }
   }
 }
+
 // 모달 띄우기 함수
 // 현재 열린 모달들을 스택으로 관리
 let modalStack = [];
