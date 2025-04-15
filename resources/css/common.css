@@ -43,6 +43,7 @@
 .btn.size-sm {min-width:120px;}
 .btn.size-md {min-width:160px;}
 .btn.size-nm {min-width:200px;}
+.btn.size-full {min-width:auto;width:100%;}
 
 /* 버튼 전체적 크기 관련 */
 .btn.sm {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
@@ -127,6 +128,10 @@
   background: url('../images/ico/ico_radio_active.svg') no-repeat center / contain;
 }
 /* 포커스 스타일 */
+.radio-wrap input:focus + .radiomark {
+  background: url('../images/ico/ico_radio_focus.svg') no-repeat center / contain;
+}
+
 /*.radio-wrap input:focus + .radiomark {  background: url('../images/ico/ico_radio_focus.svg') no-repeat center / contain;}*/
 
 /* b. 라디오 (탭 디자인) */
@@ -137,6 +142,8 @@
 .radio-tab + .radio-tab {border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:first-child > span {border-radius:4px 0 0 4px;overflow:hidden;border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:last-child > span {border-radius:0 4px 4px 0;overflow:hidden;border-right:1px solid var(--border-color);}
+.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:2px solid var(--color-primary);}
+.radio-tab input:focus + span {background-color:var(--color-white);color:var(--color-primary);font-weight:var(--fw-bold);}
 @media (max-width: 768px) {
   .radio-tab span {padding:9px;}
 }

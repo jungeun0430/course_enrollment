@@ -55,7 +55,7 @@
             </ul>
             <!-- mobile 에서의 gnb -->
             <div class="sidebar-title-wrap mobile-only-f">
-                <button type="button" class="user-btn">로그인</button>
+                <a href="../user/login.html" class="user-btn">로그인</a>
                 <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
             </div>
             <div class="sidebar-menu-wrap">
@@ -70,12 +70,12 @@
             </div>
         </nav>
         <div class="btn-wrap pc-only-f">
-            <a href="#" class="ico-user"><span>로그인</span></a>
+            <a href="../user/login.html" class="ico-user"><span>로그인</span></a>
             <a href="../user/cs_shopping_cart.html" class="ico-bag"><span>장바구니</span></a>
             <a href="../user/cs_payment_history.html" class="ico-pay"><span>결제내역</span></a>
         </div>
         <div class="btn-wrap sm mobile-only-f">
-            <a href="#" class="ico-btn ico-user"><span class="visually-hidden">로그인</span></a>
+            <a href="../user/login.html" class="ico-btn ico-user"><span class="visually-hidden">로그인</span></a>
             <a href="#" class="ico-btn ico-bc"><span class="visually-hidden">바코드</span></a>
             <button type="button" class="ico-btn ico-hamburger"><span class="visually-hidden">메뉴 열기</span></button>
         </div>
@@ -83,249 +83,30 @@
 </header>
 
 <!-- 메인 -->
-<main id="main">
-    <div class="inner-wrap">
-        <div class="title-wrap sub-ver lg">
-            <h2>센터가입</h2>
+<main id="main" class="login">
+    <div class="login-box">
+        <div class="login-title-wrap">
+            <h2><img src="../../resources/images/common/kspo_logo2.svg" alt="한국체육산업개발주식회사 수강신청" /></h2>
+            <h3>온라인수강신청 관리자 전용</h3>
         </div>
-        <div class="content-box">
-            <!-- 1. 개인정보 수집, 이용 등에 대한 안내 및 동의서 -->
-            <div class="sub-content-box">
-                <h3 class="sub-title">[개인정보 수집, 이용 등에 대한 안내 및 동의서]</h3>
-                <div class="gray-box">
-<pre>
-'한국체육산업개발(주)’(이하 ‘회사’는)은 고객님의 개인정보를 중요시하며, 관련 법률을 준수하고 있습니다.
-이에 따라 회사는 개인정보 처리방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며, 개인정보 보호를 위해 어떠한 조치가 취해지고
-있는지 아래와 같이 알려드리오며, 개인정보 수집 및 이용을 위한 고객님의 동의를 구하오니 적극 협조하여 주시기 바랍니다.
-※ 자세한 개인정보 처리방침은 한국체육산업개발 홈페이지 www.ksponco.or.kr에서 확인하시기 바랍니다.
- 
-  ◰ 수집하여 처리하는 개인정보의 항목
- 
- 회사는 회원가입, 상담, 서비스 신청 등을 위하여 아래와 같은 개인정보 항목을 수집 및 처리하고 있습니다.
- ◦개인정보 항목 : 이름, 생년월일, 성별,  휴대전화번호, 14세 미만 아동의 경우 법정대리인 휴대전화번호 및 관계, 수강 결제에 필요한 개인정보,
-            신용카드정보(카드번호 및 유효기간, 카드자동이체 신청자에 한함), 차량번호, 스포츠센터에서 안내 및 이벤트 목적으로 발송하는 SMS 수신여부, 차량번호
- ◦인터넷 서비스 이용 과정에서 IP주소, 쿠키, MAC주소, 서비스 이용기록, 방문기록 등이 자동으로 생성되어 수집될 수 있습니다.                        
- ◦개인정보 수집방법 : 홈페이지(회원가입), 회원관리시스템, 서면양식
- 
-  ◰ 개인정보의 처리 목적
- 
- 회사는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보
- 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
- ◦회원관리 - 회원제 서비스 이용에 따른 본인확인, 개인식별, 불량회원의 부정이용 방지와 비인가 사용 방지, 가입의사 확인, 연령확인, 만 14세 미만 아동 개인정보 수집 시
-법정대리인 동의여부 확인, 불만 처리 등 민원처리, 고지사항 전달, 구매 및 요금 결재, 물품배송, 금융거래시 본인 인증 및 금융 서비스 등을 목적으로 개인정보를
-</pre>
+        <div class="login-input-wrap">
+            <div class="login-input">
+                <label for="user-num">회원번호</label>
+                <div class="input-wrap2">
+                    <input id="user-num" type="text" placeholder=""/>
                 </div>
-                <div class="agree-box">
-                    <div class="flex-wrap al-center between">
-                        <p class="txt-sm fw-medium c-gray">(필수)개인정보 수집 및 이용</p>
-                        <div class="flex-wrap w-auto agree-radio-wrap ">
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1" aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의안함</span>
-                            </label>
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1"  aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의함</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="flex-wrap al-center between">
-                        <p class="txt-sm fw-medium c-gray">(필수) 개인정보 취급 위탁(시스템 유지관리)</p>
-                        <div class="flex-wrap w-auto agree-radio-wrap">
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1" aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의안함</span>
-                            </label>
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1"  aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의함</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="flex-wrap al-center between">
-                        <p class="txt-sm fw-medium c-gray">(선택) 이벤트 및 안내 서비스를 위한 SMS 및 이메일 발송</p>
-                        <div class="flex-wrap w-auto agree-radio-wrap">
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1" aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의안함</span>
-                            </label>
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1"  aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의함</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <!-- 2. 스포츠센터 이용약관 동의서 -->
-            <div class="sub-content-box">
-                <h3 class="sub-title">[스포츠센터 이용약관 동의서]</h3>
-                <div class="gray-box">
-<pre>
-[제 1 장   총  칙]
- 
- ◰ 제1조 (목적)
-    
- 이 약관은 한국체육산업개발주식회사의 ㅇㅇ올림픽스포츠센터 운영에 관한 사항과 스포츠센터가 제공하는 시설 및 서비스의 이용에 관한 사항을 규정함을 목적으로 한다.
- 
- ◰ 제2조 (정의)
- 
- 1. '센터'라 함은 한국체육산업개발주식회사의 ㅇㅇ올림픽스포츠센터에서 운영하는 스포츠교실을 말한다.
- 2. '회원'이라 함은 센터가 규정하는 소정의 등록절차를 거쳐 일정 기간 동안 센터의 체육시설 및 서비스 이용계약을 센터와 체결한 자를 말한다.
- 3. '회원 및 임직원의’ 가족이라 함은 민법 제779조의 가족을 관공소에서 발급하는 서류에 입증되는 자를 말한다
- 4. '체육시설'이라 함은 회원의 체육활동에 지속적으로 이용되는 센터내 모든 시설과 그 부대시설을 말한다.
- 5. '서비스'라 함은 회원의 체육시설 이용상 편의를 위해 센터가 제공하는 일체의 행위 및 물품 등을 말한다.
- 6. '등록일'이라 함은 센터와 회원이 체육시설 및 서비스 이용에 대하여 계약을 체결한 일자를 말한다.
- 7. '개시일'이라 함은 센터와 회원이 체결한 계약에 명시하는 체육시설 및 서비스 이용 시작일자를 말한다.
- 8. '장애인'이라 함은 시장, 군수, 구청장 등 관공서에서 발급한 장애인등록증을 소지한 자를 말한다.
- 9. '국가보훈대상자'라 함은 할인 대상자 중 관공서에서 발급한 국가유공자증 및 국가유공자유족증을 소지한 자를 말한다.
- 10. '기초생활수급자'라 함은 '국민기초생활보장법'에 따라 국가 또는 지방자치단체로부터 급여를 받고 있으며, 수급자 증명서를 소지한 자를 말한다.
- 
-</pre>
+            <div class="login-input">
+                <label for="user-birth">생년월일 6자리</label>
+                <div class="input-wrap2">
+                    <input id="user-birth" type="text" placeholder=""/>
                 </div>
-                <div class="agree-box">
-                    <div class="flex-wrap al-center between">
-                        <p class="txt-sm fw-medium c-gray">(필수) 스포츠센터 이용약관 동의</p>
-                        <div class="flex-wrap w-auto agree-radio-wrap ">
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1" aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의안함</span>
-                            </label>
-                            <label class="radio-wrap">
-                                <input type="radio" name="type1"  aria-checked="false">
-                                <span class="radiomark" aria-hidden="true"></span>
-                                <span>동의함</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- 3. 기본정보 -->
-            <div class="sub-content-box">
-                <h3 class="sub-title">기본정보</h3>
-                <div class="custom-table form-ver">
-                    <table>
-                        <colgroup class="pc-only-column-group">
-                            <col style="width: 20%;" />
-                            <col style="width: 80%;" />
-                        </colgroup>
-                        <colgroup class="mobile-only-column-group">
-                            <col style="width: 30%;" />
-                            <col style="width: 70%;" />
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <th><div class="th-wrap important">성별</div></th>
-                            <td>
-                                <div class="td-wrap start">
-                                    <div class="radio-tab-wrap">
-                                        <label class="radio-tab">
-                                            <input type="radio" aria-checked="true" checked="true" name="radioGroup">
-                                            <span>남자</span>
-                                        </label>
-                                        <label class="radio-tab">
-                                            <input type="radio" aria-checked="false" name="radioGroup">
-                                            <span>여자</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><div class="th-wrap">차량번호</div></th>
-                            <td>
-                                <div class="td-wrap start">
-                                    <label class="input-wrap">
-                                        <input type="text" placeholder="예) 01오0000">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><div class="th-wrap">귀하의 연령이<br>만 14세 미만이십니까?</div></th>
-                            <td>
-                                <div class="td-wrap start">
-                                    <div class="flex-wrap w-auto agree-radio-wrap ">
-                                        <label class="radio-wrap">
-                                            <input type="radio" name="type1" aria-checked="false">
-                                            <span class="radiomark" aria-hidden="true"></span>
-                                            <span>예</span>
-                                        </label>
-                                        <label class="radio-wrap">
-                                            <input type="radio" name="type1"  aria-checked="false">
-                                            <span class="radiomark" aria-hidden="true"></span>
-                                            <span>아니오</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><div class="th-wrap important">법정대리인과의 관계</div></th>
-                            <td>
-                                <div class="td-wrap start">
-                                    <label class="input-wrap">
-                                        <input type="text" placeholder="" value="모">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th><div class="th-wrap important">법정대리인 연락처</div></th>
-                            <td>
-                                <div class="td-wrap start number-wrap">
-                                    <label class="input-wrap size-sm">
-                                        <input type="text" placeholder="">
-                                    </label>
-                                    <span>-</span>
-                                    <label class="input-wrap size-sm">
-                                        <input type="text" placeholder="">
-                                    </label>
-                                    <span>-</span>
-                                    <label class="input-wrap size-sm">
-                                        <input type="text" placeholder="">
-                                    </label>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <!-- 버튼 -->
-            <div class="confirm-btn-wrap flex-wrap center">
-                <button type="button" class="btn outlined size-nm" onclick="showModal('modal2');">취소</button>
-                <button type="button" class="btn size-nm" onclick="showModal('modal2');">확인</button>
             </div>
         </div>
-
+        <div class="login-btn-wrap flex-wrap">
+            <button type="button" class="btn size-full">로그인</button>
+        </div>
     </div>
 </main>
-
-<!-- 사용한 모달 모음 -->
-<!-- [모달] 2. 센터가입 정보입력을 중단하시겠습니까? -->
-<div id="modal2" class="modal" data-modal-type="confirm-ver">
-    <div class="modal-content sm pd-auto">
-        <div class="confirm-box">
-            <img src="../../resources/images/ico/ico_error.svg" alt="" />
-            <p class="c-em">센터가입 정보입력을 중단하시겠습니까?</p>
-            <p class="c-desc">센터가입을 취소하시면 지금까진 입력하신 <br>내용이 저장되지 않습니다.</p>
-        </div>
-        <div class="flex-wrap center">
-            <button type="button" class="btn outlined size-nm" onclick="hideModal('modal2')">중단하기</button>
-            <button type="button" class="btn size-nm" onclick="hideModal('modal2')">계속 진행하기</button>
-        </div>
-    </div>
-</div>
 </body>
 </html>

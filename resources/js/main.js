@@ -4,6 +4,7 @@
 * 3. 모달 관련 함수
 * 4. 탭 관련 함수
 * 5. 수강신청 탭 관련 함수
+* 6. 라디오 버튼 핸들러
 *  */
 
 /* 1. 사이드바 */
@@ -381,6 +382,37 @@ function openTab() {
   }
 
 }
+
+/* 6. 라디오 버튼 핸들러 */
+// 라디오 버튼 키보드 이벤트 핸들러
+function handleRadioKeyDown(e) {
+  // 해당 라디오 버튼이 속한 그룹의 모든 라디오 버튼 찾기
+  const name = e.target.name;
+  const group = Array.from(document.querySelectorAll(`input[type="radio"][name="${name}"]`));
+  const currentIndex = group.indexOf(e.target);
+
+  // 키 이벤트에 따라 다음/이전 라디오 버튼으로 이동
+  switch (e.key) {
+    case 'ArrowLeft':
+    case 'ArrowUp':
+      e.preventDefault();
+      // 이전 버튼으로 이동 (첫 번째면 마지막으로)
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : group.length - 1;
+      group[prevIndex].focus();
+      group[prevIndex].checked = true;
+      break;
+
+    case 'ArrowRight':
+    case 'ArrowDown':
+      e.preventDefault();
+      // 다음 버튼으로 이동 (마지막이면 첫 번째로)
+      const nextIndex = currentIndex < group.length - 1 ? currentIndex + 1 : 0;
+      group[nextIndex].focus();
+      group[nextIndex].checked = true;
+      break;
+  }
+}
+
 
 class CheckTabManager {
   constructor() {
@@ -883,6 +915,39 @@ $(document).ready(function(){
       }
     }
   };
+
+  /* 6. 라디오 버튼 핸들러 */
+  // 모든 라디오 버튼에 대한 키보드 접근성 향상 (name 속성 독립적)
+// 문서 로드 완료 후 실행
+// 모든 라디오 버튼에 tabindex 추가하여 포커스 가능하게 만들기
+// 라디오 버튼의 접근성 및 포커스 문제 해결
+  document.addEventListener('DOMContentLoaded', function() {
+    // 기본정보 테이블 내의 라디오 버튼 식별
+    const tableRadios = document.querySelectorAll('.custom-table.form-ver .radio-wrap input[type="radio"]');
+
+    // 각 라디오 버튼에 대해
+    tableRadios.forEach(function(radio) {
+      // tabindex 재설정 (이미 -1로 설정된 경우 수정)
+      if (radio.getAttribute('tabindex') === '-1') {
+        radio.setAttribute('tabindex', '0');
+      }
+
+      // 시각적으로 숨겨진 라디오 버튼의 포커스 상태 표시하기 위한 이벤트 처리
+      radio.addEventListener('focus', function() {
+        this.parentElement.classList.add('radio-focused');
+      });
+
+      radio.addEventListener('blur', function() {
+        this.parentElement.classList.remove('radio-focused');
+      });
+    });
+
+    // 포커스 이동 디버깅을 위한 코드
+    document.addEventListener('focusin', function(e) {
+      console.log('포커스된 요소:', e.target.tagName, e.target.type, e.target.name || e.target.className);
+    });
+  });
+
 
 
 })
