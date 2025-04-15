@@ -195,9 +195,9 @@ span.title-wrap > .h4,
 .custom-table.fixed-ver > table {table-layout:fixed;}
 .custom-table > table {width:100%;}
 .custom-table thead {border-bottom:1px solid var(--table-border-color);}
-.custom-table thead th {padding:12px;background-color:var(--table-cell-bg);}
+.custom-table thead th {padding:12px 8px;background-color:var(--table-cell-bg);}
 .custom-table thead th + th {border-left:1px solid var(--table-border-color);}
-.custom-table tbody td {padding:8px 12px;transition:background-color 0.3s}
+.custom-table tbody td {padding:8px 8px;transition:background-color 0.3s}
 .custom-table tbody td + td {border-left:1px solid var(--table-border-color);}
 .custom-table tbody tr + tr {border-top:1px solid var(--table-border-color);}
 .custom-table:not(.form-ver) tbody tr:hover td{background-color:var(--color-primary-light);}
