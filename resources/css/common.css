@@ -57,7 +57,7 @@
 
   /* 버튼 너비 관련 */
   .btn.size-sm {min-width:auto; max-width:140px;width:100%;}
-  .btn.size-nm {min-width:auto; max-width:140px;width:100%;}
+  .btn.size-nm {min-width:auto; max-width:100%;width:100%;}
 }
 
 /* 아이콘 버튼 */
