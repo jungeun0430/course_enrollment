@@ -69,6 +69,7 @@ body[data-text-size='lg'] {
     /* [커스텀] lg */
     .txt-gray + .arrow_link {margin-left:20px;}
     header .btn-wrap > a.ico-user {min-width:inherit;}
+    .check-tab-btn {height:auto;}
   }
 }
 body[data-text-size='normal'] {

@@ -335,7 +335,6 @@ class TabManager {
   }
 }
 
-/* 5. 수강신청 관련 탭 함수 */
 /* 5. 수강신청 관련 탭 함수 - 인덱스를 매개변수로 받도록 수정 */
 function openTab(tabIndex) {
   const tab = document.querySelector('.f-modal');
