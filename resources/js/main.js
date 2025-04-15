@@ -336,84 +336,54 @@ class TabManager {
 }
 
 /* 5. 수강신청 관련 탭 함수 */
-function openTab() {
+/* 5. 수강신청 관련 탭 함수 - 인덱스를 매개변수로 받도록 수정 */
+function openTab(tabIndex) {
   const tab = document.querySelector('.f-modal');
   tab.classList.add('active');
   document.body.classList.add('no-scroll');
 
-// 첫 번째 탭 활성화하고 나머지 탭은 비활성화
-  const allTabs = tab.querySelectorAll('.check-scroll > ul > li'); // 모든 탭 선택
+  // 모든 탭 선택
+  const allTabs = tab.querySelectorAll('.check-scroll > ul > li');
   if (allTabs.length > 0) {
+    // 인덱스 유효성 검사
+    if (tabIndex === undefined || tabIndex < 0 || tabIndex >= allTabs.length) {
+      tabIndex = 0; // 잘못된 인덱스인 경우 첫 번째 탭 사용
+    }
+
     // 모든 탭에서 active 제거
-    allTabs.forEach((tabItem, index) => {
-      // 첫 번째가 아닌 탭은 active 클래스 제거
-      if (index > 0) {
-        tabItem.classList.remove('active');
+    allTabs.forEach((tabItem) => {
+      tabItem.classList.remove('active');
 
-        // 각 탭의 버튼에서도 active 클래스 제거
-        const btn = tabItem.querySelector('.check-tab-btn');
-        if (btn) {
-          btn.classList.remove('active');
-        }
+      // 각 탭의 버튼에서도 active 클래스 제거
+      const btn = tabItem.querySelector('.check-tab-btn');
+      if (btn) {
+        btn.classList.remove('active');
+      }
 
-        // 콘텐츠 높이 초기화 (필요한 경우)
-        const content = tabItem.querySelector('.sub-tab-content');
-        if (content) {
-          content.style.height = '';
-        }
+      // 콘텐츠 높이 초기화
+      const content = tabItem.querySelector('.sub-tab-content');
+      if (content) {
+        content.style.height = '';
       }
     });
 
-    // 첫 번째 탭만 활성화
-    allTabs[0].classList.add('active');
+    // 선택한 탭만 활성화
+    allTabs[tabIndex].classList.add('active');
 
-    // 첫 번째 탭의 버튼도 활성화
-    const firstBtn = allTabs[0].querySelector('.check-tab-btn');
-    if (firstBtn) {
-      firstBtn.classList.add('active');
+    // 선택한 탭의 버튼도 활성화
+    const selectedBtn = allTabs[tabIndex].querySelector('.check-tab-btn');
+    if (selectedBtn) {
+      selectedBtn.classList.add('active');
     }
 
-    // 첫 번째 탭의 내용을 표시 (모바일인 경우)
-    const firstContent = allTabs[0].querySelector('.sub-tab-content');
-    if (firstContent && window.innerWidth <= 768) { // 모바일 환경 확인
-      firstContent.style.height = 'calc(80vh - 96px)';
-      allTabs[0].style.height = 'auto';
+    // 선택한 탭의 내용을 표시 (모바일인 경우)
+    const selectedContent = allTabs[tabIndex].querySelector('.sub-tab-content');
+    if (selectedContent && window.innerWidth <= 768) {
+      selectedContent.style.height = 'calc(80vh - 96px)';
+      allTabs[tabIndex].style.height = 'auto';
     }
   }
-
 }
-
-/* 6. 라디오 버튼 핸들러 */
-// 라디오 버튼 키보드 이벤트 핸들러
-function handleRadioKeyDown(e) {
-  // 해당 라디오 버튼이 속한 그룹의 모든 라디오 버튼 찾기
-  const name = e.target.name;
-  const group = Array.from(document.querySelectorAll(`input[type="radio"][name="${name}"]`));
-  const currentIndex = group.indexOf(e.target);
-
-  // 키 이벤트에 따라 다음/이전 라디오 버튼으로 이동
-  switch (e.key) {
-    case 'ArrowLeft':
-    case 'ArrowUp':
-      e.preventDefault();
-      // 이전 버튼으로 이동 (첫 번째면 마지막으로)
-      const prevIndex = currentIndex > 0 ? currentIndex - 1 : group.length - 1;
-      group[prevIndex].focus();
-      group[prevIndex].checked = true;
-      break;
-
-    case 'ArrowRight':
-    case 'ArrowDown':
-      e.preventDefault();
-      // 다음 버튼으로 이동 (마지막이면 첫 번째로)
-      const nextIndex = currentIndex < group.length - 1 ? currentIndex + 1 : 0;
-      group[nextIndex].focus();
-      group[nextIndex].checked = true;
-      break;
-  }
-}
-
-
 class CheckTabManager {
   constructor() {
     this.mobileWrap = document.querySelector('.f-modal');
@@ -809,6 +779,36 @@ class CheckTabManager {
     });
   }
 }
+/* 6. 라디오 버튼 핸들러 */
+// 라디오 버튼 키보드 이벤트 핸들러
+/*function handleRadioKeyDown(e) {
+  // 해당 라디오 버튼이 속한 그룹의 모든 라디오 버튼 찾기
+  const name = e.target.name;
+  const group = Array.from(document.querySelectorAll(`input[type="radio"][name="${name}"]`));
+  const currentIndex = group.indexOf(e.target);
+
+  // 키 이벤트에 따라 다음/이전 라디오 버튼으로 이동
+  switch (e.key) {
+    case 'ArrowLeft':
+    case 'ArrowUp':
+      e.preventDefault();
+      // 이전 버튼으로 이동 (첫 번째면 마지막으로)
+      const prevIndex = currentIndex > 0 ? currentIndex - 1 : group.length - 1;
+      group[prevIndex].focus();
+      group[prevIndex].checked = true;
+      break;
+
+    case 'ArrowRight':
+    case 'ArrowDown':
+      e.preventDefault();
+      // 다음 버튼으로 이동 (마지막이면 첫 번째로)
+      const nextIndex = currentIndex < group.length - 1 ? currentIndex + 1 : 0;
+      group[nextIndex].focus();
+      group[nextIndex].checked = true;
+      break;
+  }
+}*/
+
 /*-------------------------------*/
 /* [실행문] */
 $(document).ready(function(){
@@ -947,7 +947,4 @@ $(document).ready(function(){
       console.log('포커스된 요소:', e.target.tagName, e.target.type, e.target.name || e.target.className);
     });
   });
-
-
-
 })

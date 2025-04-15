@@ -29,9 +29,6 @@
 .dash-list > li::before {content:'-';font-size:inherit;position:absolute;left:0;top:-1px;}
 
 
-
-
-
   /* ------------------------------------------------------- */
 /* 버튼 : 기본 (배경색 존재) */
 .btn {padding:16px;font-size:var(--txt-size04);border:2px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);transition:all 0.3s;}
@@ -142,7 +139,7 @@
 .radio-tab + .radio-tab {border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:first-child > span {border-radius:4px 0 0 4px;overflow:hidden;border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:last-child > span {border-radius:0 4px 4px 0;overflow:hidden;border-right:1px solid var(--border-color);}
-.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:2px solid var(--color-primary);}
+.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:1px solid var(--color-primary);}
 .radio-tab input:focus + span {background-color:var(--color-white);color:var(--color-primary);font-weight:var(--fw-bold);}
 @media (max-width: 768px) {
   .radio-tab span {padding:9px;}
