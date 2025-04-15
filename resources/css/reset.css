@@ -5,5 +5,6 @@ a{text-decoration:none;}
 span{display:inline-block;}
 img{max-width:100%;object-fit:cover;}
 button {border:0;background:none;padding:0;cursor:pointer;}
-table {border-collapse:collapse;border-spacing:0;}
+table {border-collapse:collapse;border-spacing:0; table-layout: fixed;
+}
 em {font-style:normal;}

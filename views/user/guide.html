@@ -1020,6 +1020,326 @@
             </tfoot>
           </table>
         </div>
+      </div>
+
+      <h5>2-2. 수강신청 등 공통 테이블 디자인</h5>
+      <div class="box">
+        <div class="flex-wrap between al-center mb-12">
+          <p class="txt-md fw-medium c-gray"><em class="txt-md fw-bold c-blue">10</em>개의 강좌가 있습니다.</p>
+          <button type="button" class="btn sm outlined">장바구니 담기</button>
+        </div>
+
+        <div class="custom-table pc-only">
+          <table>
+            <caption class="visually-hidden">장바구니 표</caption>
+            <colgroup>
+              <col style="width:50px;"/>
+              <col style="width:80px;"/>
+              <col style=""/>
+              <col style="width:80px;"/>
+              <col style="width:80px;"/>
+              <col style="width:130px;"/>
+              <col style="width:100px;"/>
+              <col style="width:100px;"/>
+              <col style="width:110px;"/>
+              <col style="width:80px;"/>
+            </colgroup>
+            <thead>
+            <tr>
+              <th>
+                <div class="th-wrap">
+                  <span class="visually-hidden">선택</span>
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </th>
+              <th><div class="th-wrap">상태</div></th>
+              <th><div class="th-wrap center">강좌명</div></th>
+              <th><div class="th-wrap">강습반</div></th>
+              <th><div class="th-wrap">강사</div></th>
+              <th><div class="th-wrap">강습일정</div></th>
+              <th><div class="th-wrap">인원수<br>(인원/정원)</div></th>
+              <th><div class="th-wrap">결제진행중</div></th>
+              <th><div class="th-wrap">금액(원)</div></th>
+              <th><div class="th-wrap center">장바구니<br>바로담기</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 1. 마감일 경우 -->
+            <tr class="disabled">
+              <td>
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  <span class="badge red">마감</span>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-sm fw-bold ellipsis">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  월,화<br>
+                  20:00~20:50
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium c-red">30/30</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium">0</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium">8,800,000</p>
+                </div>
+              </td>
+              <td>N
+                <div class="td-wrap center">
+                  <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
+                </div>
+              </td>
+            </tr>
+            <!-- 2. 마감 아닌경우 -->
+            <tr>
+              <td>
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  <span class="badge blue">접수중</span>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-sm fw-bold ellipsis">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  월,화<br>
+                  20:00~20:50
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium c-blue">30/30</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium">0</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium">8,800,000</p>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="custom-table mobile-only">
+          <table>
+            <caption class="visually-hidden">수강신청 표</caption>
+            <colgroup>
+              <col style="width:50px;"/>
+              <col style=""/>
+            </colgroup>
+            <thead>
+            <tr>
+              <th>
+                <div class="th-wrap">
+                  <span class="visually-hidden">선택</span>
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </th>
+              <th><div class="th-wrap">강좌명</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 1. 마감일 경우 -->
+            <tr class="disabled">
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="badge red">마감</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                        <span class="txt-sm fw-medium">(결제진행중 1명)</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap al-center end">
+                      <span class="txt-md fw-bold">8,800,000원</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- 2. 마감이 아닐 경우 -->
+            <tr>
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="badge blue mb-6">접수중</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                        <span class="txt-sm fw-medium">(결제진행중 1명)</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap al-center end">
+                      <span class="txt-md fw-bold">8,800,000원</span>
+                      <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h5>3. 폼 입력관련 공통 테이블</h5>
+      <div class="custom-form-table">
 
       </div>
     </div>
@@ -1041,7 +1361,7 @@
       <hr style="margin:20px 0">
       <h5>2. 아이콘형 버튼</h5>
       <div class="box">
-        <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">버튼</span></button>
+        <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
       </div>
 
       <hr style="margin:20px 0">
@@ -1122,6 +1442,18 @@
         <label class="checkbox-wrap">
           <input type="checkbox" aria-checked="false">
           <span class="checkmark" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <h5>1-2. 체크박스 (뱃지모양)</h5>
+      <div class="box">
+        <label class="checkbox-badge-wrap">
+          <input type="checkbox" aria-checked="false">
+          <span>신규등록</span>
+        </label>
+        <label class="checkbox-badge-wrap">
+          <input type="checkbox" aria-checked="true" checked>
+          <span>신규등록</span>
         </label>
       </div>
 
@@ -1331,6 +1663,23 @@
                     </span>
                   </span>
                 </button>
+                <button type="button" class="custom-btn">
+                  <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 미사용">미사용</span>
+                  <span class="flex-wrap gap-auto col-ver">
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="회원번호">회원번호</span>
+                      <span class="txt-sm fw-medium" aria-label="1603000002">1603000002</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="가입일자">가입일자</span>
+                      <span class="txt-sm fw-medium" aria-label="2016.03.01">2016.03.01</span>
+                    </span>
+                    <span class="vertical-bar-list">
+                      <span class="txt-sm fw-medium c-gray" aria-label="최근수강이력">최근수강이력</span>
+                      <span class="txt-sm fw-medium" aria-label="(25년 3월) 기구필라/일반인반">(25년 3월) 기구필라/일반인반</span>
+                    </span>
+                  </span>
+                </button>
                 <button type="button" class="custom-btn" disabled>
                   <span class="float txt-xs fw-bold c-blue" aria-label="현재상태: 사용불가">사용불가</span>
                   <span class="flex-wrap gap-auto col-ver">
@@ -1431,6 +1780,7 @@
               </div>
             </div>
           </div>
+          <button type="button" class="btn fixed" onclick="showModal('modal3');" >선택 완료</button>
         </div>
       </div>
     </div>
@@ -1588,14 +1938,220 @@
       </div>
     </div>
 
+    <div class="guide-box">
+      <h2>자. 수강신청 체크박스</h2>
+      <h5>1. 단독 커스텀 버전</h5>
+      <div class="box">
+        <button type="button" onclick="openTab()">탭열기</button>
+        <div class="f-modal">
+          <div class="f-modal-content">
+            <div class="title-wrap mobile-only-f">
+              <h3>조회</h3>
+              <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="f-modal-body">
+              <div class="check-tab-wrap">
+                <div class="check-scroll">
+                  <ul>
+                    <li>
+                      <button type="button" class="check-tab-btn">센터명<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
+                      <div class="sub-tab-content">
+                        <ul>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false" checked>
+                              <span>스포츠교실</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false" checked>
+                              <span>분당스포츠센터</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="true" checked>
+                              <span>일산스포츠센터</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>올림픽수영장</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>축구장</span>
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <button type="button" class="check-tab-btn">신규등록<br class="mobile-only">/재등록 여부<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
+                      <div class="sub-tab-content">
+                        <ul>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="true" checked>
+                              <span>신규등록</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>재등록</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>방학특강</span>
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <button type="button" class="check-tab-btn">종목<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
+                      <div class="sub-tab-content">
+                        <ul>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="true" checked>
+                              <span>검도</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>수영</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>배드민턴</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>필라테스</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>모델워킹</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>축구</span>
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                      <button type="button" class="check-tab-btn">시작/시간<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
+                      <div class="sub-tab-content">
+                        <ul>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="true" checked>
+                              <span>전체</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>9시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>10시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>11시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>12시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>13시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>14시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>15시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>16시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>17시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" aria-checked="false">
+                              <span>18시</span>
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
 
-
-    <!-- 1. 라디오 버튼 -->
+              </div>
+            </div>
+            <div class="cr_box flex-wrap al-start between">
+              <p class="star-txt pc-only">신규등록은 매월 27일(일산SC는 25일)부터 가능, 센터별로 상이할 수 있음. (홈페이지 참조)</p>
+              <button type="button" class="btn size-md md">조회하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </main>
 <script>
   // 초기화
   new TabManager();
+  new CheckTabManager();
+  new ModalManager();
+
 </script>
 </body>
 </html>

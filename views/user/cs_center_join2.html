@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+    <link rel="stylesheet" href="../../resources/lib/swiper/swiper.css">
+    <link rel="stylesheet" href="../../resources/css/main.css">
+
+    <!-- lib -->
+    <script src="../../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../../resources/lib/swiper/swiper.js"></script>
+
+    <!-- js -->
+    <script src="../../resources/js/main.js"></script>
+
+    <title>센터가입</title>
+    <style>
+        /*.content-box{padding-top:20px;}*/
+        /*.content-box > img{width:100%;}*/
+    </style>
+</head>
+<body data-text-size="normal">
+<!-- [웹 접근성] : 본문 바로가기 -->
+<a href="#main" id="skip-nav">본문 바로가기</a>
+
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+    <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
+    <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
+    <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+</div>
+
+<!-- 헤더 -->
+<header>
+    <!-- [사이드바] dim 처리 영역 -->
+    <div id="dim-overlay" class="dim"></div>
+    <div class="content-wrap">
+        <h1>
+            <a href="../user/main.html">
+                <img src="../../resources/images/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
+            </a>
+        </h1>
+        <nav class="sidebar">
+            <!-- pc 에서의 gnb -->
+            <ul class="pc-only-f">
+                <li><a href="../user/cs_center_join.html">센터가입</a></li>
+                <li><a href="../user/cs_course_registration.html">수강신청</a></li>
+                <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
+                <li><a href="#">이용안내</a></li>
+            </ul>
+            <!-- mobile 에서의 gnb -->
+            <div class="sidebar-title-wrap mobile-only-f">
+                <button type="button" class="user-btn">로그인</button>
+                <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="sidebar-menu-wrap">
+                <ul class="sidebar-list mobile-only">
+                    <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
+                    <li><a href="../user/cs_center_join.html">센터가입</a></li>
+                    <li><a href="../user/cs_course_registration.html">수강신청</a></li>
+                    <li><a href="../user/cs_shopping_cart.html">장바구니</a></li>
+                    <li><a href="../user/cs_payment_history.html">결제내역</a></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="btn-wrap pc-only-f">
+            <a href="#" class="ico-user"><span>로그인</span></a>
+            <a href="../user/cs_shopping_cart.html" class="ico-bag"><span>장바구니</span></a>
+            <a href="../user/cs_payment_history.html" class="ico-pay"><span>결제내역</span></a>
+        </div>
+        <div class="btn-wrap sm mobile-only-f">
+            <a href="#" class="ico-btn ico-user"><span class="visually-hidden">로그인</span></a>
+            <a href="#" class="ico-btn ico-bc"><span class="visually-hidden">바코드</span></a>
+            <button type="button" class="ico-btn ico-hamburger"><span class="visually-hidden">메뉴 열기</span></button>
+        </div>
+    </div>
+</header>
+
+<!-- 메인 -->
+<main id="main">
+    <div class="inner-wrap">
+        <div class="title-wrap sub-ver lg">
+            <h2>센터가입</h2>
+            <p>신규 회원번호를 발급하고, 기존 회원번호를 확인할 수 있습니다.</p>
+        </div>
+        <div class="content-box">
+            <div class="custom-table form-ver">
+                <table>
+                    <colgroup class="pc-only-column-group">
+                        <col style="width: 20%;" />
+                        <col style="width: 80%;" />
+                    </colgroup>
+                    <colgroup class="mobile-only-column-group">
+                        <col style="width: 30%;" />
+                        <col style="width: 70%;" />
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th><div class="th-wrap">일산스포츠센터</div></th>
+                        <td>
+                            <div class="td-wrap start">
+                                <button type="button" class="btn sm outlined">회원번호발급</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><div class="th-wrap">분당스포츠센터</div></th>
+                        <td>
+                            <div class="td-wrap start">
+                                <label class="input-wrap">
+                                    <input type="text" placeholder="예) 01오0000">
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><div class="th-wrap">스포츠교실</div></th>
+                        <td>
+                            <div class="td-wrap start">
+                                <button type="button" class="btn sm outlined">회원번호발급</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><div class="th-wrap">축구장</div></th>
+                        <td>
+                            <div class="td-wrap start">
+                                <label class="input-wrap">
+                                    <input type="text" placeholder="" value="1603000002">
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><div class="th-wrap">올림픽수영장</div></th>
+                        <td>
+                            <div class="td-wrap start">
+                                <label class="input-wrap">
+                                    <input type="text" placeholder="" value="1603000002">
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 버튼 -->
+            <div class="confirm-btn-wrap flex-wrap center">
+                <button type="button" class="btn outlined size-nm">입력 정보 확인</button>
+                <button type="button" class="btn size-nm" disabled>회원카드 바로가기</button>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- 사용한 모달 모음 -->
+</body>
+</html>

@@ -3,6 +3,7 @@
 * 2. 상단 글씨크기 변경
 * 3. 모달 관련 함수
 * 4. 탭 관련 함수
+* 5. 수강신청 탭 관련 함수
 *  */
 
 /* 1. 사이드바 */
@@ -46,11 +47,23 @@ function adjustModalSize(modalId) {
   }
 }
 // 모달 띄우기 함수
+// 현재 열린 모달들을 스택으로 관리
+let modalStack = [];
+
 function showModal(modalId) {
   const modal = document.getElementById(modalId);
   if (modal) {
+    // 이미 열린 모달이 있으면 스택에 저장 (z-index 관리)
+    const currentOpenModal = document.querySelector('.modal[style*="block"]');
+    if (currentOpenModal && currentOpenModal.id !== modalId) {
+      // 현재 열린 모달이 있고, 새로 열려는 모달과 다른 경우
+      modalStack.push(currentOpenModal.id);
+      currentOpenModal.style.zIndex = '10001'; // 기존 모달의 z-index 낮춤
+    }
+
     adjustModalSize(modalId); // 크기 조정 로직 호출
     modal.style.display = 'block'; // 모달 표시
+    modal.style.zIndex = '10002'; // 새 모달을 최상위로 표시
     document.body.classList.add('no-scroll'); // 스크롤 방지
     modal.setAttribute('aria-hidden', 'false'); // ARIA 활성화
     const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
@@ -83,7 +96,9 @@ function showModal(modalId) {
     });
 
     // 모달 열릴 때 첫 번째 요소로 초점 이동
-    firstFocusableElement.focus();
+    if (firstFocusableElement) {
+      firstFocusableElement.focus();
+    }
   }
 }
 let previousFocus;
@@ -103,12 +118,117 @@ function hideModal(modalId) {
 /* 4. 탭 관련 함수 */
 class TabManager {
   constructor() {
-    this.init();
     this.isMobile = window.innerWidth <= 767;
+    this.originalOrder = null;  // 초기 순서를 저장할 변수
+    this.init();
 
     window.addEventListener('resize', () => {
-      this.isMobile = window.innerWidth <= 767;
+      const wasMobile = this.isMobile;  // 현재 상태 저장
+      this.isMobile = window.innerWidth <= 767;  // 새로운 상태 설정
+
+      if (!wasMobile && this.isMobile) {
+        // 데스크톱에서 모바일로 전환될 때만 active 탭을 상단으로
+        this.moveActiveTabToTop();
+      } else if (wasMobile && !this.isMobile) {
+        // 모바일에서 데스크톱으로 전환될 때는 원래 순서로 복원
+        this.restoreOriginalOrder();
+      }
+
       this.updateHeight();
+    });
+
+  }
+  // 초기 순서 저장
+  saveOriginalOrder(firstDepth) {
+    if (!this.originalOrder) {
+      this.originalOrder = Array.from(firstDepth.children).map(li => li.cloneNode(true));
+    }
+  }
+
+  // 원래 순서로 복원
+  restoreOriginalOrder() {
+    if (this.originalOrder) {
+      document.querySelectorAll('.tab-wrap').forEach(wrap => {
+        // 현재 활성화된 탭 찾기
+        const currentActiveTab = wrap.querySelector('.first-depth > li.active .tab');
+        const currentActiveTabId = currentActiveTab ? currentActiveTab.textContent.trim() : null;
+
+        const firstDepth = wrap.querySelector('.first-depth');
+        firstDepth.innerHTML = '';
+
+        // 원래 순서로 복원하지만 active 클래스는 모두 제거
+        this.originalOrder.forEach(li => {
+          const newLi = li.cloneNode(true);
+          newLi.classList.remove('active'); // 모든 active 클래스 제거
+          firstDepth.appendChild(newLi);
+        });
+
+        // 현재 활성화된 탭 텍스트와 일치하는 탭을 찾아 active로 설정
+        if (currentActiveTabId) {
+          const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+          for (const tab of tabs) {
+            if (tab.textContent.trim() === currentActiveTabId) {
+              const tabItem = tab.closest('li');
+              tabItem.classList.add('active');
+
+              // 해당 tab-box 표시
+              const tabBox = tabItem.querySelector('.tab-box');
+              if (tabBox) {
+                tabBox.style.display = 'block';
+              }
+              break;
+            }
+          }
+        }
+      });
+
+      this.reattachEventListeners();
+      this.updateHeight(); // 높이 업데이트 추가
+    }
+  }
+
+  // 활성 탭을 상단으로 이동하는 메서드 추가
+  moveActiveTabToTop() {
+    document.querySelectorAll('.tab-wrap').forEach(wrap => {
+      const firstDepth = wrap.querySelector('.first-depth');
+      const activeTab = wrap.querySelector('.first-depth > li.active');
+      if (activeTab && this.isMobile) {
+        firstDepth.insertBefore(activeTab, firstDepth.firstChild);
+      }
+    });
+  }
+
+// 이벤트 리스너 다시 연결하는 메서드
+  attachEventListeners(wrap) {
+    const firstDepth = wrap.querySelector('.first-depth');
+    const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        if (this.isMobile) {
+          if (firstDepth.classList.contains('opened')) {
+            this.activateTab(tab);
+            firstDepth.classList.remove('opened');
+          } else {
+            firstDepth.classList.add('opened');
+          }
+        } else {
+          this.activateTab(tab);
+        }
+      });
+
+      tab.addEventListener('focus', () => {
+        if (!this.isMobile) {
+          this.activateTab(tab);
+        }
+      });
+    });
+  }
+
+// 모든 탭의 이벤트 리스너 다시 연결
+  reattachEventListeners() {
+    document.querySelectorAll('.tab-wrap').forEach(wrap => {
+      this.attachEventListeners(wrap);
     });
   }
 
@@ -117,6 +237,9 @@ class TabManager {
 
     tabWraps.forEach(wrap => {
       const firstDepth = wrap.querySelector('.first-depth');
+      // 초기 순서 저장
+      this.saveOriginalOrder(firstDepth);
+
       const tabs = wrap.querySelectorAll('.first-depth > li .tab');
       const tabBoxes = wrap.querySelectorAll('.tab-box');
 
@@ -127,6 +250,11 @@ class TabManager {
       const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
       if (activeTabBox) {
         activeTabBox.style.display = 'block';
+        // 모바일일 경우 초기에 활성 탭을 최상단으로 이동
+        if (this.isMobile) {
+          const activeTab = activeTabBox.closest('li');
+          firstDepth.insertBefore(activeTab, firstDepth.firstChild);
+        }
       }
 
       tabs.forEach(tab => {
@@ -194,7 +322,6 @@ class TabManager {
     setTimeout(() => this.updateHeight(), 0);
   }
 
-
   updateHeight() {
     document.querySelectorAll('.tab-wrap').forEach(wrap => {
       const activeTab = wrap.querySelector('.first-depth > li.active .tab-box');
@@ -207,66 +334,451 @@ class TabManager {
   }
 }
 
-/*class TabManager {
+/* 5. 수강신청 관련 탭 함수 */
+function openTab() {
+  const tab = document.querySelector('.f-modal');
+  tab.classList.add('active');
+  document.body.classList.add('no-scroll');
+
+// 첫 번째 탭 활성화하고 나머지 탭은 비활성화
+  const allTabs = tab.querySelectorAll('.check-scroll > ul > li'); // 모든 탭 선택
+  if (allTabs.length > 0) {
+    // 모든 탭에서 active 제거
+    allTabs.forEach((tabItem, index) => {
+      // 첫 번째가 아닌 탭은 active 클래스 제거
+      if (index > 0) {
+        tabItem.classList.remove('active');
+
+        // 각 탭의 버튼에서도 active 클래스 제거
+        const btn = tabItem.querySelector('.check-tab-btn');
+        if (btn) {
+          btn.classList.remove('active');
+        }
+
+        // 콘텐츠 높이 초기화 (필요한 경우)
+        const content = tabItem.querySelector('.sub-tab-content');
+        if (content) {
+          content.style.height = '';
+        }
+      }
+    });
+
+    // 첫 번째 탭만 활성화
+    allTabs[0].classList.add('active');
+
+    // 첫 번째 탭의 버튼도 활성화
+    const firstBtn = allTabs[0].querySelector('.check-tab-btn');
+    if (firstBtn) {
+      firstBtn.classList.add('active');
+    }
+
+    // 첫 번째 탭의 내용을 표시 (모바일인 경우)
+    const firstContent = allTabs[0].querySelector('.sub-tab-content');
+    if (firstContent && window.innerWidth <= 768) { // 모바일 환경 확인
+      firstContent.style.height = 'calc(80vh - 96px)';
+      allTabs[0].style.height = 'auto';
+    }
+  }
+
+}
+
+class CheckTabManager {
   constructor() {
+    this.mobileWrap = document.querySelector('.f-modal');
+    this.wrap = document.querySelector('.check-tab-wrap');
+
+    // .check-tab-wrap 요소가 없는 경우 초기화 중단
+    if (!this.wrap) {
+      console.warn('CheckTabManager: .check-tab-wrap 요소를 찾을 수 없습니다.');
+      return;
+    }
+
+    this.modalBody = document.querySelector('.f-modal-body');
+    this.tabItems = this.wrap.querySelectorAll('.check-scroll > ul > li');
+    this.isExpanded = false;
+    this.isMobile = window.innerWidth < 768;
+    this.allWrapBtns = this.wrap.querySelectorAll('.check-tab-btn');
+    this.closeBtn = this.mobileWrap.querySelector('.close-btn');
+
+    this.BUTTON_HEIGHT = 48;
+
+    // PC 환경에서의 높이 값
+    this.CONTENT_HEIGHT = 222;
+    this.COLLAPSED_CONTENT_HEIGHT = 52;
+
     this.init();
-    window.addEventListener('resize', () => this.updateHeight());
+
+    // 창 크기 변경 시 모바일 상태 업데이트
+    window.addEventListener('resize', () => {
+      const wasMobile = this.isMobile;
+      this.isMobile = window.innerWidth < 768;
+
+      // 모바일 <-> PC 전환 시 UI 상태 업데이트
+      if (wasMobile !== this.isMobile) {
+        this.updateUIForDeviceChange();
+      }
+
+      // 모바일 -> PC 전환 시
+      if (wasMobile === true && this.isMobile === false) {
+        this.mobileWrap.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    // 모달 배경 클릭 시 모달 닫기 이벤트 추가
+    this.mobileWrap.addEventListener('click', (event) => {
+      // 클릭된 요소가 f-modal 자체인 경우에만 닫기 (내부 요소 클릭 시 닫지 않음)
+      if (event.target === this.mobileWrap) {
+        this.mobileWrap.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        this.tabItems.forEach(tabItem => {
+          tabItem.classList.remove('active');
+        })
+      }
+    });
+
   }
 
   init() {
-    const tabWraps = document.querySelectorAll('.tab-wrap');
+    // 모든 check-tab-btn에 이벤트 리스너 추가
+    this.allWrapBtns.forEach(btn => {
+      btn.classList.remove('active'); // 초기에 active 제거
 
-    tabWraps.forEach(wrap => {
-      const tabs = wrap.querySelectorAll('.first-depth > li .tab');
-      const tabBoxes = wrap.querySelectorAll('.tab-box');
-
-      // 초기에 모든 tab-box 숨기기
-      tabBoxes.forEach(box => box.style.display = 'none');
-
-      // 활성 탭의 tab-box 보이기
-      const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
-      if (activeTabBox) {
-        activeTabBox.style.display = 'block';
+      // 초기 텍스트를 '닫힘'으로 설정
+      const visibilityText = btn.querySelector('.isOpen .visually-hidden');
+      if (visibilityText) {
+        visibilityText.textContent = '열림';
       }
 
-      tabs.forEach(tab => {
-        tab.addEventListener('focus', () => this.activateTab(tab));
-        tab.addEventListener('click', () => this.activateTab(tab));
+      btn.addEventListener('click', (event) => {
+        // 모바일 환경에서도 클릭 이벤트가 작동하도록 수정
+        if (this.isMobile) {
+          this.toggleMobileTab(event);
+        } else {
+          this.toggleAllTabs();
+        }
       });
     });
 
-    this.updateHeight();
-  }
 
-  activateTab(selectedTab) {
-    const wrap = selectedTab.closest('.tab-wrap');
-    const allTabs = wrap.querySelectorAll('.first-depth > li');
 
-    // 모든 탭 비활성화 및 tab-box 숨기기
-    allTabs.forEach(tab => {
-      tab.classList.remove('active');
-      tab.querySelector('.tab-box').style.display = 'none';
+    this.closeBtn.addEventListener('click', () => {
+      this.mobileWrap.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      this.tabItems.forEach(tabItem => {
+        tabItem.classList.remove('active');
+      })
+
     });
 
-    // 선택된 탭 활성화 및 tab-box 보이기
-    const activeTabItem = selectedTab.closest('li');
-    activeTabItem.classList.add('active');
-    activeTabItem.querySelector('.tab-box').style.display = 'block';
+    this.tabItems.forEach(tabItem => {
+      const content = tabItem.querySelector('.sub-tab-content');
 
-    // setTimeout으로 높이 계산 지연
-    setTimeout(() => this.updateHeight(), 0);
+      // content가 null인 경우 건너뛰기
+      if (!content) {
+        console.warn('sub-tab-content 요소를 찾을 수 없습니다.');
+        return;
+      }
+
+      // 초기 상태 설정
+      tabItem.classList.remove('active'); // 초기에 active 제거
+      content.dataset.expanded = 'true';
+
+      // 모바일/PC에 따라 다른 초기 높이 설정
+      if (this.isMobile) {
+        this.setMobileInitialHeight(content);
+      } else {
+        this.setPCInitialHeight(content);
+      }
+
+      // 체크박스 변경 이벤트 (PC 환경에서만 작동)
+      content.addEventListener('change', (e) => {
+        if (!this.isMobile && e.target.type === 'checkbox' && this.isActive(tabItem)) {
+          this.showOnlyCheckedItems(content);
+        }
+      });
+    });
   }
 
-  updateHeight() {
-    document.querySelectorAll('.tab-wrap').forEach(wrap => {
-      const activeTab = wrap.querySelector('.first-depth > li.active .tab-box');
-      if (activeTab) {
-        const tabBoxHeight = activeTab.offsetHeight;
-        wrap.style.height = `${tabBoxHeight + 64 + 40}px`;
+  // 디바이스 변경 시 UI 업데이트
+  updateUIForDeviceChange() {
+    this.tabItems.forEach((item,index) => {
+      const content = item.querySelector('.sub-tab-content');
+      if (!content) return;
+
+      const isActive = item.classList.contains('active');
+
+      if (this.isMobile) {
+        // PC -> 모바일 전환 시
+        // 높이를 auto로 설정하고 transition 제거
+        content.style.transition = 'none';
+        item.style.transition = 'none';
+
+        // 모바일에서는 auto 높이 적용
+        if (isActive) {
+          content.style.height = 'calc(80vh - 96px)';
+          // 버튼 높이는 유지하면서 컨텐츠 높이는 auto로 설정
+          item.style.height = '';
+          this.showAllItemsMobile(content);
+        } else {
+          // 닫힌 상태일 때는 최소 높이 설정
+          content.style.height = '0';
+          item.style.height = `${this.BUTTON_HEIGHT}px`;
+        }
+      } else {
+        // 모바일 -> PC 전환 시
+        // PC 환경으로 복원
+        content.style.transition = 'height 0.3s ease-in-out';
+        item.style.transition = 'height 0.3s ease-in-out';
+
+        this.setPCInitialHeight(content);
+
+        // 모든 탭 닫기
+        this.isExpanded = false;
+        item.classList.remove('active');
+        const btn = item.querySelector('.check-tab-btn');
+        if (btn) btn.classList.remove('active');
+
+        // 모든 항목 표시 (필터링 해제)
+        this.showAllItems(content);
       }
     });
   }
-}*/
+
+  // PC 환경에서의 초기 높이 설정
+  setPCInitialHeight(content) {
+    if (!content) return;
+
+    const li = content.closest('li');
+    if (!li) return;
+
+    content.style.transition = 'height 0.3s ease-in-out';
+    li.style.transition = 'height 0.3s ease-in-out';
+
+    content.style.height = `${this.CONTENT_HEIGHT}px`;
+    li.style.height = `${this.CONTENT_HEIGHT + this.BUTTON_HEIGHT}px`;
+  }
+
+  // 모바일 환경에서의 초기 높이 설정
+  setMobileInitialHeight(content) {
+    if (!content) return;
+
+    const li = content.closest('li');
+    if (!li) return;
+
+    // 모바일에서는 transition 제거 (부드러운 애니메이션 대신 즉시 변경)
+    content.style.transition = 'none';
+    li.style.transition = 'none';
+
+    // 초기 상태에서는 접혀있도록 설정
+    content.style.height = '0';
+    li.style.height = `${this.BUTTON_HEIGHT}px`;
+  }
+
+  // 모바일 환경에서 탭 토글
+  toggleMobileTab(event) {
+    const clickedBtn = event.currentTarget;
+    const tabItem = clickedBtn.closest('li');
+
+    if (!tabItem) return;
+
+    const isActive = tabItem.classList.contains('active');
+    const content = tabItem.querySelector('.sub-tab-content');
+    // 열림/닫힘 텍스트 요소 찾기
+    const visibilityText = clickedBtn.querySelector('.isOpen .visually-hidden');
+
+    if (!content) return;
+
+    // 다른 모든 탭 닫기 (아코디언 방식)
+    this.tabItems.forEach(item => {
+      if (item !== tabItem && item.classList.contains('active')) {
+        const itemContent = item.querySelector('.sub-tab-content');
+        if (itemContent) {
+          itemContent.style.height = '0';
+          item.style.height = `${this.BUTTON_HEIGHT}px`;
+        }
+        item.classList.remove('active');
+        const btn = item.querySelector('.check-tab-btn');
+        if (btn) {
+          btn.classList.remove('active');
+          // 다른 버튼의 텍스트도 '닫힘'으로 변경
+          const otherVisibilityText = btn.querySelector('.isOpen .visually-hidden');
+          if (otherVisibilityText) {
+            otherVisibilityText.textContent = '닫힘';
+          }
+        }
+      }
+    });
+
+    // 현재 클릭한 탭 토글
+    if (isActive) {
+      // 닫기
+      content.style.height = '0';
+      tabItem.style.height = `${this.BUTTON_HEIGHT}px`;
+      tabItem.classList.remove('active');
+      clickedBtn.classList.remove('active');
+      // 텍스트 '닫힘'으로 변경
+      if (visibilityText) {
+        visibilityText.textContent = '열림';
+      }
+    } else {
+      // 열기 - auto 높이 사용
+      // 먼저 높이를 계산하기 위해 임시로 auto 설정
+      content.style.height = 'auto';
+      const autoHeight = content.offsetHeight;
+
+      // 애니메이션을 위해 0으로 다시 설정한 후 자연스럽게 전환
+      content.style.height = '0';
+
+      // reflow 강제
+      content.offsetHeight;
+
+      // transition 추가 후 높이 설정
+      content.style.transition = 'height 0.3s ease-in-out';
+      content.style.height = `${autoHeight}px`;
+      tabItem.style.height = `${autoHeight + this.BUTTON_HEIGHT}px`;
+
+      // 모든 항목 표시
+      this.showAllItemsMobile(content);
+
+      tabItem.classList.add('active');
+      clickedBtn.classList.add('active');
+      // 텍스트 '열림'으로 변경
+      if (visibilityText) {
+        visibilityText.textContent = '열림';
+      }
+
+      // transition 종료 후 height를 auto로 설정 (내용이 동적으로 변경될 수 있으므로)
+      setTimeout(() => {
+        content.style.height = 'auto';
+        tabItem.style.height = 'auto';
+      }, 300);
+    }
+  }
+
+  // PC 환경에서 모든 탭 토글
+  toggleAllTabs() {
+    this.isExpanded = !this.isExpanded;
+
+    // 모든 탭 컨테이너의 상태 변경
+    this.tabItems.forEach(item => {
+      this.updateTabHeight(item, this.isExpanded);
+      item.classList.toggle('active', this.isExpanded);
+
+      // 열림/닫힘 텍스트 업데이트
+      const btn = item.querySelector('.check-tab-btn');
+      if (btn) {
+        const visibilityText = btn.querySelector('.isOpen .visually-hidden');
+        if (visibilityText) {
+          visibilityText.textContent = this.isExpanded ? '닫힘' : '열림';
+        }
+      }
+    });
+
+    // 모든 버튼의 상태 변경
+    this.allWrapBtns.forEach(btn => {
+      btn.classList.toggle('active', this.isExpanded);
+    });
+  }
+
+  // PC 환경에서 탭 높이 업데이트
+  updateTabHeight(item, isActive) {
+    if (!item) return;
+
+    const content = item.querySelector('.sub-tab-content');
+    if (content) {
+      const contentHeight = isActive ? this.COLLAPSED_CONTENT_HEIGHT : this.CONTENT_HEIGHT;
+
+      content.style.transition = 'height 0.3s ease-in-out';
+      item.style.transition = 'height 0.3s ease-in-out';
+
+      content.style.height = `${contentHeight}px`;
+      item.style.height = `${contentHeight + this.BUTTON_HEIGHT}px`;
+
+      if (isActive) {
+        // PC 환경에서는 체크된 항목만 표시
+        this.showOnlyCheckedItems(content);
+
+        // display: none인 checkbox-badge-wrap의 상위 li에서 active 제거
+        const hiddenItems = content.querySelectorAll('.checkbox-badge-wrap[style*="display: none"]');
+        hiddenItems.forEach(hiddenItem => {
+          const parentLi = hiddenItem.closest('li');
+          if (parentLi) {
+            parentLi.classList.remove('active');
+          }
+        });
+      } else {
+        this.showAllItems(content);
+      }
+    }
+  }
+
+  // 모바일 환경에서 모든 항목 표시 (체크박스 필터링 없음)
+  showAllItemsMobile(content) {
+    if (!content) return;
+    const items = content.querySelectorAll('.checkbox-badge-wrap');
+    items.forEach(item => {
+      item.style.display = '';
+      const listItem = item.closest('li');
+      if (listItem) {
+        listItem.style.display = '';
+        // 모바일에서는 모든 항목 활성화
+        listItem.classList.add('active');
+      }
+
+      // 체크박스 활성화 상태 유지
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (checkbox) {
+        checkbox.disabled = false;
+      }
+    });
+  }
+
+  isActive(item) {
+    return item.classList.contains('active');
+  }
+
+  showOnlyCheckedItems(content) {
+
+    if (!content) return;
+
+    const items = content.querySelectorAll('.checkbox-badge-wrap');
+    items.forEach(item => {
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      const listItem = item.closest('li');
+
+      if (!checkbox || !listItem) return;
+
+      if (checkbox && checkbox.checked) {
+        listItem.style.display = '';        // 보여주기
+        listItem.classList.add('active');
+      } else {
+        listItem.classList.remove('active');
+        listItem.style.display = 'none';    // 숨기기
+      }
+      checkbox.disabled = true;
+    });
+  }
+
+  showAllItems(content) {
+
+    if (!content) return;
+
+    const items = content.querySelectorAll('.checkbox-badge-wrap');
+    items.forEach(item => {
+      item.style.display = '';
+      const listItem = item.closest('li');
+      if (!listItem) return;
+
+      listItem.classList.remove('active');
+      listItem.style.display = '';
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (checkbox) checkbox.disabled = false;
+    });
+  }
+}
+/*-------------------------------*/
+/* [실행문] */
 $(document).ready(function(){
   /* 1. 사이드바 */
   const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
@@ -302,7 +814,10 @@ $(document).ready(function(){
   function removeActiveClasses() {
     $dimOverlay.removeClass('active');
     $sidebar.removeClass('active');
-    $('body').removeClass('no-scroll'); // 스크롤 가능하게
+    if (!document.querySelector('.modal[style*="display: block"]')) {
+      $('body').removeClass('no-scroll'); // 열린 모달이 없을 때만 스크롤 활성화
+    }
+
   }
 
   /* 2. 상단 글자크기 변경 */
