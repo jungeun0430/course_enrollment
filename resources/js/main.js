@@ -5,6 +5,7 @@
 * 4. 탭 관련 함수
 * 5. 수강신청 탭 관련 함수
 * 6. 라디오 버튼 핸들러
+* 7. 데이트피커
 *  */
 
 /* 1. 사이드바 */
@@ -945,5 +946,38 @@ $(document).ready(function(){
     document.addEventListener('focusin', function(e) {
       console.log('포커스된 요소:', e.target.tagName, e.target.type, e.target.name || e.target.className);
     });
+  });
+
+  /* 7. 데이트피커: datepicker */
+  // 시작일과 종료일 선택 필드
+  let startDateInput = $(".dates").eq(0);
+  let endDateInput = $(".dates").eq(1);
+
+  // 공통 옵션
+  let dateOptions = {
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: "yy-mm-dd",  // 날짜 형식 설정
+    showMonthAfterYear: true, // 한국식 년도-월 표시
+    dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], // 요일 한글화
+    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] // 월 한글화
+  };
+
+  // 시작일 datepicker
+  startDateInput.datepicker({
+    ...dateOptions,
+    onSelect: function(selectedDate) {
+      // 시작일이 선택되면 종료일의 최소 날짜를 시작일로 설정
+      endDateInput.datepicker("option", "minDate", selectedDate);
+    }
+  });
+
+  // 종료일 datepicker
+  endDateInput.datepicker({
+    ...dateOptions,
+    onSelect: function(selectedDate) {
+      // 종료일이 선택되면 시작일의 최대 날짜를 종료일로 설정
+      startDateInput.datepicker("option", "maxDate", selectedDate);
+    }
   });
 })
