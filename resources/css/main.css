@@ -85,7 +85,7 @@ header  h1  a > img {width: 100%;}
 nav > ul > li > a {display:inline-flex;padding:12px;font-size:var(--txt-size05);font-weight:var(--fw-medium);color:var(--color-black);}
 nav > ul {display:flex;align-items:center;gap:96px;}
 header .btn-wrap {display:flex;align-items:center;gap:16px;}
-header .btn-wrap > a {display:inline-flex;padding-top:32px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:#666666;}
+header .btn-wrap > a {display:inline-flex;justify-content:center;padding-top:32px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:#666666;}
 header .btn-wrap > a.ico-user {min-width:42px;background:url(../images/ico/ico_login.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
 header .btn-wrap > a.ico-bag {min-width:56px;background:url(../images/ico/ico_bag.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
 header .btn-wrap > a.ico-pay {min-width:56px;background:url(../images/ico/ico_paper.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
