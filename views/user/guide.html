@@ -107,17 +107,39 @@
         <div class="sub-content-box">
           <h3 class="sub-title">서브타이틀 제목 : 단독으로 쓰일 경우 margin bottom없음</h3>
         </div>
-        <h4 class="sub-title2 c-gray">[수영 수준별 진도표></h4>
+        <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
       </div>
 
       <h5>1-3. 테이블에 들어가는 텍스트 관련</h5>
       <div class="box">
-        <span class="txt-xs fw-bold c-blue">검도</span>
-        <span class="txt-xs fw-bold c-green">사물함 대여</span>
-        <p class="txt-rgl fw-bold">검도 06:00~07:30(월화목금)성인</p>
-        <span class="txt-sm fw-medium c-gray">강습일정</span>
-        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
-        <span class="txt-lg fw-bold">62,000원</span>
+        <ul>
+          <li>
+            <span class="txt-xs fw-bold c-blue">검도</span>
+          </li>
+          <li>
+            <span class="txt-xs fw-bold c-green">사물함 대여</span>
+          </li>
+          <li>
+            <p class="txt-rgl fw-bold">검도 06:00~07:30(월화목금)성인</p>
+          </li>
+          <li>
+            <span class="txt-sm fw-medium c-gray">강습일정</span>
+          </li>
+          <li>
+            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+          </li>
+          <li>
+            <span class="txt-lg fw-bold">62,000원</span>
+          </li>
+          <li>
+            <p class="txt-sm c-blue fw-bold">한줄 ... 처리  : ellipsis</p>
+            <p class="ellipsis">글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.글자가 한줄 말줄임표로 표시됩니다.</p>
+          </li>
+          <li>
+            <p class="txt-sm c-blue fw-bold">두줄 ... 처리 : ellipsis2</p>
+            <p class="ellipsis2">글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.글자가 두줄 말줄임표로 표시됩니다.</p>
+          </li>
+        </ul>
       </div>
 
       <hr style="margin:20px 0;"/>
@@ -161,6 +183,9 @@
       </div>
 
       <h5>2-3. 리스트 관련<span>(| ver)</span></h5>
+      <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
+      vertical-bar-list의 첫 li는 제목을 담당하고 나머지는 내용을 담당하는 형식임.
+      </p>
       <div class="box">
         <p style="font-size:18px;margin-bottom:4px;">a. 가로 나열</p>
         <ul class="vertical-bar-list">
@@ -685,6 +710,13 @@
         </div>
       </div>
 
+      <hr style="margin:40px 0">
+      <p style="font-size:18px;margin-bottom:40px;color:var(--color-red)">
+       장바구니, 수강신청내역, 결제내역의 경우 표가 반응형이 아님 (pc/mo 나뉘어 작업하고 있음)<br>
+        작업시 두가지의 표를 확인해야 함.<br>
+        *결제내역 표 (mo)의 경우 : 결제완료 / 취소완료로 나뉘어 표가 만들어져 있어 작업시 확인 필요.
+      </p>
+
       <h5>2. 장바구니 등 공통 테이블 디자인</h5>
       <div class="box">
         <div class="flex-wrap between al-center mb-12">
@@ -1126,7 +1158,7 @@
                   <p class="txt-sm fw-medium">8,800,000</p>
                 </div>
               </td>
-              <td>N
+              <td>
                 <div class="td-wrap center">
                   <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
                 </div>
@@ -1338,9 +1370,924 @@
         </div>
       </div>
 
+      <h5>2-3. 결제내역 등 공통 테이블 디자인</h5>
+      <div class="box">
+        <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
+          결제내역 표 (pc)버전의 경우 rowspan을 사용하고 있어<br>
+          hover시 색상 적용을 위해 스크립트를 사용하고 있음 (main.js에서 주석 8번 항목에서 확인 가능)
+          해당 기능을 사용하기 위해서 data-tab=rowspan-ver 지정 필요
+        </p>
+        <div class="custom-table fixed-ver pc-only" data-table="rowspan-ver">
+          <table>
+            <caption class="visually-hidden">결제내역 표</caption>
+            <colgroup>
+              <col style="width:150px;"/>
+              <col style="width:100px;"/>
+              <col style="width:80px;"/>
+              <col style="width:100px;"/>
+              <col style=""/>
+              <col style="width:80px;"/>
+              <col style="width:80px;"/>
+              <col style="width:120px;"/>
+              <col style="width:180px;"/>
+            </colgroup>
+            <thead>
+            <tr>
+              <th><div class="th-wrap center">결제일자/상태</div></th>
+              <th><div class="th-wrap center">결제구분</div></th>
+              <th><div class="th-wrap center">강습일</div></th>
+              <th><div class="th-wrap center">센터명</div></th>
+              <th><div class="th-wrap center">강좌명</div></th>
+              <th><div class="th-wrap center">강습반</div></th>
+              <th><div class="th-wrap center">강사</div></th>
+              <th><div class="th-wrap">금액(원)</div></th>
+              <th><div class="th-wrap center"></div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 1. 결제완료일 경우 (rowspan 사용한 경우) -->
+            <!-- ** rowspan 사용의 그 다음 tr > td 에 bl클래스 추가 (border-left약어) -->
+            <tr>
+              <td rowspan="3">
+                <div class="td-wrap center">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <p class="txt-sm fw-medium mb-8">2025.03.01 11:00</p>
+                    <span class="badge blue">결제완료</span>
+                  </div>
+                </div>
+              </td>
+              <td rowspan="3">
+                <div class="td-wrap center">
+                  온라인 결제
+                </div>
+              </td>
+              <td rowspan="3">
+                <div class="td-wrap center">
+                  25.03
+                </div>
+              </td>
+              <td rowspan="3">
+                <div class="td-wrap center">
+                  스포츠 교실
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <span class="txt-sm fw-bold ellipsis mb-8">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                    <ul class="vertical-bar-list">
+                      <li>강습일정</li>
+                      <li>월,화 20:00 ~ 20:50</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td rowspan="3">
+                <div class="td-wrap center">
+                  8,800,000
+                </div>
+              </td>
+              <td rowspan="3">
+                <div class="td-wrap center">
+                  <div class="flex-wrap col-ver al-center gap4">
+                    <button type="button" class="btn sm outlined">영수증 출력</button>
+                    <button type="button" class="btn sm outlined c-red">수강변경</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="bl">
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <span class="txt-sm fw-bold ellipsis mb-8">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                    <ul class="vertical-bar-list">
+                      <li>강습일정</li>
+                      <li>월,화 20:00 ~ 20:50</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="bl">
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <span class="txt-sm fw-bold ellipsis mb-8">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                    <ul class="vertical-bar-list">
+                      <li>강습일정</li>
+                      <li>월,화 20:00 ~ 20:50</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+            </tr>
+            <!-- 1-2. 결제완료의 경우 (rowspan 없을 경우) -->
+            <tr>
+              <td>
+                <div class="td-wrap center">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <p class="txt-sm fw-medium mb-8">2025.03.01 11:00</p>
+                    <span class="badge blue">결제완료</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  온라인 결제
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  25.03
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  스포츠 교실
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <span class="txt-sm fw-bold ellipsis mb-8">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                    <ul class="vertical-bar-list">
+                      <li>강습일정</li>
+                      <li>월,화 20:00 ~ 20:50</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  8,800,000
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  <div class="flex-wrap col-ver al-center gap4">
+                    <button type="button" class="btn sm outlined">영수증 출력</button>
+                    <button type="button" class="btn sm outlined c-red">수강변경</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- 2. 취소완료일 경우 -->
+            <tr>
+              <td>
+                <div class="td-wrap center">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <p class="txt-sm fw-medium mb-8">2025.03.01 11:00</p>
+                    <span class="badge red">취소완료</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  온라인 결제
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  25.03
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  스포츠 교실
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <span class="txt-sm fw-bold ellipsis mb-8">
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                      검도 06:00~07:30(월화목금)성인 강좌명이 길어질 경우에는 말줄임 표시로 표현됩니다.
+                    </span>
+                    <ul class="vertical-bar-list">
+                      <li>강습일정</li>
+                      <li>월,화 20:00 ~ 20:50</li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  성인반
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  홍길동
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  8,800,000
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap center">
+                  <div class="flex-wrap col-ver al-center gap4">
+                    <button type="button" class="btn sm outlined">영수증 출력</button>
+                    <button type="button" class="btn sm outlined c-red">수강변경</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- ** 결제내역의 경우 모바일에서  (결제완료 / 취소완료로 나눠짐) -->
+        <!-- 1. 결제완료 -->
+        <div class="custom-table mobile-only">
+          <table>
+            <caption class="visually-hidden">결제내역 표 : 결제완료된 경우</caption>
+            <thead>
+            <tr>
+              <th>
+                <div class="th-wrap">
+                  <div class="flex-wrap gap-auto mo-col">
+                    <div class="flex-wrap al-center between mb-6">
+                      <div class="flex-wrap gap-auto mo-col al-start">
+                        <span class="badge blue mb-4">결제완료</span>
+                        <span class="txt-sm fw-bold c-gray">2025.03.04 11:00</span>
+                      </div>
+                      <div class="flex-wrap gap4 end">
+                        <button type="button" class="btn sm outlined">영수증 출력</button>
+                        <button type="button" class="btn sm outlined c-red">수강변경</button>
+                      </div>
+                    </div>
+                    <div class="flex-wrap end">
+                      <span class="txt-md fw-bold">8,800,000 원</span>
+                    </div>
+                  </div>
+
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-6">기구필라테스</span>
+                    <p class="txt-rgl fw-bold ellipsis2">기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영,기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영,기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영,기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영</p>
+                    <ul class="vertical-bar-list mt-10">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">결제구분</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">온라인결제</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습월</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">25.03</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">센터명</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">스포츠교실</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-6">수영</span>
+                    <p class="txt-rgl fw-bold ellipsis2">아침수영 성인반</p>
+                    <ul class="vertical-bar-list mt-10">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">결제구분</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">온라인결제</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습월</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">25.03</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">센터명</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">스포츠교실</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- 1. 마감일 경우 -->
+            <!--<tr class="disabled">
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="badge red">마감</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                        <span class="txt-sm fw-medium">(결제진행중 1명)</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap al-center end">
+                      <span class="txt-md fw-bold">8,800,000원</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>-->
+            <!-- 2. 마감이 아닐 경우 -->
+            <!--<tr>
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="badge blue mb-6">접수중</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                        <span class="txt-sm fw-medium">(결제진행중 1명)</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap al-center end">
+                      <span class="txt-md fw-bold">8,800,000원</span>
+                      <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>-->
+            </tbody>
+          </table>
+        </div>
+        <!-- 2. 취소완료 -->
+        <div class="custom-table mobile-only">
+          <table>
+            <caption class="visually-hidden">결제내역 표 : 결제완료된 경우</caption>
+            <thead>
+            <tr>
+              <th>
+                <div class="th-wrap">
+                  <div class="flex-wrap gap-auto mo-col">
+                    <div class="flex-wrap al-center between mb-6">
+                      <div class="flex-wrap gap-auto mo-col al-start">
+                        <span class="badge red mb-4">취소완료</span>
+                        <span class="txt-sm fw-bold c-gray">2025.03.04 11:00</span>
+                      </div>
+                      <div class="flex-wrap gap4 end">
+                        <button type="button" class="btn sm outlined">영수증 출력</button>
+                      </div>
+                    </div>
+                    <div class="flex-wrap end">
+                      <span class="txt-md fw-bold">8,800,000 원</span>
+                    </div>
+                  </div>
+
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-6">기구필라테스</span>
+                    <p class="txt-rgl fw-bold ellipsis2">기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영,기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영,기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영,기구필라 09시(월수) 신진영 / 월,수 /  일반인반 /
+                      Free / 신진영</p>
+                    <ul class="vertical-bar-list mt-10">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">결제구분</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">온라인결제</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습월</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">25.03</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">센터명</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">스포츠교실</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-6">수영</span>
+                    <p class="txt-rgl fw-bold ellipsis2">아침수영 성인반</p>
+                    <ul class="vertical-bar-list mt-10">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">결제구분</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">온라인결제</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습월</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">25.03</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">센터명</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">스포츠교실</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- 1. 마감일 경우 -->
+            <!--<tr class="disabled">
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="badge red">마감</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                        <span class="txt-sm fw-medium">(결제진행중 1명)</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap al-center end">
+                      <span class="txt-md fw-bold">8,800,000원</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>-->
+            <!-- 2. 마감이 아닐 경우 -->
+            <!--<tr>
+              <td class="al-start">
+                <div class="td-wrap center">
+                  <label class="checkbox-wrap">
+                    <input type="checkbox" aria-checked="false">
+                    <span class="checkmark" aria-hidden="true"></span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="badge blue mb-6">접수중</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습반</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">성인반</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강사</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">홍길동</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium c-blue">29/30</span>
+                        <span class="txt-sm fw-medium">(결제진행중 1명)</span>
+                      </li>
+                    </ul>
+                    <div class="flex-wrap al-center end">
+                      <span class="txt-md fw-bold">8,800,000원</span>
+                      <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>-->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <h5>3. 폼 입력관련 공통 테이블</h5>
       <div class="custom-form-table">
-
+        <div class="custom-table form-ver">
+          <table>
+            <colgroup class="pc-only-column-group">
+              <col style="width: 20%;" />
+              <col style="width: 80%;" />
+            </colgroup>
+            <colgroup class="mobile-only-column-group">
+              <col style="width: 30%;" />
+              <col style="width: 70%;" />
+            </colgroup>
+            <tbody>
+            <tr>
+              <th><div class="th-wrap important">성별</div></th>
+              <td>
+                <div class="td-wrap start">
+                  <div class="radio-tab-wrap">
+                    <label class="radio-tab">
+                      <input type="radio" aria-checked="true" checked="true" name="type5">
+                      <span>남자</span>
+                    </label>
+                    <label class="radio-tab">
+                      <input type="radio" aria-checked="false" name="type5">
+                      <span>여자</span>
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th><div class="th-wrap">차량번호</div></th>
+              <td>
+                <div class="td-wrap start">
+                  <label class="input-wrap">
+                    <input type="text" placeholder="예) 01오0000">
+                  </label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th><div class="th-wrap">귀하의 연령이<br>만 14세 미만이십니까?</div></th>
+              <td>
+                <div class="td-wrap start">
+                  <div class="flex-wrap w-auto agree-radio-wrap ">
+                    <label class="radio-wrap">
+                      <input type="radio" name="type6" aria-checked="false">
+                      <span class="radiomark" aria-hidden="true"></span>
+                      <span>예</span>
+                    </label>
+                    <label class="radio-wrap">
+                      <input type="radio" name="type6"  aria-checked="false">
+                      <span class="radiomark" aria-hidden="true"></span>
+                      <span>아니오</span>
+                    </label>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th><div class="th-wrap important">법정대리인과의 관계</div></th>
+              <td>
+                <div class="td-wrap start">
+                  <label class="input-wrap">
+                    <input type="text" placeholder="" value="모">
+                  </label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th><div class="th-wrap important">법정대리인 연락처</div></th>
+              <td>
+                <div class="td-wrap start number-wrap">
+                  <label class="input-wrap size-sm">
+                    <input type="text" placeholder="">
+                  </label>
+                  <span>-</span>
+                  <label class="input-wrap size-sm">
+                    <input type="text" placeholder="">
+                  </label>
+                  <span>-</span>
+                  <label class="input-wrap size-sm">
+                    <input type="text" placeholder="">
+                  </label>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -1524,15 +2471,19 @@
       <hr style="margin:20px 0"/>
       <h5>4-1. 데이트 피커</h5>
       <div class="box">
-        <div class="calendar-wrap flex-wrap al-center">
-          <label class="date">
-            <input type="text" class="dates">
-          </label>
-          <span class="txt-sm fw-bold color-gray">-</span>
-          <label class="date">
-            <input type="text" class="dates">
-          </label>
-        </div>
+        <fieldset class="calendar">
+          <legend>기간 선택</legend>
+          <div class="calendar-wrap flex-wrap al-center">
+            <label class="date">
+              <input type="text" class="dates">
+            </label>
+            <span class="txt-sm fw-bold color-gray">-</span>
+            <label class="date">
+              <input type="text" class="dates">
+            </label>
+          </div>
+        </fieldset>
+
       </div>
 
     </div>

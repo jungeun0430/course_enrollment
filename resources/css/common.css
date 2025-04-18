@@ -31,7 +31,7 @@
 
   /* ------------------------------------------------------- */
 /* 버튼 : 기본 (배경색 존재) */
-.btn {padding:16px;font-size:var(--txt-size04);border:2px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);transition:all 0.3s;}
+.btn {flex: 0 0 auto;flex-shrink: 0  ;flex-grow: 0;padding:16px;font-size:var(--txt-size04);border:2px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);transition:all 0.3s;}
 .btn:not(:disabled):hover {background-color: var(--color-primary-dark);}
 .btn.outlined {border-color:var(--border-color);color:var(--color-gray);font-weight:var(--fw-medium);background-color:var(--color-white);}
 .btn.outlined:not(:disabled):hover {font-weight:var(--fw-bold);color:var(--color-primary);border-color:var(--color-primary);background-color:var(--color-white);}
@@ -45,6 +45,7 @@
 /* 버튼 전체적 크기 관련 */
 .btn.sm {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
 .btn.md {padding:14px;font-size:var(--txt-size02);}
+.btn.fixed-md {height:48px;padding:11px 14px;font-size:var(--txt-size02);}
 .btn.c-red {color:var(--color-red);}
 .btn.c-red:hover {color:var(--color-red);}
 
@@ -58,6 +59,9 @@
   /* 버튼 너비 관련 */
   .btn.size-sm {min-width:auto; max-width:140px;width:100%;}
   .btn.size-nm {min-width:auto; max-width:100%;width:100%;}
+  .btn.size-md {min-width:auto;}
+  /* 버튼 전체적 크기 관련 */
+  .btn.fixed-md {height:40px;padding:11px 14px;}
 }
 
 /* 아이콘 버튼 */
@@ -139,8 +143,8 @@
 .radio-tab + .radio-tab {border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:first-child > span {border-radius:4px 0 0 4px;overflow:hidden;border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:last-child > span {border-radius:0 4px 4px 0;overflow:hidden;border-right:1px solid var(--border-color);}
-.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:1px solid var(--color-primary);}
-.radio-tab input:focus + span {background-color:var(--color-white);color:var(--color-primary);font-weight:var(--fw-bold);}
+/*.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:1px solid var(--color-primary);}*/
+/*.radio-tab input:focus + span {background-color:var(--color-white);color:var(--color-primary);font-weight:var(--fw-bold);}*/
 @media (max-width: 768px) {
   .radio-tab span {padding:9px;}
 }
@@ -161,12 +165,17 @@
 /* ------------------------------------------------------- */
 /* 데이트 피커 */
 /*.date {width:140px;height:48px;}*/
-.date > input {width:150px;height:48px;padding:14px 40px 14px 14px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border:1px solid var(--border-color);border-radius:4px;background:url('../images/ico/ico_calendar.svg') right 12px center no-repeat;background-size:24px;}
+.calendar {display:flex;padding-left:108px;position:relative;font-size:var(--txt-size04);color:var(--color-gray);font-weight:var(--fw-bold);}
+.calendar > legend {position:absolute;left:0;top:50%;transform:translateY(-50%);}
+.date {width:150px;}
+.date > input {width:100%;height:48px;padding:14px 40px 14px 14px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border:1px solid var(--border-color);border-radius:4px;background:url('../images/ico/ico_calendar.svg') right 12px center no-repeat;background-size:24px;}
 .date > input:focus {outline:none;border-color:var(--color-primary);}
-.calendar-wrap.flex-wrap {gap:4px;}
+.calendar-wrap.flex-wrap {gap:4px;width:100%;}
 
-@media (max-width: 767px) {
-  .date {flex:1;}
+@media (max-width: 1200px) {
+  .calendar {padding-left:0;width: 100%;}
+  .calendar > legend {position:static;transform:none;margin-bottom:4px;}
+  .date {width:100%;}
   .date > input {width:100%;height:40px;padding:8px;background:url('../images/ico/ico_calendar.svg') right 8px center no-repeat;background-size:16px;}
 }
 
@@ -185,6 +194,7 @@
 .txt-sm {font-size:var(--txt-size02);color:var(--color-black);}
 .txt-xs {font-size:var(--txt-size01);color:var(--color-black);}
 .ellipsis {display:block;width:100%;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.ellipsis2 {display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break: break-word;}
 .deco-line {text-decoration:line-through;}
 .fw-bold {font-weight:var(--fw-bold);}
 .fw-medium {font-weight:var(--fw-medium);}
@@ -201,6 +211,7 @@
 .mb-6 {margin-bottom:6px!important;}
 .mb-8 {margin-bottom:8px!important;}
 .mb-12 {margin-bottom:12px!important;}
+.mt-10 {margin-top:10px!important;}
 .mt-12 {margin-top:12px!important;}
 .mt-8 {margin-top:8px!important;}
 

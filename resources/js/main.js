@@ -6,6 +6,7 @@
 * 5. 수강신청 탭 관련 함수
 * 6. 라디오 버튼 핸들러
 * 7. 데이트피커
+* 8. 테이블 rowspan 존재시 hover색상 지정
 *  */
 
 /* 1. 사이드바 */
@@ -1051,5 +1052,40 @@ $(document).ready(function(){
       // 종료일이 선택되면 시작일의 최대 날짜를 종료일로 설정
       startDateInput.datepicker("option", "maxDate", selectedDate);
     }
+  });
+  /* 8. 테이블 rowspan 존재시 hover색상 지정 */
+  const tables = document.querySelectorAll('.custom-table[data-table="rowspan-ver"]');
+
+  tables.forEach(table => {
+    // 해당 테이블 내의 rowspan이 있는 모든 td 찾기
+    const rowspanCells = table.querySelectorAll('td[rowspan]');
+
+    rowspanCells.forEach(cell => {
+      const rowspan = parseInt(cell.getAttribute('rowspan'));
+      const parentRow = cell.closest('tr');
+      const rows = [parentRow];
+
+      // rowspan 값만큼 다음 행들 찾기
+      let nextRow = parentRow.nextElementSibling;
+      for (let i = 1; i < rowspan; i++) {
+        if (nextRow) {
+          rows.push(nextRow);
+          nextRow = nextRow.nextElementSibling;
+        }
+      }
+
+      // 모든 관련 행에 이벤트 리스너 추가
+      rows.forEach(row => {
+        row.addEventListener('mouseover', function() {
+          // 모든 관련 행에 hover 클래스 추가
+          rows.forEach(r => r.classList.add('table-row-hover'));
+        });
+
+        row.addEventListener('mouseout', function() {
+          // 모든 관련 행에서 hover 클래스 제거
+          rows.forEach(r => r.classList.remove('table-row-hover'));
+        });
+      });
+    });
   });
 })
