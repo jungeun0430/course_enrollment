@@ -232,13 +232,15 @@ span.title-wrap > .h4,
 .ico-box.minus {background:url(../images/ico/ico_circle_minus.svg) center center no-repeat;background-size:24px;}
 .ico-box.plus {background:url(../images/ico/ico_circle_plus.svg) center center no-repeat;background-size:24px;}
 .ico-box.equal {background:url(../images/ico/ico_circle_equal.svg) center center no-repeat;background-size:24px;}
+@media (max-width:1200px) {
+    .custom-table + .custom-table {margin-top:20px;}
+}
 
 @media (max-width:768px) {
     .custom-table tfoot td {padding:16px 12px;}
     .custom-table tr.empty td {padding:35px 12px;}
     .empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:48px;background:url('../images/ico/ico_bag_big.svg') center top no-repeat;background-size:40px;}
 
-    .custom-table + .custom-table {margin-top:20px;}
     /* 폼 입력 테이블 */
     .custom-table.form-ver th {padding:2px 8px;}
     .custom-table.form-ver .radio-tab-wrap {width:100%;}
@@ -543,7 +545,6 @@ span.title-wrap > .h4,
     /* sidebar */
     .sidebar .sidebar-title-wrap .user-btn {/*font-size:12px;*/}
     .sidebar-list > li > a {font-size:var(--txt-size02);}
-
 
     /*---------------------------------*/
     /* 서브 페이지 공통 */
