@@ -90,12 +90,13 @@ header .btn-wrap > a.ico-user {min-width:42px;background:url(../images/ico/ico_l
 header .btn-wrap > a.ico-bag {min-width:56px;background:url(../images/ico/ico_bag.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
 header .btn-wrap > a.ico-pay {min-width:56px;background:url(../images/ico/ico_paper.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
 header .btn-wrap.sm {gap:8px;}
-.sidebar .pc-only-f > li:hover > a {color:#0189FF;font-weight:var(--fw-bold);transition:color 0.3s;}
+.sidebar .pc-only-f > li:hover > a {color:var(--color-primary);font-weight:var(--fw-bold);transition:color 0.3s;}
+.sidebar .pc-only-f > li.active > a {color:var(--color-primary);font-weight:var(--fw-bold)}
 
 
 /* main-con-box 색상 박스 */
 button.main-con-box {display:flex;}
-.main-con-box{border-radius:32px;padding:40px 32px;}
+.main-con-box{border-radius:16px;padding:40px 32px;}
 .main-con-box:hover{box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);transition: box-shadow 0.3s;}
 .main-con-box.blue {background-color:#D2E1FF}
 .main-con-box.orange {background-color:#FFF2E4}
@@ -496,8 +497,9 @@ span.title-wrap > .h4,
     .sidebar .sidebar-menu-wrap {padding:8px 0;}
     .sidebar-list > li {border-bottom:1px solid #ebebeb;}
     .sidebar-list > li > a {display:block;padding:16px 12px 16px 24px;font-size:var(--txt-size03);font-weight:var(--fw-medium);color:#333333;}
+    .sidebar-list > li.active > a {color:var(--color-primary);}
 
-    /*---------------------------------*/
+        /*---------------------------------*/
     /* 서브 페이지 공통 */
     .inner-wrap{padding-top:60px;padding-bottom:22px;}
     .content-box {max-width:100%;padding:0 16px;}
