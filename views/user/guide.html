@@ -37,17 +37,16 @@
 <header>
   <!-- [사이드바] dim 처리 영역 -->
   <div id="dim-overlay" class="dim"></div>
-  <div class="content-wrap">
+  <div class="content-wrap"  id="main-content">
     <h1>
       <a href="../user/main.html">
         <img src="../../resources/images/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
       </a>
     </h1>
-    <nav class="sidebar">
+    <nav class="sidebar" role="dialog" aria-model="true" aria-label="메뉴">
       <!-- pc 에서의 gnb -->
-      <!-- 해당 경로 활성화 표시를 하기 위해 li태그에 active클래스 추가 -->
       <ul class="pc-only-f">
-        <li class="active"><a href="../user/cs_center_join.html">센터가입</a></li>
+        <li><a href="../user/cs_center_join.html">센터가입</a></li>
         <li><a href="../user/cs_course_registration.html">수강신청</a></li>
         <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
         <li><a href="#">이용안내</a></li>
@@ -58,9 +57,8 @@
         <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
       </div>
       <div class="sidebar-menu-wrap">
-        <!-- 해당 경로 활성화 표시를 하기 위해 li태그에 active클래스 추가 -->
         <ul class="sidebar-list mobile-only">
-          <li class="active"><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
+          <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
           <li><a href="../user/cs_center_join.html">센터가입</a></li>
           <li><a href="../user/cs_course_registration.html">수강신청</a></li>
           <li><a href="../user/cs_shopping_cart.html">장바구니</a></li>
@@ -75,8 +73,8 @@
       <a href="../user/cs_payment_history.html" class="ico-pay"><span>결제내역</span></a>
     </div>
     <div class="btn-wrap sm mobile-only-f">
-      <a href="../user/login.html" class="ico-btn ico-user"><span class="visually-hidden">로그인</span></a>
-      <a href="#" class="ico-btn ico-bc"><span class="visually-hidden">바코드</span></a>
+      <a href="../user/login.html" class="ico-btn ico-user" aria-label="사용자 계정"><img src="../../resources/images/ico/ico_login.svg" alt="로그인 페이지 이동"/></a>
+      <a href="../user/cs_payment_history.html" class="ico-btn ico-pay" aria-label="결제내역"><img src="../../resources/images/ico/ico_bc.svg" alt="결제내역 페이지 이동"/></a>
       <button type="button" class="ico-btn ico-hamburger"><span class="visually-hidden">메뉴 열기</span></button>
     </div>
   </div>

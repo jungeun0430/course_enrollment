@@ -492,7 +492,15 @@ span.title-wrap > .h4,
     /* #sec1 */
     #sec1 .flex-wrap.first {width:100%;}
 
-    /* sidebar */
+    /* header */
+    header  h1  a {display:flex;border:1px solid transparent;}
+    header  h1  a > img {width: 100%;}
+    header .btn-wrap > a.ico-user,
+    header .btn-wrap > a.ico-pay {padding-top:0;border:1px solid transparent;background:none;min-width:28px;}
+    header .btn-wrap > a.ico-user > img,
+    header .btn-wrap > a.ico-pay > img {object-fit: contain;}
+
+        /* sidebar */
     .sidebar {position:fixed;right:-280px;top:0;width:280px;height:100vh;padding-top:60px;z-index:100005;background-color:var(--color-white);transition: right 0.3s ease; /*transform:translateX(100%);transition:transform 0.3s*/;overflow-y:auto;}
     .sidebar.active {right:0;}
     .sidebar .sidebar-title-wrap,
@@ -553,7 +561,9 @@ span.title-wrap > .h4,
     header > .content-wrap {width:100%;height:100%;padding:15px 20px;}
     header  h1 {width:130px;height:29px;}
 
-    /* sidebar */
+
+
+        /* sidebar */
     .sidebar .sidebar-title-wrap .user-btn {/*font-size:12px;*/}
     .sidebar-list > li > a {font-size:var(--txt-size02);}
 
