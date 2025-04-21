@@ -114,8 +114,8 @@
 /* 체크박스 비주얼 */
 .checkbox-badge-wrap span {display:inline-flex;padding:7px 12px;border-radius:20px;border-width:2px;border-style:solid;border-color:var(--color-transparent);font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);transition: all 0.3s;}
 /* 체크된 상태 */
-.checkbox-badge-wrap input:focus + span,
-.checkbox-badge-wrap input:focus:checked + span,
+/*.checkbox-badge-wrap input:focus + span,*/
+/*.checkbox-badge-wrap input:focus:checked + span,*/
 .checkbox-badge-wrap input:checked + span {color:var(--color-primary);font-weight:var(--fw-bold);border-color:var(--color-primary)}
 /* ------------------------------------------------------- */
 /* a. 라디오 (일반 디자인) */

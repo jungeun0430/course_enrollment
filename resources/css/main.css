@@ -501,6 +501,7 @@ span.title-wrap > .h4,
     .sidebar .sidebar-menu-wrap {padding:8px 0;}
     .sidebar-list > li {border-bottom:1px solid #ebebeb;}
     .sidebar-list > li > a {display:block;padding:16px 12px 16px 24px;font-size:var(--txt-size03);font-weight:var(--fw-medium);color:#333333;}
+    .sidebar-list > li > a:focus,
     .sidebar-list > li.active > a {color:var(--color-primary);}
 
         /*---------------------------------*/

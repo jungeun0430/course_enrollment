@@ -465,224 +465,6 @@ class TabManager {
     });
   }
 }
-/*class TabManager {
-  constructor() {
-    this.isMobile = window.innerWidth <= 767;
-    this.originalOrder = null;  // 초기 순서를 저장할 변수
-    this.init();
-
-    window.addEventListener('resize', () => {
-      const wasMobile = this.isMobile;  // 현재 상태 저장
-      this.isMobile = window.innerWidth <= 767;  // 새로운 상태 설정
-
-      if (!wasMobile && this.isMobile) {
-        // 데스크톱에서 모바일로 전환될 때만 active 탭을 상단으로
-        this.moveActiveTabToTop();
-      } else if (wasMobile && !this.isMobile) {
-        // 모바일에서 데스크톱으로 전환될 때는 원래 순서로 복원
-        this.restoreOriginalOrder();
-      }
-
-      this.updateHeight();
-    });
-
-  }
-  // 초기 순서 저장
-  saveOriginalOrder(firstDepth) {
-    if (!this.originalOrder) {
-      this.originalOrder = Array.from(firstDepth.children).map(li => li.cloneNode(true));
-    }
-  }
-
-  // 원래 순서로 복원
-  restoreOriginalOrder() {
-    if (this.originalOrder) {
-      document.querySelectorAll('.tab-wrap').forEach(wrap => {
-        // 현재 활성화된 탭 찾기
-        const currentActiveTab = wrap.querySelector('.first-depth > li.active .tab');
-        const currentActiveTabId = currentActiveTab ? currentActiveTab.textContent.trim() : null;
-
-        const firstDepth = wrap.querySelector('.first-depth');
-        firstDepth.innerHTML = '';
-
-        // 원래 순서로 복원하지만 active 클래스는 모두 제거
-        this.originalOrder.forEach(li => {
-          const newLi = li.cloneNode(true);
-          newLi.classList.remove('active'); // 모든 active 클래스 제거
-          firstDepth.appendChild(newLi);
-        });
-
-        // 현재 활성화된 탭 텍스트와 일치하는 탭을 찾아 active로 설정
-        if (currentActiveTabId) {
-          const tabs = wrap.querySelectorAll('.first-depth > li .tab');
-          for (const tab of tabs) {
-            if (tab.textContent.trim() === currentActiveTabId) {
-              const tabItem = tab.closest('li');
-              tabItem.classList.add('active');
-
-              // 해당 tab-box 표시
-              const tabBox = tabItem.querySelector('.tab-box');
-              if (tabBox) {
-                tabBox.style.display = 'block';
-              }
-              break;
-            }
-          }
-        }
-      });
-
-      this.reattachEventListeners();
-      this.updateHeight(); // 높이 업데이트 추가
-    }
-  }
-
-  // 활성 탭을 상단으로 이동하는 메서드 추가
-  moveActiveTabToTop() {
-    document.querySelectorAll('.tab-wrap').forEach(wrap => {
-      const firstDepth = wrap.querySelector('.first-depth');
-      const activeTab = wrap.querySelector('.first-depth > li.active');
-      if (activeTab && this.isMobile) {
-        firstDepth.insertBefore(activeTab, firstDepth.firstChild);
-      }
-    });
-  }
-
-// 이벤트 리스너 다시 연결하는 메서드
-  attachEventListeners(wrap) {
-    const firstDepth = wrap.querySelector('.first-depth');
-    const tabs = wrap.querySelectorAll('.first-depth > li .tab');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        if (this.isMobile) {
-          if (firstDepth.classList.contains('opened')) {
-            this.activateTab(tab);
-            firstDepth.classList.remove('opened');
-          } else {
-            firstDepth.classList.add('opened');
-          }
-        } else {
-          this.activateTab(tab);
-        }
-      });
-
-      tab.addEventListener('focus', () => {
-        if (!this.isMobile) {
-          this.activateTab(tab);
-        }
-      });
-    });
-  }
-
-// 모든 탭의 이벤트 리스너 다시 연결
-  reattachEventListeners() {
-    document.querySelectorAll('.tab-wrap').forEach(wrap => {
-      this.attachEventListeners(wrap);
-    });
-  }
-
-  init() {
-    const tabWraps = document.querySelectorAll('.tab-wrap');
-
-    tabWraps.forEach(wrap => {
-      const firstDepth = wrap.querySelector('.first-depth');
-      // 초기 순서 저장
-      this.saveOriginalOrder(firstDepth);
-
-      const tabs = wrap.querySelectorAll('.first-depth > li .tab');
-      const tabBoxes = wrap.querySelectorAll('.tab-box');
-
-      // 초기에 모든 tab-box 숨기기
-      tabBoxes.forEach(box => box.style.display = 'none');
-
-      // 활성 탭의 tab-box 보이기
-      const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
-      if (activeTabBox) {
-        activeTabBox.style.display = 'block';
-        // 모바일일 경우 초기에 활성 탭을 최상단으로 이동
-        if (this.isMobile) {
-          const activeTab = activeTabBox.closest('li');
-          firstDepth.insertBefore(activeTab, firstDepth.firstChild);
-        }
-      }
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', (e) => {
-          if (this.isMobile) {
-            // 모바일에서는 클릭 시 목록 토글
-            if (firstDepth.classList.contains('opened')) {
-              this.activateTab(tab);
-              firstDepth.classList.remove('opened');
-            } else {
-              firstDepth.classList.add('opened');
-            }
-          } else {
-            // PC에서는 기존 동작 유지
-            this.activateTab(tab);
-          }
-        });
-
-        tab.addEventListener('focus', () => {
-          if (!this.isMobile) {
-            this.activateTab(tab);
-          }
-        });
-      });
-
-      // 모바일에서 외부 클릭 시 목록 닫기
-      document.addEventListener('click', (e) => {
-        if (this.isMobile && !wrap.contains(e.target)) {
-          firstDepth.classList.remove('opened');
-        }
-      });
-    });
-
-    this.updateHeight();
-  }
-
-  activateTab(selectedTab) {
-    const wrap = selectedTab.closest('.tab-wrap');
-    const firstDepth = wrap.querySelector('.first-depth');
-    const allTabs = wrap.querySelectorAll('.first-depth > li');
-
-    // 모든 탭 비활성화 및 tab-box 숨기기
-    allTabs.forEach(tab => {
-      tab.classList.remove('active');
-      const tabBox = tab.querySelector('.tab-box');
-      if (tabBox) {
-        tabBox.style.display = 'none';
-      }
-    });
-
-    // 선택된 탭 활성화 및 tab-box 보이기
-    const activeTabItem = selectedTab.closest('li');
-    activeTabItem.classList.add('active');
-    const activeTabBox = activeTabItem.querySelector('.tab-box');
-    if (activeTabBox) {
-      activeTabBox.style.display = 'block';
-    }
-
-    // 모바일에서 선택된 탭을 최상단으로 이동
-    if (this.isMobile) {
-      const parent = activeTabItem.parentNode;
-      parent.insertBefore(activeTabItem, parent.firstChild);
-    }
-
-    setTimeout(() => this.updateHeight(), 0);
-  }
-
-  updateHeight() {
-    document.querySelectorAll('.tab-wrap').forEach(wrap => {
-      const activeTab = wrap.querySelector('.first-depth > li.active .tab-box');
-      if (activeTab) {
-        const tabBoxHeight = activeTab.offsetHeight;
-        const topSpacing = this.isMobile ? 84 : 104;
-        wrap.style.height = `${tabBoxHeight + topSpacing}px`;
-      }
-    });
-  }
-}*/
-
 /* 5. 수강신청 관련 탭 함수 - 인덱스를 매개변수로 받도록 수정 */
 function openTab(tabIndex) {
   const tab = document.querySelector('.f-modal');
@@ -1165,15 +947,67 @@ $(document).ready(function(){
   const $sidebar = $('.sidebar'); // 사이드바 메뉴
   const $closeBtn = $('.close-btn'); // 닫기 버튼
   const breakpoint = 1200; // PC와 모바일을 구분할 기준 너비
+
   // 햄버거 버튼 클릭 이벤트
   $hamburgerBtn.on('click', function () {
     if ($(window).width() < breakpoint) {
-      // 모바일 화면일 때만 active 클래스 추가
       $dimOverlay.addClass('active');
       $sidebar.addClass('active');
-      $('body').addClass('no-scroll'); // 뒷배경 스크롤 방지
+      $('body').addClass('no-scroll');
+      trapFocus($sidebar[0]);
     }
   });
+
+// 포커스 트랩 함수
+  function trapFocus(container) {
+    const focusableElements = Array.from(
+      container.querySelectorAll(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter(el => {
+      // 보이는 요소만 걸러냄 (display: none 등)
+      return el.offsetParent !== null;
+    });
+
+    if (focusableElements.length === 0) return;
+
+    const firstEl = focusableElements[0];
+    const lastEl = focusableElements[focusableElements.length - 1];
+
+    firstEl.focus();
+
+    function handleKeydown(e) {
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      } else if (e.key === 'Escape') {
+        closeSidebar();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+
+    function closeSidebar() {
+      $dimOverlay.removeClass('active');
+      $sidebar.removeClass('active');
+      $('body').removeClass('no-scroll');
+      $hamburgerBtn.focus();
+      document.removeEventListener('keydown', handleKeydown);
+    }
+
+    // 닫기 버튼 클릭 시 닫기
+    $(container).find('.close-btn').on('click', closeSidebar);
+  }
+
   // 사이드바 닫기 버튼 클릭 이벤트
   $closeBtn.on('click', function () {
     removeActiveClasses();
@@ -1196,7 +1030,6 @@ $(document).ready(function(){
     if (!document.querySelector('.modal[style*="display: block"]')) {
       $('body').removeClass('no-scroll'); // 열린 모달이 없을 때만 스크롤 활성화
     }
-
   }
 
   /* 2. 상단 글자크기 변경 */
