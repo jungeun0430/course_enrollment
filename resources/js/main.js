@@ -324,12 +324,35 @@ class TabManager {
     const tabs = wrap.querySelectorAll('.first-depth > li .tab');
     const tabType = wrap.getAttribute('data-tab');
 
+    // 모바일 환경에서 탭 키 네비게이션을 위한 tabindex 설정
+    if (tabType === 'fraternal') {
+      this.updateTabindexes(wrap);
+
+      // opened 클래스가 변경될 때마다 tabindex 업데이트
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'attributes' &&
+            mutation.attributeName === 'class' &&
+            firstDepth === mutation.target) {
+            this.updateTabindexes(wrap);
+          }
+        });
+      });
+
+      observer.observe(firstDepth, { attributes: true });
+    }
+
     tabs.forEach(tab => {
       tab.addEventListener('click', (e) => {
         if (tabType === 'fraternal' && this.isMobile) {
           if (firstDepth.classList.contains('opened')) {
             this.activateTab(tab);
             firstDepth.classList.remove('opened');
+
+            // 클릭한 탭에 포커스 유지 (이 부분만 추가)
+            setTimeout(() => {
+              tab.focus();
+            }, 0);
           } else {
             firstDepth.classList.add('opened');
           }
@@ -346,6 +369,33 @@ class TabManager {
     });
   }
 
+// 탭의 tabindex를 업데이트하는 새로운 메서드
+  updateTabindexes(wrap) {
+    const firstDepth = wrap.querySelector('.first-depth');
+    if (!firstDepth) return;
+
+    const isOpened = firstDepth.classList.contains('opened');
+    const tabType = wrap.getAttribute('data-tab');
+
+    if (tabType === 'fraternal' && this.isMobile) {
+      const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+
+      if (isOpened) {
+        // 열린 상태에서는 모든 탭에 탭 포커스 활성화
+        tabs.forEach(tab => {
+          tab.setAttribute('tabindex', '0');
+        });
+      } else {
+        // 닫힌 상태에서는 활성화된 탭만 탭 포커스 활성화
+        tabs.forEach(tab => {
+          const isActive = tab.closest('li').classList.contains('active');
+          tab.setAttribute('tabindex', isActive ? '0' : '-1');
+        });
+      }
+    }
+  }
+
+// init 함수의 끝부분에 다음 코드 추가
   reattachEventListeners() {
     document.querySelectorAll('.tab-wrap').forEach(wrap => {
       this.attachEventListeners(wrap);
@@ -353,27 +403,21 @@ class TabManager {
   }
 
   init() {
-    console.log('TabManager 초기화 시작...');
     // Map 초기화 확인
     if (!this.tabSets) {
-      console.log('tabSets Map 초기화');
       this.tabSets = new Map();
     }
 
     const tabWraps = document.querySelectorAll('.tab-wrap');
-    console.log(`탭 랩 요소 ${tabWraps.length}개 발견`);
 
     tabWraps.forEach((wrap, index) => {
-      console.log(`탭 랩 #${index} 처리 중...`);
       const tabType = wrap.getAttribute('data-tab');
-      console.log(`탭 타입: ${tabType}`);
 
       const firstDepth = wrap.querySelector('.first-depth');
       if (!firstDepth) {
         console.warn(`탭 랩 #${index}에 .first-depth 요소가 없습니다!`);
         return;
       }
-      console.log(`.first-depth 요소 발견: `, firstDepth);
 
       // 초기 순서 저장 - 수정된 메서드 호출
       this.saveOriginalOrder(wrap, firstDepth);
@@ -388,12 +432,10 @@ class TabManager {
       // 활성 탭의 tab-box 보이기
       const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
       if (activeTabBox) {
-        console.log(`활성 탭 박스 발견, 표시 설정`);
         activeTabBox.style.display = 'block';
 
         // fraternal 타입 모바일일 경우만 초기에 활성 탭을 최상단으로 이동
         if (tabType === 'fraternal' && this.isMobile) {
-          console.log(`모바일 fraternal 탭, 활성 탭을 최상단으로 이동`);
           const activeTab = activeTabBox.closest('li');
           firstDepth.insertBefore(activeTab, firstDepth.firstChild);
         }
@@ -413,9 +455,7 @@ class TabManager {
         });
       }
     });
-
     this.updateHeight();
-    console.log('TabManager 초기화 완료');
   }
 
   activateTab(selectedTab, tabType) {
