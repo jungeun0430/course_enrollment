@@ -1377,7 +1377,7 @@
         <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
           결제내역 표 (pc)버전의 경우 rowspan을 사용하고 있어<br>
           hover시 색상 적용을 위해 스크립트를 사용하고 있음 (main.js에서 주석 8번 항목에서 확인 가능)
-          해당 기능을 사용하기 위해서 data-tab=rowspan-ver 지정 필요
+          해당 기능을 사용하기 위해서 data-table=rowspan-ver 지정 필요
         </p>
         <div class="custom-table fixed-ver pc-only" data-table="rowspan-ver">
           <table>
@@ -1688,8 +1688,8 @@
                         <span class="txt-sm fw-bold c-gray">2025.03.04 11:00</span>
                       </div>
                       <div class="flex-wrap gap4 end">
-                        <button type="button" class="btn sm outlined">영수증 출력</button>
-                        <button type="button" class="btn sm outlined c-red">수강변경</button>
+                        <button type="button" class="btn sm mo-sm outlined">영수증 출력</button>
+                        <button type="button" class="btn sm mo-sm outlined c-red">수강변경</button>
                       </div>
                     </div>
                     <div class="flex-wrap end">
@@ -1951,7 +1951,7 @@
                         <span class="txt-sm fw-bold c-gray">2025.03.04 11:00</span>
                       </div>
                       <div class="flex-wrap gap4 end">
-                        <button type="button" class="btn sm outlined">영수증 출력</button>
+                        <button type="button" class="btn sm mo-sm outlined">영수증 출력</button>
                       </div>
                     </div>
                     <div class="flex-wrap end">
@@ -2305,6 +2305,7 @@
         <button type="button" class="btn sm outlined">회원번호발급</button>
         <button type="button" class="btn sm outlined c-red">결제취소</button>
         <button type="button" class="btn sm outlined" disabled>취소불가</button>
+        <button type="button" class="btn sm mo-sm outlined">모바일 전환시 크기가 더 작은 버튼</button>
       </div>
 
       <hr style="margin:20px 0">
@@ -3281,9 +3282,13 @@
 
     <div class="guide-box">
       <h2>사. 탭 관련(진행중)</h2>
-      <h5>1. 탭</h5>
+      <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
+        pc / mobile 탭 모양 다른경우 : data-tab="fraternal"<br>
+        pc / mobile 탭 모양 같을경우 : data-tab="twin"
+      </p>
+      <h5>1. 탭 (fraternal 버전)</h5>
       <div class="box">
-        <div class="tab-wrap">
+        <div class="tab-wrap" data-tab="fraternal">
           <ul class="first-depth">
             <li class="">
               <button type="button" class="tab"><span>스포츠교실</span></button>
@@ -3347,6 +3352,72 @@
           </ul>
           <div class="clear"></div>
         </div>
+      </div>
+
+      <h5>1-2. 탭 (twin 버전)</h5>
+      <div class="tab-wrap" data-tab="twin">
+        <ul class="first-depth">
+          <li class="">
+            <button type="button" class="tab"><span>스포츠교실</span></button>
+            <div class="tab-box">
+              <a href="#">sdfkjskdfs</a>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+              스포츠 교실 내용 입니다.<br>
+            </div>
+          </li>
+          <li>
+            <button type="button" class="tab"><span>분당스포츠센터</span></button>
+            <div class="tab-box">
+              <a href="#">sdfkjskdfs</a>
+              분당스포츠센터 내용 입니다.
+            </div>
+          </li>
+          <li>
+            <button type="button" class="tab"><span>일산스포츠센터</span></button>
+            <div class="tab-box">
+              <a href="#">sdfkjskdfs</a>
+              일산스포츠센터 내용 입니다.
+            </div>
+          </li>
+          <li>
+            <button type="button" class="tab"><span>올림픽수영장</span></button>
+            <div class="tab-box">
+              <a href="#">sdfkjskdfs</a>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+              올림픽수영장 내용 입니다.<br>
+            </div>
+          </li>
+          <li class="active">
+            <button type="button" class="tab"><span>수영장</span></button>
+            <div class="tab-box">
+              <a href="#">sdfkjskdfs</a>
+              수영장 내용 입니다.
+            </div>
+          </li>
+        </ul>
+        <div class="clear"></div>
       </div>
     </div>
 
@@ -3428,7 +3499,6 @@
           </div>
 
         </div>
-
       </div>
     </div>
 
@@ -3642,10 +3712,10 @@
 </main>
 <script>
   // 초기화
-  new TabManager();
+  const tabManager = new TabManager();
+
   new CheckTabManager();
   new ModalManager();
-
 </script>
 </body>
 </html>

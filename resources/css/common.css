@@ -29,9 +29,9 @@
 .dash-list > li::before {content:'-';font-size:inherit;position:absolute;left:0;top:-1px;}
 
 
-  /* ------------------------------------------------------- */
+/* ------------------------------------------------------- */
 /* 버튼 : 기본 (배경색 존재) */
-.btn {flex: 0 0 auto;flex-shrink: 0  ;flex-grow: 0;padding:16px;font-size:var(--txt-size04);border:2px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);transition:all 0.3s;}
+.btn {display:flex;justify-content:center;align-items:center;flex: 0 0 auto;flex-shrink: 0  ;flex-grow: 0;padding:16px;font-size:var(--txt-size04);border:2px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);transition:all 0.3s;}
 .btn:not(:disabled):hover {background-color: var(--color-primary-dark);}
 .btn.outlined {border-color:var(--border-color);color:var(--color-gray);font-weight:var(--fw-medium);background-color:var(--color-white);}
 .btn.outlined:not(:disabled):hover {font-weight:var(--fw-bold);color:var(--color-primary);border-color:var(--color-primary);background-color:var(--color-white);}
@@ -44,6 +44,7 @@
 .btn.size-full {min-width:auto;width:100%;}
 
 /* 버튼 전체적 크기 관련 */
+.btn.fixed-xs {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
 .btn.sm {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
 .btn.md {padding:14px;font-size:var(--txt-size02);}
 .btn.fixed-md {height:48px;padding:11px 14px;font-size:var(--txt-size02);}
@@ -62,6 +63,8 @@
   .btn.size-md {min-width:auto;}
   /* 버튼 전체적 크기 관련 */
   .btn.fixed-md {height:40px;padding:11px 14px;}
+
+  .btn.sm.mo-sm{padding:8px;height:32px;}
 }
 
 /* 아이콘 버튼 */
@@ -139,14 +142,14 @@
 .radio-tab-wrap {display:inline-flex;align-items:center;border-radius:4px;overflow:hidden;}
 .radio-tab > input {position: absolute;width: 1px;height: 1px;overflow: hidden;clip: rect(0 0 0 0);white-space: nowrap;clip-path: inset(50%);}
 .radio-tab input:checked + span {background-color:var(--color-primary);color:var(--color-white);font-weight:var(--fw-bold);border-color:var(--color-primary);}
-.radio-tab span {display:inline-flex;justify-content:center;align-items:center;min-width:100px;padding:12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
+.radio-tab span {display:inline-flex;justify-content:center;align-items:center;min-width:100px;height:48px;padding:11px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
 .radio-tab + .radio-tab {border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:first-child > span {border-radius:4px 0 0 4px;overflow:hidden;border-left:1px solid var(--border-color);}
 .radio-tab-wrap > .radio-tab:last-child > span {border-radius:0 4px 4px 0;overflow:hidden;border-right:1px solid var(--border-color);}
 /*.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:1px solid var(--color-primary);}*/
 /*.radio-tab input:focus + span {background-color:var(--color-white);color:var(--color-primary);font-weight:var(--fw-bold);}*/
 @media (max-width: 768px) {
-  .radio-tab span {padding:9px;}
+  .radio-tab span {padding:9px;height: 40px;}
 }
 /* ------------------------------------------------------- */
 /* 인풋 */

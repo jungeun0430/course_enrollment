@@ -194,6 +194,280 @@ function hideModal(modalId) {
 class TabManager {
   constructor() {
     this.isMobile = window.innerWidth <= 767;
+    this.tabSets = new Map(); // Map을 명시적으로 초기화
+    this.init();
+
+    window.addEventListener('resize', () => {
+      const wasMobile = this.isMobile;
+      this.isMobile = window.innerWidth <= 767;
+
+      document.querySelectorAll('.tab-wrap').forEach(wrap => {
+        const tabType = wrap.getAttribute('data-tab');
+        const firstDepth = wrap.querySelector('.first-depth');
+
+        if (!firstDepth) return;
+
+        if (tabType === 'fraternal') {
+          if (!wasMobile && this.isMobile) {
+            this.moveActiveTabToTop(wrap);
+          } else if (wasMobile && !this.isMobile) {
+            this.restoreOriginalOrder(wrap);
+          }
+        }
+      });
+
+      this.updateHeight();
+    });
+  }
+
+  // 각 탭 세트의 ID 생성
+  getTabSetId(wrap) {
+    // 이미 ID가 있으면 사용, 없으면 data-tab 속성과 랜덤 값을 합쳐 고유 ID 생성
+    if (!wrap.dataset.tabSetId) {
+      const tabType = wrap.getAttribute('data-tab') || 'unknown';
+      wrap.dataset.tabSetId = `${tabType}-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+    }
+    return wrap.dataset.tabSetId;
+  }
+
+  // 탭 세트별로 초기 순서 저장
+  saveOriginalOrder(wrap, firstDepth) {
+    if (!firstDepth) return;
+
+    // this.tabSets가 정의되어 있는지 확인
+    if (!this.tabSets) {
+      this.tabSets = new Map();
+    }
+
+    const id = this.getTabSetId(wrap);
+
+    if (!this.tabSets.has(id)) {
+      console.log(`${id} 탭 세트의 초기 순서 저장`);
+      this.tabSets.set(id, {
+        originalOrder: Array.from(firstDepth.children).map(li => li.cloneNode(true))
+      });
+    }
+  }
+
+  // 탭 세트별로 원래 순서 복원
+  restoreOriginalOrder(wrap) {
+    // this.tabSets가 정의되어 있는지 확인
+    if (!this.tabSets) {
+      console.warn('tabSets가 초기화되지 않았습니다.');
+      return;
+    }
+
+    const id = this.getTabSetId(wrap);
+    const tabSetData = this.tabSets.get(id);
+
+    if (!tabSetData || !tabSetData.originalOrder) {
+      console.warn(`저장된 탭 세트 데이터가 없습니다. ID: ${id}`);
+      return;
+    }
+
+    const firstDepth = wrap.querySelector('.first-depth');
+    if (!firstDepth) return;
+
+    if (wrap.getAttribute('data-tab') === 'fraternal') {
+      console.log(`${id} 탭 세트의 초기 순서 복원 중...`);
+
+      // 현재 활성화된 탭 찾기
+      const currentActiveTab = wrap.querySelector('.first-depth > li.active .tab');
+      const currentActiveTabId = currentActiveTab ? currentActiveTab.textContent.trim() : null;
+
+      firstDepth.innerHTML = '';
+
+      // 원래 순서로 복원하지만 active 클래스는 모두 제거
+      tabSetData.originalOrder.forEach(li => {
+        const newLi = li.cloneNode(true);
+        newLi.classList.remove('active'); // 모든 active 클래스 제거
+        firstDepth.appendChild(newLi);
+      });
+
+      // 현재 활성화된 탭 텍스트와 일치하는 탭을 찾아 active로 설정
+      if (currentActiveTabId) {
+        const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+        for (const tab of tabs) {
+          if (tab.textContent.trim() === currentActiveTabId) {
+            const tabItem = tab.closest('li');
+            tabItem.classList.add('active');
+
+            // 해당 tab-box 표시
+            const tabBox = tabItem.querySelector('.tab-box');
+            if (tabBox) {
+              tabBox.style.display = 'block';
+            }
+            break;
+          }
+        }
+      }
+
+      this.reattachEventListeners();
+      this.updateHeight();
+    }
+  }
+
+  moveActiveTabToTop(wrap) {
+    const firstDepth = wrap.querySelector('.first-depth');
+    if (!firstDepth) return;
+
+    const activeTab = wrap.querySelector('.first-depth > li.active');
+    if (activeTab && this.isMobile && wrap.getAttribute('data-tab') === 'fraternal') {
+      firstDepth.insertBefore(activeTab, firstDepth.firstChild);
+    }
+  }
+
+  attachEventListeners(wrap) {
+    const firstDepth = wrap.querySelector('.first-depth');
+    if (!firstDepth) return;
+
+    const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+    const tabType = wrap.getAttribute('data-tab');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        if (tabType === 'fraternal' && this.isMobile) {
+          if (firstDepth.classList.contains('opened')) {
+            this.activateTab(tab);
+            firstDepth.classList.remove('opened');
+          } else {
+            firstDepth.classList.add('opened');
+          }
+        } else {
+          this.activateTab(tab, tabType);
+        }
+      });
+
+      tab.addEventListener('focus', () => {
+        if (tabType !== 'fraternal' || !this.isMobile) {
+          this.activateTab(tab, tabType);
+        }
+      });
+    });
+  }
+
+  reattachEventListeners() {
+    document.querySelectorAll('.tab-wrap').forEach(wrap => {
+      this.attachEventListeners(wrap);
+    });
+  }
+
+  init() {
+    console.log('TabManager 초기화 시작...');
+    // Map 초기화 확인
+    if (!this.tabSets) {
+      console.log('tabSets Map 초기화');
+      this.tabSets = new Map();
+    }
+
+    const tabWraps = document.querySelectorAll('.tab-wrap');
+    console.log(`탭 랩 요소 ${tabWraps.length}개 발견`);
+
+    tabWraps.forEach((wrap, index) => {
+      console.log(`탭 랩 #${index} 처리 중...`);
+      const tabType = wrap.getAttribute('data-tab');
+      console.log(`탭 타입: ${tabType}`);
+
+      const firstDepth = wrap.querySelector('.first-depth');
+      if (!firstDepth) {
+        console.warn(`탭 랩 #${index}에 .first-depth 요소가 없습니다!`);
+        return;
+      }
+      console.log(`.first-depth 요소 발견: `, firstDepth);
+
+      // 초기 순서 저장 - 수정된 메서드 호출
+      this.saveOriginalOrder(wrap, firstDepth);
+
+      const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+      const tabBoxes = wrap.querySelectorAll('.tab-box');
+      console.log(`탭 ${tabs.length}개, 탭 박스 ${tabBoxes.length}개 발견`);
+
+      // 초기에 모든 tab-box 숨기기
+      tabBoxes.forEach(box => box.style.display = 'none');
+
+      // 활성 탭의 tab-box 보이기
+      const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
+      if (activeTabBox) {
+        console.log(`활성 탭 박스 발견, 표시 설정`);
+        activeTabBox.style.display = 'block';
+
+        // fraternal 타입 모바일일 경우만 초기에 활성 탭을 최상단으로 이동
+        if (tabType === 'fraternal' && this.isMobile) {
+          console.log(`모바일 fraternal 탭, 활성 탭을 최상단으로 이동`);
+          const activeTab = activeTabBox.closest('li');
+          firstDepth.insertBefore(activeTab, firstDepth.firstChild);
+        }
+      } else {
+        console.log(`활성 탭 박스를 찾을 수 없음`);
+      }
+
+      // 각 탭 랩에 이벤트 리스너 부착
+      this.attachEventListeners(wrap);
+
+      // 모바일에서 외부 클릭 시 목록 닫기 (fraternal 타입만)
+      if (tabType === 'fraternal') {
+        document.addEventListener('click', (e) => {
+          if (this.isMobile && !wrap.contains(e.target)) {
+            firstDepth.classList.remove('opened');
+          }
+        });
+      }
+    });
+
+    this.updateHeight();
+    console.log('TabManager 초기화 완료');
+  }
+
+  activateTab(selectedTab, tabType) {
+    const wrap = selectedTab.closest('.tab-wrap');
+    if (!wrap) return;
+
+    const firstDepth = wrap.querySelector('.first-depth');
+    if (!firstDepth) return;
+
+    const allTabs = wrap.querySelectorAll('.first-depth > li');
+    tabType = tabType || wrap.getAttribute('data-tab');
+
+    // 모든 탭 비활성화 및 tab-box 숨기기
+    allTabs.forEach(tab => {
+      tab.classList.remove('active');
+      const tabBox = tab.querySelector('.tab-box');
+      if (tabBox) {
+        tabBox.style.display = 'none';
+      }
+    });
+
+    // 선택된 탭 활성화 및 tab-box 보이기
+    const activeTabItem = selectedTab.closest('li');
+    activeTabItem.classList.add('active');
+    const activeTabBox = activeTabItem.querySelector('.tab-box');
+    if (activeTabBox) {
+      activeTabBox.style.display = 'block';
+    }
+
+    // fraternal 타입의 모바일에서만 선택된 탭을 최상단으로 이동
+    if (tabType === 'fraternal' && this.isMobile) {
+      const parent = activeTabItem.parentNode;
+      parent.insertBefore(activeTabItem, parent.firstChild);
+    }
+
+    setTimeout(() => this.updateHeight(), 0);
+  }
+
+  updateHeight() {
+    document.querySelectorAll('.tab-wrap').forEach(wrap => {
+      const activeTab = wrap.querySelector('.first-depth > li.active .tab-box');
+      if (activeTab) {
+        const tabBoxHeight = activeTab.offsetHeight;
+        const topSpacing = this.isMobile ? 84 : 104;
+        wrap.style.height = `${tabBoxHeight + topSpacing}px`;
+      }
+    });
+  }
+}
+/*class TabManager {
+  constructor() {
+    this.isMobile = window.innerWidth <= 767;
     this.originalOrder = null;  // 초기 순서를 저장할 변수
     this.init();
 
@@ -407,7 +681,7 @@ class TabManager {
       }
     });
   }
-}
+}*/
 
 /* 5. 수강신청 관련 탭 함수 - 인덱스를 매개변수로 받도록 수정 */
 function openTab(tabIndex) {
