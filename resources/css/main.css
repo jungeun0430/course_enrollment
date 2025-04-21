@@ -495,6 +495,10 @@ span.title-wrap > .h4,
     /* sidebar */
     .sidebar {position:fixed;right:-280px;top:0;width:280px;height:100vh;padding-top:60px;z-index:100005;background-color:var(--color-white);transition: right 0.3s ease; /*transform:translateX(100%);transition:transform 0.3s*/;overflow-y:auto;}
     .sidebar.active {right:0;}
+    .sidebar .sidebar-title-wrap,
+    .sidebar .sidebar-list {display: none!important;}
+    .sidebar.active .sidebar-title-wrap {display:flex!important;}
+    .sidebar.active .sidebar-list {display:block!important;}
     .sidebar .sidebar-title-wrap .user-btn {display:flex;align-items:center;height:28px;color:var(--color-white);font-size:var(--txt-size03);font-weight:var(--fw-medium);padding-left:32px;background:url(../images/ico/ico_login_white.svg) left center no-repeat;background-size:28px;}
     .sidebar .sidebar-title-wrap .close-btn {width:28px;height:28px;background:url(../images/ico/ico_close.svg) center center no-repeat;background-size:28px;}
     .sidebar-title-wrap{width:100%;align-items:center;justify-content:space-between;position:absolute;left:0;top:0;height:60px;}
