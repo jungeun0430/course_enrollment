@@ -51,8 +51,13 @@ body[data-text-size='lg'] {
   /* custom-info-table */
   .body-lg-only-tc {display:table-column!important;}
 
+  /* date */
+  .date {width:165px;}
+
   @media (max-width:1200px) {
     .body-lg-only-tc {display:none!important;}
+    /* date */
+    .date {width:100%;}
   }
   @media (max-width: 767px) {
     --txt-size01 : 14px;
@@ -70,6 +75,7 @@ body[data-text-size='lg'] {
     .txt-gray + .arrow_link {margin-left:20px;}
     header .btn-wrap > a.ico-user {min-width:inherit;}
     .check-tab-btn {height:auto;}
+
   }
 }
 body[data-text-size='normal'] {
