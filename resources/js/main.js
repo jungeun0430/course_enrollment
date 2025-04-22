@@ -7,6 +7,7 @@
 * 6. [공통]라디오 버튼 핸들러
 * 7. [결제내역]데이트피커
 * 8. [결제내역]테이블 rowspan 존재시 hover색상 지정
+* 9. [공통] 테이블 체크박스 존재시 클릭하면 전체 선택
 *  */
 
 /* 1. 사이드바 */
@@ -122,74 +123,152 @@ function adjustModalSize(modalId) {
 }
 
 // 모달 띄우기 함수
-// 현재 열린 모달들을 스택으로 관리
+// 외부 클릭시 팝업 닫힘
+let openModalName = ''; // 열린 팝업 이름 저장
 let modalStack = [];
-
+// 현재 열린 모달들을 스택으로 관리
 function showModal(modalId) {
   const modal = document.getElementById(modalId);
-  if (modal) {
-    // 이미 열린 모달이 있으면 스택에 저장 (z-index 관리)
-    const currentOpenModal = document.querySelector('.modal[style*="block"]');
-    if (currentOpenModal && currentOpenModal.id !== modalId) {
-      // 현재 열린 모달이 있고, 새로 열려는 모달과 다른 경우
-      modalStack.push(currentOpenModal.id);
-      currentOpenModal.style.zIndex = '10001'; // 기존 모달의 z-index 낮춤
-    }
+  if (!modal) return;
+  // 결제내역에서 사용하는 overlay
+  const overlay = document.getElementById('overlay');
 
-    adjustModalSize(modalId); // 크기 조정 로직 호출
-    modal.style.display = 'block'; // 모달 표시
-    modal.style.zIndex = '10002'; // 새 모달을 최상위로 표시
-    document.body.classList.add('no-scroll'); // 스크롤 방지
-    modal.setAttribute('aria-hidden', 'false'); // ARIA 활성화
-    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    const firstFocusableElement = focusableElements[0];
-    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+  // 이전 모달 처리
+  const currentOpenModal = document.querySelector('.modal[style*="block"]');
 
-    // Tab 감지(모달 내부에서만 초점 이동)
-    modal.addEventListener('keydown', function (e) {
-      if (e.key === 'Tab') {
-        // Shift+Tab => 첫 번째 요소에서 마지막으로 이동
-        if (e.shiftKey) {
-          if (document.activeElement === firstFocusableElement) {
-            e.preventDefault();
-            lastFocusableElement.focus();
-          }
-        }
-        // Tab => 마지막 요소에서 첫 번째로 이동
-        else {
-          if (document.activeElement === lastFocusableElement) {
-            e.preventDefault();
-            firstFocusableElement.focus();
-          }
-        }
-      }
-
-      // ESC 키로 모달 닫기
-      if (e.key === 'Escape') {
-        hideModal(modalId);
-      }
-    });
-
-    // 모달 열릴 때 첫 번째 요소로 초점 이동
-    if (firstFocusableElement) {
-      firstFocusableElement.focus();
-    }
+  if(modal.classList.contains('no-dim')) {
+    overlay.classList.add('active');
   }
+  if (currentOpenModal && currentOpenModal.id !== modalId) {
+    modalStack.push(currentOpenModal.id);
+    currentOpenModal.style.zIndex = '10001';
+  }
+
+  // 새 모달 표시
+  modal.style.display = 'block';
+  modal.style.zIndex = '10002';
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
+
+  // 현재 열린 모달 이름 갱신
+  openModalName = modalId;
+
+  // DOM focusable elements 처리 (포커스 트랩 설정)
+  const focusableElements = Array.from(
+    modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+  );
+  const firstFocusable = focusableElements[0];
+  const lastFocusable = focusableElements[focusableElements.length - 1];
+
+  // 🔒 강제 포커스 트랩
+  const enforceFocus = (e) => {
+    if (!modal.contains(e.target)) {
+      e.stopPropagation();
+      e.preventDefault();
+      firstFocusable?.focus();
+    }
+  };
+
+  const keydownHandler = (e) => {
+    if (e.key === 'Tab') {
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        e.preventDefault();
+        lastFocusable.focus();
+      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable.focus();
+      }
+    }
+
+    if (e.key === 'Escape') {
+      hideModal(modalId);
+    }
+  };
+
+  if (!modal._eventsBound) {
+    // 진짜로 강제 막으려면 focus (캡처 모드 true) 사용
+    document.addEventListener('focus', enforceFocus, true); // 🔑 핵심!
+    document.addEventListener('keydown', keydownHandler);
+    modal._enforceFocus = enforceFocus;
+    modal._keydownHandler = keydownHandler;
+    modal._eventsBound = true;
+  }
+
+  // 모달 내 tab-wrap이 있는지 체크하고 높이 업데이트 호출
+  const tabWraps = modal.querySelectorAll('.tab-wrap');
+  if (tabWraps.length > 0) {
+    console.log(`${modalId} 모달에 tab-wrap이 있습니다. 높이 업데이트 실행.`);
+    const tabManager = new TabManager();
+    setTimeout(() => {
+      tabManager.updateHeight(modalId); // 특정 모달 내 tab-wrap 높이 업데이트
+    }, 0);
+  } else {
+    console.log(`${modalId} 모달에 tab-wrap이 없습니다.`);
+  }
+
+
+  setTimeout(() => {
+    firstFocusable?.focus();
+  }, 0);
 }
-let previousFocus;
-// 모달 숨기기 함수
+
 function hideModal(modalId) {
   const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.style.display = 'none'; // 모달 숨김
-    modal.setAttribute('aria-hidden', 'true'); // ARIA 비활성화
-    document.body.classList.remove('no-scroll'); // 스크롤 허용
+  if (!modal || modal.style.display === 'none') return; // 이미 닫혀 있다면 동작 취소
+  // 결제내역에서 사용하는 overlay
+  const overlay = document.getElementById('overlay');
+  if(modal.classList.contains('no-dim')) {
+    overlay.classList.remove('active');
+  }
 
-    // 모달 닫힐 때 이전 초점으로 복구
-    previousFocus?.focus();
+  /* 리셋 코드 [개별 추가 가능] */
+  /* [결제내역] 수강변경 */
+  if (modalId === 'modal-courseChange') {
+
+    /* 탭 초기화 */
+    const tabs = modal.querySelectorAll('.tab-wrap > .first-depth > li');
+    const firstTab = modal.querySelector('.tab-wrap > .first-depth > li:first-child');
+
+    // 탭이 존재하는 경우에만 처리
+    if (tabs.length > 0 && firstTab) {
+      // 모든 기존 활성화된(li.active) 탭 비활성화
+      tabs.forEach((tab) => {
+        tab.classList.remove('active');
+      });
+
+      // 첫 번째 LI에 active 클래스 추가
+      firstTab.classList.add('active');
+    }
+  }
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('no-scroll');
+
+  // modalStack 처리
+  if (modalStack && modalStack.length > 0) {
+    const prevModalId = modalStack.pop();
+    const prevModal = document.getElementById(prevModalId);
+    if (prevModal) {
+      prevModal.style.zIndex = '10002';
+    }
+  }
+
+  // 이벤트 리스너 제거
+  if (modal._eventsBound) {
+    document.removeEventListener('focus', modal._enforceFocus, true);
+    document.removeEventListener('keydown', modal._keydownHandler);
+    modal._eventsBound = false;
   }
 }
 
+// 모달 숨기기 함수
 /* 4. 탭 관련 함수 */
 class TabManager {
   constructor() {
@@ -494,20 +573,53 @@ class TabManager {
     setTimeout(() => this.updateHeight(), 0);
   }
 
-  updateHeight() {
-    document.querySelectorAll('.tab-wrap').forEach(wrap => {
-      const activeTab = wrap.querySelector('.first-depth > li.active .tab-box');
+  updateHeight(modalId = null) {
+    // 대상 선택: modalId가 있으면 특정 모달 내부의 tab-wrap만 선택
+    const tabWrapSelector = modalId
+      ? `#${modalId} .tab-wrap` // 특정 모달 안의 .tab-wrap
+      : '.tab-wrap';            // 모든 .tab-wrap
+
+    console.log(tabWrapSelector)
+    // 선택된 tab-wrap 요소
+    const tabWraps = document.querySelectorAll(tabWrapSelector);
+
+    // tab-wrap이 존재하지 않으면 아무 작업도 하지 않음
+    if (!tabWraps.length) {
+      console.log('tab-wrap 요소가 없습니다.');
+      return;
+    }
+
+    // 각 tab-wrap의 높이 계산 및 업데이트
+    tabWraps.forEach(wrap => {
+      const activeTab = wrap.querySelector('.first-depth > li.active .tab-box'); // 활성화된 탭 찾기
       if (activeTab) {
-        const tabBoxHeight = activeTab.offsetHeight;
-        const topSpacing = this.isMobile ? 84 : 104;
-        wrap.style.height = `${tabBoxHeight + topSpacing}px`;
+        const tabBoxHeight = activeTab.offsetHeight; // 활성 탭의 높이
+        // modal 내부인지 확인하는 조건
+        const isInModal = modalId && wrap.closest(`#${modalId}`);
+        console.log(isInModal)
+
+
+
+        // 높이 계산
+        const topSpacing = isInModal
+          ? 84 // 모달 내부
+          : this.isMobile
+            ? 84 // 모바일
+            : 104; // 데스크톱
+        console.log(topSpacing)
+
+        wrap.style.height = `${tabBoxHeight + topSpacing}px`; // 계산된 높이 설정
       }
     });
   }
 }
 /* 5. 수강신청 관련 탭 함수 - 인덱스를 매개변수로 받도록 수정 */
+// openTab 함수 수정
 function openTab(tabIndex) {
   const tab = document.querySelector('.f-modal');
+  // 모달 열기 전에 data-focus-trap 속성 초기화
+  tab.removeAttribute('data-focus-trap');
+
   tab.classList.add('active');
   document.body.classList.add('no-scroll');
 
@@ -552,7 +664,163 @@ function openTab(tabIndex) {
       allTabs[tabIndex].style.height = 'auto';
     }
   }
+
+  // 모바일일 경우 포커스 트랩 설정
+  if (window.innerWidth <= 768) {
+    // 간단한 포커스 트랩 직접 구현
+    setupFocusTrap(tab);
+  }
 }
+function setupFocusTrap(modal) {
+  if (!modal) return;
+
+  console.log('포커스 트랩 설정 중...');
+
+  // 이전 이벤트 리스너 제거 (중복 방지)
+  document.removeEventListener('keydown', handleTabKey);
+  document.addEventListener('keydown', handleTabKey);
+
+  // 포커스 가능한 기본 요소들 수집
+  let focusableElements = Array.from(modal.querySelectorAll(
+    'button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"]), .check-tab-btn'
+  ));
+  focusableElements = focusableElements.filter(el => {
+    const style = window.getComputedStyle(el);
+    if (
+      style.display === 'none' ||
+      style.visibility === 'hidden' ||
+      style.opacity === '0' ||
+      el.hasAttribute('hidden')
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+
+  // label[for] 요소도 포커스 가능하게 추가
+  const customInputLabels = Array.from(modal.querySelectorAll('label[for]'));
+  customInputLabels.forEach(label => {
+    if (!label.hasAttribute('tabindex')) {
+      label.setAttribute('tabindex', '0');
+    }
+  });
+
+  // 병합
+  focusableElements = [...focusableElements, ...customInputLabels];
+
+  focusableElements = focusableElements.filter(el => {
+    // 추가 디버깅 로그
+    console.log(`필터링 중: ${el.tagName}`, {
+      visible: window.getComputedStyle(el).visibility,
+      display: window.getComputedStyle(el).display,
+      opacity: window.getComputedStyle(el).opacity,
+      hidden: el.hasAttribute('hidden'),
+    });
+
+    if (
+      el.disabled || // 비활성화된 요소 제외
+      window.getComputedStyle(el).display === 'none' || // 안 보이는 요소 제외
+      window.getComputedStyle(el).visibility === 'hidden' || // 숨김 처리된 요소 제외
+      window.getComputedStyle(el).opacity === '0' || // 투명한 요소 제외
+      el.hasAttribute('hidden') // 다른 숨김 속성 제외
+    ) {
+      return false;
+    }
+
+    // 모든 조건을 통과한 요소만 유지
+    return true;
+  });
+
+  // DOM 순서대로 정렬
+  focusableElements.sort((a, b) => {
+    return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+  });
+
+  console.log('포커스 가능한 요소들:', focusableElements.length);
+  focusableElements.forEach((el, index) => {
+    console.log(`요소 ${index}:`, el.tagName, el.className, el.id);
+  });
+
+  // 저장
+  modal._focusableElements = focusableElements;
+  modal._firstFocusableElement = focusableElements[0];
+  modal._lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  // 이전 포커스된 요소 저장
+  window.lastFocusedElement = document.activeElement;
+
+  const activeTabBtn = modal.querySelector('.check-scroll > ul > li.active > .check-tab-btn');
+
+  setTimeout(() => {
+    // 포커스 설정
+    if (activeTabBtn) {
+      console.log('활성화된 탭 버튼에 포커스 설정');
+      activeTabBtn.focus();
+    } else {
+      const firstTabBtn = modal.querySelector('.check-tab-btn');
+      if (firstTabBtn) {
+        console.log('첫 탭 버튼에 포커스 설정');
+        firstTabBtn.focus();
+      } else if (focusableElements.length > 0) {
+        console.log('첫 포커스 가능한 요소에 포커스 설정');
+        focusableElements[0].focus();
+      }
+    }
+
+    // 모든 체크박스/라디오에 tabindex=0 부여 (포커스 가능하게)
+  // 숨겨진 체크박스와 라디오도 포함
+    const allInputs = modal.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+    allInputs.forEach(input => {
+      // tabindex가 없으면 추가
+      if (!input.hasAttribute('tabindex')) {
+        input.setAttribute('tabindex', '0');
+      }
+    });
+
+
+    modal.setAttribute('data-focus-trap', 'true');
+  }, 100);
+}
+function handleTabKey(e) {
+  if (e.key !== "Tab") return;
+
+  const modal = document.querySelector('.f-modal.active[data-focus-trap="true"]');
+  if (!modal) return;
+
+  const focusableElements = modal._focusableElements || [];
+  const firstFocusableElement = modal._firstFocusableElement;
+  const lastFocusableElement = modal._lastFocusableElement;
+
+  if (!focusableElements.length || !firstFocusableElement || !lastFocusableElement) return;
+
+  const currentFocusIndex = focusableElements.indexOf(document.activeElement);
+
+  // 포커스가 모달 외부에 있는 경우
+  if (currentFocusIndex === -1) {
+    e.preventDefault();
+    (e.shiftKey ? lastFocusableElement : firstFocusableElement).focus({ preventScroll: true });
+    return;
+  }
+
+  // 순환 포커스 처리
+  if (e.shiftKey) {
+    if (document.activeElement === firstFocusableElement) {
+      e.preventDefault();
+      requestAnimationFrame(() => {
+        lastFocusableElement.focus({ preventScroll: true });
+      });
+    }
+  } else {
+    if (document.activeElement === lastFocusableElement) {
+      e.preventDefault();
+      requestAnimationFrame(() => {
+        firstFocusableElement.focus({ preventScroll: true });
+      });
+    }
+  }
+}
+
 class CheckTabManager {
   constructor() {
     this.mobileWrap = document.querySelector('.f-modal');
@@ -570,6 +838,12 @@ class CheckTabManager {
     this.isMobile = window.innerWidth < 768;
     this.allWrapBtns = this.wrap.querySelectorAll('.check-tab-btn');
     this.closeBtn = this.mobileWrap.querySelector('.close-btn');
+
+    // 포커스 제어를 위한 변수 추가
+    this.focusableElements = null;
+    this.firstFocusableElement = null;
+    this.lastFocusableElement = null;
+
 
     this.BUTTON_HEIGHT = 48;
 
@@ -608,6 +882,15 @@ class CheckTabManager {
       }
     });
 
+    // 모달이 활성화될 때 포커스 트랩 설정
+    this.mobileWrap.addEventListener('transitionend', () => {
+      if (this.mobileWrap.classList.contains('active') && this.isMobile) {
+        this.setupFocusTrap();
+      }
+    });
+
+    // 키보드 이벤트 리스너 추가
+    // document.addEventListener('keydown', this.handleKeyDown.bind(this));
   }
 
   init() {
@@ -631,15 +914,12 @@ class CheckTabManager {
       });
     });
 
-
-
     this.closeBtn.addEventListener('click', () => {
       this.mobileWrap.classList.remove('active');
       document.body.classList.remove('no-scroll');
       this.tabItems.forEach(tabItem => {
         tabItem.classList.remove('active');
       })
-
     });
 
     this.tabItems.forEach(tabItem => {
@@ -910,7 +1190,6 @@ class CheckTabManager {
   }
 
   showOnlyCheckedItems(content) {
-
     if (!content) return;
 
     const items = content.querySelectorAll('.checkbox-badge-wrap');
@@ -932,7 +1211,6 @@ class CheckTabManager {
   }
 
   showAllItems(content) {
-
     if (!content) return;
 
     const items = content.querySelectorAll('.checkbox-badge-wrap');
@@ -977,6 +1255,18 @@ class CheckTabManager {
       break;
   }
 }*/
+
+/* 7. 데이트 피커 */
+function formatYearOptions() {
+  $(".ui-datepicker-year").each(function () {
+    $(this).find("option").each(function () {
+      const val = $(this).val();
+      if (!$(this).text().includes("년")) {
+        $(this).text(val + "년");
+      }
+    });
+  });
+}
 
 /*-------------------------------*/
 /* [실행문] */
@@ -1190,24 +1480,52 @@ $(document).ready(function(){
       adjustModalSize(openModal.id); // 크기 재조정 호출
     }
   });
-  // 외부 클릭시 팝업 닫힘
-  let openModalName = '' // 열린 팝업이름 저장
-  window.onclick = function (event) {
-    const modals = document.querySelectorAll('.modal'); // 모든 모달 탐색
+
+
+  window.addEventListener('click', function (event) {
+    // 모든 모달을 탐색
+    const modals = document.querySelectorAll('.modal');
     const body = document.querySelector('body');
+    const overlay = document.getElementById('overlay'); // 결제내역
+
+    // #overlay가 클릭되었을 때 모달 닫기 처리
+    if (event.target === overlay) {
+      hideModal(openModalName);
+      for (let modal of modals) {
+        modal.style.display = 'none';
+      }
+      body.classList.remove('no-scroll'); // 스크롤 가능하게 복구
+      overlay.classList.remove('active');
+      // 이벤트 리스너 제거
+      if (modal._eventsBound) {
+        document.removeEventListener('focus', modal._enforceFocus, true);
+        document.removeEventListener('keydown', modal._keydownHandler);
+        modal._eventsBound = false;
+      }
+      return;
+    }
 
     for (let modal of modals) {
-      // 클릭된 요소가 현재 모달 요소인 경우
+      // 클릭된 요소가 정확히 modal 태그(백드롭) 자체인지 확인
       if (event.target === modal) {
-        // 해당 모달 숨기기
+        // 모달 숨기기
         modal.style.display = 'none';
-        body.classList.remove('no-scroll'); // 스크롤 가능하게
+        body.classList.remove('no-scroll'); // 스크롤 가능하게 복구
 
-        // 열린 팝업 이름과 연결된 추가 로직 처리
+        // 열린 팝업 숨김 처리 로직 실행
         hideModal(openModalName);
+        // 이벤트 리스너 제거
+        if (modal._eventsBound) {
+          document.removeEventListener('focus', modal._enforceFocus, true);
+          document.removeEventListener('keydown', modal._keydownHandler);
+          modal._eventsBound = false;
+        }
+        // 열린 팝업 이름 초기화
+        openModalName = '';
+        return; // 한 번 처리 후 루프 종료
       }
     }
-  };
+  });
 
   /* 6. 라디오 버튼 핸들러 */
   // 모든 라디오 버튼에 대한 키보드 접근성 향상 (name 속성 독립적)
@@ -1250,10 +1568,22 @@ $(document).ready(function(){
   let dateOptions = {
     changeMonth: true,
     changeYear: true,
-    dateFormat: "yy-mm-dd",  // 날짜 형식 설정
+    dateFormat: "yy-mm-dd",
+    showOtherMonths: true,// 날짜 형식 설정
     showMonthAfterYear: true, // 한국식 년도-월 표시
     dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], // 요일 한글화
-    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] // 월 한글화
+    monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'], // 월 한글화
+    defaultDate: new Date(),
+    beforeShow: function () {
+      setTimeout(() => {
+        formatYearOptions();
+      }, 0);
+    },
+    onChangeMonthYear: function () {
+      setTimeout(() => {
+        formatYearOptions();
+      }, 0);
+    }
   };
 
   // 시작일 datepicker
@@ -1308,4 +1638,24 @@ $(document).ready(function(){
       });
     });
   });
+
+  /* 9. [공통] 테이블 체크박스 존재시 클릭하면 전체 선택 */
+  $('.custom-table').each(function () {
+    const $table = $(this);
+    const $headCheckbox = $table.find('thead input[type="checkbox"]');
+
+    // 헤더 체크박스 클릭 시, 해당 테이블 tbody에서 보이는 체크박스만 체크/해제
+    $headCheckbox.on('change', function () {
+      const isChecked = $(this).is(':checked');
+      $table.find('tbody input[type="checkbox"]:visible').prop('checked', isChecked);
+    });
+
+    // tbody 체크박스 상태 변경 시, 보이는 체크박스 기준으로 전체 체크 여부 판단
+    $table.find('tbody input[type="checkbox"]').on('change', function () {
+      const $visibleCheckboxes = $table.find('tbody input[type="checkbox"]:visible');
+      const allChecked = $visibleCheckboxes.length === $visibleCheckboxes.filter(':checked').length;
+      $headCheckbox.prop('checked', allChecked);
+    });
+  });
+
 })

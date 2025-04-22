@@ -10,8 +10,11 @@
   --color-red:#FF4343;
   --color-green:#18972B;
   --color-light-gray: #C2C2C2;
+  --color-light-gray2: #dddddd;
+  --color-light-gray3: #F2F2F2;
   --color-gray: #666666;
   --color-gray2: #888888;
+  --color-light-blue:#6BBAFF;
   --color-primary: #0189FF;
   --color-primary-dark: #076DC5;
   --color-primary-light: #F0F6FF;
@@ -20,9 +23,11 @@
 
   /* 보더 컬러 */
   --border-color:#D8DCE2;
+  --border-color2:#dbdbdb;
 
   /* background color */
   --bg-light-red:#FFD9D9;
+  --bg-light-red2:#FFF0F0;
   --bg-light-blue:#CDE8FF;
 
   /* table */
@@ -73,8 +78,10 @@ body[data-text-size='lg'] {
     --txt-size11 : 38px;
     /* [커스텀] lg */
     .txt-gray + .arrow_link {margin-left:20px;}
+    header .btn-wrap > a.ico-pay,
     header .btn-wrap > a.ico-user {min-width:inherit;}
     .check-tab-btn {height:auto;}
+
 
   }
 }

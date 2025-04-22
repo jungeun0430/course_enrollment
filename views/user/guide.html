@@ -195,7 +195,11 @@
       <div class="box">
         <p style="font-size:18px;margin-bottom:4px;">a. 가로 나열</p>
         <ul class="dash-list">
+          <li>16폰트 예시 입니다.</li>
           <li>예시 입니다.</li>
+        </ul>
+        <ul class="dash-list sm">
+          <li>14폰트 예시 입니다.</li>
           <li>예시 입니다.</li>
         </ul>
       </div>
@@ -2195,6 +2199,244 @@
         </div>
       </div>
 
+      <h5>2-6. 결제내역 : 수강취소</h5>
+      <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
+        기존에 표 에서는 td-wrap안에 텍스트를 입력하면 정해진 글자크기 폰트로 들어가나<br>
+        결제내역 팝업 테이블에서는 취소선 간편 설정을 위해 텍스트를 p 태그에 감싸서 표현해야 함.
+      </p>
+      <div class="box">
+        <!-- 수강취소 뎁스 : active 클래스 추가 -->
+        <!-- 완료시에 active,complete (이중 클래스) / complete (단일클래스) 로 넣어도 동일 모양 나오니 편하게 작업가능 -->
+        <div class="depth-box">
+          <ul class="depth-list">
+            <li class="active">
+              <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+            </li>
+            <li>
+              <div class="depth">기존 결제 금액 전액 취소</div>
+            </li>
+            <li>
+              <div class="depth">수강 취소/환불 완료</div>
+            </li>
+          </ul>
+        </div>
+        <hr style="margin:20px 0;">
+        <div class="depth-box">
+          <ul class="depth-list">
+            <li class="active complete">
+              <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+            </li>
+            <li class="active">
+              <div class="depth">기존 결제 금액 전액 취소</div>
+            </li>
+            <li>
+              <div class="depth">수강 취소/환불 완료</div>
+            </li>
+          </ul>
+        </div>
+        <hr style="margin:20px 0;">
+        <div class="depth-box">
+          <ul class="depth-list">
+            <li class="active complete">
+              <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+            </li>
+            <li class="active complete">
+              <div class="depth">기존 결제 금액 전액 취소</div>
+            </li>
+            <li class="active">
+              <div class="depth">수강 취소/환불 완료</div>
+            </li>
+          </ul>
+        </div>
+        <hr style="margin:20px 0 60px;">
+        <!-- 멘트 -->
+        <p class="txt-md fw-bold">수강 강좌 재결제를 완료했습니다.<span class="txt-md fw-bold c-red">기존 결제 금액을 취소</span>합니다.</p>
+        <!-- 수강취소 테이블 -->
+        <div class="custom-table fixed-ver pc-only">
+          <table>
+            <caption class="visually-hidden">수강취소 테이블</caption>
+            <colgroup>
+              <col style="width:100px;"/>
+              <col style="width:120px;"/>
+              <col />
+              <col style="width:100px;"/>
+              <col style="width:100px;"/>
+              <col style="width:200px;"/>
+            </colgroup>
+            <thead>
+            <tr>
+              <th><div class="th-wrap center">구분</div></th>
+              <th><div class="th-wrap center">센터명</div></th>
+              <th><div class="th-wrap center">내용</div></th>
+              <th><div class="th-wrap center">강습반</div></th>
+              <th><div class="th-wrap center">강사</div></th>
+              <th><div class="th-wrap center">금액(원)</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 1. '유지'일 경우 -->
+            <tr>
+              <td>
+                <div class="td-wrap">
+                  <span class="badge blue">접수중</span>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">스포츠교실</div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap">성인반</div>
+              </td>
+              <td>
+                <div class="td-wrap">강사</div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver al-center gap-auto">
+                    <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                      <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                      <span class="txt-rgl fw-medium">55,800</span>
+                    </div>
+                    <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <!-- 2. '취소'일 경우 -->
+            <tr class="cancel">
+              <td>
+                <div class="td-wrap">
+                  <span class="badge red">취소</span>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap"><p class="txt-sm fw-medium">스포츠교실</p></div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <div class="flex-wrap col-ver gap-auto">
+                    <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                    <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                    <ul class="vertical-bar-list">
+                      <li>
+                        <span class="txt-sm fw-medium c-gray">강습일정</span>
+                      </li>
+                      <li>
+                        <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="td-wrap"><p class="txt-sm fw-medium">성인반</p></div>
+              </td>
+              <td>
+                <div class="td-wrap"><p class="txt-sm fw-medium">홍길동</p></div>
+              </td>
+              <td>
+                <div class="td-wrap">
+                  <p class="txt-sm fw-medium">20,000</p>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="6">
+                <div class="td-wrap">
+                  <div class="total-wrap">
+                    <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                      <p class="txt-rgl fw-medium c-gray">총 결제금액(취소예정금액)</p>
+                      <span class="txt-lg fw-bold">85,800원</span>
+                    </div>
+                    <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
+                    <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                      <p class="txt-rgl fw-medium c-gray">취소강좌금액</p>
+                      <span class="txt-lg fw-bold c-red">20,000원</span>
+                    </div>
+                    <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                    <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                      <p class="txt-rgl fw-medium c-gray">위약금(10%)</p>
+                      <span class="txt-lg fw-bold">10,000원</span>
+                    </div>
+                    <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                    <div class="flex-wrap center gap12">
+                      <span class="txt-lg fw-bold">재결제금액</span>
+                      <span class="txt-lg fw-bold c-blue">67,800원</span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p class="txt-xs fw-medium c-gray mb-4">[연기 안내]</p>
+        <ul class="dash-list sm">
+          <li>연 2회(1회 1개월) 가능하며, 강습 개시 전 말일까지 연기 신청 가능합니다.<br>
+            (단, 수술 등의 불가피한 사유로 인해 연 2회 이상 또는 강습 개시 후 연기신청 시 회원안내실 방문이 필요합니다. 자세한 사항은 각 센터 홈페이지를 참고해주세요.)</li>
+        </ul>
+        <label class="checkbox-wrap">
+          <input type="checkbox" aria-checked="false">
+          <span class="checkmark" aria-hidden="true"></span>
+          <span>연기 안내를 확인하였으며, 동의합니다.</span>
+        </label>
+
+        <hr style="margin:20px 0 20px;">
+        <p class="txt-xs fw-medium c-gray mb-4">[연기 안내]</p>
+        <ul class="dash-list sm">
+          <li class="c-red">부분 수강취소는 (1)재결제 완료 후 (2)기존 결제 금액이 전액 취소되는 방식으로 진행됩니다.</li>
+          <li>결제일 당일은 위약금 없이 취소 가능하며, 결제일 다음날~강습개시 전까지 환불 시  위약금(실납입금 10%)공제됩니다.</li>
+          <li>강습개시 후에는 <span class="c-red">온라인 환불이 불가하며, 회원관리실 현장방문이 필요합니다.</span></li>
+          <li>
+            입회비는 센터를 처음 이용하는 경우에 회원증 발급관리 등에 필요한 일회성의 가입수수료로 환불이 되지 않습니다.<br>
+            단, 등록 후 강습개시전 또는 이용개시일 이전까지 회원탈퇴를 하는 경우에 한하여 환불이 가능합니다.
+          </li>
+          <li>
+            현장결제건은 환불 시 현장 방문이 필요합니다.<br>
+            <span class="c-gray2">
+              공정거래위원회 소비자분쟁해결기준 지침 의거(고시2011-10호)
+            </span>
+          </li>
+        </ul>
+
+        <!-- 결제 수단 -->
+        <div class="sub-content-box ver2">
+          <h3 class="sub-title">결제 수단</h3>
+          <div class="flex-wrap gap12">
+            <label class="radio-ico-tab credit">
+              <input type="radio" aria-checked="true" checked="true" name="radioGroup">
+              <span>신용카드</span>
+            </label>
+            <label class="radio-ico-tab account">
+              <input type="radio" aria-checked="true" checked="" name="radioGroup">
+              <span>실시간계좌이체</span>
+            </label>
+            <label class="radio-ico-tab banktransfer">
+              <input type="radio" aria-checked="true" checked="" name="radioGroup">
+              <span>무통장입금(가상계좌)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
       <h5>3. 폼 입력관련 공통 테이블</h5>
       <div class="custom-form-table">
         <div class="custom-table form-ver">
@@ -2292,15 +2534,31 @@
       <h2>다. 버튼 관련</h2>
       <h5>1. 텍스트형 버튼</h5>
       <div class="box">
-        <button type="button" class="btn outlined">기본 버전</button>
-        <button type="button" class="btn outlined" disabled>기본 버전</button>
-        <button type="button" class="btn size-sm">작은 크기 버전</button>
-        <button type="button" class="btn size-sm" disabled>disabled 버전</button>
-        <button type="button" class="btn size-nm" disabled>보통크기 버전</button>
-        <button type="button" class="btn sm outlined">회원번호발급</button>
-        <button type="button" class="btn sm outlined c-red">결제취소</button>
-        <button type="button" class="btn sm outlined" disabled>취소불가</button>
-        <button type="button" class="btn sm mo-sm outlined">모바일 전환시 크기가 더 작은 버튼</button>
+        <div class="flex-wrap">
+          <button type="button" class="btn outlined">센터 가입하기</button>
+          <button type="button" class="btn">센터 가입하기</button>
+          <button type="button" class="btn outlined" disabled>센터 가입하기</button>
+        </div>
+        <div class="flex-wrap" style="margin-top:20px;">
+          <button type="button" class="btn sm outlined">회원번호발급</button>
+          <button type="button" class="btn sm outlined c-red">결제취소</button>
+          <button type="button" class="btn sm outlined" disabled>취소불가</button>
+        </div>
+        <div class="flex-wrap" style="margin-top:20px;">
+          <button type="button" class="btn sm mo-sm outlined">모바일 전환시 크기가 더 작은 버튼</button>
+        </div>
+
+        <div class="flex-wrap" style="margin-top:20px;">
+          <button type="button" class="btn size-sm outlined">너비(size-sm) 버전 (min-120px)</button>
+          <button type="button" class="btn size-nm outlined" disabled>너비(size-nm) 버전 (min-160px)</button>
+          <button type="button" class="btn size-md">너비(size-md) 버전 (min-200px)</button>
+        </div>
+
+        <div class="flex-wrap" style="margin-top:20px;">
+          <button type="button" class="btn size-full">너비(size-full) 버전</button>
+        </div>
+
+
       </div>
 
       <hr style="margin:20px 0">
@@ -2447,6 +2705,22 @@
         </div>
       </div>
 
+      <h5>2-4. 라디오 버튼(결제내역 아이콘 디자인)</h5>
+      <div class="box">
+        <label class="radio-ico-tab credit">
+          <input type="radio" aria-checked="true" checked="true" name="radioGroup">
+          <span>신용카드</span>
+        </label>
+        <label class="radio-ico-tab account">
+          <input type="radio" aria-checked="true" checked="" name="radioGroup">
+          <span>실시간계좌이체</span>
+        </label>
+        <label class="radio-ico-tab banktransfer">
+          <input type="radio" aria-checked="true" checked="" name="radioGroup">
+          <span>무통장입금(가상계좌)</span>
+        </label>
+      </div>
+
       <hr style="margin:20px 0"/>
       <h5>3-1. 인풋</h5>
       <div class="box">
@@ -2507,6 +2781,10 @@
         <button type="button" class="btn outlined" onclick="showModal('modal-onlineUserCard');">[바코드]5. 온라인 회원카드</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-centerJoin');">7. 센터 중복 가입 안내</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-curriculum');">8. 강습 수준별 진도표</button>
+        <!-- 결제내역 -->
+        <button type="button" class="btn outlined" onclick="showModal('modal-courseChange');">[결제내역] 수강변경</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-courseCancellation');">[결제내역] 수강취소</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-paymentMethod');">[결제내역] 결제</button>
       </div>
       <!-- [모달] 1. 가입하신 센터가 없습니다. -->
       <div id="modal1" class="modal" data-modal-type="confirm-ver">
@@ -3273,6 +3551,719 @@
           </div>
         </div>
       </div>
+
+      <!---------- [결제내역 공통 overlay] -------------------->
+      <div id="overlay"></div>
+      <!-- [결제내역] 수강변경 -->
+      <div id="modal-courseChange" class="modal no-dim pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content lg">
+          <div class="title-wrap">
+            <h3>수강변경</h3>
+            <button type="button" onclick="hideModal('modal-courseChange')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="tab-wrap" data-tab="twin">
+              <ul class="first-depth">
+                <li class="active">
+                  <button type="button" class="tab"><span>수강 연기</span></button>
+                  <div class="tab-box">
+                    <!-- 멘트 -->
+                    <div class="flex-wrap al-center between mb-8">
+                      <p class="txt-md fw-bold">수강 연기는 <span class="txt-md fw-bold c-blue">연 2회(1회 1개월) 가능</span>합니다.</p>
+                      <p class="txt-md fw-bold">2025년 잔여 연기 횟수 : <span class="txt-md fw-bold c-blue">1</span></p>
+                    </div>
+
+                    <!-- 수강연기 테이블 -->
+                    <div class="custom-table fixed-ver pc-only">
+                      <table>
+                        <caption class="visually-hidden">수강연기 테이블</caption>
+                        <colgroup>
+                          <col style="width:50px;"/>
+                          <col style="width:120px;"/>
+                          <col />
+                          <col style="width:100px;"/>
+                          <col style="width:100px;"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                          <th>
+                            <div class="th-wrap center">
+                              <span class="visually-hidden">선택</span>
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </th>
+                          <th><div class="th-wrap center">센터명</div></th>
+                          <th><div class="th-wrap center">내용</div></th>
+                          <th><div class="th-wrap center">강습반</div></th>
+                          <th><div class="th-wrap center">강사</div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 1. 클릭 할 수 있을 경우 -->
+                        <tr>
+                          <td>
+                            <div class="td-wrap center">
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">스포츠교실</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver gap-auto">
+                                <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                                <p class="txt-rgl fw-bold mb-8 ellipsis">검도 06:00~07:30(월화목금)성인</p>
+                                <ul class="vertical-bar-list">
+                                  <li>
+                                    <span class="txt-sm fw-medium c-gray">강습일정</span>
+                                  </li>
+                                  <li>
+                                    <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">성인반</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">홍길동</div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="td-wrap center">
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">스포츠교실</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver gap-auto">
+                                <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                                <p class="txt-rgl fw-bold mb-8 ellipsis">검도 06:00~07:30(월화목금)성인</p>
+                                <ul class="vertical-bar-list">
+                                  <li>
+                                    <span class="txt-sm fw-medium c-gray">강습일정</span>
+                                  </li>
+                                  <li>
+                                    <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">성인반</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">홍길동</div>
+                          </td>
+                        </tr>
+                        <!-- 2. 클릭 할 수 없을 경우 -->
+                        <tr class="disabled-chkbox">
+                          <td>
+                            <div class="td-wrap center">
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap"><p class="txt-sm fw-medium">스포츠교실</p></div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver gap-auto">
+                                <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                                <p class="txt-rgl fw-bold mb-8 ellipsis">검도 06:00~07:30(월화목금)성인</p>
+                                <ul class="vertical-bar-list">
+                                  <li>
+                                    <span class="txt-sm fw-medium c-gray">강습일정</span>
+                                  </li>
+                                  <li>
+                                    <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap"><p class="txt-sm fw-medium">성인반</p></div>
+                          </td>
+                          <td>
+                            <div class="td-wrap"><p class="txt-sm fw-medium">홍길동</p></div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- 연기안내 -->
+                    <p class="txt-xs fw-medium c-gray mb-4 mt-8">[연기 안내]</p>
+                    <ul class="dash-list sm">
+                      <li>연 2회(1회 1개월) 가능하며, 강습 개시 전 말일까지 연기 신청 가능합니다.<br>
+                        (단, 수술 등의 불가피한 사유로 인해 연 2회 이상 또는 강습 개시 후 연기신청 시 회원안내실 방문이 필요합니다. 자세한 사항은 각 센터 홈페이지를 참고해주세요.)</li>
+                    </ul>
+
+                    <!-- 동의여부 -->
+                    <div class="flex-wrap gap-auto agree-wrap">
+                      <label class="checkbox-wrap">
+                        <input type="checkbox" aria-checked="false">
+                        <span class="checkmark" aria-hidden="true"></span>
+                        <span>연기 안내를 확인하였으며, 동의합니다.</span>
+                      </label>
+                    </div>
+
+                  </div>
+                </li>
+                <li>
+                  <button type="button" class="tab"><span>수강 취소/환불</span></button>
+                  <div class="tab-box">
+                    <!-- 멘트 -->
+                    <p class="txt-md fw-bold">결제일 다음날~강습개시 전까지<span class="txt-md fw-bold c-blue">위약금 10%(실납입금 10%)가 공제</span>됩니다.</p>
+                    <p class="txt-md fw-bold mb-8">부분 수강취소는<span class="txt-md fw-bold c-blue">(1)취소강좌 제외 수강강좌 재결제 후 (2)기존 결제 금액이 전액 취소</span>되는 방식으로 진행됩니다.</p>
+
+                    <!-- 수강 취소/환불 테이블 -->
+                    <div class="custom-table fixed-ver pc-only">
+                      <table>
+                        <caption class="visually-hidden">수강 취소/환불 테이블</caption>
+                        <colgroup>
+                          <col style="width:50px;"/>
+                          <col style="width:120px;"/>
+                          <col />
+                          <col style="width:100px;"/>
+                          <col style="width:100px;"/>
+                          <col style="width:180px;"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                          <th>
+                            <div class="th-wrap center">
+                              <span class="visually-hidden">선택</span>
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </th>
+                          <th><div class="th-wrap center">센터명</div></th>
+                          <th><div class="th-wrap center">내용</div></th>
+                          <th><div class="th-wrap center">강습반</div></th>
+                          <th><div class="th-wrap center">강사</div></th>
+                          <th><div class="th-wrap center">금액(원)</div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td>
+                            <div class="td-wrap center">
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">스포츠교실</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver gap-auto">
+                                <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                                <p class="txt-rgl fw-bold mb-8 ellipsis">검도 06:00~07:30(월화목금)성인</p>
+                                <ul class="vertical-bar-list">
+                                  <li>
+                                    <span class="txt-sm fw-medium c-gray">강습일정</span>
+                                  </li>
+                                  <li>
+                                    <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">성인반</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">홍길동</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver al-center gap-auto">
+                                <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                                  <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                                  <span class="txt-rgl fw-medium">55,800</span>
+                                </div>
+                                <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="td-wrap center">
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">스포츠교실</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver gap-auto">
+                                <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                                <p class="txt-rgl fw-bold mb-8 ellipsis">검도 06:00~07:30(월화목금)성인</p>
+                                <ul class="vertical-bar-list">
+                                  <li>
+                                    <span class="txt-sm fw-medium c-gray">강습일정</span>
+                                  </li>
+                                  <li>
+                                    <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">성인반</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">홍길동</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              20,000
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div class="td-wrap center">
+                              <label class="checkbox-wrap">
+                                <input type="checkbox" aria-checked="false">
+                                <span class="checkmark" aria-hidden="true"></span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">스포츠교실</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              <div class="flex-wrap col-ver gap-auto">
+                                <span class="txt-xs fw-bold c-blue mb-4">입회비</span>
+                                <p class="txt-rgl fw-bold mb-8 ellipsis">입회비</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">성인반</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">홍길동</div>
+                          </td>
+                          <td>
+                            <div class="td-wrap">
+                              10,000
+                            </div>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <!-- 환불 안내 -->
+                    <p class="txt-xs fw-medium c-gray mb-4 mt-8">[환불 안내]</p>
+                    <ul class="dash-list sm">
+                      <li class="c-red">부분 수강취소는 (1)재결제 완료 후 (2)기존 결제 금액이 전액 취소되는 방식으로 진행됩니다.</li>
+                      <li>결제일 당일은 위약금 없이 취소 가능하며, 결제일 다음날~강습개시 전까지 환불 시  위약금(실납입금 10%)공제됩니다.</li>
+                      <li>강습개시 후에는 <span class="c-red">온라인 환불이 불가하며, 회원관리실 현장방문이 필요합니다.</span></li>
+                      <li>
+                        입회비는 센터를 처음 이용하는 경우에 회원증 발급관리 등에 필요한 일회성의 가입수수료로 환불이 되지 않습니다.<br>
+                        단, 등록 후 강습개시전 또는 이용개시일 이전까지 회원탈퇴를 하는 경우에 한하여 환불이 가능합니다.
+                      </li>
+                      <li>
+                        현장결제건은 환불 시 현장 방문이 필요합니다.<br>
+                        <span class="c-gray2">
+                          공정거래위원회 소비자분쟁해결기준 지침 의거(고시2011-10호)
+                        </span>
+                      </li>
+                    </ul>
+
+                    <!-- 동의여부 -->
+                    <div class="flex-wrap gap-auto agree-wrap">
+                      <label class="checkbox-wrap">
+                        <input type="checkbox" aria-checked="false">
+                        <span class="checkmark" aria-hidden="true"></span>
+                        <span>환불 안내를 확인하였으며, 동의합니다.</span>
+                      </label>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="clear"></div>
+            </div>
+          </div>
+          <!-- 탭 에 따라 변경 필요(연기 신청하기 / 취소 신청하기) -->
+          <button type="button" class="btn fixed" disabled>연기 신청하기</button>
+        </div>
+      </div>
+      <!-- [결제내역] 수강취소 -->
+      <div id="modal-courseCancellation" class="modal pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content lg">
+          <div class="title-wrap">
+            <h3>수강취소</h3>
+            <button type="button" onclick="hideModal('modal-courseCancellation')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <!-- 결제 수단 선택 시 노출되는 항목 -->
+            <div class="depth-box">
+              <ul class="depth-list">
+                <!-- 완료시 active complete || complete추가 -->
+                <li class="active complete">
+                  <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+                </li>
+                <li class="active">
+                  <div class="depth">기존 결제 금액 전액 취소</div>
+                </li>
+                <li class="">
+                  <div class="depth">수강 취소/환불 완료</div>
+                </li>
+              </ul>
+            </div>
+            <!-- 멘트 -->
+            <p class="txt-md fw-bold">수강 강좌 재결제를 완료했습니다.<span class="txt-md fw-bold c-red">기존 결제 금액을 취소</span>합니다.</p>
+
+            <!-- 수강취소 테이블 -->
+            <div class="custom-table fixed-ver pc-only">
+              <table>
+                <caption class="visually-hidden">수강취소 테이블</caption>
+                <colgroup>
+                  <col style="width:100px;"/>
+                  <col style="width:120px;"/>
+                  <col />
+                  <col style="width:100px;"/>
+                  <col style="width:100px;"/>
+                  <col style="width:200px;"/>
+                </colgroup>
+                <thead>
+                <tr>
+                  <th><div class="th-wrap center">구분</div></th>
+                  <th><div class="th-wrap center">센터명</div></th>
+                  <th><div class="th-wrap center">내용</div></th>
+                  <th><div class="th-wrap center">강습반</div></th>
+                  <th><div class="th-wrap center">강사</div></th>
+                  <th><div class="th-wrap center">금액(원)</div></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 1. '유지'일 경우 -->
+                <tr>
+                  <td>
+                    <div class="td-wrap">
+                      <span class="badge blue">접수중</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">스포츠교실</div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <div class="flex-wrap col-ver gap-auto">
+                        <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                        <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습일정</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">성인반</div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">강사</div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <div class="flex-wrap col-ver al-center gap-auto">
+                        <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                          <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                          <span class="txt-rgl fw-medium">55,800</span>
+                        </div>
+                        <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- 2. '취소'일 경우 -->
+                <tr class="cancel">
+                  <td>
+                    <div class="td-wrap">
+                      <span class="badge red">취소</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="td-wrap"><p class="txt-sm fw-medium">스포츠교실</p></div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <div class="flex-wrap col-ver gap-auto">
+                        <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                        <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습일정</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="td-wrap"><p class="txt-sm fw-medium">성인반</p></div>
+                  </td>
+                  <td>
+                    <div class="td-wrap"><p class="txt-sm fw-medium">홍길동</p></div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <p class="txt-sm fw-medium">20,000</p>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+                <!-- 수강 변경 -->
+                <tfoot>
+                <!-- 1. 결제 합산 -->
+                <tr>
+                  <td colspan="6">
+                    <div class="td-wrap">
+                      <div class="total-wrap">
+                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                          <p class="txt-rgl fw-medium c-gray">총 결제금액(취소예정금액)</p>
+                          <span class="txt-lg fw-bold">85,800원</span>
+                        </div>
+                        <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
+                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                          <p class="txt-rgl fw-medium c-gray">취소강좌금액</p>
+                          <span class="txt-lg fw-bold c-red">20,000원</span>
+                        </div>
+                        <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                          <p class="txt-rgl fw-medium c-gray">위약금(10%)</p>
+                          <span class="txt-lg fw-bold">10,000원</span>
+                        </div>
+                        <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                        <div class="flex-wrap center gap12">
+                          <span class="txt-lg fw-bold">재결제금액</span>
+                          <span class="txt-lg fw-bold c-blue">67,800원</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <!-- 2. 재결제금액 합산 -->
+                <tr>
+                  <td colspan="6">
+                    <div class="td-wrap">
+                      <div class="total-wrap">
+                        <div class="flex-wrap center gap12">
+                          <span class="txt-lg fw-bold">재결제금액</span>
+                          <span class="txt-lg fw-bold c-blue">67,800원</span>
+                        </div>
+                        <span class="txt-md fw-bold c-gray">|</span>
+                        <div class="flex-wrap center gap12">
+                          <span class="txt-lg fw-bold">기존 결제금액(환불예정금액)</span>
+                          <span class="txt-lg fw-bold c-blue">67,800원</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <!-- 결제 수단 -->
+            <div class="sub-content-box ver2 paymethod-wrap">
+              <h3 class="sub-title">결제 수단</h3>
+              <div class="flex-wrap gap12">
+                <label class="radio-ico-tab credit">
+                  <input type="radio" aria-checked="true" checked="true" name="radioGroup">
+                  <span>신용카드</span>
+                </label>
+                <label class="radio-ico-tab account">
+                  <input type="radio" aria-checked="true" checked="" name="radioGroup">
+                  <span>실시간계좌이체</span>
+                </label>
+                <label class="radio-ico-tab banktransfer">
+                  <input type="radio" aria-checked="true" checked="" name="radioGroup">
+                  <span>무통장입금(가상계좌)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn fixed" disabled>재결제하기</button>
+        </div>
+      </div>
+      <!-- [결제내역] 결제 -->
+      <div id="modal-paymentMethod" class="modal pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content lg">
+          <div class="title-wrap">
+            <h3>결제</h3>
+            <button type="button" onclick="hideModal('modal-paymentMethod')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <!-- 수강취소 테이블 -->
+            <div class="custom-table fixed-ver pc-only">
+              <table>
+                <caption class="visually-hidden">수강취소 테이블</caption>
+                <colgroup>
+                  <col style="width:100px;"/>
+                  <col />
+                  <col style="width:100px;"/>
+                  <col style="width:100px;"/>
+                  <col style="width:120px;"/>
+                  <col style="width:200px;"/>
+                </colgroup>
+                <thead>
+                <tr>
+                  <th><div class="th-wrap center">센터명</div></th>
+                  <th><div class="th-wrap center">내용</div></th>
+                  <th><div class="th-wrap center">강습반</div></th>
+                  <th><div class="th-wrap center">강사</div></th>
+                  <th><div class="th-wrap">인원수<br>(인원/정원)</div></th>
+                  <th><div class="th-wrap center">금액(원)</div></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td>
+                    <div class="td-wrap">스포츠교실</div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <div class="flex-wrap col-ver gap-auto">
+                        <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                        <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습일정</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">성인반</div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">홍길동</div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <p class="txt-sm fw-medium c-blue">29/30</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="td-wrap">
+                      <div class="flex-wrap col-ver al-center gap-auto">
+                        <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                          <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                          <span class="txt-rgl fw-medium">55,800</span>
+                        </div>
+                        <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+                <!-- 수강 변경 -->
+                <tfoot>
+                <!-- 1. 결제 합산 -->
+                <tr>
+                  <td colspan="6">
+                    <div class="td-wrap">
+                      <div class="total-wrap">
+                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                          <p class="txt-rgl fw-medium c-gray">항목 1건</p>
+                          <span class="txt-lg fw-bold">85,800원</span>
+                        </div>
+                        <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
+                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                          <p class="txt-rgl fw-medium c-gray">할인금액</p>
+                          <span class="txt-lg fw-bold c-red">20,000원</span>
+                        </div>
+                        <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                          <p class="txt-rgl fw-medium c-gray">입회비</p>
+                          <span class="txt-lg fw-bold">10,000원</span>
+                        </div>
+                        <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                        <div class="flex-wrap center gap12">
+                          <span class="txt-lg fw-bold">결제 예정 금액</span>
+                          <span class="txt-lg fw-bold c-blue">67,800원</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <!-- 결제 수단 -->
+            <div class="sub-content-box ver2 paymethod-wrap">
+              <h3 class="sub-title">결제 수단</h3>
+              <div class="flex-wrap gap12">
+                <label class="radio-ico-tab credit">
+                  <input type="radio" aria-checked="true" checked="true" name="radioGroup">
+                  <span>신용카드</span>
+                </label>
+                <label class="radio-ico-tab account">
+                  <input type="radio" aria-checked="true" checked="" name="radioGroup">
+                  <span>실시간계좌이체</span>
+                </label>
+                <label class="radio-ico-tab banktransfer">
+                  <input type="radio" aria-checked="true" checked="" name="radioGroup">
+                  <span>무통장입금</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn fixed">결제하기</button>
+        </div>
+      </div>
     </div>
 
     <div class="guide-box">
@@ -3708,9 +4699,8 @@
 <script>
   // 초기화
   const tabManager = new TabManager();
-
   new CheckTabManager();
-  new ModalManager();
+  // new ModalManager();
 </script>
 </body>
 </html>

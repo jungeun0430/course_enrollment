@@ -27,6 +27,12 @@
 .dash-list > li {padding-left:12px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-gray);}
 .dash-list > li + li {margin-top:0;}
 .dash-list > li::before {content:'-';font-size:inherit;position:absolute;left:0;top:-1px;}
+.dash-list.sm > li {padding-left:8px;font-size:var(--txt-size01);}
+.dash-list.sm > li + li {margin-top:0;}
+.dash-list.sm > li::before {content:'-';font-size:inherit;position:absolute;left:0;top:-1px;}
+
+/* 리스트 공통 */
+.dash-list > li.c-red {color:var(--color-red);}
 
 
 /* ------------------------------------------------------- */
@@ -52,7 +58,7 @@
 
 /* 버튼 disabled */
 .btn:disabled,
-.btn.outlined:disabled {color:var(--color-gray2);background-color:var(--color-light-gray);font-weight:var(--fw-medium);cursor: default;transition:none;border-color:var(--color-transparent);}
+.btn.outlined:disabled {color:var(--color-gray2);background-color:var(--color-disabled);font-weight:var(--fw-medium);cursor: default;transition:none;border-color:var(--color-transparent);}
 @media (max-width: 768px) {
   /* 버튼 : 기본 (배경색 존재) */
   .btn {padding:12px 14px;border-width:1px;}
@@ -89,7 +95,6 @@
 @media (max-width: 768px) {
   .custom-btn {padding:12px;}
 }
-
 /* ------------------------------------------------------- */
 /* 체크박스 */
 /* 체크박스 숨기기 */
@@ -106,7 +111,7 @@
 }
 /* 포커스 스타일 */
 .checkbox-wrap input:focus + .checkmark {  background: url('../images/ico/ico_checked_focus.svg') no-repeat center / contain;}
-
+/* ------------------------------------------------------- */
 /* 체크박스 (뱃지 모양) */
 .checkbox-badge-wrap input {position: absolute;width: 1px;height: 1px;overflow: hidden;clip: rect(0 0 0 0);white-space: nowrap;clip-path: inset(50%);}
 /* 체크박스 스타일 */
@@ -152,6 +157,18 @@
 @media (max-width: 768px) {
   .radio-tab span {padding:9px;height: 40px;}
 }
+
+/* c. 라디오(결제내역 아이콘 디자인) */
+.radio-ico-tab > input {position: absolute;width: 1px;height: 1px;overflow: hidden;clip: rect(0 0 0 0);white-space: nowrap;clip-path: inset(50%);}
+.radio-ico-tab input + span {min-width:160px;display:inline-flex;align-items:center;justify-content:center;padding:64px 20px 16px 20px;border-radius:4px;border:1px solid var(--border-color2);background-color:var(--color-white);font-size:var(--txt-size03);font-weight:var(--fw-medium);text-align:center;transition:all 0.3s;cursor:pointer;}
+.radio-ico-tab input:checked + span {border-color:var(--color-primary);color:var(--color-primary);}
+.radio-ico-tab.credit input + span {background:url("../images/common/pay_ico4.svg") center 16px no-repeat;background-size: 40px;}
+.radio-ico-tab.credit input:checked + span {background:url("../images/common/pay_ico4_active.svg") center 16px no-repeat;background-size: 40px;}
+.radio-ico-tab.account input + span {background:url("../images/common/pay_ico5.svg") center 16px no-repeat;background-size: 40px;}
+.radio-ico-tab.account input:checked + span {background:url("../images/common/pay_ico5_active.svg") center 16px no-repeat;background-size: 40px;}
+.radio-ico-tab.banktransfer input + span {background:url("../images/common/pay_ico6.svg") center 16px no-repeat;background-size: 40px;}
+.radio-ico-tab.banktransfer input:checked + span {background:url("../images/common/pay_ico6_active.svg") center 16px no-repeat;background-size: 40px;}
+
 /* ------------------------------------------------------- */
 /* 인풋 */
 .input-wrap{width:200px;display:inline-flex;overflow:hidden;height:48px;}
@@ -183,12 +200,11 @@
   .date > input {width:100%;height:40px;padding:8px;background:url('../images/ico/ico_calendar.svg') right 8px center no-repeat;background-size:16px;}
 }
 
-
-  /* ------------------------------------------------------- */
+/* ------------------------------------------------------- */
 /* 뱃지 */
-.badge { width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
-.badge.red {background-color:var(--bg-light-red);color:var(--color-red);}
-.badge.blue {background-color:var(--bg-light-blue);color:var(--color-primary-dark);}
+.badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
+.badge.red {background-color:var(--bg-light-red);color:var(--color-red);text-decoration:none!important;}
+.badge.blue {background-color:var(--bg-light-blue);color:var(--color-primary-dark);text-decoration:none!important;}
 
 /* 텍스트 관련 (기본) */
 .txt-xlg {font-size:var(--txt-size07);color:var(--color-black);}
@@ -208,6 +224,7 @@
 .c-blue{color:var(--color-primary);}
 .c-green{color:var(--color-green);}
 .c-gray{color:var(--color-gray);}
+.c-gray2{color:var(--color-gray2);}
 .c-light-gray{color:var(--color-light-gray);}
 
 /* 간격 (고정) - media 변경 없음 */
