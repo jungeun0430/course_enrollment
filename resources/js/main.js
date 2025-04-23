@@ -8,6 +8,9 @@
 * 7. [결제내역]데이트피커
 * 8. [결제내역]테이블 rowspan 존재시 hover색상 지정
 * 9. [공통] 테이블 체크박스 존재시 클릭하면 전체 선택
+* 10. [공통] 셀렉트박스
+* 11. [결제내역] 주민등록번호 : 가상키패드
+* 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사
 *  */
 
 /* 1. 사이드바 */
@@ -17,7 +20,7 @@
 
 /* 3. 모달 관련 함수 */
 // 모달 크기 조정 및 회전 처리
-function adjustModalSize(modalId) {
+function adjustModalSize(modalId, options={}) {
   const modal = document.getElementById(modalId);
   const modalContent = modal.querySelector('.modal-content');
   const modalBody = modalContent.querySelector('.modal-body');
@@ -125,80 +128,43 @@ function adjustModalSize(modalId) {
 // 모달 띄우기 함수
 // 외부 클릭시 팝업 닫힘
 let openModalName = ''; // 열린 팝업 이름 저장
-let modalStack = [];
 // 현재 열린 모달들을 스택으로 관리
-function showModal(modalId) {
+let modalStack = []; // 모달 스택
+function showModal(modalId,options={}) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
-  // 결제내역에서 사용하는 overlay
+
   const overlay = document.getElementById('overlay');
+  const currentOpenModal = modalStack.length > 0 ? document.getElementById(modalStack[modalStack.length - 1]) : null;
 
-  // 이전 모달 처리
-  const currentOpenModal = document.querySelector('.modal[style*="block"]');
-
-  if(modal.classList.contains('no-dim')) {
-    overlay.classList.add('active');
-  }
-  if (currentOpenModal && currentOpenModal.id !== modalId) {
-    modalStack.push(currentOpenModal.id);
+  // 기존 모달 비활성화
+  if (currentOpenModal) {
+    currentOpenModal.setAttribute('aria-hidden', 'true'); // 비활성화
     currentOpenModal.style.zIndex = '10001';
   }
 
-  // 새 모달 표시
+  // 새 모달 활성화
   modal.style.display = 'block';
   modal.style.zIndex = '10002';
   modal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('no-scroll');
+  modalStack.push(modalId); // 스택에 모달 ID 추가
 
-  // 현재 열린 모달 이름 갱신
-  openModalName = modalId;
+  // ✅ 위치 조정 로직
+  if (options.absolute && options.triggerElement) {
+    const rect = options.triggerElement.getBoundingClientRect();
+    console.log(rect)
+    modal.style.position = 'absolute';
+    modal.style.left = `${rect.left}px`;
+    modal.style.top = `${rect.bottom + window.scrollY}px`;
+  }
 
-  // DOM focusable elements 처리 (포커스 트랩 설정)
-  const focusableElements = Array.from(
-    modal.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )
-  );
-  const firstFocusable = focusableElements[0];
-  const lastFocusable = focusableElements[focusableElements.length - 1];
-
-  // 🔒 강제 포커스 트랩
-  const enforceFocus = (e) => {
-    if (!modal.contains(e.target)) {
-      e.stopPropagation();
-      e.preventDefault();
-      firstFocusable?.focus();
+  // 오버레이 활성화
+  if (modal.classList.contains('no-dim')) {
+    if(modal.id === 'modal-virtualKeyboard') {
+      overlay?.classList.add('transparent');
     }
-  };
-
-  const keydownHandler = (e) => {
-    if (e.key === 'Tab') {
-      if (focusableElements.length === 0) {
-        e.preventDefault();
-        return;
-      }
-
-      if (e.shiftKey && document.activeElement === firstFocusable) {
-        e.preventDefault();
-        lastFocusable.focus();
-      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
-        e.preventDefault();
-        firstFocusable.focus();
-      }
-    }
-
-    if (e.key === 'Escape') {
-      hideModal(modalId);
-    }
-  };
-
-  if (!modal._eventsBound) {
-    // 진짜로 강제 막으려면 focus (캡처 모드 true) 사용
-    document.addEventListener('focus', enforceFocus, true); // 🔑 핵심!
-    document.addEventListener('keydown', keydownHandler);
-    modal._enforceFocus = enforceFocus;
-    modal._keydownHandler = keydownHandler;
-    modal._eventsBound = true;
+    overlay?.classList.add('active');
   }
 
   // 모달 내 tab-wrap이 있는지 체크하고 높이 업데이트 호출
@@ -213,62 +179,139 @@ function showModal(modalId) {
     console.log(`${modalId} 모달에 tab-wrap이 없습니다.`);
   }
 
+  // 포커스 트랩 설정
+  handleFocusTrap(modal);
+}
+// 모달 안 focus 가능한 영역 확인 코드 : 최상단 모달에서만 tab키를 눌러도 반응할
+const handleFocusTrap = (modal) => {
+  // 포커스 가능한 요소 추출
+  const focusableElements = Array.from(
+    modal.querySelectorAll(
+      'button:not([disabled]), [href]:not([aria-hidden="true"]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((el) => el.offsetParent !== null);
 
+  const firstFocusable = focusableElements[0];
+  const lastFocusable = focusableElements[focusableElements.length - 1];
+  // 모달 열릴 때 첫 번째 포커스
+  setTimeout(() => {
+    if (firstFocusable) {
+
+      firstFocusable.focus();
+    }
+  }, 0);
+
+  // 모달별 isEnforcingFocus 상태를 추가
+  if (!modal._isEnforcingFocus) {
+    modal._isEnforcingFocus = false;
+  }
+  const enforceFocus = (e) => {
+    const isTopModal = modalStack[modalStack.length - 1] === modal.id;
+    if (!isTopModal) {
+      // 상위 모달이 아니면 포커스를 트랩하지 않음
+      return;
+    }
+
+    if (modal._isEnforcingFocus) return;
+
+    // 포커스가 모달 외부로 빠져나가면 첫 번째 포커스 가능한 요소로 포커스 설정
+    if (!modal.contains(e.target)) {
+      e.preventDefault();
+      modal._isEnforcingFocus = true;
+      firstFocusable?.focus();
+
+      setTimeout(() => {
+        modal._isEnforcingFocus = false;
+      }, 0);
+    }
+  };
+
+  const keydownHandler = (e) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const currentIndex = focusableElements.indexOf(document.activeElement);
+      /* 모달 창 열리고 첫 요소에 focus가 갈 때 위치를 제대로 인식못해서 -1로 찍히지만 첫번째 요소로 focus이동시킴으로써 0으로 인식됨. 그러나 간격을 두어야 focus가 인식할 수 있어 settimeout필요 */
+      if (currentIndex === -1) {
+        setTimeout(() => {
+          firstFocusable?.focus();
+          console.log('focus set');
+        }, 0);
+        return;
+      }
+
+      let nextIndex;
+      if (e.shiftKey) {
+        nextIndex = currentIndex - 1 < 0 ? focusableElements.length - 1 : currentIndex - 1;
+      } else {
+        nextIndex = currentIndex + 1 >= focusableElements.length ? 0 : currentIndex + 1;
+      }
+
+      setTimeout(() => {
+        focusableElements[nextIndex]?.focus();
+      }, 0);
+    }
+  };
+
+
+  // 기존 이벤트 제거
+  if (modal._enforceFocusHandler) {
+    document.removeEventListener('focus', modal._enforceFocusHandler, true);
+    document.removeEventListener('keydown', modal._keydownHandler, true);
+  }
+
+  // 새 이벤트 등록
+  document.addEventListener('focus', enforceFocus, true);
+  document.addEventListener('keydown', keydownHandler, true);
+
+  // 핸들러 참조 저장
+  modal._enforceFocusHandler = enforceFocus;
+  modal._keydownHandler = keydownHandler;
+
+  // 모달 열릴 때 첫 번째 포커스
   setTimeout(() => {
     firstFocusable?.focus();
   }, 0);
-}
-
+};
+// 모달 숨기기 함수
 function hideModal(modalId) {
   const modal = document.getElementById(modalId);
-  if (!modal || modal.style.display === 'none') return; // 이미 닫혀 있다면 동작 취소
-  // 결제내역에서 사용하는 overlay
-  const overlay = document.getElementById('overlay');
-  if(modal.classList.contains('no-dim')) {
-    overlay.classList.remove('active');
-  }
+  if (!modal) return;
 
-  /* 리셋 코드 [개별 추가 가능] */
-  /* [결제내역] 수강변경 */
-  if (modalId === 'modal-courseChange') {
-
-    /* 탭 초기화 */
-    const tabs = modal.querySelectorAll('.tab-wrap > .first-depth > li');
-    const firstTab = modal.querySelector('.tab-wrap > .first-depth > li:first-child');
-
-    // 탭이 존재하는 경우에만 처리
-    if (tabs.length > 0 && firstTab) {
-      // 모든 기존 활성화된(li.active) 탭 비활성화
-      tabs.forEach((tab) => {
-        tab.classList.remove('active');
-      });
-
-      // 첫 번째 LI에 active 클래스 추가
-      firstTab.classList.add('active');
-    }
-  }
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('no-scroll');
 
-  // modalStack 처리
-  if (modalStack && modalStack.length > 0) {
-    const prevModalId = modalStack.pop();
-    const prevModal = document.getElementById(prevModalId);
-    if (prevModal) {
-      prevModal.style.zIndex = '10002';
-    }
+  // 스택에서 제거
+  modalStack = modalStack.filter((id) => id !== modalId);
+
+  // 포커스 트랩 제거
+  if (modal._enforceFocusHandler) {
+    document.removeEventListener('focus', modal._enforceFocusHandler, true);
+    document.removeEventListener('keydown', modal._keydownHandler, true);
+    delete modal._enforceFocusHandler;
+    delete modal._keydownHandler;
   }
 
-  // 이벤트 리스너 제거
-  if (modal._eventsBound) {
-    document.removeEventListener('focus', modal._enforceFocus, true);
-    document.removeEventListener('keydown', modal._keydownHandler);
-    modal._eventsBound = false;
+  // 오버레이 제거 (선택적)
+  const overlay = document.getElementById('overlay');
+  if(overlay.classList.contains('transparent')) {
+    overlay.classList.remove('transparent');
+  }
+  overlay.classList.remove('active');
+
+  // 아래 모달 다시 포커싱 가능하도록 처리
+  const prevModalId = modalStack[modalStack.length - 1];
+  if (prevModalId) {
+    const prevModal = document.getElementById(prevModalId);
+    prevModal?.setAttribute('aria-hidden', 'false');
+    prevModal?.focus(); // optional
+  }
+
+  // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
+  if (modalStack.length === 0) {
+    document.body.classList.remove('no-scroll');
   }
 }
 
-// 모달 숨기기 함수
 /* 4. 탭 관련 함수 */
 class TabManager {
   constructor() {
@@ -1267,7 +1310,20 @@ function formatYearOptions() {
     });
   });
 }
+/* 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 */
+function applyNumericInputFilter(inputElement, maxLength = Infinity) {
+  inputElement.addEventListener('input', (event) => {
+    const input = event.target;
 
+    // 숫자 이외의 값 제거
+    input.value = input.value.replace(/[^0-9]/g, '');
+
+    // 최대 길이 제한 (기본값은 제한 없음)
+    if (input.value.length > maxLength) {
+      input.value = input.value.slice(0, maxLength);
+    }
+  });
+}
 /*-------------------------------*/
 /* [실행문] */
 $(document).ready(function(){
@@ -1483,46 +1539,40 @@ $(document).ready(function(){
 
 
   window.addEventListener('click', function (event) {
-    // 모든 모달을 탐색
+    const overlay = document.getElementById('overlay');
     const modals = document.querySelectorAll('.modal');
     const body = document.querySelector('body');
-    const overlay = document.getElementById('overlay'); // 결제내역
 
-    // #overlay가 클릭되었을 때 모달 닫기 처리
+    // overlay 클릭 시, 최상단 모달만 닫기
     if (event.target === overlay) {
-      hideModal(openModalName);
-      for (let modal of modals) {
-        modal.style.display = 'none';
+      const topModalId = modalStack[modalStack.length - 1];
+      const topModal = document.getElementById(topModalId);
+
+      if (topModal && topModal.classList.contains('no-dim')) {
+        // 최상단 모달이 "no-dim"인 경우 닫기
+        topModal.style.display = 'none';
+        if (modalStack.length === 0) {
+          body.classList.remove('no-scroll');
+        }
+        if(overlay.classList.contains('transparent')) {
+          overlay.classList.remove('transparent');
+        }
+        overlay.classList.remove('active');
+        modalStack.pop(); // 스택에서 제거
+        return;
       }
-      body.classList.remove('no-scroll'); // 스크롤 가능하게 복구
-      overlay.classList.remove('active');
-      // 이벤트 리스너 제거
-      if (modal._eventsBound) {
-        document.removeEventListener('focus', modal._enforceFocus, true);
-        document.removeEventListener('keydown', modal._keydownHandler);
-        modal._eventsBound = false;
-      }
-      return;
     }
 
+    // 나머지 모달 클릭 시, 닫기
     for (let modal of modals) {
-      // 클릭된 요소가 정확히 modal 태그(백드롭) 자체인지 확인
       if (event.target === modal) {
-        // 모달 숨기기
         modal.style.display = 'none';
-        body.classList.remove('no-scroll'); // 스크롤 가능하게 복구
-
-        // 열린 팝업 숨김 처리 로직 실행
-        hideModal(openModalName);
-        // 이벤트 리스너 제거
-        if (modal._eventsBound) {
-          document.removeEventListener('focus', modal._enforceFocus, true);
-          document.removeEventListener('keydown', modal._keydownHandler);
-          modal._eventsBound = false;
+        // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
+        modalStack.pop(); // 스택에서 제거
+        if (modalStack.length === 0) {
+          body.classList.remove('no-scroll');
         }
-        // 열린 팝업 이름 초기화
-        openModalName = '';
-        return; // 한 번 처리 후 루프 종료
+        return;
       }
     }
   });
@@ -1656,6 +1706,185 @@ $(document).ready(function(){
       const allChecked = $visibleCheckboxes.length === $visibleCheckboxes.filter(':checked').length;
       $headCheckbox.prop('checked', allChecked);
     });
+  });
+
+  /* 10. [공통] 셀렉트박스 */
+  const selectOptions = [
+    {
+      value:'장애인',
+      discount:'-50%'
+    },
+    {
+      value:'장애인2',
+      discount:'-50%'
+    },
+    {
+      value:'장애인3',
+      discount:'+50%'
+    }
+  ]
+  document.querySelectorAll('.custom-select').forEach(select => {
+    const button = select.querySelector('.select-toggle');
+    const list = select.querySelector('.select-list');
+    const selectedText = button.querySelector('.selected-text');
+    const placeholder = select.dataset.placeholder || '선택하세요';
+
+    selectedText.textContent = placeholder;
+    list.setAttribute('aria-hidden', 'true');
+
+// 옵션 DOM 생성
+    selectOptions.forEach(opt => {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.setAttribute('tabindex', '0');
+      li.setAttribute('data-value', opt.value);
+
+      const discountClass = opt.discount.startsWith('-') ? 'c-red' : 'c-blue';
+      li.innerHTML = `
+    <div class="flex-wrap gap-auto al-center">
+      <span class="txt-sm fw-medium">${opt.value}</span>
+      <span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>
+    </div>
+  `;
+      list.appendChild(li);
+    });
+
+// 이 타이밍 이후에 다시 불러와야 포커스 가능
+    const items = list.querySelectorAll('li');
+
+
+    const closeList = () => {
+      list.setAttribute('aria-hidden', 'true');
+      button.setAttribute('aria-expanded', 'false');
+    };
+
+    const openList = () => {
+      list.setAttribute('aria-hidden', 'false');
+      button.setAttribute('aria-expanded', 'true');
+    };
+
+    const toggleList = () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      expanded ? closeList() : openList();
+    };
+
+    const selectItem = item => {
+      selectedText.innerHTML = item.innerHTML;
+      items.forEach(i => i.setAttribute('aria-selected', 'false'));
+      item.setAttribute('aria-selected', 'true');
+      closeList();
+      button.focus();
+    };
+
+    button.addEventListener('click', toggleList);
+
+    items.forEach((item, index) => {
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          if (e.shiftKey) {
+            // Shift + Tab → 이전 요소
+            const prev = items[index - 1] || items[items.length - 1];
+            prev.focus();
+          } else {
+            // Tab → 다음 요소
+            const next = items[index + 1] || items[0];
+            next.focus();
+          }
+        }
+
+        // 기존 로직 유지
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = items[index + 1] || items[0];
+          next.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = items[index - 1] || items[items.length - 1];
+          prev.focus();
+        } else if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectItem(item);
+        } else if (e.key === 'Escape') {
+          closeList();
+          button.focus();
+        }
+      });
+    });
+
+
+
+    button.addEventListener('keydown', e => {
+      if (['Enter', ' ', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault();
+        openList();
+        items[0].focus();
+      }
+    });
+
+    document.addEventListener('click', e => {
+      if (!select.contains(e.target)) {
+        closeList();
+      }
+    });
+  });
+
+  /* 11. [결제내역] 주민등록번호 */
+  // 입력 필드와 키패드 요소 가져오기
+  const inputField = document.getElementById('input-field');
+  const numberButtons = document.querySelectorAll('.key.num');
+  const deleteButton = document.getElementById('deleteKey');
+  const clearButton = document.getElementById('clearKey');
+
+  let inputValues = ''; // 입력된 값을 추적 (사용자가 직접 보는 값)
+
+  // 랜덤 활성화 클래스 효과 함수
+  function activateRandomButton() {
+    const randomIndex = Math.floor(Math.random() * numberButtons.length); // 0~9 중 랜덤
+    const randomButton = numberButtons[randomIndex];
+
+    // 랜덤 버튼에 active 클래스 추가
+    randomButton.classList.add('active');
+
+    // 짧은 시간 후 active 클래스 제거
+    setTimeout(() => {
+      randomButton.classList.remove('active');
+    }, 200); // 200ms 후 제거
+  }
+
+// 숫자 버튼 클릭 이벤트
+  numberButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      if (inputValues.length >= 7) return; // 7자리 제한
+      const value = button.dataset.value; // 클릭된 버튼의 실제 값 (사용하진 않음)
+
+      // 사용자 입력값 업데이트
+      inputValues += value;
+
+      // 랜덤 버튼 활성화 효과
+      activateRandomButton();
+
+      // 입력 필드 업데이트 (최신값 설정)
+      inputField.value = inputValues.replace(/./g, '*'); // 입력된 값은 *로 표시
+    });
+  });
+
+  // 삭제 버튼 이벤트
+  deleteButton.addEventListener('click', () => {
+    inputValues = inputValues.slice(0, -1); // 마지막 문자 제거
+    inputField.value = inputValues.replace(/./g, '*'); // 수정된 값 반영
+  });
+
+  // 키보드로 눌렀을때 팝업창 열기
+  const idcardLicense = document.getElementById('input-field');
+  idcardLicense.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault(); // 기본 스크롤/서브밋 방지
+      showModal('modal-virtualKeyboard', {
+        absolute: true,
+        triggerElement: e.currentTarget,
+      });
+    }
   });
 
 })

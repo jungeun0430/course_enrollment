@@ -93,7 +93,6 @@ header .btn-wrap.sm {gap:8px;}
 .sidebar .pc-only-f > li:hover > a {color:var(--color-primary);font-weight:var(--fw-bold);transition:color 0.3s;}
 .sidebar .pc-only-f > li.active > a {color:var(--color-primary);font-weight:var(--fw-bold)}
 
-
 /* main-con-box 색상 박스 */
 button.main-con-box {display:flex;}
 .main-con-box{border-radius:16px;padding:40px 32px;}
@@ -135,6 +134,7 @@ main > .sec{width:100%;margin:0 auto;}
 .flex-wrap.gap-auto{gap:0;}
 .flex-wrap.gap4 {gap:4px;}
 .flex-wrap.gap12 {gap:12px;}
+.flex-wrap.gap-pc-8 {gap:8px;}
 .flex-wrap .flex1 {flex:1;}
 span.title-wrap{display:block;}
 span.title-wrap span {display:block;text-align:left;}
@@ -162,10 +162,15 @@ span.title-wrap > .h4,
 .sub-content-box {width:100%;}
 .sub-content-box + .sub-content-box {margin-top:40px;}
 .sub-content-box [class^="sub-title"] {margin-bottom:8px;}
+/* 모달 내부에서 주로 쓰이는 간격 */
 .sub-content-box.ver2 [class^="sub-title"] {margin-bottom:12px;}
+.sub-content-box.ver2 + .sub-content-box.ver2 {margin-top:40px;}
+.sub-content-box.ver2.mt-only {margin-top:40px;}
 .sub-title {font-size:var(--txt-size05);font-weight:var(--fw-bold);}
 .sub-title2 {font-size:var(--txt-size04);font-weight:var(--fw-bold);}
 
+/* 공통 박스 */
+.c-box {width:100%;display:flex;align-items:center;justify-content:center;padding:31px 12px;background-color:var(--color-primary-light);}
 /* 개인정보처리방침 텍스트 박스 */
 .gray-box {width:100%;height:377px;overflow-y:auto;border:1px solid var(--border-color);padding:8px;}
 .pre{margin:0;font-family:inherit;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);}
@@ -203,6 +208,8 @@ span.title-wrap > .h4,
 .custom-table tbody td {padding:8px 8px;transition:background-color 0.3s}
 .custom-table tbody td + td {border-left:1px solid var(--table-border-color);}
 .custom-table tbody tr + tr {border-top:1px solid var(--table-border-color);}
+/* 너비가 작을 경우 */
+.custom-table.pd-sm thead th{padding:4px 8px;}
 /* 호버했을 경우 */
 .custom-table[data-table="rowspan-ver"] tr.table-row-hover td,
 .custom-table:not(.form-ver) tbody tr:not(.disabled-chkbox):hover td{background-color:var(--color-primary-light);}
@@ -430,7 +437,7 @@ span.title-wrap > .h4,
 
 /* 결제내역 */
 .payment-wrap {gap:6px;}
-.paymethod-wrap {margin-top:40px;}
+.sub-content-box.ver2.paymethod-wrap {margin-top:40px;}
 .depth-box {padding:24px 60px;margin-bottom:20px;display:flex;align-items:center;position:relative;}
 .depth-box::before {content:'';width:100%;height:100%;background-color:var(--color-primary-light);position:absolute;left:0;top:0;z-index: -1;border-radius:4px;}
 .depth-list {display:flex;width:100%;justify-content:space-between;}
@@ -451,6 +458,18 @@ span.title-wrap > .h4,
 
 /* 결제내역 (수강변경) */
 .agree-wrap {margin-top:20px;}
+.pm-total-wrap {margin-top:40px;}
+.rule-message {margin-top:5px;}
+.agree-rule-message {padding-left:34px;}
+
+/* 결제내역 > 가상키패드 */
+.virtual-num-wrap {padding:20px 24px;background-color:var(--border-color);}
+.virtual-num-box {width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.virtual-num-box > button {width:100%;height:82px;display:flex;justify-content:center;align-items:center;font-size:var(--txt-size07);font-weight:var(--fw-bold);color:var(--color-gray2);border:1px solid var(--border-color);background-color:var(--color-white);border-radius:4px;transition:all 0.3s;}
+.virtual-num-box > button.action {background:var(--color-white) url("../images/common/delete_ico.svg") center center no-repeat;background-size:40px;}
+.virtual-num-box > button.confirm {background-color:var(--color-primary);color:var(--color-white);font-size:var(--txt-size06);}
+.virtual-num-box > button.confirm:hover {background-color: var(--color-primary-dark); }
+.virtual-num-box > button.num.active {background-color:rgba(0, 0, 0, 0.5);}
 
 
 
@@ -506,6 +525,7 @@ span.title-wrap > .h4,
     .flex-wrap.mo-col.mo-al-start {align-items: flex-start;}
     .flex-wrap.mo-col.mo-al-end {align-items: flex-end;}
     .flex-wrap.mo-j-start {justify-content:flex-start;}
+    .flex-wrap.gap-pc-8 {gap:0;}
 
     /* sec1 > main-con-box */
     .main-con-box{border-radius:8px;padding:16px 12px;}
@@ -532,7 +552,7 @@ span.title-wrap > .h4,
     header .btn-wrap > a.ico-user > img,
     header .btn-wrap > a.ico-pay > img {object-fit: contain;}
 
-        /* sidebar */
+    /* sidebar */
     .sidebar {position:fixed;right:-280px;top:0;width:280px;height:100vh;padding-top:60px;z-index:100005;background-color:var(--color-white);transition: right 0.3s ease; /*transform:translateX(100%);transition:transform 0.3s*/;overflow-y:auto;}
     .sidebar.active {right:0;}
     .sidebar .sidebar-title-wrap,

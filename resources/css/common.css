@@ -101,6 +101,7 @@
 .checkbox-wrap input {position: absolute;width: 1px;height: 1px;overflow: hidden;clip: rect(0 0 0 0);white-space: nowrap;clip-path: inset(50%);}
 /* 체크박스 스타일 */
 .checkbox-wrap {display:inline-flex;align-items: center;gap: 4px;cursor: pointer;}
+.agree-wrap .checkbox-wrap {gap:8px;}
 /* 체크박스 비주얼 */
 .checkbox-wrap .checkmark {width: 28px;height: 28px;background: url('../images/ico/ico_checked_empty.svg') no-repeat center / contain;display: inline-block;transition: all 0.3s;}
 .checkbox-wrap .checkmark + span {font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);}
@@ -176,6 +177,7 @@
 .input-wrap > input:focus {outline:none;border-color:var(--color-primary);}
 
 .input-wrap.size-sm {width:80px;}
+.input-wrap.size-md {width:120px;}
 .input-wrap.size-full {width:100%;}
 
 @media (max-width: 768px) {
@@ -201,12 +203,27 @@
 }
 
 /* ------------------------------------------------------- */
+/* 셀렉트박스 */
+.custom-select {width:200px;position:relative;font-family:inherit;}
+.select-toggle {width:100%;height:48px;padding: 10px;text-align: left;border: 1px solid var(--border-color);border-radius:4px;background:var(--color-white) url("../images/ico/ico_select_arrow.svg") right 12px center no-repeat;background-size:14px;cursor: pointer;transition:background 0.2s;}
+.select-toggle[aria-expanded="true"] {background:var(--color-white) url("../images/ico/ico_select_arrow_active.svg") right 12px center no-repeat;}
+.select-toggle:focus {border-width:2px;border-color:var(--color-primary);}
+.select-list {position: absolute;width: 100%;background: var(--color-white);border: 1px solid var(--border-color);border-top: none;max-height: 200px;overflow-y: auto;display: none;z-index: 10;}
+.select-list[aria-hidden="false"] {display: block;}
+.select-list li {padding: 10px;cursor: pointer;}
+.select-list li:hover,
+.select-list li[aria-selected="true"] {background: var(--color-primary-light);color: var(--color-white);}
+
+
+/* ------------------------------------------------------- */
 /* 뱃지 */
 .badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
 .badge.red {background-color:var(--bg-light-red);color:var(--color-red);text-decoration:none!important;}
 .badge.blue {background-color:var(--bg-light-blue);color:var(--color-primary-dark);text-decoration:none!important;}
 
 /* 텍스트 관련 (기본) */
+.relative-box {position:relative;}
+.ds-block {display: block!important;}
 .txt-xlg {font-size:var(--txt-size07);color:var(--color-black);}
 .txt-lg {font-size:var(--txt-size05);color:var(--color-black);}
 .txt-md {font-size:var(--txt-size04);color:var(--color-black);}
@@ -228,6 +245,7 @@
 .c-light-gray{color:var(--color-light-gray);}
 
 /* 간격 (고정) - media 변경 없음 */
+.ml-4 {margin-left:4px!important;}
 .mb-4 {margin-bottom:4px!important;}
 .mb-6 {margin-bottom:6px!important;}
 .mb-8 {margin-bottom:8px!important;}

@@ -2454,15 +2454,18 @@
               <th><div class="th-wrap important">성별</div></th>
               <td>
                 <div class="td-wrap start">
-                  <div class="radio-tab-wrap">
-                    <label class="radio-tab">
-                      <input type="radio" aria-checked="true" checked="true" name="type5">
-                      <span>남자</span>
-                    </label>
-                    <label class="radio-tab">
-                      <input type="radio" aria-checked="false" name="type5">
-                      <span>여자</span>
-                    </label>
+                  <div class="flex-wrap al-center gap-pc-8 mo-col start gap-auto mo-al-start">
+                    <div class="radio-tab-wrap">
+                      <label class="radio-tab">
+                        <input type="radio" aria-checked="true" checked="true" name="type5">
+                        <span>남자</span>
+                      </label>
+                      <label class="radio-tab">
+                        <input type="radio" aria-checked="false" name="type5">
+                        <span>여자</span>
+                      </label>
+                    </div>
+                    <p class="txt-sm fw-medium c-gray2">주민등록상 성별을 선택해주세요.</p>
                   </div>
                 </div>
               </td>
@@ -2647,8 +2650,7 @@
           <span class="checkmark" aria-hidden="true"></span>
         </label>
       </div>
-
-      <h5>1-2. 체크박스 (뱃지모양)</h5>
+      <h5>1-3. 체크박스 (뱃지모양)</h5>
       <div class="box">
         <label class="checkbox-badge-wrap">
           <input type="checkbox" aria-checked="false">
@@ -2704,7 +2706,6 @@
           </label>
         </div>
       </div>
-
       <h5>2-4. 라디오 버튼(결제내역 아이콘 디자인)</h5>
       <div class="box">
         <label class="radio-ico-tab credit">
@@ -2722,6 +2723,7 @@
       </div>
 
       <hr style="margin:20px 0"/>
+
       <h5>3-1. 인풋</h5>
       <div class="box">
         <p style="font-size:18px;margin-bottom:4px;">a. 기본사이즈</p>
@@ -2741,6 +2743,7 @@
       </div>
 
       <hr style="margin:20px 0"/>
+
       <h5>4-1. 데이트 피커</h5>
       <div class="box">
         <fieldset class="calendar">
@@ -2755,9 +2758,17 @@
             </label>
           </div>
         </fieldset>
-
       </div>
 
+      <h5>5-1. 셀렉트 박스</h5>
+      <div class="box">
+        <div class="custom-select" data-placeholder="항목 선택">
+          <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+            <span class="selected-text"></span>
+          </button>
+          <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+        </div>
+      </div>
     </div>
 
     <div class="guide-box">
@@ -2778,13 +2789,19 @@
         <button type="button" class="btn outlined" onclick="showModal('modal3');">[물음표]3. 정말 선택하신 회원번호를 사용하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal4');">[체크]4. 강좌가 장바구니에 담겼습니다.</button>
         <button type="button" class="btn outlined" onclick="showModal('modal5');">[X]5. 선택한 강좌를 삭제하시겠습니까?</button>
-        <button type="button" class="btn outlined" onclick="showModal('modal-onlineUserCard');">[바코드]5. 온라인 회원카드</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-onlineUserCard');">[바코드]6. 온라인 회원카드</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-centerJoin');">7. 센터 중복 가입 안내</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-curriculum');">8. 강습 수준별 진도표</button>
         <!-- 결제내역 -->
-        <button type="button" class="btn outlined" onclick="showModal('modal-courseChange');">[결제내역] 수강변경</button>
-        <button type="button" class="btn outlined" onclick="showModal('modal-courseCancellation');">[결제내역] 수강취소</button>
-        <button type="button" class="btn outlined" onclick="showModal('modal-paymentMethod');">[결제내역] 결제</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-courseChange');">[결제내역] 9. 수강변경</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-courseCancellation');">[결제내역] 10. 수강취소</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-paymentMethod');">[결제내역] 11. 결제</button>
+        <!-- 결제내역 > 알림창 -->
+        <button type="button" class="btn outlined" onclick="showModal('modal6');">[느낌표]12. 할인 대상자 최초 1회 방문 필요</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal7');">[X]13. 조회 결과 할인 대상이 아닙니다.</button>
+        <!-- 결제내역 > 결제 > 세부 모달 -->
+        <button type="button" class="btn outlined" onclick="showModal('modal-discountCheck');">[결제내역] 14. 결제 > 할인대상확인</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-virtualKeyboard-copy');">[결제내역] 15. 결제 > 할인대상확인 > 가상키패드</button>
       </div>
       <!-- [모달] 1. 가입하신 센터가 없습니다. -->
       <div id="modal1" class="modal" data-modal-type="confirm-ver">
@@ -2846,7 +2863,7 @@
         </div>
       </div>
 
-      <!-- [모달] 4. 강좌가 장바구니에 담겼습니다. -->
+      <!-- [모달] 5. 강좌가 장바구니에 담겼습니다. -->
       <div id="modal5" class="modal"  data-modal-type="confirm-ver" role="dialog" aria-labelledby="modal5-title" aria-describedby="modal5-desc" aria-hidden="true">
         <div class="modal-content sm pd-auto" tabindex="-1">
           <div class="confirm-box">
@@ -2860,7 +2877,7 @@
         </div>
       </div>
 
-      <!-- [모달] 5. 온라인 회원카드 -->
+      <!-- [모달] 6. 온라인 회원카드 -->
       <div id="modal-onlineUserCard" class="modal" data-modal-type="rotate-ver">
         <div class="modal-content mobile-rotate">
           <div class="title-wrap">
@@ -2890,7 +2907,7 @@
           <div class="modal-body">
             <p class="txt-md fw-medium">동일 센터에 중복가입내역이 확인되었습니다.사용하실 회원번호를 선택해주세요.</p>
             <ul class="dash-list">
-              <li>선택하지 않은 회원번호는 삭제됩니다.</li>
+              <li>선택하지 않은 회원번호는 삭제되며, 선택한 회원번호로 수강/결제정보가 통합됩니다.</li>
               <li>수강 중 또는 예정된 강좌가 있다면, 반드시 해당 강좌를 등록한 회원번호를 사용해주셔야 합니다.</li>
             </ul>
             <div class="sub-content-box">
@@ -3552,7 +3569,7 @@
         </div>
       </div>
 
-      <!---------- [결제내역 공통 overlay] -------------------->
+      <!---------- [결제내역 공통: no-dim 클래스 존재의 경우 사용하는 overlay] -------------------->
       <div id="overlay"></div>
       <!-- [결제내역] 수강변경 -->
       <div id="modal-courseChange" class="modal no-dim pd-sm" data-modal-type="fixed-btn-ver">
@@ -4142,7 +4159,7 @@
           </div>
           <div class="modal-body">
             <!-- 수강취소 테이블 -->
-            <div class="custom-table fixed-ver pc-only">
+            <div class="custom-table fixed-ver pd-sm pc-only">
               <table>
                 <caption class="visually-hidden">수강취소 테이블</caption>
                 <colgroup>
@@ -4209,42 +4226,31 @@
                 </tr>
                 </tbody>
                 <!-- 수강 변경 -->
-                <tfoot>
-                <!-- 1. 결제 합산 -->
-                <tr>
-                  <td colspan="6">
-                    <div class="td-wrap">
-                      <div class="total-wrap">
-                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
-                          <p class="txt-rgl fw-medium c-gray">항목 1건</p>
-                          <span class="txt-lg fw-bold">85,800원</span>
-                        </div>
-                        <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
-                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
-                          <p class="txt-rgl fw-medium c-gray">할인금액</p>
-                          <span class="txt-lg fw-bold c-red">20,000원</span>
-                        </div>
-                        <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
-                        <div class="flex-wrap col-ver al-center center gap-auto mb-8">
-                          <p class="txt-rgl fw-medium c-gray">입회비</p>
-                          <span class="txt-lg fw-bold">10,000원</span>
-                        </div>
-                        <span class="ico-box equal"><span class="visually-hidden">는</span></span>
-                        <div class="flex-wrap center gap12">
-                          <span class="txt-lg fw-bold">결제 예정 금액</span>
-                          <span class="txt-lg fw-bold c-blue">67,800원</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                </tfoot>
               </table>
             </div>
 
+            <!-- 할인 -->
+            <div class="sub-content-box ver2 mt-only">
+              <h3 class="sub-title2">할인</h3>
+              <div class="flex-wrap col-ver gap-auto">
+                <div class="flex-wrap gap-auto gap-pc-8">
+                  <div class="custom-select" data-placeholder="항목 선택">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                  </div>
+                  <button type="button" class="btn outlined sm" onclick="showModal('modal6');">할인대상확인</button>
+                </div>
+                <!-- 대상 확인이 되었을 경우 노출 -->
+                <p class="rule-message txt-sm fw-medium c-blue">대상확인이 완료되었습니다.</p>
+              </div>
+
+            </div>
+
             <!-- 결제 수단 -->
-            <div class="sub-content-box ver2 paymethod-wrap">
-              <h3 class="sub-title">결제 수단</h3>
+            <div class="sub-content-box ver2">
+              <h3 class="sub-title2">결제 수단</h3>
               <div class="flex-wrap gap12">
                 <label class="radio-ico-tab credit">
                   <input type="radio" aria-checked="true" checked="true" name="radioGroup">
@@ -4260,11 +4266,164 @@
                 </label>
               </div>
             </div>
+
+            <!-- 합산 금액 -->
+            <div class="c-box pm-total-wrap">
+              <div class="total-wrap">
+                <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                  <p class="txt-rgl fw-medium c-gray">항목 1건</p>
+                  <span class="txt-lg fw-bold">85,800원</span>
+                </div>
+                <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
+                <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                  <p class="txt-rgl fw-medium c-gray">할인금액</p>
+                  <span class="txt-lg fw-bold c-red">20,000원</span>
+                </div>
+                <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                <div class="flex-wrap col-ver al-center center gap-auto mb-8">
+                  <p class="txt-rgl fw-medium c-gray">입회비</p>
+                  <span class="txt-lg fw-bold">10,000원</span>
+                </div>
+                <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                <div class="flex-wrap center gap12">
+                  <span class="txt-lg fw-bold">결제 예정 금액</span>
+                  <span class="txt-lg fw-bold c-blue">67,800원</span>
+                </div>
+              </div>
+            </div>
           </div>
           <button type="button" class="btn fixed">결제하기</button>
         </div>
       </div>
-    </div>
+
+      <!-- [결제내역] 알림창 모달 -->
+      <!-- [모달] 12. 할인 대상자 최초 1회 방문 필요 -->
+      <div id="modal6" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_exp.svg" alt="" />
+            <p class="c-em">할인 대상자 최초 1회 방문 필요</p>
+            <p class="c-desc">
+              다자녀·장애인 보호자는 할인 적용을 위해<br>
+              회원관리실 방문하여 가족 등록이 필요합니다.
+            </p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn size-nm" onclick="hideModal('modal6');showModal('modal-discountCheck');">확인</button>
+          </div>
+        </div>
+      </div>
+      <!-- [모달] 13. 조회 결과 할인 대상이 아닙니다. -->
+      <div id="modal7" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_error.svg" alt="" />
+            <p class="c-em">조회 결과 할인 대상이 아닙니다.</p>
+            <p class="c-desc">
+              할인 대상이 맞다고 생각되실 경우<br>
+              주민등록번호를 정확하게 다시 입력해 주세요.
+            </p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn size-nm" onclick="hideModal('modal7')">확인</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- [결제내역] 결제 > 할인대상확인 -->
+      <div id="modal-discountCheck" class="modal pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content">
+          <div class="title-wrap">
+            <h3>할인대상확인</h3>
+            <button type="button" onclick="hideModal('modal-discountCheck')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <!-- 대상조회 -->
+            <div class="sub-content-box ver2">
+              <h3 class="sub-title2">대상조회</h3>
+              <div class="custom-form-table">
+                <div class="custom-table form-ver">
+                  <table>
+                    <colgroup class="pc-only-column-group">
+                      <col style="width: 20%;" />
+                      <col style="width: 80%;" />
+                    </colgroup>
+                    <colgroup class="mobile-only-column-group">
+                      <col style="width: 30%;" />
+                      <col style="width: 70%;" />
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                      <th><div class="th-wrap important">주민등록번호</div></th>
+                      <td>
+                        <div class="td-wrap start number-wrap">
+                          <label class="input-wrap size-md">
+                            <input type="text" id="number-input" maxlength="6" placeholder="" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                          </label>
+                          <span>-</span>
+                          <!-- 주민번호 뒷자리 (input id 설정) -->
+                          <label class="input-wrap size-md">
+                            <input type="password" id="input-field" readonly onclick="showModal('modal-virtualKeyboard', {
+                              absolute: true,
+                              triggerElement: event.currentTarget,
+                            });"/>
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- 행정정보공동이용 사전동의서 -->
+            <div class="sub-content-box ver2">
+              <h3 class="sub-title2">[행정정보공동이용 사전동의서]</h3>
+              <!-- 아직 안넣음 -->
+            </div>
+            <!-- 동의여부 -->
+            <div class="flex-wrap gap-auto col-ver mo-col agree-wrap">
+              <label class="checkbox-wrap">
+                <input type="checkbox" aria-checked="false">
+                <span class="checkmark" aria-hidden="true"></span>
+                <span>연기 안내를 확인하였으며, 동의합니다.</span>
+              </label>
+              <span class="agree-rule-message ds-block txt-sm fw-medium c-red">본인이 동의를 하지 않을 경우 해당 구비서류는 직접 제출하여야합니다.</span>
+            </div>
+          </div>
+          <button type="button" class="btn fixed">확인</button>
+        </div>
+      </div>
+
+      <!-- [결제내역] 결제 > 할인대상확인 > 가상키패드 -->
+      <div id="modal-virtualKeyboard" class="modal xs no-dim" data-modal-type="absolute-ver">
+        <div class="modal-content">
+          <div class="title-wrap">
+            <h3>가상키패드</h3>
+            <button type="button" onclick="hideModal('modal-virtualKeyboard')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body pd-0">
+            <div class="virtual-num-wrap">
+              <div class="virtual-num-box">
+                <button class="key num" data-value="1">1</button>
+                <button class="key num" data-value="2">2</button>
+                <button class="key num" data-value="3">3</button>
+                <button class="key num" data-value="4">4</button>
+                <button class="key num" data-value="5">5</button>
+                <button class="key num" data-value="6">6</button>
+                <button class="key num" data-value="7">7</button>
+                <button class="key num" data-value="8">8</button>
+                <button class="key num" data-value="9">9</button>
+                <button class="key num" data-value="0">0</button>
+                <button class="key action" id="deleteKey"><span class="visually-hidden">삭제</span></button>
+                <button class="key confirm" id="clearKey" onclick="hideModal('modal-virtualKeyboard')">확인</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
 
     <div class="guide-box">
       <h2>사. 탭 관련(진행중)</h2>
@@ -4280,17 +4439,17 @@
               <button type="button" class="tab"><span>스포츠교실</span></button>
               <div class="tab-box">
                 <a href="#">sdfkjskdfs</a>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-               스포츠 교실 내용 입니다.<br>
-             </div>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+              </div>
             </li>
             <li>
               <button type="button" class="tab"><span>분당스포츠센터</span></button>
@@ -4609,7 +4768,7 @@
                       </div>
                     </li>
                     <li>
-                      <button type="button" class="check-tab-btn">시작/시간<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
+                      <button type="button" class="check-tab-btn">시작시간<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
                       <div class="sub-tab-content">
                         <ul>
                           <li>
