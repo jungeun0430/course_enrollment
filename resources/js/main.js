@@ -184,41 +184,49 @@ function showModal(modalId,options={}) {
 }
 // 모달 안 focus 가능한 영역 확인 코드 : 최상단 모달에서만 tab키를 눌러도 반응할
 const handleFocusTrap = (modal) => {
-  // 포커스 가능한 요소 추출
-  const focusableElements = Array.from(
-    modal.querySelectorAll(
-      'button:not([disabled]), [href]:not([aria-hidden="true"]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    )
-  ).filter((el) => el.offsetParent !== null);
-
-  const firstFocusable = focusableElements[0];
-  const lastFocusable = focusableElements[focusableElements.length - 1];
-  // 모달 열릴 때 첫 번째 포커스
-  setTimeout(() => {
-    if (firstFocusable) {
-
-      firstFocusable.focus();
-    }
-  }, 0);
+  const getFocusableElements = () => {
+    return Array.from(
+      modal.querySelectorAll(`
+        button:not([disabled]),
+        [href]:not([aria-hidden="true"]),
+        input:not([disabled]):not([type="hidden"]),
+        select:not([disabled]),
+        textarea:not([disabled]),
+        [tabindex]:not([tabindex="-1"]),
+        .custom-select .select-list[aria-hidden="false"] li button,
+        .custom-select .select-list[aria-hidden="false"] li a
+      `)
+    ).filter((el) => {
+      const style = window.getComputedStyle(el);
+      return (
+        style.display !== 'none' &&
+        style.visibility !== 'hidden' &&
+        style.opacity !== '0'
+      );
+    });
+  };
 
   // 모달별 isEnforcingFocus 상태를 추가
   if (!modal._isEnforcingFocus) {
     modal._isEnforcingFocus = false;
   }
+
   const enforceFocus = (e) => {
     const isTopModal = modalStack[modalStack.length - 1] === modal.id;
-    if (!isTopModal) {
-      // 상위 모달이 아니면 포커스를 트랩하지 않음
-      return;
-    }
+    const activeElement = document.activeElement;
 
-    if (modal._isEnforcingFocus) return;
+    if (!isTopModal || modal._isEnforcingFocus) return;
 
-    // 포커스가 모달 외부로 빠져나가면 첫 번째 포커스 가능한 요소로 포커스 설정
     if (!modal.contains(e.target)) {
       e.preventDefault();
       modal._isEnforcingFocus = true;
-      firstFocusable?.focus();
+
+      if (activeElement && activeElement.closest('.custom-select')) {
+        activeElement.focus(); // select 열려있는 경우 그대로 유지
+      } else {
+        const firstFocusable = getFocusableElements()[0];
+        firstFocusable?.focus(); // 최신 요소 기준으로
+      }
 
       setTimeout(() => {
         modal._isEnforcingFocus = false;
@@ -227,31 +235,32 @@ const handleFocusTrap = (modal) => {
   };
 
   const keydownHandler = (e) => {
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      const currentIndex = focusableElements.indexOf(document.activeElement);
-      /* 모달 창 열리고 첫 요소에 focus가 갈 때 위치를 제대로 인식못해서 -1로 찍히지만 첫번째 요소로 focus이동시킴으로써 0으로 인식됨. 그러나 간격을 두어야 focus가 인식할 수 있어 settimeout필요 */
-      if (currentIndex === -1) {
-        setTimeout(() => {
-          firstFocusable?.focus();
-          console.log('focus set');
-        }, 0);
-        return;
-      }
+    if (e.key !== 'Tab') return;
 
-      let nextIndex;
-      if (e.shiftKey) {
-        nextIndex = currentIndex - 1 < 0 ? focusableElements.length - 1 : currentIndex - 1;
-      } else {
-        nextIndex = currentIndex + 1 >= focusableElements.length ? 0 : currentIndex + 1;
-      }
+    const focusableElements = getFocusableElements();
+    if (focusableElements.length === 0) return;
 
-      setTimeout(() => {
-        focusableElements[nextIndex]?.focus();
-      }, 0);
+    const currentIndex = focusableElements.indexOf(document.activeElement);
+    if (currentIndex === -1) {
+      requestAnimationFrame(() => {
+        focusableElements[0]?.focus();
+      });
+      return;
     }
-  };
 
+    e.preventDefault();
+
+    let nextIndex;
+    if (e.shiftKey) {
+      nextIndex = currentIndex - 1 < 0 ? focusableElements.length - 1 : currentIndex - 1;
+    } else {
+      nextIndex = currentIndex + 1 >= focusableElements.length ? 0 : currentIndex + 1;
+    }
+
+    requestAnimationFrame(() => {
+      focusableElements[nextIndex]?.focus();
+    });
+  };
 
   // 기존 이벤트 제거
   if (modal._enforceFocusHandler) {
@@ -267,11 +276,13 @@ const handleFocusTrap = (modal) => {
   modal._enforceFocusHandler = enforceFocus;
   modal._keydownHandler = keydownHandler;
 
-  // 모달 열릴 때 첫 번째 포커스
+  // 모달 열릴 때 첫 포커스
   setTimeout(() => {
+    const firstFocusable = getFocusableElements()[0];
     firstFocusable?.focus();
   }, 0);
 };
+
 // 모달 숨기기 함수
 function hideModal(modalId) {
   const modal = document.getElementById(modalId);
@@ -293,7 +304,7 @@ function hideModal(modalId) {
 
   // 오버레이 제거 (선택적)
   const overlay = document.getElementById('overlay');
-  if(overlay.classList.contains('transparent')) {
+  if (overlay.classList.contains('transparent')) {
     overlay.classList.remove('transparent');
   }
   overlay.classList.remove('active');
@@ -302,8 +313,16 @@ function hideModal(modalId) {
   const prevModalId = modalStack[modalStack.length - 1];
   if (prevModalId) {
     const prevModal = document.getElementById(prevModalId);
-    prevModal?.setAttribute('aria-hidden', 'false');
-    prevModal?.focus(); // optional
+    if (prevModal) {
+      prevModal.setAttribute('aria-hidden', 'false');
+      handleFocusTrap(prevModal); // ← 💡여기서 포커스트랩 재설정!
+      requestAnimationFrame(() => {
+        const firstFocusable = prevModal.querySelector(
+          'button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        firstFocusable?.focus(); // optional
+      });
+    }
   }
 
   // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
@@ -311,6 +330,7 @@ function hideModal(modalId) {
     document.body.classList.remove('no-scroll');
   }
 }
+
 
 /* 4. 탭 관련 함수 */
 class TabManager {
@@ -545,6 +565,13 @@ class TabManager {
       this.saveOriginalOrder(wrap, firstDepth);
 
       const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+      if (tabs.length <= 1) {
+        // 탭 버튼이 하나라면 숨기기
+        firstDepth.classList.add('only');
+      } else {
+        firstDepth.classList.remove('only');
+      }
+
       const tabBoxes = wrap.querySelectorAll('.tab-box');
       console.log(`탭 ${tabs.length}개, 탭 박스 ${tabBoxes.length}개 발견`);
 
@@ -639,16 +666,23 @@ class TabManager {
         const tabBoxHeight = activeTab.offsetHeight; // 활성 탭의 높이
         // modal 내부인지 확인하는 조건
         const isInModal = modalId && wrap.closest(`#${modalId}`);
-        console.log(isInModal)
+        const listLength = wrap.querySelectorAll('.first-depth > li').length;
 
-
-
+        const topSpacing =
+          listLength <= 1
+            ? 0
+            : isInModal
+              ? 84
+              : this.isMobile
+                ? 84
+                : 104;
         // 높이 계산
-        const topSpacing = isInModal
+        /*const topSpacing = isInModal
           ? 84 // 모달 내부
           : this.isMobile
             ? 84 // 모바일
             : 104; // 데스크톱
+        console.log(topSpacing)*/
         console.log(topSpacing)
 
         wrap.style.height = `${tabBoxHeight + topSpacing}px`; // 계산된 높이 설정
@@ -1310,6 +1344,154 @@ function formatYearOptions() {
     });
   });
 }
+/* 10. [공통] 셀렉트박스 */
+// 초기화 함수
+function initializeCustomSelect(selectElement, selectOptions, options = {}) {
+  const button = selectElement.querySelector('.select-toggle');
+  const list = selectElement.querySelector('.select-list');
+  const selectedText = button.querySelector('.selected-text');
+
+  const {
+    up = false,
+    placeholder = selectElement.dataset.placeholder || '선택하세요',
+    preventSelectionOnLink = false,
+  } = options;
+
+  if (up) {
+    selectElement.classList.add('up');
+  }
+
+  selectedText.textContent = placeholder;
+  list.setAttribute('aria-hidden', 'true');
+
+  // 옵션 DOM 생성
+  selectOptions.forEach(opt => {
+    const li = document.createElement('li');
+    li.setAttribute('role', 'option');
+    li.setAttribute('data-value', opt.value);
+
+    const discountClass = opt.discount?.startsWith('-') ? 'c-red' : (opt.discount ? 'c-blue' : '');
+    if (opt.tag === 'a') {
+      li.innerHTML = `
+        <a href="${opt.href}" target="_blank" class="flex-wrap gap-auto al-center">
+          <span class="txt-sm fw-medium">${opt.value}</span>
+          ${opt.discount ? `<span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>` : ''}
+        </a>
+      `;
+    } else if (opt.tag === 'button') {
+      li.innerHTML = `
+        <button type="button" class="flex-wrap gap-auto al-center">
+          <span class="txt-sm fw-medium">${opt.value}</span>
+          ${opt.discount ? `<span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>` : ''}
+        </button>
+      `;
+    }
+
+    list.appendChild(li);
+  });
+
+  // Focus 업데이트
+  const items = list.querySelectorAll('li');
+
+  const closeList = () => {
+    list.setAttribute('aria-hidden', 'true');
+    button.setAttribute('aria-expanded', 'false');
+    selectElement.classList.remove('active');
+  };
+
+  const openList = () => {
+    list.setAttribute('aria-hidden', 'false');
+    button.setAttribute('aria-expanded', 'true');
+    selectElement.classList.add('active');
+  };
+
+  const toggleList = () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+    expanded ? closeList() : openList();
+  };
+
+  const selectItem = item => {
+    const selectedButton = item.querySelector('button');
+    const selectedAnchor = item.querySelector('a');
+
+    if (selectedButton) {
+      const div = document.createElement('div');
+      div.classList.add('selected-item');
+      div.innerHTML = selectedButton.innerHTML;
+      selectedText.innerHTML = '';
+      selectedText.appendChild(div);
+    } else if (selectedAnchor && !preventSelectionOnLink) {
+      const div = document.createElement('div');
+      div.classList.add('selected-item');
+      div.innerHTML = selectedAnchor.innerHTML;
+      selectedText.innerHTML = '';
+      selectedText.appendChild(div);
+    }
+
+    items.forEach(i => i.setAttribute('aria-selected', 'false'));
+    item.setAttribute('aria-selected', 'true');
+    closeList();
+    button.focus();
+  };
+
+  // 이벤트
+  button.addEventListener('click', toggleList);
+
+  items.forEach((item, index) => {
+    item.addEventListener('keydown', e => {
+      const isAnchor = !!item.querySelector('a');
+
+      if ((e.key === 'Enter' || e.key === ' ') && isAnchor && preventSelectionOnLink) {
+        // 링크는 이동만 하고, 선택 텍스트는 업데이트 안 함
+        closeList();  // 링크를 클릭하면 리스트는 닫아줘야 함
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          const prev = items[index - 1] || items[items.length - 1];
+          prev.focus();
+        } else {
+          const next = items[index + 1] || items[0];
+          next.focus();
+        }
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = items[index + 1] || items[0];
+        next.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = items[index - 1] || items[items.length - 1];
+        prev.focus();
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectItem(item);
+        closeList();  // 선택한 후 리스트 닫기
+      } else if (e.key === 'Escape') {
+        closeList();
+        button.focus();
+      }
+    });
+
+
+    item.addEventListener('click', () => {
+      const isAnchor = !!item.querySelector('a');
+      if (isAnchor && preventSelectionOnLink) {
+        closeList(); // 텍스트 변경 안 하고 리스트만 닫기
+        return;
+      }
+
+      selectItem(item);
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (!selectElement.contains(e.target)) {
+      closeList();
+    }
+  });
+}
+
 /* 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 */
 function applyNumericInputFilter(inputElement, maxLength = Infinity) {
   inputElement.addEventListener('input', (event) => {
@@ -1705,127 +1887,6 @@ $(document).ready(function(){
       const $visibleCheckboxes = $table.find('tbody input[type="checkbox"]:visible');
       const allChecked = $visibleCheckboxes.length === $visibleCheckboxes.filter(':checked').length;
       $headCheckbox.prop('checked', allChecked);
-    });
-  });
-
-  /* 10. [공통] 셀렉트박스 */
-  const selectOptions = [
-    {
-      value:'장애인',
-      discount:'-50%'
-    },
-    {
-      value:'장애인2',
-      discount:'-50%'
-    },
-    {
-      value:'장애인3',
-      discount:'+50%'
-    }
-  ]
-  document.querySelectorAll('.custom-select').forEach(select => {
-    const button = select.querySelector('.select-toggle');
-    const list = select.querySelector('.select-list');
-    const selectedText = button.querySelector('.selected-text');
-    const placeholder = select.dataset.placeholder || '선택하세요';
-
-    selectedText.textContent = placeholder;
-    list.setAttribute('aria-hidden', 'true');
-
-// 옵션 DOM 생성
-    selectOptions.forEach(opt => {
-      const li = document.createElement('li');
-      li.setAttribute('role', 'option');
-      li.setAttribute('tabindex', '0');
-      li.setAttribute('data-value', opt.value);
-
-      const discountClass = opt.discount.startsWith('-') ? 'c-red' : 'c-blue';
-      li.innerHTML = `
-    <div class="flex-wrap gap-auto al-center">
-      <span class="txt-sm fw-medium">${opt.value}</span>
-      <span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>
-    </div>
-  `;
-      list.appendChild(li);
-    });
-
-// 이 타이밍 이후에 다시 불러와야 포커스 가능
-    const items = list.querySelectorAll('li');
-
-
-    const closeList = () => {
-      list.setAttribute('aria-hidden', 'true');
-      button.setAttribute('aria-expanded', 'false');
-    };
-
-    const openList = () => {
-      list.setAttribute('aria-hidden', 'false');
-      button.setAttribute('aria-expanded', 'true');
-    };
-
-    const toggleList = () => {
-      const expanded = button.getAttribute('aria-expanded') === 'true';
-      expanded ? closeList() : openList();
-    };
-
-    const selectItem = item => {
-      selectedText.innerHTML = item.innerHTML;
-      items.forEach(i => i.setAttribute('aria-selected', 'false'));
-      item.setAttribute('aria-selected', 'true');
-      closeList();
-      button.focus();
-    };
-
-    button.addEventListener('click', toggleList);
-
-    items.forEach((item, index) => {
-      item.addEventListener('keydown', e => {
-        if (e.key === 'Tab') {
-          e.preventDefault();
-          if (e.shiftKey) {
-            // Shift + Tab → 이전 요소
-            const prev = items[index - 1] || items[items.length - 1];
-            prev.focus();
-          } else {
-            // Tab → 다음 요소
-            const next = items[index + 1] || items[0];
-            next.focus();
-          }
-        }
-
-        // 기존 로직 유지
-        if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          const next = items[index + 1] || items[0];
-          next.focus();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          const prev = items[index - 1] || items[items.length - 1];
-          prev.focus();
-        } else if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          selectItem(item);
-        } else if (e.key === 'Escape') {
-          closeList();
-          button.focus();
-        }
-      });
-    });
-
-
-
-    button.addEventListener('keydown', e => {
-      if (['Enter', ' ', 'ArrowDown'].includes(e.key)) {
-        e.preventDefault();
-        openList();
-        items[0].focus();
-      }
-    });
-
-    document.addEventListener('click', e => {
-      if (!select.contains(e.target)) {
-        closeList();
-      }
     });
   });
 

@@ -23,6 +23,7 @@
 
   /* 보더 컬러 */
   --border-color:#D8DCE2;
+  --border-dash-color:#dbdbdb;
   --border-color2:#dbdbdb;
   --border-light-color: #ebebeb;
 
@@ -38,6 +39,7 @@
 }
 body[data-text-size='lg'] {
   /* fonts size (크게) */
+  --txt-footer-size:14px;
   --txt-size01 : 16px;
   --txt-size02 : 18px;
   --txt-size03 : 20px;
@@ -66,6 +68,7 @@ body[data-text-size='lg'] {
     .date {width:100%;}
   }
   @media (max-width: 767px) {
+    --txt-footer-size:13px;
     --txt-size01 : 14px;
     --txt-size02 : 18px;
     --txt-size03 : 20px;
@@ -88,6 +91,7 @@ body[data-text-size='lg'] {
 }
 body[data-text-size='normal'] {
   /* fonts size (보통) */
+  --txt-footer-size:13px;
   --txt-size01: 14px;
   --txt-size02: 16px;
   --txt-size03: 18px;
@@ -102,6 +106,7 @@ body[data-text-size='normal'] {
 
   /* 너비조정 */
   @media (max-width: 767px) {
+    --txt-footer-size:11px;
     --txt-size01: 12px;
     --txt-size02: 14px;
     --txt-size03: 16px;
@@ -120,6 +125,7 @@ body[data-text-size='normal'] {
 
 body[data-text-size='small'] {
   /* fonts size (보통) */
+  --txt-footer-size:13px;
   --txt-size01 : 13px;
   --txt-size02 : 14px;
   --txt-size03 : 16px;
@@ -132,6 +138,7 @@ body[data-text-size='small'] {
   --txt-size10 : 40px;
   --txt-size11 : 48px;
   @media (max-width: 767px) {
+    --txt-footer-size:11px;
     --txt-size01 : 12px;
     --txt-size02 : 13px;
     --txt-size03 : 14px;

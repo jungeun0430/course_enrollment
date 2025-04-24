@@ -2216,13 +2216,13 @@
         <div class="depth-box">
           <ul class="depth-list">
             <li class="active">
-              <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+              <div class="depth"><span>취소강좌 제외 수강강좌 재결제</span></div>
             </li>
             <li>
-              <div class="depth">기존 결제 금액 전액 취소</div>
+              <div class="depth"><span>기존 결제 금액 전액 취소</span></div>
             </li>
             <li>
-              <div class="depth">수강 취소/환불 완료</div>
+              <div class="depth"><span>수강 취소/환불 완료</span></div>
             </li>
           </ul>
         </div>
@@ -2230,13 +2230,13 @@
         <div class="depth-box">
           <ul class="depth-list">
             <li class="active complete">
-              <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+              <div class="depth"><span>취소강좌 제외 수강강좌 재결제</span></div>
             </li>
             <li class="active">
-              <div class="depth">기존 결제 금액 전액 취소</div>
+              <div class="depth"><span>기존 결제 금액 전액 취소</span></div>
             </li>
             <li>
-              <div class="depth">수강 취소/환불 완료</div>
+              <div class="depth"><span>수강 취소/환불 완료</span></div>
             </li>
           </ul>
         </div>
@@ -2244,13 +2244,13 @@
         <div class="depth-box">
           <ul class="depth-list">
             <li class="active complete">
-              <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+              <div class="depth"><span>취소강좌 제외 수강강좌 재결제</span></div>
             </li>
             <li class="active complete">
-              <div class="depth">기존 결제 금액 전액 취소</div>
+              <div class="depth"><span>기존 결제 금액 전액 취소</span></div>
             </li>
             <li class="active">
-              <div class="depth">수강 취소/환불 완료</div>
+              <div class="depth"><span>수강 취소/환불 완료</span></div>
             </li>
           </ul>
         </div>
@@ -2768,7 +2768,19 @@
 
       <h5>5-1. 셀렉트 박스</h5>
       <div class="box">
-        <div class="custom-select" data-placeholder="항목 선택">
+        <div class="custom-select" data-options="1">
+          <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+            <span class="selected-text"></span>
+          </button>
+          <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+        </div>
+        <div class="custom-select" data-options="test1">
+          <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+            <span class="selected-text"></span>
+          </button>
+          <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+        </div>
+        <div class="custom-select" data-options="test2">
           <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
             <span class="selected-text"></span>
           </button>
@@ -4240,11 +4252,12 @@
               <h3 class="sub-title2">할인</h3>
               <div class="flex-wrap col-ver gap-auto">
                 <div class="flex-wrap gap-auto gap-pc-8">
-                  <div class="custom-select" data-placeholder="항목 선택">
+                  <!-- 결제 할인 셀렉트 -->
+                  <div class="custom-select"  data-options="2">
                     <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
                       <span class="selected-text"></span>
                     </button>
-                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                    <ul class="select-list" role="listbox" aria-hidden="true" data-disabled="true"></ul>
                   </div>
                   <button type="button" class="btn outlined sm" onclick="showModal('modal6');">할인대상확인</button>
                 </div>
@@ -4438,6 +4451,30 @@
         pc / mobile 탭 모양 같을경우 : data-tab="twin"
       </p>
       <h5>1. 탭 (fraternal 버전)</h5>
+      <div class="box">
+        <div class="tab-wrap" data-tab="fraternal">
+          <ul class="first-depth">
+            <li class="active">
+              <button type="button" class="tab"><span>스포츠교실</span></button>
+              <div class="tab-box">
+                <a href="#">sdfkjskdfs</a>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+                스포츠 교실 내용 입니다.<br>
+              </div>
+            </li>
+          </ul>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <hr style="margin:40px;">
       <div class="box">
         <div class="tab-wrap" data-tab="fraternal">
           <ul class="first-depth">
@@ -4861,11 +4898,98 @@
     </div>
   </div>
 </main>
+<!-- 푸터 -->
+<footer>
+  <div class="content-wrap">
+    <div class="flex-wrap al-start gap4 between mo-col">
+      <ul class="footer-terms-list">
+        <li><a href="#" class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
+        <li><a href="#" class="txt-sm fw-medium c-gray">이용약관</a></li>
+      </ul>
+      <div class="flex-wrap al-center gap8 w-auto">
+        <!-- 패밀리 사이트 : select 참조 변수명 = familySite -->
+        <div class="custom-select" data-options="familySite" data-select="footer">
+          <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+            <span class="selected-text"></span>
+          </button>
+          <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+        </div>
+        <!-- 관련사이트 : select 참조 변수명 = relatedSite -->
+        <div class="custom-select" data-options="relatedSite" data-select="footer">
+          <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+            <span class="selected-text"></span>
+          </button>
+          <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="f-bottom flex-wrap al-end between mo-col mo-al-start">
+      <ul class="footer-info-list">
+        <li class="txt-sm fw-regular c-gray">사업자등록번호 : 215-81-12034</li>
+        <li class="txt-sm fw-regular c-gray">(05540) 서울특별시 송파구 올림픽로 424(방이동) 올림픽역도경기장 내</li>
+        <li class="copyright">COPYRIGHT 2025 © KSPO&CO ALL RIGHTS RESERVED.</li>
+      </ul>
+      <div class="certification-wrap">
+        <div class="img-box">
+          <img src="../../resources/images/certification/certification_privacy_protection_certified_site.svg" alt="개인정보우수사이트 인증" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
 <script>
   // 초기화
   const tabManager = new TabManager();
   new CheckTabManager();
-  // new ModalManager();
+  // 셀렉트 박스 변수 관리
+  const selectOptions1 = [
+    { value: '옵션1', discount: '-50%', tag: 'button' },
+    { value: '옵션2', discount: '-50%', tag: 'a', href: 'https://example.com/link1' },
+    { value: '옵션3', discount: '+50%', tag: 'button' }
+  ];
+
+  // 두 번째 custom-select에 사용할 옵션
+  const selectOptions2 = [
+    { value: '장애인', discount: '-50%', tag: 'button' },
+    { value: '대통령', discount: '+30%', tag: 'button'}
+  ];
+
+  // custom-select 요소를 개별적으로 호출
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'), selectOptions1);
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="2"]'), selectOptions2);
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="test1"]'), selectOptions2);
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="test2"]'), selectOptions2);
+
+  /* [푸터] ------------------- */
+  /* 푸터 (패밀리사이트/관련사이트) */
+  const footer1 = [
+    { value: '패밀리사이트1',tag: 'a', href: 'https://example.com/link1' },
+    { value: '패밀리사이트2',tag: 'a', href: 'https://example.com/link1' },
+    { value: '패밀리사이트3',tag: 'a', href: 'https://example.com/link1' },
+    { value: '패밀리사이트4',tag: 'a', href: 'https://example.com/link1' },
+    { value: '패밀리사이트5',tag: 'a', href: 'https://example.com/link1' },
+  ];
+  const footer2 = [
+    { value: '관련사이트1',tag: 'a', href: 'https://example.com/link1' },
+    { value: '관련사이트2',tag: 'a', href: 'https://example.com/link1' },
+    { value: '관련사이트3',tag: 'a', href: 'https://example.com/link1' },
+    { value: '관련사이트4',tag: 'a', href: 'https://example.com/link1' },
+    { value: '관련사이트5',tag: 'a', href: 'https://example.com/link1' },
+  ]
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="familySite"]'), footer1, {
+    up:true,
+    preventSelectionOnLink: true, // 링크 이동의 역할만 할 경우 placeholder 변경 필요없음 지정 변수
+    placeholder: '패밀리 사이트',
+  });
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="relatedSite"]'), footer2, {
+    up:true,
+    preventSelectionOnLink: true,// 링크 이동의 역할만 할 경우 placeholder 변경 필요없음 지정 변수
+    placeholder: '관련 사이트',
+  });
+
+
 </script>
 </body>
 </html>

@@ -204,18 +204,29 @@
 
 /* ------------------------------------------------------- */
 /* 셀렉트박스 */
-.custom-select {width:200px;position:relative;font-family:inherit;}
+.custom-select {width:200px;position:relative;font-family:inherit;overflow:hidden;}
+.custom-select.active {overflow:initial;}
 .select-toggle {width:100%;height:48px;padding: 10px;text-align: left;border: 1px solid var(--border-color);border-radius:4px;background:var(--color-white) url("../images/ico/ico_select_arrow.svg") right 12px center no-repeat;background-size:14px;cursor: pointer;transition:background 0.2s;}
 .select-toggle[aria-expanded="true"] {background:var(--color-white) url("../images/ico/ico_select_arrow_active.svg") right 12px center no-repeat;}
 .select-toggle:focus {border-width:2px;border-color:var(--color-primary);}
-.select-list {position: absolute;width: 100%;background: var(--color-white);border: 1px solid var(--border-color);border-top: none;max-height: 200px;overflow-y: auto;display: none;z-index: 10;}
-.select-list[aria-hidden="false"] {display: block;}
-.select-list li {padding: 10px;cursor: pointer;}
+.select-list {position: absolute;width: 100%;background: var(--color-white);border: 1px solid var(--border-color);border-top: none;max-height: 200px;overflow-y: auto;visibility:hidden;opacity:0;z-index: 10;top: -9999px;left: -9999px;}
+.select-list[aria-hidden="false"] {visibility: visible;opacity: 1;pointer-events: auto;  top: 48px;left: 0;}
+.select-list li {cursor: pointer;}
+.select-list li > a,
+.select-list li > button {padding: 10px;}
 .select-list li:hover,
 .select-list li[aria-selected="true"] {background: var(--color-primary-light);color: var(--color-white);}
 
+/* 위로 열리기 */
+.custom-select.up .select-list[aria-hidden="false"] {top:auto;left: 0;bottom:40px;border: 1px solid var(--border-color);border-bottom: none;}
+/* footer안에서의 셀렉트박스 */
+.custom-select[data-select="footer"] {}
+.custom-select[data-select="footer"]  .select-toggle {height: 40px;padding:10px 10px 10px 12px;}
+.custom-select[data-select="footer"] .select-toggle[aria-expanded="true"] {linear-gradient(to bottom, red 3 0%, rgba(51, 51, 51, 0) 100%) url("../images/ico/ico_select_arrow_active.svg") right 10px center no-repeat;}
+.custom-select[data-select="footer"] .select-toggle:focus {border-width:2px;border-color:var(--color-primary);}
+.custom-select[data-select="footer"] .select-toggle {border-radius:0;border-width: 0 0 1px 0;}
 
-/* ------------------------------------------------------- */
+  /* ------------------------------------------------------- */
 /* 뱃지 */
 .badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
 .badge.red {background-color:var(--bg-light-red);color:var(--color-red);text-decoration:none!important;}
