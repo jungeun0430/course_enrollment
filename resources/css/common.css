@@ -237,6 +237,7 @@
 .fw-medium {font-weight:var(--fw-medium);}
 .fw-medium {font-weight:var(--fw-medium);}
 .fw-regular {font-weight:var(--fw-regular);}
+.c-white{color:var(--color-white);}
 .c-red{color:var(--color-red);}
 .c-blue{color:var(--color-primary);}
 .c-green{color:var(--color-green);}
