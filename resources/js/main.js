@@ -322,30 +322,6 @@ function adjustModalSize(modalId, options={}) {
     }
   }
 }
-// 모달 리사이즈 시 > 확대할 때 pc로 변경방지 위함
-function handleResizeModal() {
-  // 열려 있는 모달이 없으면 종료
-  if (modalStack.length === 0) return;
-
-  const openModalId = modalStack[modalStack.length - 1];
-  const openModal = document.getElementById(openModalId);
-
-  if (!openModal) return;
-
-  const currentIsMobile = mobileMedia.matches;
-
-  // 모바일 <-> PC 전환 감지 시 처리
-  if (isMobile !== currentIsMobile) {
-    isMobile = currentIsMobile;
-
-    if (openModal.id === 'modal-virtualKeyboard') {
-      hideModal(openModal.id);
-    } else {
-      alert('dfsjkfdjksdf');
-      adjustModalSize(openModal.id);
-    }
-  }
-}
 // -------- 모달 띄우기 함수 ------------
 // 현재 열린 모달들을 스택으로 관리
 let modalStack = []; // 모달 스택
@@ -1771,10 +1747,34 @@ $(document).ready(function(){
   /* 3. [공통]모달 관련 함수 */
   // 창 크기 변경 시 모달 크기 재조정 or hideModal 작동시키기
   const mobileMedia = window.matchMedia('(max-width: 767px)');
-  let isMobile = mobileMedia.matches; // 초기 모바일 상태 저장
+  let isMobile = mobileMedia.matches; // 초기 상태 저장
+
+  const handleResize = () => {
+    // 열려 있는 모달이 없으면 종료
+    if (modalStack.length === 0) return;
+
+    const openModalId = modalStack[modalStack.length - 1];
+    const openModal = document.getElementById(openModalId);
+
+    if (!openModal) return;
+
+    const currentIsMobile = mobileMedia.matches;
+
+    // 모바일 <-> PC 상태가 바뀐 경우만 처리
+    if (isMobile !== currentIsMobile) {
+      isMobile = currentIsMobile;
+
+      if (openModal.id === 'modal-virtualKeyboard') {
+        hideModal(openModal.id);
+      } else {
+        adjustModalSize(openModal.id);
+      }
+    }
+  };
 
   // resize 이벤트 + media query change 이벤트 둘 다 걸어줌
-  window.addEventListener('resize', handleResizeModal);
+  window.addEventListener('resize', handleResize);
+  mobileMedia.addEventListener('change', handleResize);
 
   // 모달 창 배경 클릭시 닫힘 처리
   window.addEventListener('click', function (event) {
