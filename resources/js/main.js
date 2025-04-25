@@ -231,27 +231,9 @@ function adjustModalSize(modalId, options={}) {
     const safeAreaHeight = Math.min(viewportHeight, actualVH);
 
     if (viewportWidth <= 768) {
-      // 모바일 화면: 가로/세로 교차 및 회전 적용
-      /* 모달 ID 기준 */
-      if (modalId === 'modal-centerJoin') {
-        // 안전 영역 고려한 높이 계산
-        const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
-        const vhWidth = viewportWidth * 1; // 약간의 여백 추가
-
-        modalContent.style.width = `${vhWidth}px`;
-        modalContent.style.height = `${vhHeight}px`;
-
-        // 내용이 넘칠 경우를 대비한 스크롤 설정
-        if (modalBody) {
-          // 헤더/패딩 등 고려한 계산
-          const headerHeight = 96; // 헤더 높이 (필요에 따라 조정)
-          modalBody.style.height = `${vhHeight - headerHeight}px`;
-          modalBody.style.overflow = 'auto';
-          modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
-        }
-      }
       /* 모달 타입 기준 */
       if (modalType === 'fixed-btn-ver') {
+        alert('2')
         // 안전 영역 고려한 높이 계산
         const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
         const vhWidth = viewportWidth * 1; // 약간의 여백 추가
@@ -277,7 +259,8 @@ function adjustModalSize(modalId, options={}) {
         modalContent.style.transformOrigin = 'center'; // 회전 중심
         modalContent.style.borderRadius = '8px'; // 둥근 모서리 제거
         modalContent.style.padding = '60px 0 0 0'; // 모바일에서 추가 여백
-      } else if (modalType !== 'confirm-ver' && modalType !== 'absolute-ver' && modalId === 'modal-onlineUserCard') {
+      } else if (modalType !== 'confirm-ver' && modalType !== 'absolute-ver') {
+        // 남는 type : info-ver : 강습 수준별 진도표, 나머진 css 우선적용
         // 안전 영역 고려한 높이 계산
         const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
         const vhWidth = viewportWidth * 1; // 약간의 여백 추가
