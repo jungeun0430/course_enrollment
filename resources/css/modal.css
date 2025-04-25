@@ -56,6 +56,10 @@
 .modal[data-modal-type="fixed-btn-ver"] .sub-content-box + .sub-content-box {margin-top:20px;}
 .modal[data-modal-type="fixed-btn-ver"] .dash-list + .sub-content-box {margin-top:20px;}
 
+@media (max-width: 768px) {
+  .modal.pd-sm[data-modal-type="fixed-btn-ver"] .modal-body {padding:16px;}
+}
+
 /* 모달 (안에 테이블 들어간 버전) */
 .modal[data-modal-type="info-ver"] .modal-content {}
 .modal[data-modal-type="info-ver"] .modal-body {padding:28px 24px;}

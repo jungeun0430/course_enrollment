@@ -171,7 +171,7 @@
 .radio-ico-tab.banktransfer input:checked + span {background:url("../images/common/pay_ico6_active.svg") center 16px no-repeat;background-size: 40px;}
 @media (max-width: 768px) {
   .radio-ico-tab {flex:1;}
-  .radio-ico-tab input + span {min-width:auto;width:100%;padding:64px 16px 16px 16px;height:114px;}
+  .radio-ico-tab input + span {min-width:auto;width:100%;padding:64px 6px 16px 6px;height:114px;}
 }
 
 /* ------------------------------------------------------- */
@@ -261,6 +261,7 @@
 .c-light-gray{color:var(--color-light-gray);}
 
 /* 간격 (고정) - media 변경 없음 */
+.mt-0 {margin-top:0px!important;}
 .ml-4 {margin-left:4px!important;}
 .mb-4 {margin-bottom:4px!important;}
 .mb-6 {margin-bottom:6px!important;}
@@ -269,5 +270,6 @@
 .mt-10 {margin-top:10px!important;}
 .mt-12 {margin-top:12px!important;}
 .mt-8 {margin-top:8px!important;}
+
 
 

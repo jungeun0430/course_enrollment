@@ -270,6 +270,7 @@ function adjustModalSize(modalId, options={}) {
           // 헤더/패딩 등 고려한 계산
           const headerHeight = 48; // 헤더 높이 (필요에 따라 조정)
           modalBody.style.height = `${vhHeight - headerHeight}px`;
+          modalBody.style.paddingBottom = `64px`;
           modalBody.style.overflow = 'auto';
           modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
         }

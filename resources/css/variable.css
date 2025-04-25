@@ -85,8 +85,7 @@ body[data-text-size='lg'] {
     header .btn-wrap > a.ico-pay,
     header .btn-wrap > a.ico-user {min-width:inherit;}
     .check-tab-btn {height:auto;}
-
-
+    .select-list {max-height:300px;}
   }
 }
 body[data-text-size='normal'] {
@@ -152,5 +151,8 @@ body[data-text-size='small'] {
     --txt-size11 : 28px;
     /* [커스텀] small */
     header .btn-wrap > a.ico-user {min-width:inherit;}
+    .depth-list > li:nth-child(1).active > .depth > span {width:170px;}
+    .depth-list > li:nth-child(2).active > .depth > span {width:138px;}
+    .depth-list > li:nth-child(3).active > .depth > span {width: 110px;}
   }
 }
