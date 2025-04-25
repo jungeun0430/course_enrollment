@@ -278,7 +278,7 @@ span.title-wrap > .h4,
     .custom-table + .custom-table {margin-top:20px;}
 }
 
-@media (max-width:768px) {
+@media (max-width:767px) {
     .custom-table tfoot td {padding:16px 12px;}
     .custom-table tr.empty td {padding:35px 12px;}
     .empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:48px;background:url('../images/ico/ico_bag_big.svg') center top no-repeat;background-size:40px;}
@@ -665,7 +665,7 @@ span.title-wrap > .h4,
     .content-box.no-pd {padding:0}
     .content-box.no-pd .tab-box {padding:0 16px;}
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .pc-only2 {display:none!important;}
     .pc-only-inline2 {display:none!important;}
     .mobile-only2 {display:block!important;}

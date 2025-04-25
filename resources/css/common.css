@@ -59,7 +59,7 @@
 /* 버튼 disabled */
 .btn:disabled,
 .btn.outlined:disabled {color:var(--color-gray2);background-color:var(--color-disabled);font-weight:var(--fw-medium);cursor: default;transition:none;border-color:var(--color-transparent);}
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   /* 버튼 : 기본 (배경색 존재) */
   .btn {padding:12px 14px;border-width:1px;}
 
@@ -92,7 +92,7 @@
 .custom-btn.active{border-width:2px;border-color:var(--color-primary);}
 .float {position:absolute;right:16px;top:16px;}
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .custom-btn {padding:12px;}
 }
 /* ------------------------------------------------------- */
@@ -155,7 +155,7 @@
 .radio-tab-wrap > .radio-tab:last-child > span {border-radius:0 4px 4px 0;overflow:hidden;border-right:1px solid var(--border-color);}
 /*.radio-tab input:checked:focus + span {background-color:var(--color-white);color:var(--color-primary);border:1px solid var(--color-primary);}*/
 /*.radio-tab input:focus + span {background-color:var(--color-white);color:var(--color-primary);font-weight:var(--fw-bold);}*/
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .radio-tab span {padding:9px;height: 40px;}
 }
 
@@ -169,7 +169,7 @@
 .radio-ico-tab.account input:checked + span {background:url("../images/common/pay_ico5_active.svg") center 16px no-repeat;background-size: 40px;}
 .radio-ico-tab.banktransfer input + span {background:url("../images/common/pay_ico6.svg") center 16px no-repeat;background-size: 40px;}
 .radio-ico-tab.banktransfer input:checked + span {background:url("../images/common/pay_ico6_active.svg") center 16px no-repeat;background-size: 40px;}
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .radio-ico-tab {flex:1;}
   .radio-ico-tab input + span {min-width:auto;width:100%;padding:64px 6px 16px 6px;height:114px;}
 }
@@ -184,7 +184,7 @@
 .input-wrap.size-md {width:120px;}
 .input-wrap.size-full {width:100%;}
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .input-wrap{height:40px;}
   .input-wrap > input {padding:10px 8px;}
 }

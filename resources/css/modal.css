@@ -61,7 +61,7 @@
 .modal[data-modal-type="fixed-btn-ver"] .sub-content-box + .sub-content-box {margin-top:20px;}
 .modal[data-modal-type="fixed-btn-ver"] .dash-list + .sub-content-box {margin-top:20px;}
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .modal.pd-sm[data-modal-type="fixed-btn-ver"] .modal-body {padding:16px;}
 }
 
@@ -108,7 +108,7 @@
   .txt-gray + .arrow_link {margin-left:42px;}
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .modal .title-wrap{height:48px;}
   .modal-content .close-btn {width:20px;height:20px;}
   /* 모달 (컨펌창 버전) */
