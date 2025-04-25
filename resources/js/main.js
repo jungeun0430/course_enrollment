@@ -232,6 +232,7 @@ function adjustModalSize(modalId, options={}) {
 
     if (viewportWidth <= 768) {
       // 모바일 화면: 가로/세로 교차 및 회전 적용
+      /* 모달 ID 기준 */
       if(modalId === 'modal-onlineUserCard') {
         /* 1. 온라인 회원카드 */
         // 모바일 UI 요소를 고려한 크기 계산
@@ -257,7 +258,9 @@ function adjustModalSize(modalId, options={}) {
           modalBody.style.overflow = 'auto';
           modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
         }
-      } else if (modalType === 'fixed-btn-ver') {
+      }
+      /* 모달 타입 기준 */
+      if (modalType === 'fixed-btn-ver') {
         // 안전 영역 고려한 높이 계산
         const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
         const vhWidth = viewportWidth * 1; // 약간의 여백 추가
@@ -274,7 +277,7 @@ function adjustModalSize(modalId, options={}) {
           modalBody.style.overflow = 'auto';
           modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
         }
-      } else {
+      } else if (modalType !== 'confirm-ver' && modalType !== 'absolute-ver') {
         // 안전 영역 고려한 높이 계산
         const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
         const vhWidth = viewportWidth * 1; // 약간의 여백 추가
