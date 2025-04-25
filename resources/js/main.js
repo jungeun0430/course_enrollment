@@ -1768,7 +1768,7 @@ $(document).ready(function(){
 
         // 최상단 모달이 "no-dim"인 경우 닫기
         topModal.style.display = 'none';
-        if (modalStack.length === 0) {
+        if (modalStack.length === 1) {
           body.classList.remove('no-scroll');
         }
         if(overlay.classList.contains('transparent')) {
