@@ -1188,7 +1188,7 @@ class CheckTabManager {
     // 모달이 활성화될 때 포커스 트랩 설정
     this.mobileWrap.addEventListener('transitionend', () => {
       if (this.mobileWrap.classList.contains('active') && this.isMobile) {
-        this.setupFocusTrap();
+        setupFocusTrap();
       }
     });
 
@@ -1365,49 +1365,37 @@ class CheckTabManager {
     });
 
     // 현재 클릭한 탭 토글
+// 현재 버튼이 활성 상태이고, 이를 닫으려고 하는 경우 활성 상태 유지
     if (isActive) {
-      // 닫기
-      content.style.height = '0';
-      tabItem.style.height = `${this.BUTTON_HEIGHT}px`;
-      tabItem.classList.remove('active');
-      clickedBtn.classList.remove('active');
-      // 텍스트 '닫힘'으로 변경
-      if (visibilityText) {
-        visibilityText.textContent = '열림';
-      }
+      return; // **활성화된 버튼은 닫히지 않도록 방지**
     } else {
-      // 열기 - auto 높이 사용
-      // 먼저 높이를 계산하기 위해 임시로 auto 설정
+      // 열기
       content.style.height = 'auto';
       const autoHeight = content.offsetHeight;
 
-      // 애니메이션을 위해 0으로 다시 설정한 후 자연스럽게 전환
+      // 애니메이션을 위해 초기화 후 높이 설정
       content.style.height = '0';
-
-      // reflow 강제
       content.offsetHeight;
-
-      // transition 추가 후 높이 설정
       content.style.transition = 'height 0.3s ease-in-out';
       content.style.height = `${autoHeight}px`;
       tabItem.style.height = `${autoHeight + this.BUTTON_HEIGHT}px`;
 
-      // 모든 항목 표시
       this.showAllItemsMobile(content);
 
       tabItem.classList.add('active');
       clickedBtn.classList.add('active');
-      // 텍스트 '열림'으로 변경
+
       if (visibilityText) {
         visibilityText.textContent = '열림';
       }
 
-      // transition 종료 후 height를 auto로 설정 (내용이 동적으로 변경될 수 있으므로)
+      // transition 후 높이 auto 유지
       setTimeout(() => {
         content.style.height = 'auto';
         tabItem.style.height = 'auto';
       }, 300);
     }
+
   }
 
   // PC 환경에서 모든 탭 토글
