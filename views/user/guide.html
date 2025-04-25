@@ -21,13 +21,18 @@
     <title>가이드</title>
     <style>
       .inner-wrap {width:100%;max-width:1570px;margin:0 auto;}
-      .guide-comment {font-size:18px;color:red;margin-bottom:24px;}
-      .guide-box {border:1px solid #dbdbdb;border-radius:8px;padding:24px;}
+      .guide-comment {font-size:var(--txt-size03);color:red;margin-bottom:24px;}
+      .guide-box {border:1px solid var(--border-color);border-radius:8px;padding:24px;}
       .guide-box + .guide-box {margin-top:24px;}
-      .guide-box > h2 {font-size:32px;font-weight:var(--fw-bold);margin-bottom:12px;padding:4px 8px;background-color:#dbdbdb;border-radius:4px;}
-      .guide-box > h5 {font-size:24px;font-weight:700;color:#333;margin-bottom:12px;}
-      .guide-box > h5 > span {font-size:18px;}
+      .guide-box > h2 {font-size:var(--txt-size07);font-weight:var(--fw-bold);margin-bottom:12px;padding:4px 8px;background-color:var(--color-light-blue);border-radius:4px;}
+      .guide-box > h5 {font-size:var(--txt-size05);font-weight:700;color:var(--color-black);margin-bottom:12px;}
+      .guide-box > h5 > span {font-size:var(--txt-size03);}
       .guide-box .box + h5 {margin-top:32px;}
+
+      @media (max-width:767px) {
+        .inner-wrap {width: 100%;padding:16px;}
+        .guide-box{padding:16px;}
+      }
     </style>
 </head>
 <body data-text-size="normal">
@@ -1086,6 +1091,8 @@
             <thead>
             <tr>
               <th>
+                <!-- 전체 신청 필요없어 제거 -->
+                <!--
                 <div class="th-wrap">
                   <span class="visually-hidden">선택</span>
                   <label class="checkbox-wrap">
@@ -1093,6 +1100,7 @@
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
                 </div>
+                -->
               </th>
               <th><div class="th-wrap">상태</div></th>
               <th><div class="th-wrap center">강좌명</div></th>
@@ -1249,6 +1257,8 @@
             <thead>
             <tr>
               <th>
+                <!-- 전체 신청 필요없어 제거 -->
+                <!--
                 <div class="th-wrap">
                   <span class="visually-hidden">선택</span>
                   <label class="checkbox-wrap">
@@ -1256,6 +1266,7 @@
                     <span class="checkmark" aria-hidden="true"></span>
                   </label>
                 </div>
+                -->
               </th>
               <th><div class="th-wrap">강좌명</div></th>
             </tr>
