@@ -1752,6 +1752,7 @@ $(document).ready(function(){
       }
     }
   });
+  // 모달 창 배경 클릭시 닫힘 처리
   window.addEventListener('click', function (event) {
     const overlay = document.getElementById('overlay');
     const modals = document.querySelectorAll('.modal');
