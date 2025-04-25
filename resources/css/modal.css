@@ -30,17 +30,21 @@
 .modal-content .tab-box {top:84px;}
 
 /* 모달 (단일로 위에 뜨는 버전) */
-.modal[data-modal-type="absolute-ver"] {width:auto;height:auto;background-color:var(--color-transparent);}
+.modal[data-modal-type="absolute-ver"] {width:auto;height:auto;background-color:var(--color-transparent);border:1px solid var(--border-color);border-radius: 8px;}
 .modal[data-modal-type="absolute-ver"].xs  {width:100%;max-width:400px;height:auto;background-color:var(--color-transparent);}
 .modal[data-modal-type="absolute-ver"].xs .modal-content{width:100%;height:auto;}
 .modal[data-modal-type="absolute-ver"] .modal-content {position:static;transform: none;}
 .modal[data-modal-type="absolute-ver"] .modal-body {border-radius:4px;}
 
-  /*
-  .modal[data-modal-type="absolute-ver"] {!*position:absolute;left:0;top:48px;*!width:auto;height:auto;background:var(--color-transparent);overflow:hidden;border-radius:4px;}
-  .modal[data-modal-type="absolute-ver"].xs {}
-  .modal[data-modal-type="absolute-ver"].xs .modal-content {width:400px;!*width:100%;position:static;transform: none*!}
-  */
+@media(max-width: 1200px) {
+  .modal[data-modal-type="absolute-ver"] {position:fixed;top:auto;left:0;bottom:0;z-index: 100002;}
+  .modal[data-modal-type="absolute-ver"] .modal-content {max-width:100%;}
+  .modal[data-modal-type="absolute-ver"].xs {max-width:100%;}
+}
+
+@media(max-width: 767px) {
+  .modal[data-modal-type="absolute-ver"] .modal-content {padding-top:48px;}
+}
 
 
 /* 모달 (버튼 타입 고정버전) */

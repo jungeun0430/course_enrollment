@@ -8,7 +8,6 @@
 html, body{height:100%;font-family:"Pretendard", sans-serif;font-weight:var(--fw-regular);}
 #skip-nav {position: fixed;left: 0;top: -40px;width: 100%;line-height: 40px;text-align: center;background-color: rgba(0, 0, 0, 0.8);color: #ffffff;z-index: 1000000;transition: top 0.3s;box-sizing: border-box;}
 #skip-nav:focus {top:0;border:5px solid #6dd585;border-radius:8px;}
-.blind{height:1px;width: 1px;position: absolute;overflow: hidden;clip: rect(1px 1px 1px 1px);margin: 0;}
 .visually-hidden {position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0;white-space: nowrap;}
 .pc-only {display:block!important;}
 .pc-only2 {display:block!important;}
@@ -475,7 +474,7 @@ span.title-wrap > .h4,
 .depth-list > li:nth-child(2).active > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico2_active.svg") 12px center no-repeat;background-size:32px;}
 .depth-list > li:nth-child(3) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3.svg") 12px center no-repeat;background-size:32px;}
 .depth-list > li:nth-child(3).active > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3_active.svg") 12px center no-repeat;background-size:32px;}
-.depth-list > li.active > .depth{color:var(--color-primary);}
+.depth-list > li.active > .depth > span{color:var(--color-primary);}
 .depth-list > li.complete::after{background-color:var(--color-primary);}
 .depth-list > li.complete > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_complete.svg") 12px center no-repeat;background-size:32px;}
 .depth-list > li.active.complete > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_complete.svg") 12px center no-repeat;background-size:32px;}
@@ -488,13 +487,27 @@ span.title-wrap > .h4,
     /*.depth-list {display:flex;width:100%;justify-content:space-between;}*/
     /*.depth-list > li {position:relative;}*/
     /*.depth-list > li:not(:last-child) {flex:1;}*/
-    .depth-list > li:not(:last-child)::after {height:2px;border-radius:4px;}
+    .depth-list > li{display:flex;}
+    .depth-list > li::after {content:'';width:100%;height:2px;border-radius:4px;background-color:var(--border-color2);position:absolute;right:0;top:50%;transform:translateY(-50%);z-index: -1;}
+    .depth-list > li:not(:last-child)::after{height:2px;border-radius:4px;}
+    .depth-list > li:nth-child(1) {flex:1;justify-content:start;}
+    .depth-list > li:nth-child(1)::after {flex:1;justify-content:flex-end;}
     .depth-list > li:nth-child(1) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico1.svg") 4px center no-repeat;background-size:24px;}
     .depth-list > li:nth-child(1).active > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico1_active.svg") 4px center no-repeat;background-size:24px;}
-    .depth-list > li:nth-child(2) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico2.svg") 4px center no-repeat;background-size:24px;}
+    .depth-list > li:nth-child(1).active > .depth > span {width:218px;}
+    .depth-list > li:nth-child(2) {flex:1;justify-content:flex-end;}
+    .depth-list > li:nth-child(2) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico2.svg") right 4px center no-repeat;background-size:24px;}
+    .depth-list > li:nth-child(2).active:not(.complete) {flex:initial!important;}
+    .depth-list > li:nth-child(2).active:not(.complete)::after{display:none;}
     .depth-list > li:nth-child(2).active > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico2_active.svg") 4px center no-repeat;background-size:24px;}
-    .depth-list > li:nth-child(3) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3.svg") 4px center no-repeat;background-size:24px;}
+    .depth-list > li:nth-child(2).active > .depth > span {width:174px;}
+    .depth-list > li:nth-child(2).active.complete {justify-content:flex-start;}
+    .depth-list > li:nth-child(3) {flex:1;justify-content:flex-end;}
+    .depth-list > li:nth-child(3).active {flex:1;justify-content:flex-end}
+    .depth-list > li:nth-child(3) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3.svg") right 4px center no-repeat;background-size:24px;}
     .depth-list > li:nth-child(3).active > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3_active.svg") 4px center no-repeat;background-size:24px;}
+    .depth-list > li:nth-child(3).active > .depth > span {width:144px;}
+    .depth-list > li:nth-child(3).active::after {content:'';width:100%;height:2px;border-radius:4px;background-color:var(--color-primary);position:absolute;right:0;top:50%;transform:translateY(-50%);z-index: -1;}
     .depth-list > li.active > .depth > span {color:var(--color-primary);}
     .depth-list > li:not(.active) > .depth > span {display:none; }
     .depth-list > li.complete > .depth > span {display:none; }
@@ -503,6 +516,20 @@ span.title-wrap > .h4,
     .depth-list > li.active.complete > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_complete.svg") 4px center no-repeat;background-size:24px;}
     .depth {display:inline-flex;align-items:center;height:24px;padding:3px 4px 3px 32px;position:relative;}
     /*.depth > span {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);}*/
+}
+
+@media(max-width:767px) {
+    .depth-list > li:nth-child(1).active > .depth > span {width:194px;}
+    .depth-list > li:nth-child(2).active::after{display:block;}
+    .depth-list > li:nth-child(2).active > .depth > span {width:158px;}
+    .depth-list > li:nth-child(3).active > .depth > span {width:124px;}
+}
+
+@media(max-width:767px) {
+    .depth-list > li:nth-child(1).active > .depth > span {width:194px;}
+    .depth-list > li:nth-child(2).active::after{display:block;}
+    .depth-list > li:nth-child(2).active > .depth > span {width:158px;}
+    .depth-list > li:nth-child(3).active > .depth > span {width:124px;}
 }
 
 /* 결제내역 (수강변경) */

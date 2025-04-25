@@ -169,6 +169,10 @@
 .radio-ico-tab.account input:checked + span {background:url("../images/common/pay_ico5_active.svg") center 16px no-repeat;background-size: 40px;}
 .radio-ico-tab.banktransfer input + span {background:url("../images/common/pay_ico6.svg") center 16px no-repeat;background-size: 40px;}
 .radio-ico-tab.banktransfer input:checked + span {background:url("../images/common/pay_ico6_active.svg") center 16px no-repeat;background-size: 40px;}
+@media (max-width: 768px) {
+  .radio-ico-tab {flex:1;}
+  .radio-ico-tab input + span {min-width:auto;width:100%;padding:64px 16px 16px 16px;height:114px;}
+}
 
 /* ------------------------------------------------------- */
 /* 인풋 */

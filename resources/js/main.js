@@ -326,12 +326,17 @@ function showModal(modalId,options={}) {
   modalStack.push(modalId); // 스택에 모달 ID 추가
 
   // ✅ 위치 조정 로직
-  if (options.absolute && options.triggerElement) {
+  if (window.innerWidth > 1200 && options.absolute && options.triggerElement) {
     const rect = options.triggerElement.getBoundingClientRect();
     console.log(rect)
     modal.style.position = 'absolute';
     modal.style.left = `${rect.left}px`;
     modal.style.top = `${rect.bottom + window.scrollY}px`;
+  } else {
+    // 1200 이상일 때는 위치를 reset하거나 다른 스타일 적용
+    modal.style.position = ''; // 자바스크립트로 지정한 위치를 리셋
+    modal.style.left = '';
+    modal.style.top = '';
   }
 
   // 오버레이 활성화
@@ -357,7 +362,7 @@ function showModal(modalId,options={}) {
   // 포커스 트랩 설정
   handleFocusTrap(modal);
 
-  if (window.innerWidth <= 767) {
+  if (window.innerWidth <= 1200) {
     adjustModalSize(modalId);
   }
 }
@@ -466,6 +471,8 @@ function hideModal(modalId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
 
+  // resetModalFields(modal);
+
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
 
@@ -508,6 +515,37 @@ function hideModal(modalId) {
     document.body.classList.remove('no-scroll');
   }
 }
+// 모달 안 인풋 관련 값 리셋 함수
+function resetModalFields(modal) {
+  if (!modal) return;
+
+  // 모든 input, select, textarea 초기화
+  const inputs = modal.querySelectorAll('input, select, textarea');
+
+  inputs.forEach((el) => {
+    if (el.tagName === 'INPUT') {
+      const type = el.type;
+      if (type === 'checkbox' || type === 'radio') {
+        el.checked = false;
+      } else if (type !== 'button' && type !== 'submit' && type !== 'reset') {
+        el.value = '';
+      }
+    } else if (el.tagName === 'SELECT') {
+      el.selectedIndex = 0;
+    } else if (el.tagName === 'TEXTAREA') {
+      el.value = '';
+    }
+  });
+
+  // 필요 시 추가적으로 리셋할 항목들
+  const customSelects = modal.querySelectorAll('.custom-select .selected');
+  customSelects.forEach(el => {
+    el.textContent = ''; // 선택된 값 비우기
+  });
+
+  // 클래스나 스타일 초기화 등도 여기에 포함 가능
+}
+
 /* 4. 탭 관련 함수 */
 class TabManager {
   constructor() {
@@ -1498,6 +1536,7 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
     up = false,
     placeholder = selectElement.dataset.placeholder || '선택하세요',
     preventSelectionOnLink = false,
+    initialValue = null, // ← 여기에 추가
   } = options;
 
   if (up) {
@@ -1516,14 +1555,14 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
     const discountClass = opt.discount?.startsWith('-') ? 'c-red' : (opt.discount ? 'c-blue' : '');
     if (opt.tag === 'a') {
       li.innerHTML = `
-        <a href="${opt.href}" target="_blank" class="flex-wrap gap-auto al-center">
+        <a href="${opt.href}" target="_blank" class="flex-wrap gap-auto al-center" tabindex="0">
           <span class="txt-sm fw-medium">${opt.value}</span>
           ${opt.discount ? `<span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>` : ''}
         </a>
       `;
     } else if (opt.tag === 'button') {
       li.innerHTML = `
-        <button type="button" class="flex-wrap gap-auto al-center">
+        <button type="button" class="flex-wrap gap-auto al-center"  tabindex="0">
           <span class="txt-sm fw-medium">${opt.value}</span>
           ${opt.discount ? `<span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>` : ''}
         </button>
@@ -1577,6 +1616,14 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
     button.focus();
   };
 
+  // 초기값이 있을 경우 해당 항목을 선택
+  if (initialValue !== null) {
+    const initialItem = Array.from(items).find(item => item.dataset.value === initialValue);
+    if (initialItem) {
+      selectItem(initialItem);
+    }
+  }
+
   // 이벤트
   button.addEventListener('click', toggleList);
 
@@ -1584,7 +1631,7 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
     item.addEventListener('keydown', e => {
       const isAnchor = !!item.querySelector('a');
 
-      if ((e.key === 'Enter' || e.key === ' ') && isAnchor && preventSelectionOnLink) {
+      if ((e.key === 'Enter' || e.key === ' ') && isAnchor && !preventSelectionOnLink) {
         // 링크는 이동만 하고, 선택 텍스트는 업데이트 안 함
         closeList();  // 링크를 클릭하면 리스트는 닫아줘야 함
         return;
@@ -1638,6 +1685,7 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
 /* 11. [결제내역] 주민등록번호 : 가상키패드 */
 // 랜덤 활성화 클래스 효과 함수
 function activateRandomButton() {
+  const numberButtons = document.querySelectorAll('.key.num');
   const randomIndex = Math.floor(Math.random() * numberButtons.length); // 0~9 중 랜덤
   const randomButton = numberButtons[randomIndex];
 
@@ -1715,6 +1763,9 @@ $(document).ready(function(){
       const topModal = document.getElementById(topModalId);
 
       if (topModal && topModal.classList.contains('no-dim')) {
+        // 모달 닫기 전 인풋 필드 초기화 호출
+        // resetModalFields(topModal);
+
         // 최상단 모달이 "no-dim"인 경우 닫기
         topModal.style.display = 'none';
         if (modalStack.length === 0) {
@@ -1732,6 +1783,8 @@ $(document).ready(function(){
     // 나머지 모달 클릭 시, 닫기
     for (let modal of modals) {
       if (event.target === modal) {
+        // 모달 닫기 전 인풋 필드 초기화 호출
+        // resetModalFields(modal);
         modal.style.display = 'none';
         // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
         modalStack.pop(); // 스택에서 제거

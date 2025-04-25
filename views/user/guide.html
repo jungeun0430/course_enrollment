@@ -2433,7 +2433,7 @@
             </label>
             <label class="radio-ico-tab account">
               <input type="radio" aria-checked="true" checked="" name="radioGroup">
-              <span>실시간계좌이체</span>
+              <span>실시간<br class="mobile-only2">계좌이체</span>
             </label>
             <label class="radio-ico-tab banktransfer">
               <input type="radio" aria-checked="true" checked="" name="radioGroup">
@@ -2766,7 +2766,47 @@
         </fieldset>
       </div>
 
+      <hr style="margin:20px 0"/>
+
       <h5>5-1. 셀렉트 박스</h5>
+      <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
+        커스텀 셀렉트 박스임.<br>
+        1. ul 안에 들어갈 요소가 button / a 일지 선택 가능 <br>
+        - a 선택한 경우 : 필수값 (value, tag, href)<br>
+        - button 선택할 경우 :  (value, tag) / 선택값 (discount(할인율))<br>
+      </p>
+      <ul class="star-list">
+        <li>
+          코드 작성방법<br>
+          : 배열안에 수 만큼 안에 리스트에 들어가는 값이 생성됨.
+          <pre>
+const [셀렉트안에 들어갈 변수명] = [
+  {
+    value: 값,
+    tag: a || button,
+    href: a태그 선택 시 필수값,
+    discount: button태그 선택 시 선택값
+  }, ...
+]
+          </pre>
+        </li>
+        <li>
+          실행문 <br>
+          <pre>
+initializeCustomSelect(document.querySelector('.custom-select[data-options="셀렉트 명칭"]'), 셀렉트안에 들어갈 변수명);
+          </pre>
+        </li>
+        <li>
+          추가 옵션이 필요한 경우 매개변수에 더 추가하여 보낼 수 있다.<br>
+          <pre>
+initializeCustomSelect(document.querySelector('.custom-select[data-options="relatedSite"]'), footer2, {
+  up:true, // 셀렉트 박스의 리스트가 위로 열릴 시
+  preventSelectionOnLink: true,// placeholder명 지정 가능
+  placeholder: '관련 사이트', // place 홀더 지정시
+});
+          </pre>
+        </li>
+      </ul>
       <div class="box">
         <div class="custom-select" data-options="1">
           <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
@@ -3975,13 +4015,13 @@
               <ul class="depth-list">
                 <!-- 완료시 active complete || complete추가 -->
                 <li class="active complete">
-                  <div class="depth">취소강좌 제외 수강강좌 재결제</div>
+                  <div class="depth"><span>취소강좌 제외 수강강좌 재결제</span></div>
                 </li>
                 <li class="active">
-                  <div class="depth">기존 결제 금액 전액 취소</div>
+                  <div class="depth"><span>기존 결제 금액 전액 취소</span></div>
                 </li>
                 <li class="">
-                  <div class="depth">수강 취소/환불 완료</div>
+                  <div class="depth"><span>수강 취소/환불 완료</span></div>
                 </li>
               </ul>
             </div>
@@ -4156,7 +4196,7 @@
                 </label>
                 <label class="radio-ico-tab account">
                   <input type="radio" aria-checked="true" checked="" name="radioGroup">
-                  <span>실시간계좌이체</span>
+                  <span>실시간<br class="mobile-only2">계좌이체</span>
                 </label>
                 <label class="radio-ico-tab banktransfer">
                   <input type="radio" aria-checked="true" checked="" name="radioGroup">
@@ -4277,11 +4317,11 @@
                 </label>
                 <label class="radio-ico-tab account">
                   <input type="radio" aria-checked="true" checked="" name="radioGroup">
-                  <span>실시간계좌이체</span>
+                  <span>실시간<br class="mobile-only2">계좌이체</span>
                 </label>
                 <label class="radio-ico-tab banktransfer">
                   <input type="radio" aria-checked="true" checked="" name="radioGroup">
-                  <span>무통장입금</span>
+                  <span>무통장입금(가상계좌)</span>
                 </label>
               </div>
             </div>
@@ -4957,7 +4997,9 @@
   ];
 
   // custom-select 요소를 개별적으로 호출
-  initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'), selectOptions1);
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'), selectOptions1, {
+    initialValue:selectOptions1[0].value
+  });
   initializeCustomSelect(document.querySelector('.custom-select[data-options="2"]'), selectOptions2);
   initializeCustomSelect(document.querySelector('.custom-select[data-options="test1"]'), selectOptions2);
   initializeCustomSelect(document.querySelector('.custom-select[data-options="test2"]'), selectOptions2);
