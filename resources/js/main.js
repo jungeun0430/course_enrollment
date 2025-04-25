@@ -233,7 +233,6 @@ function adjustModalSize(modalId, options={}) {
     if (viewportWidth <= 768) {
       /* 모달 타입 기준 */
       if (modalType === 'fixed-btn-ver') {
-        alert('2')
         // 안전 영역 고려한 높이 계산
         const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
         const vhWidth = viewportWidth * 1; // 약간의 여백 추가
