@@ -1731,10 +1731,10 @@ $(document).ready(function(){
   /* 2. [공통]상단 글씨크기 변경 */
   const sizes = ['small', 'normal', 'lg'];
   const savedSize = localStorage.getItem('textSize') || 'normal';
-  const index = sizes.indexOf(savedSize);
-  if (index === -1) return;
+  const txtSizeIndex = sizes.indexOf(savedSize);
+  if (txtSizeIndex === -1) return;
   $('body').attr('data-text-size', savedSize);
-  $('.txt-size-btn').removeClass('active').eq(index).addClass('active');
+  $('.txt-size-btn').removeClass('active').eq(txtSizeIndex).addClass('active');
 
   /* 3. [공통]모달 관련 함수 */
   // 창 크기 변경 시 모달 크기 재조정 or hideModal 작동시키기
