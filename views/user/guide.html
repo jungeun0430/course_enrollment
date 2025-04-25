@@ -36,7 +36,7 @@
 <!-- 헤더 -->
 <header>
   <!-- [사이드바] dim 처리 영역 -->
-  <div id="dim-overlay" class="dim"></div>
+  <div id="dim-overlay" class="dim" onclick="closeSidebar();"></div>
   <div class="content-wrap"  id="main-content">
     <h1>
       <a href="../user/main.html">
@@ -54,7 +54,7 @@
       <!-- mobile 에서의 gnb -->
       <div class="sidebar-title-wrap mobile-only-f">
         <a href="../user/login.html" class="txt-xs c-white fw-medium" >KSPO&CO 바로가기</a>
-        <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+        <button type="button" class="close-btn" onclick="closeSidebar();"><span class="visually-hidden">닫기</span></button>
       </div>
       <div class="sidebar-menu-wrap">
         <ul class="top-sidebar-list mobile-only-f">
@@ -81,15 +81,15 @@
       <a href="../user/login.html" class="ico-btn ico-user" aria-label="로그아웃"><img src="../../resources/images/ico/ico_logout.svg" alt="로그인 페이지 이동"/></a>
       <a href="../user/login.html" class="ico-btn ico-user" aria-label="사용자 계정"><img src="../../resources/images/ico/ico_login.svg" alt="로그인 페이지 이동"/></a>
       <a href="../user/cs_payment_history.html" class="ico-btn ico-pay" aria-label="결제내역"><img src="../../resources/images/ico/ico_bc.svg" alt="결제내역 페이지 이동"/></a>
-      <button type="button" class="ico-btn ico-hamburger"><span class="visually-hidden">메뉴 열기</span></button>
+      <button type="button" class="ico-btn ico-hamburger" onclick="openSideBar()"><span class="visually-hidden">메뉴 열기</span></button>
     </div>
   </div>
 </header>
 <!-- [공통] 글자 텍스트 아이콘 -->
 <div class="fixed-btn-wrap">
-  <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
-  <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
-  <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+  <button type="button" class="txt-size-btn sm" onclick="changeTextSize('normal')"><span class="visually-hidden">글씨 크게 보기</span></button>
+  <button type="button" class="txt-size-btn rg active" onclick="changeTextSize('lg')"><span class="visually-hidden">글씨 보통 보기</span></button>
+  <button type="button" class="txt-size-btn lg"  onclick="changeTextSize('small')"><span class="visually-hidden">글씨 크게 보기</span></button>
 </div>
 <!-- 메인 -->
 <main id="main">

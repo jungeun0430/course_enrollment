@@ -1,29 +1,207 @@
 /* 함수 주석
-* 1. [공통]사이드바
-* 2. [공통]상단 글씨크기 변경
-* 3. [공통]모달 관련 함수
-* 4. [장바구니]탭 관련 함수
-* 5. [수강신청내역]수강신청 탭 관련 함수
-* 6. [공통]라디오 버튼 핸들러
-* 7. [결제내역]데이트피커
-* 8. [결제내역]테이블 rowspan 존재시 hover색상 지정
-* 9. [공통] 테이블 체크박스 존재시 클릭하면 전체 선택
-* 10. [공통] 셀렉트박스
-* 11. [결제내역] 주민등록번호 : 가상키패드
-* 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사
+* 1. [공통]사이드바 (function, 실행문)
+* 2. [공통]상단 글씨크기 변경 (function, 실행문)
+* 3. [공통]모달 관련 함수 (function, 실행문)
+* 4. [장바구니]탭 관련 함수 (function)
+* 5. [수강신청내역]수강신청 탭 관련 함수 (function)
+* 6. [공통]라디오 버튼 핸들러 (실행문)
+* 7. [결제내역]데이트피커 (실행문)
+* 8. [결제내역]테이블 rowspan 존재시 hover색상 지정 (실행문)
+* 9. [공통] 테이블 체크박스 존재시 클릭하면 전체 선택 (function, 실행문)
+* 10. [공통] 셀렉트박스 (function)
+* 11. [결제내역] 주민등록번호 : 가상키패드 (function, 실행문)
+* 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 (function)
 *  */
+/*-----------------------------------------------------------------------------------------------------*/
+/* ---- [ function 모음 : 1,2,3,4,5,9,10,11,12]-------------------------------------------------------- */
 
-/* 1. 사이드바 */
+/* 1. [공통]사이드바 */
+// 사이드바 열기
+function openSideBar() {
+  /* 1. 사이드바 */
+  const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
+  const $sidebar = $('.sidebar'); // 사이드바 메뉴
+  const breakpoint = 1200; // PC와 모바일을 구분할 기준 너비
+
+  if ($(window).width() < breakpoint) {
+    $dimOverlay.addClass('active');
+    $sidebar.addClass('active');
+    $('body').addClass('no-scroll');
+
+    // iOS VoiceOver 대응을 위한 추가 코드
+    $sidebar.attr({
+      'role': 'dialog',
+      'aria-modal': 'true'
+    });
+
+    // 사이드바 외부 요소 비활성화 (inert 속성 사용)
+    if ('inert' in HTMLElement.prototype) {
+      // 사이드바와 햄버거 버튼을 제외한 모든 요소에 inert 속성 추가
+      $('body > *').not($sidebar).not($sidebar.parents()).not($dimOverlay).attr('inert', '');
+    } else {
+      // inert 폴리필 적용
+      applyInertPolyfill();
+    }
+
+    trapFocus($sidebar[0]);
+  }
+}
+// 사이드바 닫기
+function closeSideBar() {
+  removeActiveClasses();
+}
+// -------- 사이드바 열고 닫기 관련 함수 모음 -----------
+// 포커스 트랩 함수
+function trapFocus(container) {
+  const focusableElements = Array.from(
+    container.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter(el => {
+    // 보이는 요소만 걸러냄 (display: none 등)
+    return el.offsetParent !== null;
+  });
+
+  if (focusableElements.length === 0) return;
+
+  const firstEl = focusableElements[0];
+  const lastEl = focusableElements[focusableElements.length - 1];
+
+  firstEl.focus();
+
+  function handleKeydown(e) {
+    if (e.key === 'Tab') {
+      if (e.shiftKey) {
+        if (document.activeElement === firstEl) {
+          e.preventDefault();
+          lastEl.focus();
+        }
+      } else {
+        if (document.activeElement === lastEl) {
+          e.preventDefault();
+          firstEl.focus();
+        }
+      }
+    } else if (e.key === 'Escape') {
+      closeSidebar();
+    }
+  }
+
+  document.addEventListener('keydown', handleKeydown);
+}
+
+// 사이드바 닫기 공통 함수
+function closeSidebar() {
+  /* 1. 사이드바 */
+  const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
+  const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
+  const $sidebar = $('.sidebar'); // 사이드바 메뉴
+
+  $dimOverlay.removeClass('active');
+  $sidebar.removeClass('active');
+  $('body').removeClass('no-scroll');
+
+  // 접근성 속성 및 inert 제거
+  $sidebar.removeAttr('role aria-modal');
+
+  if ('inert' in HTMLElement.prototype) {
+    $('body > *').removeAttr('inert');
+  } else {
+    removeInertPolyfill();
+  }
+
+  $hamburgerBtn.focus();
+  document.removeEventListener('keydown', handleKeydown);
+}
+
+// 상태 초기화 함수
+function removeActiveClasses() {
+  /* 1. 사이드바 */
+  const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
+  const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
+  const $sidebar = $('.sidebar'); // 사이드바 메뉴
+
+  $dimOverlay.removeClass('active');
+  $sidebar.removeClass('active');
+
+  // 접근성 속성 및 inert 제거
+  $sidebar.removeAttr('role aria-modal');
+
+  if ('inert' in HTMLElement.prototype) {
+    $('body > *').removeAttr('inert');
+  } else {
+    removeInertPolyfill();
+  }
+
+  if (!document.querySelector('.modal[style*="display: block"]')) {
+    $('body').removeClass('no-scroll'); // 열린 모달이 없을 때만 스크롤 활성화
+  }
+
+  $hamburgerBtn.focus();
+}
+
+// inert 폴리필 함수
+function applyInertPolyfill() {
+  /* 1. 사이드바 */
+  const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
+  const $sidebar = $('.sidebar'); // 사이드바 메뉴
+
+  // 사이드바와 햄버거 버튼을 제외한 모든 요소
+  const elements = $('body > *').not($sidebar).not($sidebar.parents()).not($dimOverlay);
+
+  elements.each(function() {
+    $(this).attr('aria-hidden', 'true');
+
+    // 요소 내의 모든 포커스 가능한 요소 비활성화
+    $(this).find('a, button, input, select, textarea, [tabindex]').each(function() {
+      if (!$(this).data('original-tabindex')) {
+        $(this).data('original-tabindex', $(this).attr('tabindex') || null);
+      }
+      $(this).attr('tabindex', '-1');
+    });
+  });
+}
+
+// inert 폴리필 제거 함수
+function removeInertPolyfill() {
+  $('[aria-hidden="true"]').removeAttr('aria-hidden');
+
+  // 원래 tabindex 복원
+  $('[data-original-tabindex]').each(function() {
+    const originalValue = $(this).data('original-tabindex');
+    if (originalValue === null) {
+      $(this).removeAttr('tabindex');
+    } else {
+      $(this).attr('tabindex', originalValue);
+    }
+    $(this).removeData('original-tabindex');
+  });
+}
+
+/* 2. [공통]상단 글씨크기 변경 */
+function changeTextSize(size) {
+  const $buttons = $('.txt-size-btn');
+  const $body = $('body');
+  const sizes = ['small', 'normal', 'lg'];
+  const index = sizes.indexOf(size);
+
+  if (index === -1) return; // 잘못된 값 방지
+
+  $body.attr('data-text-size', size);
+  $buttons.removeClass('active');
+  $buttons.eq(index).addClass('active');
+  localStorage.setItem('textSize', size);
+}
 
 
-/* 2. 상단 글씨크기 변경 (작성한 함수는 없음) */
-
-/* 3. 모달 관련 함수 */
+/* 3. [공통]모달 관련 함수 */
 // 모달 크기 조정 및 회전 처리
 function adjustModalSize(modalId, options={}) {
   const modal = document.getElementById(modalId);
   const modalContent = modal.querySelector('.modal-content');
   const modalBody = modalContent.querySelector('.modal-body');
+  const modalType = modal?.dataset.modalType; // ← 여기 추가
+
 
   if (modalContent) {
     // 실제 사용 가능한 뷰포트 높이 계산 (모바일 브라우저 UI 고려)
@@ -79,7 +257,7 @@ function adjustModalSize(modalId, options={}) {
           modalBody.style.overflow = 'auto';
           modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
         }
-      } else if (modalId === 'modal-curriculum') {
+      } else if (modalType === 'fixed-btn-ver') {
         // 안전 영역 고려한 높이 계산
         const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
         const vhWidth = viewportWidth * 1; // 약간의 여백 추가
@@ -124,10 +302,7 @@ function adjustModalSize(modalId, options={}) {
     }
   }
 }
-
-// 모달 띄우기 함수
-// 외부 클릭시 팝업 닫힘
-let openModalName = ''; // 열린 팝업 이름 저장
+// -------- 모달 띄우기 함수 ------------
 // 현재 열린 모달들을 스택으로 관리
 let modalStack = []; // 모달 스택
 function showModal(modalId,options={}) {
@@ -181,8 +356,12 @@ function showModal(modalId,options={}) {
 
   // 포커스 트랩 설정
   handleFocusTrap(modal);
+
+  if (window.innerWidth <= 767) {
+    adjustModalSize(modalId);
+  }
 }
-// 모달 안 focus 가능한 영역 확인 코드 : 최상단 모달에서만 tab키를 눌러도 반응할
+// 모달 안 focus 가능한 영역 확인 코드 : 최상단 모달에서만 tab키를 눌러도 반응해야하는게 목적
 const handleFocusTrap = (modal) => {
   const getFocusableElements = () => {
     return Array.from(
@@ -282,7 +461,6 @@ const handleFocusTrap = (modal) => {
     firstFocusable?.focus();
   }, 0);
 };
-
 // 모달 숨기기 함수
 function hideModal(modalId) {
   const modal = document.getElementById(modalId);
@@ -330,8 +508,6 @@ function hideModal(modalId) {
     document.body.classList.remove('no-scroll');
   }
 }
-
-
 /* 4. 탭 관련 함수 */
 class TabManager {
   constructor() {
@@ -668,6 +844,9 @@ class TabManager {
         const isInModal = modalId && wrap.closest(`#${modalId}`);
         const listLength = wrap.querySelectorAll('.first-depth > li').length;
 
+        /* tab의 수가 1이하인 경우 상단에 버튼을 가리기위해 0 높이 더함 /
+        *  나머지의 경우 pc / mobile 에 따라 차등을 두어 값 적용
+        *  */
         const topSpacing =
           listLength <= 1
             ? 0
@@ -676,13 +855,6 @@ class TabManager {
               : this.isMobile
                 ? 84
                 : 104;
-        // 높이 계산
-        /*const topSpacing = isInModal
-          ? 84 // 모달 내부
-          : this.isMobile
-            ? 84 // 모바일
-            : 104; // 데스크톱
-        console.log(topSpacing)*/
         console.log(topSpacing)
 
         wrap.style.height = `${tabBoxHeight + topSpacing}px`; // 계산된 높이 설정
@@ -897,7 +1069,6 @@ function handleTabKey(e) {
     }
   }
 }
-
 class CheckTabManager {
   constructor() {
     this.mobileWrap = document.querySelector('.f-modal');
@@ -1303,35 +1474,6 @@ class CheckTabManager {
     });
   }
 }
-/* 6. 라디오 버튼 핸들러 */
-// 라디오 버튼 키보드 이벤트 핸들러
-/*function handleRadioKeyDown(e) {
-  // 해당 라디오 버튼이 속한 그룹의 모든 라디오 버튼 찾기
-  const name = e.target.name;
-  const group = Array.from(document.querySelectorAll(`input[type="radio"][name="${name}"]`));
-  const currentIndex = group.indexOf(e.target);
-
-  // 키 이벤트에 따라 다음/이전 라디오 버튼으로 이동
-  switch (e.key) {
-    case 'ArrowLeft':
-    case 'ArrowUp':
-      e.preventDefault();
-      // 이전 버튼으로 이동 (첫 번째면 마지막으로)
-      const prevIndex = currentIndex > 0 ? currentIndex - 1 : group.length - 1;
-      group[prevIndex].focus();
-      group[prevIndex].checked = true;
-      break;
-
-    case 'ArrowRight':
-    case 'ArrowDown':
-      e.preventDefault();
-      // 다음 버튼으로 이동 (마지막이면 첫 번째로)
-      const nextIndex = currentIndex < group.length - 1 ? currentIndex + 1 : 0;
-      group[nextIndex].focus();
-      group[nextIndex].checked = true;
-      break;
-  }
-}*/
 
 /* 7. 데이트 피커 */
 function formatYearOptions() {
@@ -1344,6 +1486,7 @@ function formatYearOptions() {
     });
   });
 }
+
 /* 10. [공통] 셀렉트박스 */
 // 초기화 함수
 function initializeCustomSelect(selectElement, selectOptions, options = {}) {
@@ -1492,6 +1635,20 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
   });
 }
 
+/* 11. [결제내역] 주민등록번호 : 가상키패드 */
+// 랜덤 활성화 클래스 효과 함수
+function activateRandomButton() {
+  const randomIndex = Math.floor(Math.random() * numberButtons.length); // 0~9 중 랜덤
+  const randomButton = numberButtons[randomIndex];
+
+  // 랜덤 버튼에 active 클래스 추가
+  randomButton.classList.add('active');
+
+  // 짧은 시간 후 active 클래스 제거
+  setTimeout(() => {
+    randomButton.classList.remove('active');
+  }, 200); // 200ms 후 제거
+}
 /* 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 */
 function applyNumericInputFilter(inputElement, maxLength = Infinity) {
   inputElement.addEventListener('input', (event) => {
@@ -1506,220 +1663,47 @@ function applyNumericInputFilter(inputElement, maxLength = Infinity) {
     }
   });
 }
-/*-------------------------------*/
-/* [실행문] */
+/*-----------------------------------------------------------------------------------------------------*/
+
+/* *************************************************************************************************** */
+/* *************************************************************************************************** */
+
+/*-----------------------------------------------------------------------------------------------------*/
+/* ---- [ 실행문 모음 : 1,2,3,6,7,8,9,11]--------------------------------------------------------------- */
 $(document).ready(function(){
-  /* 1. 사이드바 */
-  /* 1. 사이드바 */
-  const $hamburgerBtn = $('.ico-hamburger'); // 햄버거 버튼
-  const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
-  const $sidebar = $('.sidebar'); // 사이드바 메뉴
-  const $closeBtn = $('.close-btn'); // 닫기 버튼
-  const breakpoint = 1200; // PC와 모바일을 구분할 기준 너비
-
-// 햄버거 버튼 클릭 이벤트
-  $hamburgerBtn.on('click', function () {
-    if ($(window).width() < breakpoint) {
-      $dimOverlay.addClass('active');
-      $sidebar.addClass('active');
-      $('body').addClass('no-scroll');
-
-      // iOS VoiceOver 대응을 위한 추가 코드
-      $sidebar.attr({
-        'role': 'dialog',
-        'aria-modal': 'true'
-      });
-
-      // 사이드바 외부 요소 비활성화 (inert 속성 사용)
-      if ('inert' in HTMLElement.prototype) {
-        // 사이드바와 햄버거 버튼을 제외한 모든 요소에 inert 속성 추가
-        $('body > *').not($sidebar).not($sidebar.parents()).not($dimOverlay).attr('inert', '');
-      } else {
-        // inert 폴리필 적용
-        applyInertPolyfill();
-      }
-
-      trapFocus($sidebar[0]);
-    }
-  });
-
-// 포커스 트랩 함수
-  function trapFocus(container) {
-    const focusableElements = Array.from(
-      container.querySelectorAll(
-        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-      )
-    ).filter(el => {
-      // 보이는 요소만 걸러냄 (display: none 등)
-      return el.offsetParent !== null;
-    });
-
-    if (focusableElements.length === 0) return;
-
-    const firstEl = focusableElements[0];
-    const lastEl = focusableElements[focusableElements.length - 1];
-
-    firstEl.focus();
-
-    function handleKeydown(e) {
-      if (e.key === 'Tab') {
-        if (e.shiftKey) {
-          if (document.activeElement === firstEl) {
-            e.preventDefault();
-            lastEl.focus();
-          }
-        } else {
-          if (document.activeElement === lastEl) {
-            e.preventDefault();
-            firstEl.focus();
-          }
-        }
-      } else if (e.key === 'Escape') {
-        closeSidebar();
-      }
-    }
-
-    document.addEventListener('keydown', handleKeydown);
-  }
-
-// 사이드바 닫기 공통 함수
-  function closeSidebar() {
-    $dimOverlay.removeClass('active');
-    $sidebar.removeClass('active');
-    $('body').removeClass('no-scroll');
-
-    // 접근성 속성 및 inert 제거
-    $sidebar.removeAttr('role aria-modal');
-
-    if ('inert' in HTMLElement.prototype) {
-      $('body > *').removeAttr('inert');
-    } else {
-      removeInertPolyfill();
-    }
-
-    $hamburgerBtn.focus();
-    document.removeEventListener('keydown', handleKeydown);
-  }
-
-// 상태 초기화 함수
-  function removeActiveClasses() {
-    $dimOverlay.removeClass('active');
-    $sidebar.removeClass('active');
-
-    // 접근성 속성 및 inert 제거
-    $sidebar.removeAttr('role aria-modal');
-
-    if ('inert' in HTMLElement.prototype) {
-      $('body > *').removeAttr('inert');
-    } else {
-      removeInertPolyfill();
-    }
-
-    if (!document.querySelector('.modal[style*="display: block"]')) {
-      $('body').removeClass('no-scroll'); // 열린 모달이 없을 때만 스크롤 활성화
-    }
-
-    $hamburgerBtn.focus();
-  }
-
-// inert 폴리필 함수
-  function applyInertPolyfill() {
-    // 사이드바와 햄버거 버튼을 제외한 모든 요소
-    const elements = $('body > *').not($sidebar).not($sidebar.parents()).not($dimOverlay);
-
-    elements.each(function() {
-      $(this).attr('aria-hidden', 'true');
-
-      // 요소 내의 모든 포커스 가능한 요소 비활성화
-      $(this).find('a, button, input, select, textarea, [tabindex]').each(function() {
-        if (!$(this).data('original-tabindex')) {
-          $(this).data('original-tabindex', $(this).attr('tabindex') || null);
-        }
-        $(this).attr('tabindex', '-1');
-      });
-    });
-  }
-
-// inert 폴리필 제거 함수
-  function removeInertPolyfill() {
-    $('[aria-hidden="true"]').removeAttr('aria-hidden');
-
-    // 원래 tabindex 복원
-    $('[data-original-tabindex]').each(function() {
-      const originalValue = $(this).data('original-tabindex');
-      if (originalValue === null) {
-        $(this).removeAttr('tabindex');
-      } else {
-        $(this).attr('tabindex', originalValue);
-      }
-      $(this).removeData('original-tabindex');
-    });
-  }
-
-// 닫기 버튼 클릭 이벤트
-  $closeBtn.on('click', function () {
-    removeActiveClasses();
-  });
-
-// Dim 영역 클릭 시 사이드바 닫기
-  $dimOverlay.on('click', function () {
-    removeActiveClasses();
-  });
-
-// 윈도우 리사이즈 이벤트
+  /* 1. [공통]사이드바 */
+  // 윈도우 리사이즈 이벤트
   $(window).on('resize', function () {
-    if ($(window).width() >= breakpoint) {
+    if ($(window).width() >= 1200) {
       // PC 모드로 전환되면 초기화
       removeActiveClasses();
     }
   });
-  /* 2. 상단 글자크기 변경 */
-  const $buttons = $('.txt-size-btn'); // 모든 버튼 선택
-  const $body = $('body'); // body 요소 선택
-  const sizes = ['small', 'normal', 'lg']; // 크기 순서 배열
-  let currentIndex = 1; // 초기 인덱스 값 (기본값 normal)
-  // **'깜빡임 방지' 단계 추가**: body 스타일을 비활성화 상태로 유지
-  $body.css('visibility', 'hidden'); // 설정이 완료될 때까지 표시하지 않음
-  // localStorage에서 저장된 글자 크기 가져오기
-  const savedSize = localStorage.getItem('textSize');
-  if (savedSize) {
-    // 저장된 값이 있는 경우 해당 글자 크기 인덱스로 설정
-    currentIndex = sizes.indexOf(savedSize);
-    if (currentIndex === -1) currentIndex = 1; // 잘못된 값이면 기본값 적용
-  }
-  // 초기화: 글자 크기와 버튼 상태 설정
-  $body.attr('data-text-size', sizes[currentIndex]); // body에 크기 반영
-  $buttons.removeClass('active'); // 모든 버튼의 active 제거
-  $buttons.eq(currentIndex).addClass('active'); // 현재 크기에 맞는 버튼에 active 추가
-  // 설정이 끝난 후 body 표시
-  $body.css('visibility', 'visible');
-  // 버튼 클릭 이벤트
-  $buttons.on('click', function () {
-    $buttons.removeClass('active'); // 모든 active 제거
-    currentIndex = (currentIndex + 1) % sizes.length; // 다음 인덱스 계산
 
-    // 새 active 버튼에 클래스 추가
-    const $activeButton = $buttons.eq(currentIndex);
-    $activeButton.addClass('active');
+  /* 2. [공통]상단 글씨크기 변경 */
+  const sizes = ['small', 'normal', 'lg'];
+  const savedSize = localStorage.getItem('textSize') || 'normal';
+  const index = sizes.indexOf(savedSize);
+  if (index === -1) return;
+  $('body').attr('data-text-size', savedSize);
+  $('.txt-size-btn').removeClass('active').eq(index).addClass('active');
 
-    // body에 data-text-size 속성 변경
-    const newSize = sizes[currentIndex];
-    $body.attr('data-text-size', newSize);
-
-    // localStorage에 현재 글자 크기 저장
-    localStorage.setItem('textSize', newSize);
-  });
-
-  /* 3. 모달 관련 함수 */
-  // 창 크기 변경 시 모달 크기 재조정
+  /* 3. [공통]모달 관련 함수 */
+  // 창 크기 변경 시 모달 크기 재조정 or hideModal 작동시키기
   window.addEventListener('resize', () => {
-    const openModal = document.querySelector('.modal[style*="block"]'); // 현재 열린 모달 찾기
+    if (modalStack.length === 0) return; // 열린 모달이 없으면 종료
+
+    const openModalId = modalStack[modalStack.length - 1]; // 스택에서 가장 최근 열린 모달 ID 가져오기
+    const openModal = document.getElementById(openModalId); // 해당 ID로 모달 요소 가져오기
+
     if (openModal) {
-      adjustModalSize(openModal.id); // 크기 재조정 호출
+      if (openModal.id === 'modal-virtualKeyboard') {
+        hideModal(openModal.id); // hideModal 실행
+      } else {
+        adjustModalSize(openModal.id); // 크기 재조정 호출
+      }
     }
   });
-
-
   window.addEventListener('click', function (event) {
     const overlay = document.getElementById('overlay');
     const modals = document.querySelectorAll('.modal');
@@ -1759,27 +1743,21 @@ $(document).ready(function(){
     }
   });
 
-  /* 6. 라디오 버튼 핸들러 */
+  /* 6. [공통]라디오 버튼 핸들러 */
   // 모든 라디오 버튼에 대한 키보드 접근성 향상 (name 속성 독립적)
-// 문서 로드 완료 후 실행
-// 모든 라디오 버튼에 tabindex 추가하여 포커스 가능하게 만들기
-// 라디오 버튼의 접근성 및 포커스 문제 해결
   document.addEventListener('DOMContentLoaded', function() {
     // 기본정보 테이블 내의 라디오 버튼 식별
     const tableRadios = document.querySelectorAll('.custom-table.form-ver .radio-wrap input[type="radio"]');
-
     // 각 라디오 버튼에 대해
     tableRadios.forEach(function(radio) {
       // tabindex 재설정 (이미 -1로 설정된 경우 수정)
       if (radio.getAttribute('tabindex') === '-1') {
         radio.setAttribute('tabindex', '0');
       }
-
       // 시각적으로 숨겨진 라디오 버튼의 포커스 상태 표시하기 위한 이벤트 처리
       radio.addEventListener('focus', function() {
         this.parentElement.classList.add('radio-focused');
       });
-
       radio.addEventListener('blur', function() {
         this.parentElement.classList.remove('radio-focused');
       });
@@ -1791,11 +1769,10 @@ $(document).ready(function(){
     });
   });
 
-  /* 7. 데이트피커: datepicker */
+  /* 7. [결제내역]데이트피커 */
   // 시작일과 종료일 선택 필드
   let startDateInput = $(".dates").eq(0);
   let endDateInput = $(".dates").eq(1);
-
   // 공통 옵션
   let dateOptions = {
     changeMonth: true,
@@ -1817,7 +1794,6 @@ $(document).ready(function(){
       }, 0);
     }
   };
-
   // 시작일 datepicker
   startDateInput.datepicker({
     ...dateOptions,
@@ -1826,7 +1802,6 @@ $(document).ready(function(){
       endDateInput.datepicker("option", "minDate", selectedDate);
     }
   });
-
   // 종료일 datepicker
   endDateInput.datepicker({
     ...dateOptions,
@@ -1835,9 +1810,9 @@ $(document).ready(function(){
       startDateInput.datepicker("option", "maxDate", selectedDate);
     }
   });
-  /* 8. 테이블 rowspan 존재시 hover색상 지정 */
-  const tables = document.querySelectorAll('.custom-table[data-table="rowspan-ver"]');
 
+  /* 8. [결제내역]테이블 rowspan 존재시 hover색상 지정 */
+  const tables = document.querySelectorAll('.custom-table[data-table="rowspan-ver"]');
   tables.forEach(table => {
     // 해당 테이블 내의 rowspan이 있는 모든 td 찾기
     const rowspanCells = table.querySelectorAll('td[rowspan]');
@@ -1899,21 +1874,7 @@ $(document).ready(function(){
 
   let inputValues = ''; // 입력된 값을 추적 (사용자가 직접 보는 값)
 
-  // 랜덤 활성화 클래스 효과 함수
-  function activateRandomButton() {
-    const randomIndex = Math.floor(Math.random() * numberButtons.length); // 0~9 중 랜덤
-    const randomButton = numberButtons[randomIndex];
-
-    // 랜덤 버튼에 active 클래스 추가
-    randomButton.classList.add('active');
-
-    // 짧은 시간 후 active 클래스 제거
-    setTimeout(() => {
-      randomButton.classList.remove('active');
-    }, 200); // 200ms 후 제거
-  }
-
-// 숫자 버튼 클릭 이벤트
+  // 숫자 버튼 클릭 이벤트
   numberButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
       if (inputValues.length >= 7) return; // 7자리 제한
