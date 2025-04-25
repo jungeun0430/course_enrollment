@@ -26,6 +26,11 @@
 .modal.no-dim .modal-content{background-color:var(--color-white);}
 .modal.no-dim .modal-content.lg {max-width:1200px;width:100%;position:fixed;}
 
+@media(max-width: 1200px) {
+  .modal.no-dim .modal-content.lg {max-width:100%;width:calc(100% - 32px)}
+
+}
+
 /* 모달 (안에 들어간 탭) */
 .modal-content .tab-box {top:84px;}
 
@@ -68,7 +73,7 @@
 .confirm-box {display:flex;flex-direction:column;align-items:center;}
 .confirm-box img {width:80px;height:80px;}
 .confirm-box img + .c-em {margin-top:20px;}
-.confirm-box .c-em {font-size:var(--txt-size05);font-weight:var(--fw-bold);}
+.confirm-box .c-em {font-size:var(--txt-size05);font-weight:var(--fw-bold);text-align:center;}
 .confirm-box .c-desc {font-size:var(--txt-size04);font-weight:var(--fw-medium);color:var(--color-gray);text-align:center;}
 .confirm-box .c-em + .c-desc {margin-top: 8px;}
 .confirm-box + .flex-wrap {margin-top: 28px;}

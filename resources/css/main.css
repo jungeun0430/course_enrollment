@@ -13,6 +13,7 @@ html, body{height:100%;font-family:"Pretendard", sans-serif;font-weight:var(--fw
 .pc-only2 {display:block!important;}
 .pc-only-f {display:flex!important;}
 .pc-only-inline {display:inline!important;}
+.pc-only-inline2 {display:inline!important;}
 .pc-only-cell {display:table-cell!important;}
 .pc-only-tc {display:table-caption!important;}
 .pc-only-column-group {display: table-column-group!important;}
@@ -22,6 +23,8 @@ html, body{height:100%;font-family:"Pretendard", sans-serif;font-weight:var(--fw
 .mobile-only-f {display:none!important;}
 .mobile-only-f2 {display:none!important;}
 .mobile-only-cell {display:none!important;}
+.mobile-only-inline {display:none!important;}
+.mobile-only-inline2 {display:none!important;}
 .mobile-only-tc {display:none!important;}
 .mobile-only-tr {display:none!important;}
 .body-lg-only-tc {display:none!important;}
@@ -596,6 +599,7 @@ span.title-wrap > .h4,
     .pc-only-column-group  {display: none!important;}
     .mobile-only {display:block!important;}
     .pc-only-inline {display:none!important;}
+    .mobile-only-inline {display:inline!important;}
     .mobile-only-f {display:flex!important;}
     .mobile-only-cell {display:table-cell!important;}
     .mobile-only-tc {display:table-column!important;}
@@ -663,8 +667,10 @@ span.title-wrap > .h4,
 }
 @media (max-width: 768px) {
     .pc-only2 {display:none!important;}
+    .pc-only-inline2 {display:none!important;}
     .mobile-only2 {display:block!important;}
     .mobile-only-f2 {display:flex!important;}
+    .mobile-only-inline2 {display:inline!important;}
     /* 공통 */
     .flex-wrap{gap:12px;}
     .mo-flex1 {flex:1;}
@@ -700,9 +706,7 @@ span.title-wrap > .h4,
     header > .content-wrap {width:100%;height:100%;padding:15px 20px;}
     header  h1 {width:130px;height:29px;}
 
-
-
-        /* sidebar */
+    /* sidebar */
     .sidebar .sidebar-title-wrap .user-btn {/*font-size:12px;*/}
     .sidebar-list > li > a {font-size:var(--txt-size02);}
 

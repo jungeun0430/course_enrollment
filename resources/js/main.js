@@ -274,6 +274,22 @@ function adjustModalSize(modalId, options={}) {
           modalBody.style.overflow = 'auto';
           modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
         }
+      } else {
+        // 안전 영역 고려한 높이 계산
+        const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
+        const vhWidth = viewportWidth * 1; // 약간의 여백 추가
+
+        modalContent.style.width = `${vhWidth}px`;
+        modalContent.style.height = `${vhHeight}px`;
+
+        // 내용이 넘칠 경우를 대비한 스크롤 설정
+        if (modalBody) {
+          // 헤더/패딩 등 고려한 계산
+          const headerHeight = 48; // 헤더 높이 (필요에 따라 조정)
+          modalBody.style.height = `${vhHeight - headerHeight}px`;
+          modalBody.style.overflow = 'auto';
+          modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
+        }
       }
 
       // 디버깅용 - 실제 계산된 높이 확인 (개발 중 참고용, 나중에 제거)

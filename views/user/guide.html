@@ -222,7 +222,7 @@
       <div class="box">
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
-          <div class="custom-info-table-wrap" style="max-width:702px;">
+          <div class="custom-info-table-wrap">
             <div class="flex-wrap gap-auto col-ver">
               <div class="flex-wrap mo-col gap-auto">
                 <div class="flex1 custom-info-table">
@@ -231,7 +231,9 @@
                     <colgroup>
                       <col style="width:50px;"/>
                       <col style="width:55px" class="body-lg-only-tc" />
-                      <col style="width:92px;" class="mobile-only-tc"/>
+                      <col style="width:70px;" class="mobile-only-tc"/>
+                      <col style="" class="mobile-only-tc"/>
+                      <col style="width:70px;" class="mobile-only-tc"/>
                       <col class="body-lg-only-tc"/>
                       <col style="width:70px" class="body-lg-only-tc" />
                     </colgroup>
@@ -311,6 +313,8 @@
                     <colgroup>
                       <col style="width:50px;" class="mobile-only-tc"/>
                       <col style="width:92px;" class="mobile-only-tc"/>
+                      <col style="" class="mobile-only-tc"/>
+                      <col style="width:70px;" class="mobile-only-tc"/>
                     </colgroup>
                     <thead>
                     <tr>
@@ -406,7 +410,7 @@
                     <!-- 첫 번째 열: 50px -->
                     <col style="width:50px;"/>
                     <!-- 두 번째 열: 3 부분 중 하나 -->
-                    <col style="width:299px;"/>
+                    <col style="width:316px;"/>
                     <!-- 세 번째 열: 5 부분 중 하나 -->
                     <col style="width:calc((100% - 50px) * 5 / 8);"/>
                   </colgroup>
@@ -437,7 +441,7 @@
         </div>
         <div class="sub-content-box">
           <h4 class="sub-title2">[스케이트 수준별 진도표]</h4>
-          <div class="custom-info-table-wrap" style="max-width:702px;">
+          <div class="custom-info-table-wrap">
             <div class="flex-wrap col-ver gap-auto">
               <!-- 1. pc에서만! -->
               <div class="flex1 custom-info-table pc-only">
@@ -2897,8 +2901,8 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         <div class="modal-content sm pd-auto">
           <div class="confirm-box">
             <img src="../../resources/images/ico/ico_error.svg" alt="" />
-            <p class="c-em">센터가입 정보입력을 중단하시겠습니까?</p>
-            <p class="c-desc">센터가입을 취소하시면 지금까진 입력하신 <br>내용이 저장되지 않습니다.</p>
+            <p class="c-em">센터가입 정보입력을<br class="mobile-only-inline2"> 중단하시겠습니까?</p>
+            <p class="c-desc">센터가입을 취소하시면 <br class="pc-only-inline2"> 지금까진  <br class="mobile-only-inline2"> 입력하신 내용이 저장되지 않습니다.</p>
           </div>
           <div class="flex-wrap center">
             <button type="button" class="btn outlined size-nm" onclick="hideModal('modal2')">중단하기</button>
@@ -2912,8 +2916,8 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         <div class="modal-content sm pd-auto">
           <div class="confirm-box">
             <img src="../../resources/images/ico/ico_question.svg" alt="" />
-            <p class="c-em">정말 선택하신 회원번호를 사용하시겠습니까?</p>
-            <p class="c-desc">선택하지 않은 회원번호 및 해당 회원번호의<br>수강/결제내역은 삭제됩니다.</p>
+            <p class="c-em">정말 선택하신 회원번호를 <br class="mobile-only-inline2"> 사용하시겠습니까?</p>
+            <p class="c-desc">선택하지 않은  회원번호 및 해당 <br class="mobile-only-inline2"> 회원번호의<br class="pc-only-inline">수강/결제내역은 삭제됩니다.</p>
           </div>
           <div class="flex-wrap center">
             <button type="button" class="btn outlined size-sm" onclick="hideModal('modal3')">취소</button>
@@ -3144,7 +3148,9 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                         <colgroup>
                           <col style="width:50px;"/>
                           <col style="width:55px" class="body-lg-only-tc" />
-                          <col style="width:92px;" class="mobile-only-tc"/>
+                          <col style="width:70px;" class="mobile-only-tc"/>
+                          <col style="" class="mobile-only-tc"/>
+                          <col style="width:70px;" class="mobile-only-tc"/>
                           <col class="body-lg-only-tc"/>
                           <col style="width:70px" class="body-lg-only-tc" />
                         </colgroup>
@@ -3224,6 +3230,8 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                         <colgroup>
                           <col style="width:50px;" class="mobile-only-tc"/>
                           <col style="width:92px;" class="mobile-only-tc"/>
+                          <col style="" class="mobile-only-tc"/>
+                          <col style="width:70px;" class="mobile-only-tc"/>
                         </colgroup>
                         <thead>
                         <tr>
