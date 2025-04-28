@@ -266,7 +266,10 @@ span.title-wrap > .h4,
 .custom-table .bl {border-left:1px solid var(--table-border-color);}
 .custom-table .br {border-right: 0;}
 .custom-table .bb {border-bottom: 0;}
-.empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:88px;background:url('../images/ico/ico_bag_big.svg') center top no-repeat}
+.empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:88px;}
+.empty-txt.shop {background:url('../images/ico/ico_bag_big.svg') center top no-repeat;background-size:80px;}
+.empty-txt.course {background:url('../images/ico/ico_mortarboard.svg') center top no-repeat;background-size:80px;}
+.empty-txt.paper {background:url('../images/ico/ico_paper.svg') center top no-repeat;background-size:80px;}
 /* 커스텀 테이블 > 장바구니 합산 */
 .total-wrap {max-width:950px;width:100%;display:flex;justify-content:space-evenly;align-items:center;gap:40px;}
 .total-wrap .flex-wrap {width:auto;}
@@ -281,7 +284,10 @@ span.title-wrap > .h4,
 @media (max-width:767px) {
     .custom-table tfoot td {padding:16px 12px;}
     .custom-table tr.empty td {padding:35px 12px;}
-    .empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:48px;background:url('../images/ico/ico_bag_big.svg') center top no-repeat;background-size:40px;}
+    .empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:48px;background-size:40px;}
+    .empty-txt.shop {background:url('../images/ico/ico_bag_big.svg') center top no-repeat;background-size:40px;}
+    .empty-txt.course {background:url('../images/ico/ico_mortarboard.svg') center top no-repeat;background-size:40px;}
+    .empty-txt.paper {background:url('../images/ico/ico_paper.svg') center top no-repeat;background-size:40px;}
 
     /* 폼 입력 테이블 */
     .custom-table.form-ver th {padding:2px 8px;}
