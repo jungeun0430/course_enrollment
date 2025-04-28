@@ -254,6 +254,7 @@ span.title-wrap > .h4,
 .confirm-btn-wrap.ver2 {margin-top:20px;}
 /* 테이블 row별 : empty , disabled,  cancel */
 .custom-table tr.empty td {padding:70px 12px;}
+.custom-table tr.loading td {padding:70px 12px;}
 .custom-table tr.disabled *:not(.badge) {color:var(--color-light-gray)!important;}
 .custom-table tr.disabled .btn:disabled {color:var(--color-gray2)!important;}
 .custom-table tr.disabled-chkbox *:not(.c-blue) {color:var(--color-light-gray)!important;}
