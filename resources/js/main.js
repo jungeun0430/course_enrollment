@@ -316,6 +316,16 @@ function adjustModalSize(modalId, options = {}) {
         modalBody.style.maxHeight = '80vh';
         modalBody.style.overflow = 'auto';
       }
+    } else if ( modalId === 'modal-discountCheck') {
+      modalContent.style.width = '100%';
+      modalContent.style.maxWidth = '90%';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
+      }
     } else if(modalType !== 'confirm-ver') {
       modalContent.style.width = 'calc(100% - 32px)';
       modalContent.style.maxWidth = '100%';
