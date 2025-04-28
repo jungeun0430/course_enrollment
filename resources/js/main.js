@@ -2083,7 +2083,4 @@ $(document).ready(function(){
       }
     });
   });
-
-
-
 })
