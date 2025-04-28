@@ -11,6 +11,7 @@
 * 10. [공통] 셀렉트박스 (function)
 * 11. [결제내역] 주민등록번호 : 가상키패드 (function, 실행문)
 * 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 (function)
+* 13. [수강신청내역] 수강신청탭 안의 체크박스 수 제한
 *  */
 /*-----------------------------------------------------------------------------------------------------*/
 /* ---- [ function 모음 : 1,2,3,4,5,9,10,11,12]-------------------------------------------------------- */
@@ -196,114 +197,168 @@ function changeTextSize(size) {
 
 /* 3. [공통]모달 관련 함수 */
 // 모달 크기 조정 및 회전 처리
-function adjustModalSize(modalId, options={}) {
+let currentDeviceType = '';
+function adjustModalSize(modalId, options = {}) {
   const modal = document.getElementById(modalId);
+  if (!modal) return;
+
   const modalContent = modal.querySelector('.modal-content');
-  const modalBody = modalContent.querySelector('.modal-body');
-  const modalType = modal?.dataset.modalType; // ← 여기 추가
+  const modalBody = modalContent?.querySelector('.modal-body');
+  const modalType = modal?.dataset.modalType;
 
+  if (!modalContent) return;
 
-  if (modalContent) {
-    // 실제 사용 가능한 뷰포트 높이 계산 (모바일 브라우저 UI 고려)
-    const viewportHeight = window.innerHeight; // 화면 높이
-    const viewportWidth = window.innerWidth;   // 화면 너비
+  const viewportHeight = window.innerHeight;
+  const viewportWidth = window.innerWidth;
 
-    // 사파리 등 모바일 브라우저에서의 실제 높이 계산을 위한 함수
-    const getActualViewportHeight = () => {
-      // 임시 div로 100vh 측정
-      let test = document.createElement('div');
-      test.style.position = 'fixed';
-      test.style.height = '100vh';
-      test.style.width = '0';
-      test.style.top = '0';
-      document.documentElement.appendChild(test);
+  // 현재 디바이스 타입 판단
+  let newDeviceType = '';
+  if (viewportWidth <= 767) {
+    newDeviceType = 'mobile';
+  } else if (viewportWidth > 767 && viewportWidth <= 1200) {
+    newDeviceType = 'tablet';
+  } else {
+    newDeviceType = 'pc';
+  }
 
-      const vh = test.offsetHeight;
-      document.documentElement.removeChild(test);
+  // 타입이 변하지 않았다면, 아무것도 안함
+  if (currentDeviceType !== newDeviceType) {
+    currentDeviceType = newDeviceType;
+  }
 
-      return vh;
-    };
+  // 타입이 변했다면, 업데이트
+  currentDeviceType = newDeviceType;
 
-    // 실제 뷰포트 높이 (모바일 UI 고려)
-    const actualVH = getActualViewportHeight();
+  // 여기부터 기존 스타일 초기화
+  modalContent.style.width = '';
+  modalContent.style.maxWidth = '';
+  modalContent.style.height = '';
+  modalContent.style.transform = '';
+  modalContent.style.transformOrigin = '';
+  modalContent.style.padding = '';
+  modalContent.style.borderRadius = '';
 
-    // 안전 영역 계산 (접근 가능한 스크린 영역)
-    const safeAreaHeight = Math.min(viewportHeight, actualVH);
+  if (modalBody) {
+    modalBody.style.height = '';
+    modalBody.style.maxHeight = '';
+    modalBody.style.overflow = '';
+    modalBody.style.webkitOverflowScrolling = '';
+  }
 
-    if (viewportWidth <= 768) {
-      /* 모달 타입 기준 */
-      if (modalType === 'fixed-btn-ver') {
-        // 안전 영역 고려한 높이 계산
-        const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
-        const vhWidth = viewportWidth * 1; // 약간의 여백 추가
+  // safeAreaHeight 계산
+  const getActualViewportHeight = () => {
+    const test = document.createElement('div');
+    test.style.position = 'fixed';
+    test.style.height = '100vh';
+    test.style.width = '0';
+    test.style.top = '0';
+    document.documentElement.appendChild(test);
+    const vh = test.offsetHeight;
+    document.documentElement.removeChild(test);
+    return vh;
+  };
+  const safeAreaHeight = Math.min(viewportHeight, getActualViewportHeight());
 
-        modalContent.style.width = `${vhWidth}px`;
-        modalContent.style.height = `${vhHeight}px`;
+  // 디바이스 타입별 스타일 적용
+  if (newDeviceType === 'mobile') {
+    if (modalType === 'fixed-btn-ver') {
+      modalContent.style.width = `${viewportWidth}px`;
+      modalContent.style.height = `${safeAreaHeight}px`;
+      modalContent.style.maxWidth = '100%';
 
-        // 내용이 넘칠 경우를 대비한 스크롤 설정
-        if (modalBody) {
-          // 헤더/패딩 등 고려한 계산
-          const headerHeight = 48; // 헤더 높이 (필요에 따라 조정)
-          modalBody.style.height = `${vhHeight - headerHeight}px`;
-          modalBody.style.paddingBottom = `64px`;
-          modalBody.style.overflow = 'auto';
-          modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
-        }
-      } else if (modalType === "rotate-ver") {
-        /* 1. 온라인 회원카드 */
-        // 모바일 UI 요소를 고려한 크기 계산
-        modalContent.style.width = `${safeAreaHeight - 32}px`; // 여백 포함
-        modalContent.style.height = `${viewportWidth - 32}px`; // 여백 포함
-        modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)'; // 모바일은 회전 적용
-        modalContent.style.transformOrigin = 'center'; // 회전 중심
-        modalContent.style.borderRadius = '8px'; // 둥근 모서리 제거
-        modalContent.style.padding = '60px 0 0 0'; // 모바일에서 추가 여백
-      } else if (modalType !== 'confirm-ver' && modalType !== 'absolute-ver') {
-        // 남는 type : info-ver : 강습 수준별 진도표, 나머진 css 우선적용
-        // 안전 영역 고려한 높이 계산
-        const vhHeight = safeAreaHeight * 1; // 99%로 약간 줄여서 여백 확보
-        const vhWidth = viewportWidth * 1; // 약간의 여백 추가
-
-        modalContent.style.width = `${vhWidth}px`;
-        modalContent.style.height = `${vhHeight}px`;
-
-        // 내용이 넘칠 경우를 대비한 스크롤 설정
-        if (modalBody) {
-          // 헤더/패딩 등 고려한 계산
-          const headerHeight = 48; // 헤더 높이 (필요에 따라 조정)
-          modalBody.style.height = `${vhHeight - headerHeight}px`;
-          modalBody.style.overflow = 'auto';
-          modalBody.style.webkitOverflowScrolling = 'touch'; // iOS 스크롤 개선
-        }
+      if (modalBody) {
+        modalBody.style.height = `${safeAreaHeight - 48}px`;
+        modalBody.style.paddingBottom = `64px`;
+        modalBody.style.overflow = 'auto';
+        modalBody.style.webkitOverflowScrolling = 'touch';
       }
+    } else if (modalType === 'rotate-ver') {
+      modalContent.style.width = `${safeAreaHeight - 32}px`;
+      modalContent.style.height = `${viewportWidth - 32}px`;
+      modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)';
+      modalContent.style.transformOrigin = 'center';
+      modalContent.style.borderRadius = '8px';
+      modalContent.style.padding = '60px 0 0 0';
+    } else if (modalType !== 'absolute-ver' && modalType !== 'confirm-ver') {
+      modalContent.style.width = `${viewportWidth}px`;
+      modalContent.style.height = `${safeAreaHeight}px`;
 
-      // 디버깅용 - 실제 계산된 높이 확인 (개발 중 참고용, 나중에 제거)
-      console.log(`Actual VH: ${actualVH}, Window Height: ${viewportHeight}, SafeArea: ${safeAreaHeight}`);
+      if (modalBody) {
+        modalBody.style.height = `${safeAreaHeight - 48}px`;
+        modalBody.style.overflow = 'auto';
+        modalBody.style.webkitOverflowScrolling = 'touch';
+      }
+    }
+  }
+
+  if (newDeviceType === 'tablet') {
+    if (modalType === 'absolute-ver') {
+      modalContent.style.width = '100%';
+      modalContent.style.maxWidth = '100%';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
+      }
+    } else if (modalType === 'rotate-ver') {
+      modalContent.style.width = '90%';
+      modalContent.style.maxWidth = '100%';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
+      }
+    } else if(modalType !== 'confirm-ver') {
+      modalContent.style.width = 'calc(100% - 32px)';
+      modalContent.style.maxWidth = '100%';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
+      }
+    }
+  }
+
+  if (newDeviceType === 'pc') {
+    if (modalType === 'rotate-ver') {
+      modalContent.style.width = '90%';
+      modalContent.style.maxWidth = '800px';
+      modalContent.style.height = 'auto';
+      modalContent.style.transform = 'translate(-50%, -50%)';
+      modalContent.style.borderRadius = '8px';
+      modalContent.style.padding = '64px 0 0 0';
     } else {
-      // PC 화면: 스타일 초기화 및 기존 설정
-      if(modalId === 'modal-onlineUserCard') {
-        /* 1. 온라인 회원카드 */
-        modalContent.style.width = '90%'; // 기본 너비
-        modalContent.style.maxWidth = '800px'; // 최대 너비
-        modalContent.style.height = 'auto'; // 높이 자동
-        modalContent.style.transform = 'translate(-50%, -50%)'; // 기본 위치
-        modalContent.style.borderRadius = '8px'; // 둥근 모서리 추가
-        modalContent.style.padding = '64px 0 0 0'; // 기존 여백 유지
-      } else if (modalId === 'modal-centerJoin' || modalId === 'modal-curriculum') {
-        // PC 스타일 초기화
-        modalContent.style.width = '90%';
-        modalContent.style.maxWidth = '800px';
-        modalContent.style.height = 'auto';
-
-        if (modalBody) {
-          modalBody.style.height = 'auto';
-          modalBody.style.maxHeight = '80vh'; // PC에서는 최대 높이만 제한
-          modalBody.style.overflow = 'auto';
+      if (modalContent.classList.contains('lg')) {
+        modalContent.style.maxWidth = '1200px';
+      } else if (modalContent.classList.contains('sm')) {
+        modalContent.style.maxWidth = '600px';
+      } else if (modalContent.classList.contains('xs')) {
+        if (modalType === 'absolute-ver') {
+          modalContent.style.maxWidth = '100%';
         }
+        modalContent.style.maxWidth = '400px';
+      } else {
+        modalContent.style.maxWidth = '800px';
+      }
+      modalContent.style.width = '90%';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
       }
     }
   }
 }
+
+
 // -------- 모달 띄우기 함수 ------------
 // 현재 열린 모달들을 스택으로 관리
 let modalStack = []; // 모달 스택
@@ -367,6 +422,11 @@ function showModal(modalId,options={}) {
   if (window.innerWidth <= 1200) {
     adjustModalSize(modalId);
   }
+  // ✅ 변경된 부분: 열려 있는 모든 팝업에 `adjustModalSize` 호출
+  modalStack.forEach((id) => {
+    adjustModalSize(id, options);
+  });
+
 }
 // 모달 안 focus 가능한 영역 확인 코드 : 최상단 모달에서만 tab키를 눌러도 반응해야하는게 목적
 const handleFocusTrap = (modal) => {
@@ -1732,7 +1792,6 @@ $(document).ready(function(){
   let isMobile = mobileMedia.matches; // 초기 상태 저장
 
   const handleResize = () => {
-    // 열려 있는 모달이 없으면 종료
     if (modalStack.length === 0) return;
 
     const openModalId = modalStack[modalStack.length - 1];
@@ -1742,21 +1801,48 @@ $(document).ready(function(){
 
     const currentIsMobile = mobileMedia.matches;
 
-    // 모바일 <-> PC 상태가 바뀐 경우만 처리
+// 모바일 <-> PC 상태가 바뀐 경우
     if (isMobile !== currentIsMobile) {
       isMobile = currentIsMobile;
 
-      if (openModal.id === 'modal-virtualKeyboard') {
-        hideModal(openModal.id);
-      } else {
-        adjustModalSize(openModal.id);
-      }
+      // 모든 열려 있는 모달 처리
+      modalStack.forEach((modalId) => {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+
+        if (modal.id === 'modal-virtualKeyboard') {
+          // virtualKeyboard 모달은 상태가 바뀌면 닫기
+          hideModal(modal.id);
+        } else {
+          // 상태가 바뀌었으면 adjustModalSize 재호출
+          adjustModalSize(modal.id);
+        }
+      });
+    } else {
+      // 모바일/PC 상태가 바뀌지 않은 경우에도 모든 모달 크기 재조정
+      modalStack.forEach((modalId) => {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+
+        if (modal.id === 'modal-virtualKeyboard') {
+          hideModal(modal.id); // virtualKeyboard 모달은 항상 닫음
+        } else {
+          adjustModalSize(modal.id); // 크기 재조정
+        }
+      });
+    }
+
+
+    // body의 no-scroll 클래스 유지
+    if (!document.body.classList.contains('no-scroll')) {
+      document.body.classList.add('no-scroll');
     }
   };
 
+
   // resize 이벤트 + media query change 이벤트 둘 다 걸어줌
   window.addEventListener('resize', handleResize);
-  mobileMedia.addEventListener('change', handleResize);
+  // mobileMedia.addEventListener('change', handleResize);
 
   // 모달 창 배경 클릭시 닫힘 처리
   window.addEventListener('click', function (event) {
@@ -1968,5 +2054,36 @@ $(document).ready(function(){
       });
     }
   });
+
+  /* 13. [수강신청내역] 수강신청탭 안의 체크박스 수 제한 */
+  // `name`별 제한 설정
+  const MAX_CHECK_MAP = {
+    group1: 2,   // group1은 2개로 제한
+    group2: 3,   // group2는 3개로 제한
+    group3: 0,   // group3은 제한 없음 0,null가능
+    group4: 2 // group4도 제한 없음
+  };
+  const courseRegistrationCheckWrap = document.getElementById('course-registration-check-wrap');
+
+  // 모든 체크박스에 이벤트 리스너 추가
+  courseRegistrationCheckWrap.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+    checkbox.addEventListener('click', (e) => {
+      const name = checkbox.getAttribute('name'); // 현재 체크박스의 name 속성 가져오기
+      const maxCheck = MAX_CHECK_MAP[name]; // 해당 name 그룹의 최대 선택 개수
+      const groupCheckboxes = document.querySelectorAll(`input[name="${name}"]`); // 동일 name 그룹의 체크박스들
+      const checkedCount = Array.from(groupCheckboxes).filter(cb => cb.checked).length; // 선택된 체크박스 개수
+
+      // no-limit 그룹이면 제한 없이 실행
+      if (maxCheck === 0 || maxCheck === null) return;
+
+      // 제한을 초과했을 경우
+      if (checkedCount > maxCheck) {
+        e.preventDefault(); // 선택 취소
+        alert(`"${name}" 그룹에서는 최대 ${maxCheck}개까지만 선택 가능합니다.`);
+      }
+    });
+  });
+
+
 
 })

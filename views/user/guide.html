@@ -4511,7 +4511,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                 </div>
               </div>
               <!-- mobile일 경우 -->
-              <div class="flex-wrap col-ver gap-auto">
+              <div class="mobile-only-f flex-wrap col-ver gap-auto">
                 <div class="flex-wrap al-center between mb-6">
                   <span class="txt-md fw-medium c-gray">항목 1건</span>
                   <span class="txt-md fw-bold">62,000원</span>
@@ -4924,38 +4924,38 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
             <div class="f-modal-body">
               <div class="check-tab-wrap">
                 <div class="check-scroll">
-                  <ul>
+                  <ul id="course-registration-check-wrap">
                     <li>
                       <button type="button" class="check-tab-btn">센터명<span class="isOpen"><span class="visually-hidden">열림</span></span></button>
                       <div class="sub-tab-content">
                         <ul>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false" checked>
+                              <input type="checkbox" name="group1" aria-checked="false">
                               <span>스포츠교실</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false" checked>
+                              <input type="checkbox" name="group1" aria-checked="false">
                               <span>분당스포츠센터</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="true" checked>
+                              <input type="checkbox" name="group1" aria-checked="false">
                               <span>일산스포츠센터</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group1" aria-checked="false">
                               <span>올림픽수영장</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group1" aria-checked="false">
                               <span>축구장</span>
                             </label>
                           </li>
@@ -4968,19 +4968,19 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                         <ul>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="true" checked>
+                              <input type="checkbox" name="group2" aria-checked="false">
                               <span>신규등록</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group2"  aria-checked="false">
                               <span>재등록</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group2"  aria-checked="false">
                               <span>방학특강</span>
                             </label>
                           </li>
@@ -4993,37 +4993,37 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                         <ul>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="true" checked>
+                              <input type="checkbox" name="group3" aria-checked="false">
                               <span>검도</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group3"  aria-checked="false">
                               <span>수영</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group3"  aria-checked="false">
                               <span>배드민턴</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group3"  aria-checked="false">
                               <span>필라테스</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group3"  aria-checked="false">
                               <span>모델워킹</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group3"  aria-checked="false">
                               <span>축구</span>
                             </label>
                           </li>
@@ -5036,68 +5036,104 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                         <ul>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="true" checked>
+                              <input type="checkbox" name="group4"  aria-checked="false">
                               <span>전체</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>9시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>10시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>11시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>12시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>13시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>14시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>15시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>16시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>17시</span>
                             </label>
                           </li>
                           <li>
                             <label class="checkbox-badge-wrap">
-                              <input type="checkbox" aria-checked="false">
+                              <input type="checkbox" name="group4"   aria-checked="false">
                               <span>18시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" name="group4"   aria-checked="false">
+                              <span>19시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" name="group4"   aria-checked="false">
+                              <span>20시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" name="group4"   aria-checked="false">
+                              <span>21시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" name="group4"   aria-checked="false">
+                              <span>22시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" name="group4"   aria-checked="false">
+                              <span>23시</span>
+                            </label>
+                          </li>
+                          <li>
+                            <label class="checkbox-badge-wrap">
+                              <input type="checkbox" name="group4"   aria-checked="false">
+                              <span>24시</span>
                             </label>
                           </li>
                         </ul>
