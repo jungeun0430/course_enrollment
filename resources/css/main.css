@@ -517,7 +517,7 @@ span.title-wrap > .h4,
     .depth-list > li:nth-child(2).active > .depth > span {width:174px;}
     .depth-list > li:nth-child(2).active.complete {justify-content:flex-start;}
     .depth-list > li:nth-child(3) {flex:1;justify-content:flex-end;}
-    .depth-list > li:nth-child(3).active {flex:1;justify-content:flex-end}
+    .depth-list > li:nth-child(3).active {flex:0.6;justify-content:flex-end}
     .depth-list > li:nth-child(3) > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3.svg") right 4px center no-repeat;background-size:24px;}
     .depth-list > li:nth-child(3).active > .depth {background:var(--color-primary-light) url("../images/common/pay_depth_ico3_active.svg") 4px center no-repeat;background-size:24px;}
     .depth-list > li:nth-child(3).active > .depth > span {width:144px;}
@@ -536,13 +536,7 @@ span.title-wrap > .h4,
     .depth-list > li:nth-child(1).active > .depth > span {width:194px;}
     .depth-list > li:nth-child(2).active::after{display:block;}
     .depth-list > li:nth-child(2).active > .depth > span {width:158px;}
-    .depth-list > li:nth-child(3).active > .depth > span {width:124px;}
-}
-
-@media(max-width:767px) {
-    .depth-list > li:nth-child(1).active > .depth > span {width:194px;}
-    .depth-list > li:nth-child(2).active::after{display:block;}
-    .depth-list > li:nth-child(2).active > .depth > span {width:158px;}
+    .depth-list > li:nth-child(3).active {flex:1}
     .depth-list > li:nth-child(3).active > .depth > span {width:124px;}
 }
 
