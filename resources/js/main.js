@@ -199,6 +199,9 @@ function changeTextSize(size) {
 // 모달 크기 조정 및 회전 처리
 let currentDeviceType = '';
 function adjustModalSize(modalId, options = {}) {
+  if (!document.body.classList.contains('no-scroll')) {
+    document.body.classList.add('no-scroll');
+  }
   const modal = document.getElementById(modalId);
   if (!modal) return;
 
@@ -263,6 +266,7 @@ function adjustModalSize(modalId, options = {}) {
   if (newDeviceType === 'mobile') {
     if (modalType === 'fixed-btn-ver') {
       modalContent.style.width = `${viewportWidth}px`;
+      // modalContent.style.width = `50px`;
       modalContent.style.height = `${safeAreaHeight}px`;
       modalContent.style.maxWidth = '100%';
 
@@ -327,7 +331,7 @@ function adjustModalSize(modalId, options = {}) {
 
   if (newDeviceType === 'pc') {
     if (modalType === 'rotate-ver') {
-      modalContent.style.width = '90%';
+      modalContent.style.width = '100%';
       modalContent.style.maxWidth = '800px';
       modalContent.style.height = 'auto';
       modalContent.style.transform = 'translate(-50%, -50%)';
@@ -341,12 +345,13 @@ function adjustModalSize(modalId, options = {}) {
       } else if (modalContent.classList.contains('xs')) {
         if (modalType === 'absolute-ver') {
           modalContent.style.maxWidth = '100%';
+          modalContent.style.width = '100%';
         }
         modalContent.style.maxWidth = '400px';
       } else {
         modalContent.style.maxWidth = '800px';
       }
-      modalContent.style.width = '90%';
+      modalContent.style.width = '100%';
       modalContent.style.height = 'auto';
 
       if (modalBody) {
@@ -357,7 +362,6 @@ function adjustModalSize(modalId, options = {}) {
     }
   }
 }
-
 
 // -------- 모달 띄우기 함수 ------------
 // 현재 열린 모달들을 스택으로 관리
@@ -376,10 +380,11 @@ function showModal(modalId,options={}) {
   }
 
   // 새 모달 활성화
+  document.body.classList.add('no-scroll');
   modal.style.display = 'block';
   modal.style.zIndex = '10002';
   modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('no-scroll');
+
   modalStack.push(modalId); // 스택에 모달 ID 추가
 
   // ✅ 위치 조정 로직
@@ -1842,7 +1847,7 @@ $(document).ready(function(){
 
   // resize 이벤트 + media query change 이벤트 둘 다 걸어줌
   window.addEventListener('resize', handleResize);
-  // mobileMedia.addEventListener('change', handleResize);
+  mobileMedia.addEventListener('change', handleResize);
 
   // 모달 창 배경 클릭시 닫힘 처리
   window.addEventListener('click', function (event) {
