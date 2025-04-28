@@ -292,6 +292,16 @@ function adjustModalSize(modalId, options = {}) {
         modalBody.style.overflow = 'auto';
         modalBody.style.webkitOverflowScrolling = 'touch';
       }
+    }else if(modalType === 'confirm-ver') {
+      modalContent.style.width = 'calc(100% - 32px)';
+      modalContent.style.maxWidth = '500px';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
+      }
     }
   }
 
@@ -319,6 +329,16 @@ function adjustModalSize(modalId, options = {}) {
     } else if ( modalId === 'modal-discountCheck') {
       modalContent.style.width = '100%';
       modalContent.style.maxWidth = '90%';
+      modalContent.style.height = 'auto';
+
+      if (modalBody) {
+        modalBody.style.height = 'auto';
+        modalBody.style.maxHeight = '80vh';
+        modalBody.style.overflow = 'auto';
+      }
+    } else if(modalType === 'confirm-ver') {
+      modalContent.style.width = '100%';
+      modalContent.style.maxWidth = '600px';
       modalContent.style.height = 'auto';
 
       if (modalBody) {
