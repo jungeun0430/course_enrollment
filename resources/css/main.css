@@ -100,8 +100,8 @@ header .btn-wrap.sm {gap:8px;}
 /* footer */
 footer {padding:28px 36px;background-color:var(--color-white);}
 footer > .content-wrap {max-width:1760px;width:100%;margin:0 auto;}
-.footer-terms-list {display:flex;align-items:center;}
-.footer-terms-list > li {padding:0 12px 12px;position:relative;}
+.footer-terms-list {display:flex;align-items:center;padding-bottom:12px;}
+.footer-terms-list > li {padding:0 12px;position:relative;}
 .footer-terms-list > li:first-child{padding-left:0;}
 .footer-terms-list > li + li::before {content:'';width:1px;height:10px;background-color:var(--border-dash-color);position:absolute;left:0;top:50%;transform:translateY(-50%);}
 .copyright {margin-top:4px;font-size:var(--txt-footer-size);color:var(--color-gray2);font-weight:var(--fw-regular);}

@@ -39,7 +39,7 @@
 .modal[data-modal-type="absolute-ver"].xs  {width:100%;max-width:400px;height:auto;background-color:var(--color-transparent);}
 .modal[data-modal-type="absolute-ver"].xs .modal-content{width:100%;height:auto;}
 .modal[data-modal-type="absolute-ver"] .modal-content {position:static;transform: none;}
-.modal[data-modal-type="absolute-ver"] .modal-body {border-radius:4px;}
+.modal[data-modal-type="absolute-ver"] .modal-body {border-radius:0 0 4px 4px;}
 
 @media(max-width: 1200px) {
   .modal[data-modal-type="absolute-ver"] {position:fixed;top:auto;left:0;bottom:0;z-index: 100002;border-bottom-left-radius:0;border-bottom-right-radius: 0;}

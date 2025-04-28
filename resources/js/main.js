@@ -1685,7 +1685,6 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
   items.forEach((item, index) => {
     item.addEventListener('keydown', e => {
       const isAnchor = !!item.querySelector('a');
-
       if ((e.key === 'Enter' || e.key === ' ') && isAnchor && !preventSelectionOnLink) {
         // 링크는 이동만 하고, 선택 텍스트는 업데이트 안 함
         closeList();  // 링크를 클릭하면 리스트는 닫아줘야 함
@@ -1708,10 +1707,13 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
         e.preventDefault();
         const prev = items[index - 1] || items[items.length - 1];
         prev.focus();
-      } else if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        selectItem(item);
-        closeList();  // 선택한 후 리스트 닫기
+      } else if ((e.key === 'Enter' || e.key === ' ') && isAnchor) {
+        if (preventSelectionOnLink) {
+          closeList();
+        } else {
+          e.preventDefault();
+          closeList();
+        }
       } else if (e.key === 'Escape') {
         closeList();
         button.focus();
