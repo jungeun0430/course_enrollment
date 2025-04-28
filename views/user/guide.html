@@ -4539,7 +4539,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
   </div>
 
     <div class="guide-box">
-      <h2>사. 탭 관련(진행중)</h2>
+      <h2>사. 탭 관련</h2>
       <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
         pc / mobile 탭 모양 다른경우 : data-tab="fraternal"<br>
         pc / mobile 탭 모양 같을경우 : data-tab="twin"
@@ -5377,8 +5377,8 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
   <div class="content-wrap">
     <div class="flex-wrap al-start gap4 between mo-col">
       <ul class="footer-terms-list">
-        <li><a href="#" class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
-        <li><a href="#" class="txt-sm fw-medium c-gray">이용약관</a></li>
+        <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000" target="_blank" class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
+        <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10703000000" target="_blank" class="txt-sm fw-medium c-gray">이용약관</a></li>
       </ul>
       <div class="footer-select-wrap flex-wrap al-center gap8 w-auto">
         <!-- 패밀리 사이트 : select 참조 변수명 = familySite -->
@@ -5404,11 +5404,14 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         <li class="txt-sm fw-regular c-gray">(05540) 서울특별시 송파구 올림픽로 424(방이동) 올림픽역도경기장 내</li>
         <li class="copyright">COPYRIGHT 2025 © KSPO&CO ALL RIGHTS RESERVED.</li>
       </ul>
+      <!-- 임시 안보임 처리 -->
+      <!--
       <div class="certification-wrap">
         <div class="img-box">
           <img src="../../resources/images/certification/certification_privacy_protection_certified_site.svg" alt="개인정보우수사이트 인증" />
         </div>
       </div>
+      -->
     </div>
 
   </div>
@@ -5440,6 +5443,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
 
   /* [푸터] ------------------- */
   /* 푸터 (패밀리사이트/관련사이트) */
+  // 관련
   const footer1 = [
     { value: '국민체육진흥공단',tag: 'a', href: 'http://www.kspo.or.kr/' },
     { value: '문화체육관광부',tag: 'a', href: 'http://www.mcst.go.kr/main.jsp' },
@@ -5454,6 +5458,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     { value: '국민체력센터',tag: 'a', href: 'http://www.nfc.or.kr/' },
     { value: '국민권익위원회',tag: 'a', href: 'http://www.acrc.go.kr/acrc/index.do"' },
   ];
+  // 패밀리
   const footer2 = [
     { value: '한국체육산업개발(주)',tag: 'a', href: 'http://www.ksponco.or.kr/' },
     { value: '올림픽공원스포츠센터',tag: 'a', href: 'https://www.ksponco.or.kr/sports/olparksports' },
@@ -5466,12 +5471,12 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     // { value: '대관예약시스템',tag: 'a', href: '"https://www2.ksponco.or.kr/culture/index.do' }, // as-is 운영 , to-be 운영
     { value: '대관예약시스템',tag: 'a', href: 'https://www.ksponco.or.kr/culture/index.do' }, // 테스트 운영
   ]
-  initializeCustomSelect(document.querySelector('.custom-select[data-options="familySite"]'), footer1, {
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="familySite"]'), footer2, {
     up:true,
     preventSelectionOnLink: true, // 링크 이동의 역할만 할 경우 placeholder 변경 필요없음 지정 변수
     placeholder: '패밀리 사이트',
   });
-  initializeCustomSelect(document.querySelector('.custom-select[data-options="relatedSite"]'), footer2, {
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="relatedSite"]'), footer1, {
     up:true,
     preventSelectionOnLink: true,// 링크 이동의 역할만 할 경우 placeholder 변경 필요없음 지정 변수
     placeholder: '관련 사이트',
