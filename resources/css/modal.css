@@ -91,8 +91,8 @@
 .bc-user-num + .bc-img-box {margin-top:12px;}
 
 /* 1. cs_mobile_user_card : 온라인 회원카드 */
-.online-card-wrap {padding:0;margin-bottom: 20px}
-.online-card-wrap > *{flex:1;height:460px;padding:28px 20px;}
+.online-card-wrap {padding:0;margin-bottom: 20px;justify-content:center;}
+.online-card-wrap > *{flex:1;height:460px;padding:28px 20px;max-width:300px;}
 .online-card-wrap .title-wrap > .h4 + .link-btn,
 .online-card-wrap .title-wrap > h4 + .link-btn {margin-top:16px;}
 .online-card-wrap + .flex-wrap {margin-top:20px;}
@@ -102,7 +102,7 @@
 
 @media (max-width:1200px) {
   /* 1. cs_mobile_user_card : 온라인 회원카드 */
-  .online-card-wrap > *{height:80px;padding:12px 16px;}
+  .online-card-wrap > *{height:80px;padding:12px 16px;max-width: none;}
   .online-card-wrap .title-wrap > h4 + .link-btn {margin-top:8px;}
   .online-card-wrap + .flex-wrap {margin-top:0;}
   .txt-gray {text-align:left;}
