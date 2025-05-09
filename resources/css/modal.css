@@ -102,8 +102,9 @@
 .txt-gray + .arrow_link {margin-left:60px;}
 /* 흘러가는 텍스트 */
 .marquee-container {width:100%;overflow:hidden;white-space:nowrap;padding:20px 0;}
-.marquee-wrapper{display:flex;animation: slide-left 10s linear infinite;}
-.marquee-text {display: inline-block;}
+.marquee-wrapper{display:flex;align-items:center;animation: slide-left 10s linear infinite;}
+.marquee-text {display: inline-flex; align-items:center;}
+img.marquee-text {height: 20px;margin:0 6px;}
 @keyframes slide-left {
   0% {
     transform: translateX(0); /* 시작 위치 */
@@ -151,6 +152,7 @@
   .bc-user-name {/*font-size:32px;*/margin-top:0!important;}
   .bc-user-num {font-weight: var(--fw-medium)!important;}
   .marquee-container {padding:10px 0 20px;}
+  img.marquee-text {height: 18px;margin:0 4px;}
 
   /* 알림관련 모달 */
   .confirm-box {display:flex;flex-direction:column;align-items:center;}
