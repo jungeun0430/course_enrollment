@@ -2824,7 +2824,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
             <h3>온라인 회원카드</h3>
             <button type="button" onclick="hideModal('modal-onlineUserCard')" class="close-btn"><span class="visually-hidden">닫기</span></button>
           </div>
-          <div class="modal-body">
+          <div class="modal-body no-pb">
             <div class="flex-wrap col-ver bc-box gap-auto">
               <p class="bc-pl-tit">올림픽수영장</p>
               <p class="bc-user-name">홍길동</p>
@@ -2832,6 +2832,14 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
               <div class="bc-img-box">
                 <img src="../../resources/images/subPage/bgimg.png" alt="바코드 임시 이미지"/>
               </div>
+            </div>
+          </div>
+          <!-- 경고멘트 -->
+          <div class="marquee-container">
+            <div class="marquee-wrapper">
+              <p class="marquee-text c-blue fw-medium txt-rgl">본 화면은 인증된 사용자 개인 전용입니다.무단 캡쳐 및 무단 공유 시 책임이 발생할 수 있습니다.</p>
+              <p class="marquee-text c-blue fw-medium txt-rgl">본 화면은 인증된 사용자 개인 전용입니다.무단 캡쳐 및 무단 공유 시 책임이 발생할 수 있습니다.</p>
+              <p class="marquee-text c-blue fw-medium txt-rgl">본 화면은 인증된 사용자 개인 전용입니다.무단 캡쳐 및 무단 공유 시 책임이 발생할 수 있습니다.</p>
             </div>
           </div>
         </div>
@@ -5371,6 +5379,27 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
               <button type="button" class="btn size-md md">조회하기</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-box">
+      <h2>차. 페이징처리</h2>
+      <h5>페이징 처리</h5>
+      <div class="box">
+        <div class="pagination-box">
+          <button type="button" class="pg_first"><span class="visually-hidden">처음으로 가기</span></button>
+          <button type="button" class="pg_prev"><span class="visually-hidden">이전</span></button>
+          <ul>
+            <li><button type="button">1</button></li>
+            <li><button type="button">2</button></li>
+            <li><button type="button">3</button></li>
+            <li><button type="button">4</button></li>
+            <li><button type="button">5</button></li>
+            <li><button type="button">...</button></li>
+          </ul>
+          <button type="button" class="pg_next"><span class="visually-hidden">다음</span></button>
+          <button type="button" class="pg_last"><span class="visually-hidden">마지막으로 가기</span></button>
         </div>
       </div>
     </div>

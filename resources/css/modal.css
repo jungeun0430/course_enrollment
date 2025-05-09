@@ -15,6 +15,7 @@
 .modal-content .close-btn {width:28px;height:28px;background:url(../images/ico/ico_modal_close.svg) center center no-repeat;background-size:contain;cursor:pointer;}
 .modal-body {padding:40px 70px;max-height: 60vh;overflow-y: auto;}
 .modal-body.pd-0{padding:0;}
+.modal-body.no-pb{padding-bottom:0;}
 .modal-content > .btn-wrap{padding-top:10px;}
 .modal-body.h-auto {height: auto;max-height: none;}
 
@@ -99,6 +100,19 @@
 .txt-gray {font-size:var(--txt-size06);font-weight:var(--fw-bold);color:#666666;text-align:left;}
 .arrow_link {display:inline-flex;align-items:center;padding-right:48px;height:40px;font-size: var(--txt-size04);font-weight:var(--fw-medium);color:#0189FF;background:url(../images/ico/ico_arrow_white_circle.svg) right 0 center no-repeat;background-size:40px;}
 .txt-gray + .arrow_link {margin-left:60px;}
+/* 흘러가는 텍스트 */
+.marquee-container {width:100%;overflow:hidden;white-space:nowrap;padding:20px 0;}
+.marquee-wrapper{display:flex;animation: slide-left 10s linear infinite;}
+.marquee-text {display: inline-block;}
+@keyframes slide-left {
+  0% {
+    transform: translateX(0); /* 시작 위치 */
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 
 @media (max-width:1200px) {
   /* 1. cs_mobile_user_card : 온라인 회원카드 */
@@ -136,6 +150,7 @@
   .bc-img-box img {}
   .bc-user-name {/*font-size:32px;*/margin-top:0!important;}
   .bc-user-num {font-weight: var(--fw-medium)!important;}
+  .marquee-container {padding:10px 0 20px;}
 
   /* 알림관련 모달 */
   .confirm-box {display:flex;flex-direction:column;align-items:center;}

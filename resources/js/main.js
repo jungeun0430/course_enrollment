@@ -280,9 +280,11 @@ function adjustModalSize(modalId, options = {}) {
       modalContent.style.width = `${safeAreaHeight - 32}px`;
       modalContent.style.height = `${viewportWidth - 32}px`;
       modalContent.style.transform = 'translate(-50%, -50%) rotate(-90deg)';
+      modalBody.style.maxHeight = 'none';
+      modalBody.style.height = 'calc(100% - 52px)'
       modalContent.style.transformOrigin = 'center';
       modalContent.style.borderRadius = '8px';
-      modalContent.style.padding = '60px 0 0 0';
+      modalContent.style.padding = '48px 0 0 0';
     } else if (modalType !== 'absolute-ver' && modalType !== 'confirm-ver') {
       modalContent.style.width = `${viewportWidth}px`;
       modalContent.style.height = `${safeAreaHeight}px`;
@@ -566,12 +568,13 @@ const handleFocusTrap = (modal) => {
 // 모달 숨기기 함수
 function hideModal(modalId) {
   const modal = document.getElementById(modalId);
-  if (!modal) return;
 
+  if (!modal) return;
   // resetModalFields(modal);
 
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
+
 
   // 스택에서 제거
   modalStack = modalStack.filter((id) => id !== modalId);
@@ -586,10 +589,12 @@ function hideModal(modalId) {
 
   // 오버레이 제거 (선택적)
   const overlay = document.getElementById('overlay');
-  if (overlay.classList.contains('transparent')) {
+
+  // overlay가 존재하는 경우에만 실행
+  if (overlay && overlay.classList.contains('transparent')) {
     overlay.classList.remove('transparent');
+    overlay.classList.remove('active');
   }
-  overlay.classList.remove('active');
 
   // 아래 모달 다시 포커싱 가능하도록 처리
   const prevModalId = modalStack[modalStack.length - 1];
