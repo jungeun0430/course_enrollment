@@ -29,6 +29,8 @@ html, body{/*position:static;left:auto;*/height:100%;font-family:"Pretendard", s
 .mobile-only-tr {display:none!important;}
 .body-lg-only-tc {display:none!important;}
 body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-action:none;-webkit-overflow-scrolling:initial;overscroll-behavior: none/* 스크롤 막기 */}
+.cursor-pointer {cursor:pointer!important;}
+.cursor-pointer:disabled {cursor:default!important;}
 
 body.loading {visibility: hidden}
 /* 초기화가 끝난 후 visibility 복구 */
