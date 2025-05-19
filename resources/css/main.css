@@ -332,9 +332,11 @@ span.title-wrap > .h4,
 .tab-wrap[data-tab="twin"] {z-index:0;}
 .tab-wrap[data-tab="fraternal"] {z-index:1;}
 .tab-wrap .first-depth {display:flex;align-items:center;justify-content:center;}
+.tab-wrap[data-tab="fraternal"] .first-depth,
+.tab-wrap[data-tab="fraternal"] .first-depth > li {height:100%;}
 .tab-wrap .first-depth > li {flex:1;height:64px;border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);}
 .tab-wrap .first-depth > li > .tab-box {display:none;}
-.tab-wrap .first-depth > li.active > .tab-box {display:block;}
+.tab-wrap .first-depth > li.active > .tab-box {display:block;z-index: 1}
 .tab-box {position:absolute;left:0;top:104px;width:100%;}
 .tab-wrap .first-depth > li > button {width:100%;height:100%;display:flex;justify-content:center;align-items:center;text-align:center;font-size:var(--txt-size04);font-weight:var(--fw-medium);color:var(--color-gray);}
 .tab-wrap .first-depth > li + li {border-left:1px solid var(--border-color);}

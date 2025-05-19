@@ -648,6 +648,79 @@ function resetModalFields(modal) {
   // 클래스나 스타일 초기화 등도 여기에 포함 가능
 }
 
+function removeItem(modalId, targetRowElement) {
+  const modal = document.getElementById(modalId); // modalId로 모달 요소 찾기
+  const target = document.getElementById(targetRowElement)
+  if (!modal) {
+    alert('모달을 찾을 수 없습니다.');
+    return;
+  }
+
+  if (target) {
+    target.remove(); // 대상 행 삭제
+    updateTabHeights(modalId); // 탭 높이 업데이트
+    alert('선택한 행이 삭제되었습니다!');
+  } else {
+    alert('삭제할 행을 찾을 수 없습니다.');
+  }
+}
+
+
+/**
+ * 탭의 높이를 계산하는 함수
+ * @param {HTMLElement} wrap - 각 탭의 래퍼 요소 (.tab-wrap)
+ * @param {String|null} modalId - 특정 모달 ID (null이면 일반 탭-wrap)
+ * @param {Boolean} isMobile - 현재 화면이 모바일인지 여부
+ * @returns {Number|null} 계산된 높이 (없으면 null 반환)
+ */
+function calculateTabHeight(wrap, modalId, isMobile) {
+  const activeTab = wrap.querySelector('.first-depth > li.active .tab-box'); // 활성화된 탭 찾기
+  if (!activeTab) return null;
+
+  const tabBoxHeight = activeTab.offsetHeight; // 활성 탭의 높이
+  const listLength = wrap.querySelectorAll('.first-depth > li').length;
+
+  const isInModal = modalId && wrap.closest(`#${modalId}`); // 모달 내부인지 확인
+
+  const topSpacing =
+    listLength <= 1
+      ? 0
+      : isInModal
+        ? 84
+        : isMobile
+          ? 84
+          : 104;
+
+  return tabBoxHeight + topSpacing; // 계산된 높이 반환
+}
+
+/**
+ * 탭 높이를 업데이트하는 함수
+ * @param {String|null} modalId - 특정 모달 ID (null이면 일반 탭-wrap)
+ * @param {Boolean} isMobile - 현재 화면이 모바일인지 여부
+ */
+function updateTabHeights(modalId = null, isMobile) {
+
+  const tabWrapSelector = modalId
+    ? `#${modalId}.tab-wrap`
+    : '.tab-wrap';
+
+  const tabWraps = document.querySelectorAll(tabWrapSelector);
+
+  if (!tabWraps.length) {
+    console.log('tab-wrap 요소가 없습니다.');
+    return;
+  }
+
+  // .tab-wrap 요소별로 높이를 계산하고 반영
+  tabWraps.forEach(wrap => {
+    const calculatedHeight = calculateTabHeight(wrap, modalId, isMobile);
+    if (calculatedHeight !== null) {
+      wrap.style.height = `${calculatedHeight}px`;
+    }
+  });
+}
+
 /* 4. 탭 관련 함수 */
 class TabManager {
   constructor() {
