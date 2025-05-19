@@ -648,6 +648,7 @@ function resetModalFields(modal) {
   // 클래스나 스타일 초기화 등도 여기에 포함 가능
 }
 
+let isMobile;
 function removeItem(modalId, targetRowElement) {
   const modal = document.getElementById(modalId); // modalId로 모달 요소 찾기
   const target = document.getElementById(targetRowElement)
@@ -658,8 +659,11 @@ function removeItem(modalId, targetRowElement) {
 
   if (target) {
     target.remove(); // 대상 행 삭제
-    updateTabHeights(modalId); // 탭 높이 업데이트
-    alert('선택한 행이 삭제되었습니다!');
+    setTimeout(function() {
+      updateTabHeights(modalId,isMobile); // 탭 높이 업데이트
+      alert('선택한 행이 삭제되었습니다!');
+    },0)
+
   } else {
     alert('삭제할 행을 찾을 수 없습니다.');
   }
@@ -690,6 +694,10 @@ function calculateTabHeight(wrap, modalId, isMobile) {
         : isMobile
           ? 84
           : 104;
+  console.log(isMobile)
+  console.log(topSpacing,'fsdkjjsfkjsd')
+  console.log(tabBoxHeight,'tabBoxHeight')
+  console.log(topSpacing,'topSpacing')
 
   return tabBoxHeight + topSpacing; // 계산된 높이 반환
 }
@@ -1068,7 +1076,6 @@ class TabManager {
               : this.isMobile
                 ? 84
                 : 104;
-        console.log(topSpacing)
 
         wrap.style.height = `${tabBoxHeight + topSpacing}px`; // 계산된 높이 설정
       }
@@ -1904,7 +1911,7 @@ $(document).ready(function(){
   /* 3. [공통]모달 관련 함수 */
   // 창 크기 변경 시 모달 크기 재조정 or hideModal 작동시키기
   const mobileMedia = window.matchMedia('(max-width: 767px)');
-  let isMobile = mobileMedia.matches; // 초기 상태 저장
+  isMobile = mobileMedia.matches; // 초기 상태 저장
 
   const handleResize = () => {
     if (modalStack.length === 0) return;
