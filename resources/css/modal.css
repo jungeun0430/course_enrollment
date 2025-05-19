@@ -72,6 +72,15 @@
 .modal[data-modal-type="info-ver"] .modal-content {}
 .modal[data-modal-type="info-ver"] .modal-body {padding:28px 24px;}
 
+/* 모달 (absolute-ver) */
+/*.modal[data-modal-type="absolute-btn-ver"] .modal-content{padding-bottom:60px;position:relative;}
+.modal[data-modal-type="absolute-btn-ver"] .modal-body{padding:28px 60px;max-height:65vh;!*max-height:none;height:calc(100vh - 48px - 48px);*!}
+.modal.pd-sm[data-modal-type="absolute-btn-ver"] .modal-body{padding:28px 24px;}
+.modal[data-modal-type="absolute-btn-ver"] .modal-body > p {margin-bottom:12px;}
+.modal[data-modal-type="absolute-btn-ver"] .fixed.btn {position:absolute;left:0;bottom:0;width:100%;border-radius:0 0 4px 4px;}
+.modal[data-modal-type="absolute-btn-ver"] .sub-content-box + .sub-content-box {margin-top:20px;}
+.modal[data-modal-type="absolute-btn-ver"] .dash-list + .sub-content-box {margin-top:20px;}*/
+
 /* 알림관련 모달 */
 .confirm-box {display:flex;flex-direction:column;align-items:center;}
 .confirm-box img {width:80px;height:80px;}

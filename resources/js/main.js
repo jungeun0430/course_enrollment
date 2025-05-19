@@ -781,7 +781,6 @@ class TabManager {
     const id = this.getTabSetId(wrap);
 
     if (!this.tabSets.has(id)) {
-      console.log(`${id} 탭 세트의 초기 순서 저장`);
       this.tabSets.set(id, {
         originalOrder: Array.from(firstDepth.children).map(li => li.cloneNode(true))
       });
@@ -862,6 +861,7 @@ class TabManager {
 
     const tabs = wrap.querySelectorAll('.first-depth > li .tab');
     const tabType = wrap.getAttribute('data-tab');
+    const tabSingle = wrap.getAttribute('data-single');
 
     // 모바일 환경에서 탭 키 네비게이션을 위한 tabindex 설정
     if (tabType === 'fraternal') {
@@ -885,6 +885,8 @@ class TabManager {
       tab.addEventListener('click', (e) => {
         if (tabType === 'fraternal' && this.isMobile) {
           if (firstDepth.classList.contains('opened')) {
+            console.log('activate1')
+
             this.activateTab(tab);
             firstDepth.classList.remove('opened');
 
@@ -895,7 +897,13 @@ class TabManager {
           } else {
             firstDepth.classList.add('opened');
           }
-        } else {
+        } else if(tabSingle === 'aa') {
+
+          this.activateTab(tab, tabType,tabSingle);
+
+
+        } else
+        {
           this.activateTab(tab, tabType);
         }
       });
@@ -953,10 +961,10 @@ class TabManager {
       const tabType = wrap.getAttribute('data-tab');
 
       const firstDepth = wrap.querySelector('.first-depth');
-      if (!firstDepth) {
+      /*if (!firstDepth) {
         console.warn(`탭 랩 #${index}에 .first-depth 요소가 없습니다!`);
         return;
-      }
+      }*/
 
       // 초기 순서 저장 - 수정된 메서드 호출
       this.saveOriginalOrder(wrap, firstDepth);
@@ -970,7 +978,6 @@ class TabManager {
       }
 
       const tabBoxes = wrap.querySelectorAll('.tab-box');
-      console.log(`탭 ${tabs.length}개, 탭 박스 ${tabBoxes.length}개 발견`);
 
       // 초기에 모든 tab-box 숨기기
       tabBoxes.forEach(box => box.style.display = 'none');
@@ -1026,6 +1033,12 @@ class TabManager {
     // 선택된 탭 활성화 및 tab-box 보이기
     const activeTabItem = selectedTab.closest('li');
     activeTabItem.classList.add('active');
+    if(activeTabItem.dataset.selectedTab === 'cancel') {
+      changeButtonStateAndEvent('modal-courseChange','cancel')
+    } else if(activeTabItem.dataset.selectedTab === 'delay') {
+      changeButtonStateAndEvent('modal-courseChange','delay')
+    }
+
     const activeTabBox = activeTabItem.querySelector('.tab-box');
     if (activeTabBox) {
       activeTabBox.style.display = 'block';
@@ -1080,6 +1093,104 @@ class TabManager {
         wrap.style.height = `${tabBoxHeight + topSpacing}px`; // 계산된 높이 설정
       }
     });
+  }
+}
+function changeButtonStateAndEvent(modalId, selectedTabName) {
+  const modal = document.getElementById(modalId); // 해당 모달 가져오기
+  if (!modal) {
+    console.warn(`모달 ID(${modalId})를 찾을 수 없습니다.`);
+    return;
+  }
+
+  // 버튼 가져오기
+  const button = modal.querySelector('#actionButton');
+  if (!button) {
+    console.warn(`${modalId} 모달에 버튼이 없습니다.`);
+    return;
+  }
+
+  // 현재 활성 탭에서 모든 체크박스 확인
+  const activeTab = modal.querySelector(`li[data-selected-tab="${selectedTabName}"]`);
+  if (!activeTab) {
+    console.warn(`활성화된 탭(${selectedTabName})을 찾을 수 없습니다.`);
+    return;
+  }
+
+  const checkboxes = activeTab.querySelectorAll('input[type="checkbox"]');
+  const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked); // 체크박스가 체크되었는지 확인
+
+  // 버튼 비활성화/활성화 처리
+  button.disabled = !isChecked;
+
+  // 버튼 텍스트 수정 로직
+  if (selectedTabName === 'delay') {
+    button.textContent = '연기 신청하기';
+    button.onclick = () => {
+      console.log('연기 신청하기 버튼이 클릭되었습니다.');
+      // 여기에 연기 신청하기 로직 추가
+    };
+  } else if (selectedTabName === 'cancel') {
+    button.textContent = '취소 신청하기';
+    button.onclick = () => {
+      console.log('취소 신청하기 버튼이 클릭되었습니다.');
+      // 여기에 취소 신청하기 로직 추가
+    };
+  } else {
+    console.warn(`알 수 없는 탭 이름(${selectedTabName})입니다.`);
+  }
+}
+
+/**
+ * 버튼 상태를 업데이트 (텍스트 변경 및 이벤트 핸들러 설정)
+ */
+/**
+ * 체크박스 클릭 시 버튼 상태를 업데이트
+ * @param {string} modalId - 해당 모달 ID
+ * @param {string} selectedTabName - 현재 활성화된 탭 이름 (delay 또는 cancel)
+ */
+function handleCheckboxClick(modalId, selectedTabName) {
+  const modal = document.getElementById(modalId); // 모달 Element 가져오기
+  if (!modal) {
+    console.warn(`모달 ID(${modalId})를 찾을 수 없습니다.`);
+    return;
+  }
+
+  // 버튼 가져오기
+  const button = modal.querySelector('#actionButton');
+  if (!button) {
+    console.warn(`${modalId} 모달에 버튼이 없습니다.`);
+    return;
+  }
+
+  // 해당 탭 찾기
+  const activeTab = modal.querySelector(`li[data-selected-tab="${selectedTabName}"]`);
+  if (!activeTab) {
+    console.warn(`활성화된 탭(${selectedTabName})을 찾을 수 없습니다.`);
+    return;
+  }
+
+  // 체크박스 상태 확인
+  const checkboxes = activeTab.querySelectorAll('input[type="checkbox"]');
+  const isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked); // 하나라도 체크되어 있는지 확인
+
+  // 버튼 활성화 여부
+  button.disabled = !isChecked;
+
+  // 버튼 텍스트 및 동작 업데이트
+  if (selectedTabName === 'delay') {
+    button.textContent = '연기 신청하기';
+    button.onclick = () => {
+      console.log('연기 신청하기 버튼 클릭');
+      // 연기 신청 로직 추가
+    };
+  } else if (selectedTabName === 'cancel') {
+    button.textContent = '취소 신청하기';
+    button.onclick = () => {
+      console.log('취소 신청하기 버튼 클릭');
+      // 취소 신청 로직 추가
+    };
+  } else {
+    console.warn(`알 수 없는 탭 이름(${selectedTabName})입니다.`);
   }
 }
 /* 5. 수강신청 관련 탭 함수 - 인덱스를 매개변수로 받도록 수정 */
@@ -2205,4 +2316,5 @@ $(document).ready(function(){
       }
     });
   });
+
 })
