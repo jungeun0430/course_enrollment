@@ -591,7 +591,7 @@ function hideModal(modalId) {
   const overlay = document.getElementById('overlay');
 
   // overlay가 존재하는 경우에만 실행
-  if (overlay && overlay.classList.contains('transparent')) {
+  if (overlay || overlay.classList.contains('transparent')) {
     overlay.classList.remove('transparent');
     overlay.classList.remove('active');
   }
