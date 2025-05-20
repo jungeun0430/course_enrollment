@@ -279,7 +279,7 @@ span.title-wrap > .h4,
 .empty-txt.course {background:url('../images/ico/ico_mortarboard.svg') center top no-repeat;background-size:80px;}
 .empty-txt.paper {background:url('../images/ico/ico_paper.svg') center top no-repeat;background-size:80px;}
 /* 커스텀 테이블 > 장바구니 합산 */
-.total-wrap {max-width:950px;width:100%;display:flex;justify-content:space-evenly;align-items:center;gap:40px;}
+.total-wrap {width:100%;display:flex;align-items:center;justify-content:center;gap:40px;}
 .total-wrap .flex-wrap {width:auto;}
 .ico-box { width:24px;height:24px;flex-shrink: 0;}
 .ico-box.minus {background:url(../images/ico/ico_circle_minus.svg) center center no-repeat;background-size:24px;}
