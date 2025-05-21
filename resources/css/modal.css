@@ -93,7 +93,7 @@
 /* 바코드 */
 .bc-box > * {flex:1;width:100%;}
 .bc-pl-tit {display:flex;justify-content:space-between;align-items:flex-end;font-size:var(--txt-size05);font-weight:var(--fw-medium);color:#0189FF;}
-.bc-pl-tit img {width: 132px;height:32px;object-fit:contain;}
+.bc-pl-tit img {width: 180px;height:32px;object-fit:contain;}
 .bc-user-name {font-size:var(--txt-size08);font-weight:var(--fw-bold);color:#333333;}
 .bc-user-num {font-size:var(--txt-size06);font-weight:var(--fw-medium);color:#666666;}
 .bc-img-box > img {width:100%;}
@@ -163,7 +163,7 @@ img.marquee-text {height: 20px;margin:0 6px;}
   .bc-user-num {font-weight: var(--fw-medium)!important;}
   .marquee-container {padding:10px 0 20px;}
   img.marquee-text {height: 18px;margin:0 4px;}
-
+  .bc-pl-tit img {width: 132px;height:auto;object-fit:contain;}
   /* 알림관련 모달 */
   .confirm-box {display:flex;flex-direction:column;align-items:center;}
   .confirm-box img {width:48px;height:48px;}
