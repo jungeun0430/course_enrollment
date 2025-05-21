@@ -364,7 +364,7 @@ function adjustModalSize(modalId, options = {}) {
   if (newDeviceType === 'pc') {
     if (modalType === 'rotate-ver') {
       modalContent.style.width = '100%';
-      modalContent.style.maxWidth = '800px';
+      modalContent.style.maxWidth = '600px';
       modalContent.style.height = 'auto';
       modalContent.style.transform = 'translate(-50%, -50%)';
       modalContent.style.borderRadius = '8px';
