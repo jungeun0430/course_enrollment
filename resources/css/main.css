@@ -116,6 +116,14 @@ footer > .content-wrap {max-width:1760px;width:100%;margin:0 auto;}
 .certification-wrap {display:flex;align-items:center;gap:4px;}
 .certification-wrap > .img-box > img {width:100%;vertical-align:bottom}
 @media (max-width:1200px) {
+    /* header */
+    header .ico-hamburger {min-width:28px;}
+    header a.ico-user {width:100%;background-position:0 center;background-size: 24px;}
+    header a.ico-bag {width:100%;background-position:0 center;background-size: 24px;}
+    header a.ico-pay {width:100%;background-position:0 center;background-size: 24px;}
+    header a.ico-logout {width:100%;background-position:0 center;background-size: 24px;}
+
+    /* footer */
     footer{padding:20px 20px 28px 20px;}
     footer > .content-wrap > .flex-wrap {width:100%;}
     .f-bottom {margin-top:16px;}
