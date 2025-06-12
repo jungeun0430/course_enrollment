@@ -278,7 +278,16 @@
 .custom-select[data-select="footer"] .select-toggle:focus {border-width:2px;border-color:var(--color-primary);}
 .custom-select[data-select="footer"] .select-toggle {border-radius:0;border-width: 0 0 1px 0;}
 
-  /* ------------------------------------------------------- */
+/* 링크 */
+/* 텍스트 관련(링크) */
+.direct-link {display:inline-block;line-height:20px;padding-left:22px;padding-right:22px;position:relative;background:url('../images/ico/ico_i.svg') 0 center no-repeat;background-size:20px;font-size:var(--txt-size02);font-weight: var(--fw-medium);color:var(--color-gray);}
+.direct-link::after{content:'';width:20px;height:20px;background:url('../images/ico/ico_link.svg') center center no-repeat;background-size:20px;position:absolute;right:0;top:50%;transform:translateY(-50%);}
+@media (max-width: 767px) {
+  .direct-link{padding-left:22px;padding-right:12px;}
+  .direct-link::after {width:12px;height:12px;background-size: 16px;}
+}
+
+/* ------------------------------------------------------- */
 /* 뱃지 */
 .badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
 .badge.red {background-color:var(--bg-light-red);color:var(--color-red);text-decoration:none!important;}
@@ -308,7 +317,7 @@
 .c-gray2{color:var(--color-gray2);}
 .c-light-gray{color:var(--color-light-gray);}
 
-/* 간격 (고정) - media 변경 없음 */
+  /* 간격 (고정) - media 변경 없음 */
 .mt-0 {margin-top:0px!important;}
 .ml-4 {margin-left:4px!important;}
 .mb-4 {margin-bottom:4px!important;}
