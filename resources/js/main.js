@@ -37,10 +37,14 @@ function openSideBar() {
 
     // 사이드바 외부 요소 비활성화 (inert 속성 사용)
     if ('inert' in HTMLElement.prototype) {
-      // 사이드바와 햄버거 버튼을 제외한 모든 요소에 inert 속성 추가
-      $('body > *').not($sidebar).not($sidebar.parents()).not($dimOverlay).attr('inert', '');
+      // inert 속성에서 모달을 제외하여 설정
+      $('body > *')
+        .not($sidebar)
+        .not($sidebar.parents())
+        .not($dimOverlay)
+        .not('.modal[style*="display: block"]') // 열린 모달은 inert 제외
+        .attr('inert', '');
     } else {
-      // inert 폴리필 적용
       applyInertPolyfill();
     }
 
@@ -405,24 +409,30 @@ function showModal(modalId,options={}) {
   const overlay = document.getElementById('overlay');
   const currentOpenModal = modalStack.length > 0 ? document.getElementById(modalStack[modalStack.length - 1]) : null;
 
-  // 기존 모달 비활성화
+  // 1. 기존 열려 있는 모달 비활성화
   if (currentOpenModal) {
     currentOpenModal.setAttribute('aria-hidden', 'true'); // 비활성화
-    currentOpenModal.style.zIndex = '10001';
+    currentOpenModal.style.zIndex = '100001';// 아래로 이동
   }
 
-  // 새 모달 활성화
+  // 2. 새롭게 열리는 모달 활성화
   document.body.classList.add('no-scroll');
   modal.style.display = 'block';
-  modal.style.zIndex = '10002';
+  modal.style.zIndex = '100002';
   modal.setAttribute('aria-hidden', 'false');
 
   modalStack.push(modalId); // 스택에 모달 ID 추가
 
-  // ✅ 위치 조정 로직
+  // 3. 사이드바 상태 관리
+  const sidebar = document.querySelector('.sidebar.active');
+  if (sidebar) {
+    // 사이드바 비활성화 처리
+    removeInertFromSideBar(sidebar);
+  }
+
+  // 4. 모달 위치 조정 (옵션에 따라 스타일 변경)
   if (window.innerWidth > 1200 && options.absolute && options.triggerElement) {
     const rect = options.triggerElement.getBoundingClientRect();
-    console.log(rect)
     modal.style.position = 'absolute';
     modal.style.left = `${rect.left}px`;
     modal.style.top = `${rect.bottom + window.scrollY}px`;
@@ -463,7 +473,6 @@ function showModal(modalId,options={}) {
   modalStack.forEach((id) => {
     adjustModalSize(id, options);
   });
-
 }
 // 모달 안 focus 가능한 영역 확인 코드 : 최상단 모달에서만 tab키를 눌러도 반응해야하는게 목적
 const handleFocusTrap = (modal) => {
@@ -610,13 +619,41 @@ function hideModal(modalId) {
         firstFocusable?.focus(); // optional
       });
     }
+  } else {
+    // ✅ 모달이 모두 닫혔을 때 사이드바 상태 확인
+    const sidebar = document.querySelector('.sidebar.active');
+    if (sidebar) {
+      sidebar.setAttribute('aria-hidden', 'false'); // 사이드바 활성화
+      removeInertFromSideBar(sidebar); // Sidebar의 inert 복원 처리
+
+      // 사이드바 포커스 트랩 다시 설정
+      trapFocus(sidebar);
+      requestAnimationFrame(() => {
+        const firstFocusable = sidebar.querySelector(
+          'button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        firstFocusable?.focus();
+      });
+    }
   }
+
 
   // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
   if (modalStack.length === 0) {
     document.body.classList.remove('no-scroll');
   }
 }
+// 🔧 사이드바의 inert 복원 처리 함수
+function removeInertFromSideBar(sidebar) {
+  const inertElements = document.querySelectorAll('[inert]');
+  inertElements.forEach((el) => {
+    // 사이드바 외 요소는 계속 inert 유지 (모달이 닫혀도 여전히 비활성화 필요)
+    if (!sidebar.contains(el)) {
+      el.removeAttribute('inert');
+    }
+  });
+}
+
 // 모달 안 인풋 관련 값 리셋 함수
 function resetModalFields(modal) {
   if (!modal) return;
