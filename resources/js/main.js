@@ -584,7 +584,6 @@ function hideModal(modalId) {
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
 
-
   // 스택에서 제거
   modalStack = modalStack.filter((id) => id !== modalId);
 
@@ -639,7 +638,7 @@ function hideModal(modalId) {
 
 
   // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
-  if (modalStack.length === 0) {
+  if (modalStack.length === 0 &&  !document.querySelector('.sidebar')?.classList.contains('active')) {
     document.body.classList.remove('no-scroll');
   }
 }
@@ -2151,7 +2150,7 @@ $(document).ready(function(){
         modal.style.display = 'none';
         // 모달이 하나도 남지 않았다면 no-scroll 클래스 제거
         modalStack.pop(); // 스택에서 제거
-        if (modalStack.length === 0) {
+        if (modalStack.length === 0&&!document.querySelector('.sidebar')?.classList.contains('active')) {
           body.classList.remove('no-scroll');
         }
         return;
