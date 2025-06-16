@@ -12,6 +12,7 @@
 * 11. [결제내역] 주민등록번호 : 가상키패드 (function, 실행문)
 * 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 (function)
 * 13. [수강신청내역] 수강신청탭 안의 체크박스 수 제한 (실행문)
+* 14. [공통] button/a 중복클릭 방지 (function, 실행문)
 *  */
 /*-----------------------------------------------------------------------------------------------------*/
 /* ---- [ function 모음 : 1,2,3,4,5,9,10,11,12]-------------------------------------------------------- */
@@ -190,9 +191,14 @@ function changeTextSize(size) {
   const sizes = ['small', 'normal', 'lg'];
   const index = sizes.indexOf(size);
 
+
   if (index === -1) return; // 잘못된 값 방지
 
-  $body.attr('data-text-size', size);
+  // 깜빡임 최소화 위해 렌더링 프레임에 적용
+  requestAnimationFrame(() => {
+    $body.attr('data-text-size', size);
+  });
+
   $buttons.removeClass('active');
   $buttons.eq(index).addClass('active');
   localStorage.setItem('textSize', size);
@@ -2030,6 +2036,36 @@ function applyNumericInputFilter(inputElement, maxLength = Infinity) {
     }
   });
 }
+/* 14. [공통] button/a 중복클릭 방지 (function, 실행문) */
+// 클릭 방지 메서드
+// 클릭 간격(Interval)을 적용하는 함수
+function applyClickInterval(elements, delay) {
+  elements.forEach((element) => {
+    // 기존 이벤트 리스너 제거 (중복 방지)
+    element.removeEventListener("click", element._clickHandler);
+
+    // 새로운 클릭 이벤트 핸들러 등록
+    let isClicked = false;
+    element._clickHandler = (e) => {
+      if (isClicked) {
+        console.log(`${element.tagName}는 클릭 방지 중입니다.`);
+        e.preventDefault(); // 기본 동작 방지
+        return;
+      }
+
+      isClicked = true; // 클릭 상태 활성화
+      console.log(`${element.tagName}가 클릭되었습니다.`);
+
+      setTimeout(() => {
+        isClicked = false; // 딜레이 이후 클릭 허용
+      }, delay);
+    };
+
+    // 클릭 이벤트 리스너 등록
+    element.addEventListener("click", element._clickHandler);
+  });
+}
+
 /*-----------------------------------------------------------------------------------------------------*/
 
 /* *************************************************************************************************** */
@@ -2353,4 +2389,9 @@ $(document).ready(function(){
     });
   });
 
+  /* 14. [공통] button/a 중복클릭 방지 (function, 실행문) */
+  // 모든 <button>과 <a> 요소 선택
+  const elements = document.querySelectorAll("button, a");
+  // Interval 적용 (2초)
+  applyClickInterval(elements, 1000);
 })

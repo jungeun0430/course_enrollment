@@ -6,6 +6,9 @@
 /* [전체] 공통 */
 *{color:inherit;font-family:inherit;font-size:inherit;font-weight:inherit;line-height:1.4;word-break:break-all;padding:0;margin:0;box-sizing:border-box;}
 html, body{/*position:static;left:auto;*/height:100%;font-family:"Pretendard", sans-serif;font-weight:var(--fw-regular);}
+body, body * {
+    transition: font-size 0.2s ease-in-out;
+}
 #skip-nav {position: fixed;left: 0;top: -40px;width: 100%;line-height: 40px;text-align: center;background-color: rgba(0, 0, 0, 0.8);color: #ffffff;z-index: 1000000;transition: top 0.3s;box-sizing: border-box;}
 #skip-nav:focus {top:0;border:5px solid #6dd585;border-radius:8px;}
 .visually-hidden {position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0;white-space: nowrap;}
