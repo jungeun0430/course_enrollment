@@ -34,6 +34,18 @@
         .guide-box{padding:16px;}
       }
     </style>
+  <script>
+    $(function() {
+      const savedSize = localStorage.getItem('textSize') || 'normal';
+      const sizes = ['small', 'normal', 'lg'];
+      const idx = sizes.indexOf(savedSize);
+
+      if (idx !== -1) {
+        $('.txt-size-btn').removeClass('active').eq(idx).addClass('active');
+        $('body').attr('data-text-size', savedSize);
+      }
+    });
+  </script>
 </head>
 <body data-text-size="normal">
 <!-- [웹 접근성] : 본문 바로가기 -->
@@ -108,9 +120,15 @@
 </header>
 <!-- [공통] 글자 텍스트 아이콘 -->
 <div class="fixed-btn-wrap">
-  <button type="button" class="txt-size-btn sm" onclick="changeTextSize('normal')"><span class="visually-hidden">글씨 크게 보기</span></button>
-  <button type="button" class="txt-size-btn rg active" onclick="changeTextSize('lg')"><span class="visually-hidden">글씨 보통 보기</span></button>
-  <button type="button" class="txt-size-btn lg"  onclick="changeTextSize('small')"><span class="visually-hidden">글씨 크게 보기</span></button>
+  <button type="button" class="txt-size-btn sm" onclick="changeTextSize('small')">
+    <span class="visually-hidden">글씨 작게</span>
+  </button>
+  <button type="button" class="txt-size-btn rg" onclick="changeTextSize('normal')">
+    <span class="visually-hidden">글씨 보통</span>
+  </button>
+  <button type="button" class="txt-size-btn lg" onclick="changeTextSize('large')">
+    <span class="visually-hidden">글씨 크게</span>
+  </button>
 </div>
 <!-- 메인 -->
 <main id="main">

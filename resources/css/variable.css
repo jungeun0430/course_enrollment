@@ -38,7 +38,7 @@
   --table-cell-bg: #F9FAFB;
   --table-cell-td-bg: #ffffff;
 }
-body[data-text-size='lg'] {
+body[data-text-size='large'] {
   /* fonts size (크게) */
   --txt-footer-size:14px;
   --txt-size00 : 14px;
@@ -126,7 +126,6 @@ body[data-text-size='normal'] {
     header .btn-wrap > a.ico-user {min-width:inherit;}
   }
 }
-
 body[data-text-size='small'] {
   /* fonts size (보통) */
   --txt-footer-size:13px;

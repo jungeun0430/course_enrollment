@@ -185,23 +185,48 @@ function removeInertPolyfill() {
 }
 
 /* 2. [공통]상단 글씨크기 변경 */
-function changeTextSize(size) {
+function updateButtons(sizeToShow) {
+  // classMap을 통해 버튼 클래스를 적절히 매핑
   const $buttons = $('.txt-size-btn');
-  const $body = $('body');
-  const sizes = ['small', 'normal', 'lg'];
-  const index = sizes.indexOf(size);
+  const classMap = { small: 'sm', normal: 'rg', large: 'lg' };
 
+  $buttons.each((_, button) => {
+    const $button = $(button);
 
-  if (index === -1) return; // 잘못된 값 방지
-
-  // 깜빡임 최소화 위해 렌더링 프레임에 적용
-  requestAnimationFrame(() => {
-    $body.attr('data-text-size', size);
+    // 클래스 매핑에 따라 버튼 노출 설정
+    if ($button.hasClass(classMap[sizeToShow])) {
+      $button.show(); // 다음 버튼 노출
+    } else {
+      $button.hide(); // 나머지 버튼 숨김
+    }
   });
+}
 
-  $buttons.removeClass('active');
-  $buttons.eq(index).addClass('active');
+function changeTextSize(size) {
+  const $body = $('body');
+  const validSizes = ['small', 'normal', 'large'];
+  if (!validSizes.includes(size)) return;
+
+  // 텍스트 크기 적용
+  $body.attr('data-text-size', size);
+
+  // localStorage에 현재 상태 저장
   localStorage.setItem('textSize', size);
+
+  // 사이즈 순환 계산
+  const sizes = ['small', 'normal', 'large'];
+  const nextSize = sizes[(sizes.indexOf(size) + 1) % sizes.length];
+
+  // 버튼 상태 갱신
+  updateButtons(nextSize);
+}
+
+function initializeTextSize() {
+  // localStorage에서 저장된 글자 크기 가져오기
+  const savedSize = localStorage.getItem('textSize') || 'normal';
+
+  // 초기화: 변경 로직 호출
+  changeTextSize(savedSize);
 }
 
 
@@ -2084,13 +2109,7 @@ $(document).ready(function(){
   });
 
   /* 2. [공통]상단 글씨크기 변경 */
-  const sizes = ['small', 'normal', 'lg'];
-  const savedSize = localStorage.getItem('textSize') || 'normal';
-  const txtSizeIndex = sizes.indexOf(savedSize);
-  if (txtSizeIndex === -1) return;
-  $('body').attr('data-text-size', savedSize);
-  $('.txt-size-btn').removeClass('active').eq(txtSizeIndex).addClass('active');
-
+  initializeTextSize()
   /* 3. [공통]모달 관련 함수 */
   // 창 크기 변경 시 모달 크기 재조정 or hideModal 작동시키기
   const mobileMedia = window.matchMedia('(max-width: 767px)');
@@ -2143,7 +2162,6 @@ $(document).ready(function(){
       document.body.classList.add('no-scroll');
     }
   };
-
 
   // resize 이벤트 + media query change 이벤트 둘 다 걸어줌
   window.addEventListener('resize', handleResize);
