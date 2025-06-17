@@ -746,6 +746,7 @@ span.title-wrap > .h4,
     #sec1 {padding:20px 0 0;}
     #sec1 .title-wrap + .main-con-box.type1 {margin-top:0;height: 100%;}
     #sec1 .flex-wrap.first + .flex-wrap {flex:1;}
+    #sec1 .title-wrap *{text-align:left;}
 
     /* header */
     header {height:60px;}
