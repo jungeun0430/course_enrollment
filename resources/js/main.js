@@ -2277,7 +2277,16 @@ $(document).ready(function(){
   });
 
   /* 5. [수강신청내역]수강신청 탭 관련 함수 (function, 실행문) */
+  let lastWindowWidth = window.innerWidth;
   initializeTabs();
+  window.addEventListener('resize', () => {
+    const currentWidth = window.innerWidth;
+    // 모바일과 PC 간의 상태 변화 감지
+    if ((currentWidth <= 767 && lastWindowWidth > 767) || (currentWidth > 767 && lastWindowWidth <= 767)) {
+      initializeTabs();
+    }
+    lastWindowWidth = currentWidth; // 현재 너비 저장
+  });
 
   /* 6. [공통]라디오 버튼 핸들러 */
   // 모든 라디오 버튼에 대한 키보드 접근성 향상 (name 속성 독립적)
