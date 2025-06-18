@@ -590,7 +590,7 @@ span.title-wrap > .h4,
 .us-inner > p {font-size:var(--txt-size04);font-weight:var(--fw-medium);color:var(--color-gray);margin-bottom:12px;}
 .us-inner.insert-list > p {margin-bottom:0;}
 .us-inner > p > span {color:var(--color-primary);font-weight:var(--fw-bold)}
-.us-inner + .us-inner {margin-top:40px;}
+.us-inner {margin-top:40px;}
 .us-sub-list {padding-left:40px;margin-bottom:12px;}
 .us-sub-list > li {color:var(--color-gray);font-weight:var(--fw-medium);font-size:var(--txt-size04);}
 
@@ -599,7 +599,7 @@ span.title-wrap > .h4,
     .us-list > li > p {padding-left:30px;}
     .us-list > li > p > span {width:24px;height:24px;top:-3px;}
     .us-list > li > div {width:100%;padding-left:0;}
-    .us-inner + .us-inner {margin-top:12px;}
+    .us-inner {margin-top:12px;}
     .us-sub-list {padding-left:24px;margin-bottom:8px;}
 }
 /* [반응형] : pc */
