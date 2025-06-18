@@ -3,7 +3,7 @@
 * 2. [공통]상단 글씨크기 변경 (function, 실행문)
 * 3. [공통]모달 관련 함수 (function, 실행문)
 * 4. [장바구니]탭 관련 함수 (function)
-* 5. [수강신청내역]수강신청 탭 관련 함수 (function)
+* 5. [수강신청내역]수강신청 탭 관련 함수 (function, 실행문)
 * 6. [공통]라디오 버튼 핸들러 (실행문)
 * 7. [결제내역]데이트피커 (실행문)
 * 8. [결제내역]테이블 rowspan 존재시 hover색상 지정 (실행문)
@@ -224,7 +224,6 @@ function changeTextSize(size) {
 function initializeTextSize() {
   // localStorage에서 저장된 글자 크기 가져오기
   const savedSize = localStorage.getItem('textSize') || 'normal';
-
   // 초기화: 변경 로직 호출
   changeTextSize(savedSize);
 }
@@ -1318,6 +1317,71 @@ function openTab(tabIndex) {
     setupFocusTrap(tab);
   }
 }
+function updateCheckText() {
+  // 현재 활성화된 탭 (active 클래스 기준)
+  const activeTab = document.querySelector('.check-scroll > ul > li.active');
+  if (!activeTab) return; // 활성화된 탭이 없을 경우 함수 종료
+
+  // 활성화된 탭의 순서를 찾음
+  const tabIndex = Array.from(document.querySelectorAll('.check-scroll > ul > li')).indexOf(activeTab);
+
+  // 해당하는 swiper-slide의 버튼 업데이트
+  const buttonToUpdate = document.querySelector(`.swiper-wrapper .swiper-slide:nth-child(${tabIndex + 1}) .badge-ver-btn`);
+
+  // 활성화된 탭 내의 선택된 체크박스 요소 모음
+  const checkedInputs = activeTab.querySelectorAll('input[type="checkbox"]:checked');
+  const selectedTexts = Array.from(checkedInputs).map((input) => {
+    return input.nextElementSibling ? input.nextElementSibling.textContent.trim() : '';
+  });
+
+  if (buttonToUpdate) {
+    // 초기 버튼 텍스트 저장
+    if (!buttonToUpdate.hasAttribute('data-default-text')) {
+      const initialText = buttonToUpdate.textContent.trim();
+      buttonToUpdate.setAttribute('data-default-text', initialText);
+    }
+
+    // 선택된 텍스트가 있을 경우 업데이트, 없으면 기본값으로 복구
+    if (selectedTexts.length > 0) {
+      buttonToUpdate.innerHTML = `${selectedTexts.join(', ')}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
+    } else {
+      const defaultText = buttonToUpdate.getAttribute('data-default-text');
+      buttonToUpdate.innerHTML = `${defaultText}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
+    }
+  }
+}
+// 페이지 로드 시 호출되는 초기화 함수
+function initializeTabs() {
+  const allSlides = document.querySelectorAll('.swiper-wrapper .swiper-slide');
+
+  // 각 탭(버튼)에 대해 초기 값을 설정
+  allSlides.forEach((slide, tabIndex) => {
+    const buttonToUpdate = slide.querySelector('.badge-ver-btn');
+
+    if (buttonToUpdate) {
+      // 초기값을 data-default-text에 저장 (초기에만 실행)
+      if (!buttonToUpdate.hasAttribute('data-default-text')) {
+        const initialText = buttonToUpdate.textContent.trim();
+        buttonToUpdate.setAttribute('data-default-text', initialText);
+      }
+
+      // 현재 탭의 선택된 체크박스 값 가져오기
+      const tab = document.querySelectorAll('.check-scroll > ul > li')[tabIndex];
+      const checkedInputs = tab.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedTexts = Array.from(checkedInputs).map((input) => {
+        return input.nextElementSibling ? input.nextElementSibling.textContent.trim() : '';
+      });
+
+      // 선택된 값으로 업데이트 or 기본값 유지
+      if (selectedTexts.length > 0) {
+        buttonToUpdate.innerHTML = `${selectedTexts.join(', ')}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
+      } else {
+        const defaultText = buttonToUpdate.getAttribute('data-default-text');
+        buttonToUpdate.innerHTML = `${defaultText}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
+      }
+    }
+  });
+}
 function setupFocusTrap(modal) {
   if (!modal) return;
 
@@ -2211,6 +2275,9 @@ $(document).ready(function(){
       }
     }
   });
+
+  /* 5. [수강신청내역]수강신청 탭 관련 함수 (function, 실행문) */
+  initializeTabs();
 
   /* 6. [공통]라디오 버튼 핸들러 */
   // 모든 라디오 버튼에 대한 키보드 접근성 향상 (name 속성 독립적)
