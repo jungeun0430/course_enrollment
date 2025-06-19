@@ -2127,31 +2127,30 @@ function applyNumericInputFilter(inputElement, maxLength = Infinity) {
 }
 /* 14. [공통] button/a 중복클릭 방지 (function, 실행문) */
 // 클릭 방지 메서드
-// 클릭 간격(Interval)을 적용하는 함수
 function applyClickInterval(elements, delay) {
   elements.forEach((element) => {
-    // 기존 이벤트 리스너 제거 (중복 방지)
-    element.removeEventListener("click", element._clickHandler);
+    // 클릭 방지 관리 상태 초기화
+    element._clickBlocked = false;
 
-    // 새로운 클릭 이벤트 핸들러 등록
-    let isClicked = false;
-    element._clickHandler = (e) => {
-      if (isClicked) {
-        console.log(`${element.tagName}는 클릭 방지 중입니다.`);
-        e.preventDefault(); // 기본 동작 방지
-        return;
+    // 새로운 핸들러 등록
+    element.__applyClickHandler__ = function (callback) {
+      if (this._clickBlocked) {
+        console.log("연타 방지 중: 클릭 무시됨");
+        return; // 상태가 블록된 경우 클릭 차단
       }
 
-      isClicked = true; // 클릭 상태 활성화
-      console.log(`${element.tagName}가 클릭되었습니다.`);
-
+      console.log("동작 실행: 정상적으로 클릭 동작 호출");
+      this._clickBlocked = true;
       setTimeout(() => {
-        isClicked = false; // 딜레이 이후 클릭 허용
+        this._clickBlocked = false; // block 해제
+        console.log("연타 방지 해제: 다시 클릭 가능");
       }, delay);
-    };
 
-    // 클릭 이벤트 리스너 등록
-    element.addEventListener("click", element._clickHandler);
+      // 콜백 함수 실행 (실제 동작)
+      if (typeof callback === "function") {
+        callback();
+      }
+    };
   });
 }
 
@@ -2485,7 +2484,7 @@ $(document).ready(function(){
 
   /* 14. [공통] button/a 중복클릭 방지 (function, 실행문) */
   // 모든 <button>과 <a> 요소 선택
-  const elements = document.querySelectorAll("button, a");
+  const elements = document.querySelectorAll("button");
   // Interval 적용 (2초)
   applyClickInterval(elements, 1000);
 })

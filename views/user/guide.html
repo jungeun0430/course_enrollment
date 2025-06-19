@@ -2759,7 +2759,8 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
       <h2>바. 확인창</h2>
       <h5>1. 일반 모달창</h5>
       <div class="box flex-wrap col-ver">
-        <button type="button" class="btn outlined" onclick="showModal('modal1');">[느낌표]1. 정말 선택하신 회원번호를 사용하시겠습니까?</button>
+        <button type="button" class="btn outlined" onclick="this.__applyClickHandler__(() => alert('f'))">연타방지</button>
+        <button type="button" class="btn outlined" onclick="this.__applyClickHandler__(() => showModal('modal1'))">[느낌표]1. 정말 선택하신 회원번호를 사용하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal2');">[X]2. 센터가입 정보입력을 중단하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal3');">[물음표]3. 정말 선택하신 회원번호를 사용하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal4');">[체크]4. 강좌가 장바구니에 담겼습니다.</button>
