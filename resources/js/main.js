@@ -1335,21 +1335,25 @@ function updateCheckText() {
   });
 
   if (buttonToUpdate) {
-    // 초기 버튼 텍스트 저장
+    // 초기 버튼 텍스트 저장 (visually-hidden을 포함하지 않는 순수 텍스트만 저장)
     if (!buttonToUpdate.hasAttribute('data-default-text')) {
-      const initialText = buttonToUpdate.textContent.trim();
+      const initialText = Array.from(buttonToUpdate.childNodes)
+        .filter((node) => node.nodeType === Node.TEXT_NODE) // 텍스트 노드만 선택
+        .map((node) => node.textContent.trim()) // 텍스트 정리
+        .join('');
       buttonToUpdate.setAttribute('data-default-text', initialText);
     }
 
     // 선택된 텍스트가 있을 경우 업데이트, 없으면 기본값으로 복구
+    const defaultText = buttonToUpdate.getAttribute('data-default-text');
     if (selectedTexts.length > 0) {
       buttonToUpdate.innerHTML = `${selectedTexts.join(', ')}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
     } else {
-      const defaultText = buttonToUpdate.getAttribute('data-default-text');
       buttonToUpdate.innerHTML = `${defaultText}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
     }
   }
 }
+
 // 페이지 로드 시 호출되는 초기화 함수
 function initializeTabs() {
   const allSlides = document.querySelectorAll('.swiper-wrapper .swiper-slide');
@@ -1359,9 +1363,12 @@ function initializeTabs() {
     const buttonToUpdate = slide.querySelector('.badge-ver-btn');
 
     if (buttonToUpdate) {
-      // 초기값을 data-default-text에 저장 (초기에만 실행)
+      // 초기값을 data-default-text에 저장 (초기에만 실행, visually-hidden 텍스트 제외)
       if (!buttonToUpdate.hasAttribute('data-default-text')) {
-        const initialText = buttonToUpdate.textContent.trim();
+        const initialText = Array.from(buttonToUpdate.childNodes)
+          .filter((node) => node.nodeType === Node.TEXT_NODE) // 텍스트 노드만 선택
+          .map((node) => node.textContent.trim()) // 텍스트 정리
+          .join('');
         buttonToUpdate.setAttribute('data-default-text', initialText);
       }
 
@@ -1373,10 +1380,10 @@ function initializeTabs() {
       });
 
       // 선택된 값으로 업데이트 or 기본값 유지
+      const defaultText = buttonToUpdate.getAttribute('data-default-text');
       if (selectedTexts.length > 0) {
         buttonToUpdate.innerHTML = `${selectedTexts.join(', ')}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
       } else {
-        const defaultText = buttonToUpdate.getAttribute('data-default-text');
         buttonToUpdate.innerHTML = `${defaultText}<span class="isOpen rotate"><span class="visually-hidden">닫힘</span></span>`;
       }
     }
