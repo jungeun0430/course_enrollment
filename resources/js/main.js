@@ -310,6 +310,19 @@ function adjustModalSize(modalId, options = {}) {
         modalBody.style.overflow = 'auto';
         modalBody.style.webkitOverflowScrolling = 'touch';
       }
+    } else if (modalType === 'fixed-btn-height-ver') {
+      modalContent.style.width = `${viewportWidth}px`;
+      // modalContent.style.width = `50px`;
+      modalContent.style.height = `${safeAreaHeight}px`;
+      modalContent.style.maxWidth = '100%';
+
+      if (modalBody) {
+        modalBody.style.height = `${safeAreaHeight - 48}px`;
+        modalBody.style.minHeight = `80vh`;
+        modalBody.style.paddingBottom = `64px`;
+        modalBody.style.overflow = 'auto';
+        modalBody.style.webkitOverflowScrolling = 'touch';
+      }
     } else if (modalType === 'rotate-ver') {
       modalContent.style.width = `${safeAreaHeight - 32}px`;
       modalContent.style.height = `${viewportWidth - 32}px`;
@@ -421,6 +434,9 @@ function adjustModalSize(modalId, options = {}) {
       modalContent.style.height = 'auto';
 
       if (modalBody) {
+        if(modalContent.classList.contains('fixed-height')) {
+          modalBody.style.minHeight = '80vh';
+        }
         modalBody.style.height = 'auto';
         modalBody.style.maxHeight = '80vh';
         modalBody.style.overflow = 'auto';

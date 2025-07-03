@@ -52,8 +52,8 @@
 .btn.size-full {min-width:auto;width:100%;}
 
 /* 버튼 전체적 크기 관련 */
-.btn.fixed-xs {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
-.btn.sm {padding:8px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
+.btn.fixed-xs {padding:6px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
+.btn.sm {padding:6px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
 .btn.md {padding:14px;font-size:var(--txt-size02);}
 .btn.fixed-md {height:48px;padding:11px 14px;font-size:var(--txt-size02);}
 .btn.c-red {color:var(--color-red);}
@@ -268,6 +268,10 @@
 .select-list li > button {padding: 10px;}
 .select-list li:hover,
 .select-list li[aria-selected="true"] {background: var(--color-primary-light);color: var(--color-white);}
+
+@media (max-width: 1200px) {
+  .select-toggle {height:40px;}
+}
 
 /* 위로 열리기 */
 .custom-select.up .select-list[aria-hidden="false"] {top:auto;left: 0;bottom:40px;border: 1px solid var(--border-color);border-bottom: none;}

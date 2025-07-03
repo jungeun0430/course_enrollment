@@ -2786,6 +2786,8 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
           </button>
         </div>
         <button type="button" class="btn outlined" onclick="showModal('modal8');">[X]16. 조회 결과 할인 대상이 아닙니다.</button>
+        <!-- 카드 자동이체 -->
+        <button type="button" class="btn outlined" onclick="showModal('modal-automaticPayment');">[결제내역] 카드자동이체</button>
       </div>
       <!-- [모달] 1. 가입하신 센터가 없습니다. -->
       <div id="modal1" class="modal" data-modal-type="confirm-ver">
@@ -4638,6 +4640,258 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
           </div>
         </div>
       </div>
+
+      <!-- [결제내역] 결제 > 카드자동이체 -->
+      <div id="modal-automaticPayment" class="modal pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content lg fixed-height">
+          <div class="title-wrap">
+            <h3>카드 자동이체</h3>
+            <button type="button" onclick="hideModal('modal-automaticPayment')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <!-- 신용/체크카드 정보(국내카드만 가능합니다.) -->
+            <div class="sub-content-box ver2">
+              <h3 class="sub-title2">신용/체크카드 정보 (국내카드만 가능합니다.)</h3>
+              <div class="custom-ui-table">
+                <div class="c-row col3">
+                  <div class="c-col">
+                    <div class="c-th-wrap">
+                      카드사
+                    </div>
+                    <div class="c-td-wrap">
+                      <div class="custom-select" data-options="test3">
+                        <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                          <span class="selected-text"></span>
+                        </button>
+                        <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-col">
+                    <div class="c-th-wrap bl">카드번호</div>
+                    <div class="c-td-wrap">
+                      <div class="number-wrap">
+                        <label class="input-wrap size-sm">
+                          <input type="text" placeholder="" maxlength="4">
+                        </label>
+                        <label class="input-wrap size-sm">
+                          <input type="password" placeholder="" maxlength="4">
+                        </label>
+                        <label class="input-wrap size-sm">
+                          <input type="password" placeholder="" maxlength="4">
+                        </label>
+                        <label class="input-wrap size-sm">
+                          <input type="text" placeholder="" maxlength="4">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-col">
+                    <div class="c-th-wrap bl">유효기간</div>
+                    <div class="c-td-wrap">
+                      <label class="input-wrap size-full ">
+                        <input type="text" placeholder="YY/MM">
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="flex-wrap end gap4">
+                <button type="button" class="btn sm outlined" disabled>저장</button>
+                <button type="button" class="btn sm outlined" disabled>삭제</button>
+              </div>
+            </div>
+
+            <!-- 자동이체 신청/해지 -->
+            <div class="sub-content-box ver2">
+              <h3 class="sub-title2">자동이체 신청/해지</h3>
+              <!-- 자동이체 신청/해지 (pc)-->
+              <div class="custom-table fixed-ver pc-only mt-0">
+                <table>
+                  <caption class="visually-hidden">결제 테이블</caption>
+                  <colgroup>
+                    <col style="width:100px;"/>
+                    <col />
+                    <col style="width:100px;"/>
+                    <col style="width:100px;"/>
+                    <col style="width:200px;"/>
+                    <col style="width:130px;"/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th><div class="th-wrap center">센터명</div></th>
+                    <th><div class="th-wrap center">내용</div></th>
+                    <th><div class="th-wrap center">강습반</div></th>
+                    <th><div class="th-wrap center">강사</div></th>
+                    <th><div class="th-wrap">금액(원)</div></th>
+                    <th><div class="th-wrap center">카드자동이체</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver al-center gap-auto">
+                          <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                            <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                            <span class="txt-rgl fw-medium">55,800</span>
+                          </div>
+                          <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
+                        <div class="flex-wrap col-ver al-center gap4">
+                          <button type="button" class="btn sm outlined">신청</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                  <!-- 수강 변경 -->
+                </table>
+              </div>
+              <!-- 자동이체 신청/해지 (mobile)-->
+              <div class="mobile-only mt-0">
+                <ul class="card-list">
+                  <li>
+                    <div class="card">
+                      <div class="flex-wrap between al-center">
+                        <p class="txt-sm fw-bold c-gray">카드자동이체</p>
+                        <button type="button" class="btn sm mo-sm outlined">영수증 출력</button>
+                      </div>
+                      <div class="flex-wrap col-ver gap-auto">
+                        <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                        <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습반</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">성인반</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강사</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">홍길동</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습일정</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium c-blue">29/30</span>
+                          </li>
+                        </ul>
+                        <div class="flex-wrap end">
+                          <div class="flex-wrap col-ver al-end gap-auto">
+                            <div class="flex-wrap al-center end gap-auto gap4 mb-4">
+                              <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                              <span class="txt-rgl fw-medium">55,800</span>
+                            </div>
+                            <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="card">
+                      <div class="flex-wrap between al-center">
+                        <p class="txt-sm fw-bold c-gray">카드자동이체</p>
+                        <button type="button" class="btn sm mo-sm outlined">영수증 출력</button>
+                      </div>
+                      <div class="flex-wrap col-ver gap-auto">
+                        <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                        <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습반</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">성인반</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강사</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">홍길동</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습일정</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium c-blue">29/30</span>
+                          </li>
+                        </ul>
+                        <div class="flex-wrap end">
+                          <div class="flex-wrap col-ver al-end gap-auto">
+                            <div class="flex-wrap al-center end gap-auto gap4 mb-4">
+                              <span class="txt-rgl fw-medium">20,000원</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn fixed" onclick="hideModal('modal-automaticPayment')" >닫기</button>
+        </div>
+      </div>
   </div>
 
     <div class="guide-box">
@@ -6261,6 +6515,12 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     { value: '대통령', discount: '+30%', tag: 'button'}
   ];
 
+  // 세 번째 custom-select에 사용할 옵션
+  const selectOptions3 = [
+    { value: '국민카드', tag: 'button' },
+    { value: '현대카드',  tag: 'button'}
+  ];
+
   // custom-select 요소를 개별적으로 호출
   initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'), selectOptions1, {
     initialValue:selectOptions1[0].value
@@ -6268,6 +6528,9 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
   initializeCustomSelect(document.querySelector('.custom-select[data-options="2"]'), selectOptions2);
   initializeCustomSelect(document.querySelector('.custom-select[data-options="test1"]'), selectOptions2);
   initializeCustomSelect(document.querySelector('.custom-select[data-options="test2"]'), selectOptions2);
+  initializeCustomSelect(document.querySelector('.custom-select[data-options="test3"]'), selectOptions3, {
+    placeholder: '선택하세요'
+  });
 
   /* [푸터] ------------------- */
   /* 푸터 (패밀리사이트/관련사이트) */

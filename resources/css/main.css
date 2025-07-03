@@ -326,6 +326,39 @@ span.title-wrap > .h4,
 .dim.active {display:block;opacity:1;}
 .sidebar-title-wrap {width:100%;height:60px;background-color:#0189FF;display:flex;justify-content:space-between;align-items:center;padding:16px 16px 16px 12px;}
 
+/* 커스텀 테이블 ui만  */
+.custom-ui-table {border:1px solid var(--table-border-color);border-radius:4px;}
+.custom-ui-table + .flex-wrap {margin-top:8px;}
+.c-row {display:flex;}
+.c-col {display:flex;}
+.c-row.col3 .c-th-wrap {width:123px;min-width:123px;}
+.c-row.col3 .c-col:nth-child(1) {width:30%;}
+.c-row.col3 .c-col:nth-child(2) {width:47%;}
+.c-row.col3 .c-col:nth-child(3) {width:23%;}
+.c-th-wrap {display:flex;justify-content:center;align-items:center;font-size:var(--txt-size02);font-weight:var(--fw-bold);color:var(--color-gray);padding:6px 8px;background-color: var(--table-cell-bg);border-right:1px solid var(--border-color);}
+.c-th-wrap.bl {border-left:1px solid var(--border-color);}
+.c-td-wrap {display:flex;justify-content:center;align-items:center;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);padding:6px 10px;}
+
+@media (max-width:1300px) {
+    .c-row {flex-direction:column;}
+    .c-row > .c-col + .c-col {border-top:1px solid var(--border-color);}
+    .c-row.col3 .c-col:nth-child(1) {width:100%;}
+    .c-row.col3 .c-col:nth-child(2) {width:100%;}
+    .c-row.col3 .c-col:nth-child(3) {width:100%;}
+    .c-row.col3 .c-th-wrap {width:72px;min-width:72px;}
+    .c-td-wrap{width:100%;}
+    .c-th-wrap.bl {border-left:0;}
+    .custom-ui-table .custom-select {width:100%;}
+    .custom-ui-table .number-wrap {width:100%;display:flex;}
+    .custom-ui-table .number-wrap > .input-wrap.size-sm {flex:1;width:auto;}
+}
+@media (max-width:1200px) {
+    .c-row.col3 .c-th-wrap {width:68px;min-width:68px;}
+}
+
+
+
+
 /* #sec1 */
 #sec1 {width:100%;padding:26px 0 60px;}
 #sec1 > .content-wrap{width:100%;max-width:1760px;margin:0 auto;display:flex;align-items:stretch;}
@@ -594,6 +627,12 @@ span.title-wrap > .h4,
 .us-sub-list {padding-left:40px;margin-bottom:12px;}
 .us-sub-list > li {color:var(--color-gray);font-weight:var(--fw-medium);font-size:var(--txt-size04);}
 
+
+/* 자동이체 신청/해지 */
+.card-list {display:flex;flex-direction:column;gap:8px;}
+.card-list > li {border:1px solid var(--border-color);border-radius:4px;padding:10px 12px;}
+.card-list .card > .flex-wrap:nth-child(1) {border-bottom:1px solid var(--border-color);padding-bottom:10px;margin-bottom:10px;}
+
 @media(max-width:767px) {
     .us-list > li + li {margin-top:16px;}
     .us-list > li > p {padding-left:30px;}
@@ -823,5 +862,4 @@ span.title-wrap > .h4,
     .pg_prev {background:url('../images/common/pg_prev.svg') center center no-repeat;background-size:28px;}
     .pg_next {background:url('../images/common/pg_next.svg') center center no-repeat;background-size:28px;}
     .pg_last {background:url('../images/common/pg_last.svg') center center no-repeat;background-size:28px;}
-
 }
