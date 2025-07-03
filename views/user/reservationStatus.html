@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" th:content="@{/index.do}">
+    <meta property="og:title" content="한국체육산업개발주식회사 - 온라인수강신청">
+    <meta property="og:image" th:content="@{/images/common/kspo_logo.svg}">
+    <meta property="og:description" content="한국체육산업개발주식회사 - 온라인수강신청">
+    <meta property="og:site_name" content="한국체육산업개발주식회사 - 온라인수강신청">
+    <meta property="og:locale" content="ko_KR">
+
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/js/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css}">
+    <link rel="stylesheet" th:href="@{/js/lib/swiper/swiper.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <!-- lib -->
+    <script th:src="@{/js/lib/jquery-3.6.1/jquery-3.6.1.js}"></script>
+    <script th:src="@{/js/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js}"></script>
+    <script th:src="@{/js/lib/swiper/swiper.js}"></script>
+
+    <!-- js -->
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/memberCard/common.js}"></script>
+
+    <!-- 페이지 제목 -->
+    <title layout:title-pattern="온라인수강신청 - $CONTENT_TITLE">Home</title>
+
+    <script>
+        /* 검색 function */
+        //실시간 등록현황
+        function fn_swimming_search() {
+            $('#searchTime').val();
+            $('#itemCode').val();
+
+            document.getElementById("frm").action = "/reservationStatus/waitList.do";
+            document.getElementById("frm").submit();
+        }
+    </script>
+
+    <!-- 일산스포츠센터 조건 체크 -->
+    <script th:if="${todayDate <= 24 and param.scId != null and param.scId.equals('5')}" type="text/javascript">
+        alert("일산스포츠센터 월회원 등록현황은 매달 25일부터 말일까지 확인가능합니다.");
+        window.close();
+    </script>
+
+    <!-- 분당스포츠센터 조건 체크 -->
+    <script th:if="${todayDate <= 1 and param.scId != null and param.scId.equals('3')}" type="text/javascript">
+        alert("분당스포츠센터 월회원 등록현황은 매달 20일부터 말일까지 확인가능합니다.");
+        window.close();
+    </script>
+
+    <!-- 올림픽공원(테니스장) 조건 체크 -->
+    <script th:if="${todayDate >= 8 and todayDate <= 20 and param.scId != null and param.scId.equals('1')}" type="text/javascript">
+        alert("올림픽공원(테니스장) 스포츠센터 월회원 등록현황은 매달 20일부터 다음달 7일까지 확인가능합니다.");
+        window.close();
+    </script>
+
+    <!-- 올림픽수영장 조건 체크 -->
+    <script th:if="${todayDate >= 6 and todayDate <= 20 and param.scId != null and param.scId.equals('6')}" type="text/javascript">
+        alert("올림픽수영장 월회원 등록현황은 매달 20일부터 다음달 5일까지 확인가능합니다.");
+        window.close();
+    </script>
+
+    <!-- 올팍 축구장 조건 체크 -->
+    <script th:if="${todayDate >= 8 and todayDate <= 20 and param.scId != null and param.scId.equals('7')}" type="text/javascript">
+        alert("올팍 축구장 월회원 등록현황은 매달 20일부터 다음달 7일까지 확인가능합니다.");
+        window.close();
+    </script>
+</head>
+
+<body th:if="${!(todayDate <= 24 and param.scId != null and param.scId.equals('5')) and
+              !(todayDate <= 1 and param.scId != null and param.scId.equals('3')) and
+              !(todayDate >= 8 and todayDate <= 20 and param.scId != null and param.scId.equals('1')) and
+              !(todayDate >= 6 and todayDate <= 20 and param.scId != null and param.scId.equals('6')) and
+              !(todayDate >= 8 and todayDate <= 20 and param.scId != null and param.scId.equals('7'))}">
+
+    <form id="frm" name="frm" method="get" action="/swimming/swimming.do" th:object="${swimming}">
+        <input type="hidden" id="scId" name="scId" th:value="${param.scId}"/>
+
+        <!-- 본문 -->
+        <div id="popup_body">
+            <!-- 타이틀/경로 -->
+
+            <!-- 일산스포츠센터 -->
+            <div th:if="${param.scId != null and param.scId.equals('5')}">
+                <h3 class="popup_title">
+                    일산스포츠센터 월회원 등록현황
+                </h3>
+            </div>
+
+            <!-- 분당스포츠센터 -->
+            <div th:if="${param.scId != null and param.scId.equals('3')}">
+                <h3 class="popup_title">
+                    분당스포츠센터 월회원 등록현황
+                </h3>
+                <div style="margin-bottom:20px;">
+                    <img src="/spm/images/title/popup_info_bundang.gif" alt="[수영강습 수준별(강좌명)안내]수준별 모집인원은 조기 마감될수 있사오니 이점 양지 바랍니다./● 신기초 : 수영입문 (호흡, 발차기, 자유형) [20일부터 온라인접수가능]/● 기초1 : 배영 (자유형 가능한분 등록가능)/● 초급 (자유형, 배영 가능한분 등록가능) - 초급1 : 평형 발차기→ 초급2 : 평형 팔동작→초급3 : 평형 종합동작/● 중급 (자유형, 배영, 평형 가능한분 등록가능) - 중급1 : 접영 발차기→중급2 : 접영 팔동작→중급3 : 접영 종합동작, 자유형 팔꺾기/● 상급 : 4가지영법 교정 (4가지영법 가능한분 등록가능)/● 연수 (4가지영법 가능한분 등록가능) - 연수2→연수1(연수1반이 최상위 반입니다.)">
+                </div>
+            </div>
+
+            <!-- 올림픽공원(테니스장) -->
+            <div th:if="${param.scId != null and param.scId.equals('1')}">
+                <h3 class="popup_title">
+                    올림픽공원(테니스장) 스포츠센터 월회원 등록현황
+                </h3>
+            </div>
+
+            <!-- 올팍 축구장 -->
+            <div th:if="${param.scId != null and param.scId.equals('7')}">
+                <h3 class="popup_title">
+                    올팍 축구장 월회원 등록현황
+                </h3>
+            </div>
+
+            <!-- 기본 수영장 -->
+            <div th:if="${param.scId == null or (!param.scId.equals('5') and !param.scId.equals('3') and !param.scId.equals('1') and !param.scId.equals('7'))}">
+                <h3 class="popup_title">
+                    수영장 월회원 등록현황
+                </h3>
+                <div style="margin-bottom:20px;">
+                    <img src="/spm/images/title/popup_info.gif" alt="[수영강습 수준별(강좌명) 안내] 수준별 모집인원은 조기 마감될수 있사오니 이점 양지 바랍니다./ 신기초 : 수영입문 → 기초1(A) : 배영/ 초급1(A) : 자유형팔꺾기 → 초급2(B) : 평영발차기 → 초급3(C) : 평영종합동작/ 중급1(A) : 접영발차기 → 중급2(B) : 접영팔동작 → 중급3(C) : 접영종합동작/ 상급1(A) → 상급2(B) → 상급3(C) : 3개월 코스(4개 영법 가능자)/ 고급3(C) → 고급2(B) → 고급1(A) ＊고급반은 기간에 관계없이 1(A)반이 상위반/ 숫자 1, 2, 3 ⇒ 제1풀(경영풀), 알파벳 A, B, C ⇒ 제2풀(보조풀)">
+                </div>
+            </div>
+
+            <!-- //타이틀/경로 -->
+            <label class="vtc_m">수강월</label>
+            <span class="label_date" th:text="${todayYear + '년 ' + todayMonth + '월'}"></span>
+
+            <label for="itemCode" class="vtc_m">종목</label>
+                <select id="itemCode" th:field="${param.itemCode}" style="WIDTH:150PX; HEIGHT:25PX;">
+                    <option value="">--선택--</option>
+                    <option th:each="item : ${itemCodeList}"
+                            th:value="${item.itemCd}"
+                            th:text="${item.itemNm}"></option>
+                </select>
+
+            <label for="searchTime" class="vtc_m">시간</label>
+            <select id="searchTime" th:field="${param.searchTime}" style="WIDTH:70PX; HEIGHT:25PX;">
+                <option value="">전체</option>
+                <option th:each="li : ${#numbers.sequence(6, 21)}"
+                        th:value="${li < 10 ? '0' + li + '00' : li + '00'}"
+                        th:text="${li < 10 ? '0' + li + ':00' : li + ':00'}"></option>
+            </select>
+            <a href="javascript:fn_swimming_search()" class="btn_style04 text_blue2">검색</a>
+
+            <!-- 내용 -->
+            <div class="con_body" style="margin-top:-15px;">
+                <div class="pd_b25">
+                    <table class="tb5" summary="수영장 월회원 등록현황에 대한 내용입니다.">
+                        <caption>수영장 월회원 등록현황</caption>
+                        <colgroup>
+                            <col width="13%"/>
+                            <col width="20%"/>
+                            <col width="10%"/>
+                            <col width="10%"/>
+                            <col width="*"/>
+                            <col width="10%"/>
+                            <col width="10%"/>
+                            <col width="10%"/>
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th scope="col">종목</th>
+                            <th scope="col" width="140px">강좌명</th>
+                            <th scope="col">시작<br/>시간</th>
+                            <th scope="col">종료<br/>시간</th>
+                            <th scope="col" width="100px">요일</th>
+                            <th scope="col">강습비<br/>(원)</th>
+                            <th scope="col">정원<br/>(명)</th>
+                            <th scope="col" class="none">등록가능<br/>인원(명)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="status : ${reservationStatusList}">
+                            <th th:text="${status.itemNm}"></th>
+                            <td class="popup_tbtitle" th:text="${status.lessonNm}"></td>
+                            <td th:text="${#strings.substring(status.startTime,0,2) + ':' + #strings.substring(status.startTime,2,4)}"></td>
+                            <td th:text="${#strings.substring(status.endTime,0,2) + ':' + #strings.substring(status.endTime,2,4)}"></td>
+                            <td th:text="${status.dayInfo}"></td>
+                            <td th:text="${#numbers.formatInteger(status.genePay,3,'COMMA')}"></td>
+                            <td class="label_number" th:text="${status.fixMember}"></td>
+                            <td class="label_possible none" th:text="${status.okMember}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- //내용 -->
+        </div>
+        <!-- //본문 -->
+    </form>
+</body>
+</html>
+
