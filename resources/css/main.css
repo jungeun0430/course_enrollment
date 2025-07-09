@@ -355,7 +355,7 @@ span.title-wrap > .h4,
     .custom-ui-table .number-wrap > .input-wrap.size-sm {flex:1;width:auto;}
 }
 @media (max-width:1200px) {
-    .c-row.col3 .c-th-wrap {width:68px;min-width:68px;}
+    .c-row.col3 .c-th-wrap {width:74px;min-width:74px;}
 }
 
 
