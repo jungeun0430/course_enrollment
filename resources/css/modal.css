@@ -63,9 +63,12 @@
 .modal[data-modal-type="fixed-btn-ver"] .fixed.btn {position:absolute;left:0;bottom:0;width:100%;border-radius:0 0 4px 4px;}
 .modal[data-modal-type="fixed-btn-ver"] .sub-content-box + .sub-content-box {margin-top:20px;}
 .modal[data-modal-type="fixed-btn-ver"] .dash-list + .sub-content-box {margin-top:20px;}
+.modal[data-modal-type="fixed-btn-ver"] .fixed.chk {background:var(--color-white);height:48px;position:absolute;left:0;bottom:0;width:100%;border-radius:0 0 4px 4px;padding:0 12px;}
+.modal[data-modal-type="fixed-btn-ver"] .fixed.chk .checkbox-wrap .checkmark {width:20px;height:20px;}
 
 @media (max-width: 767px) {
   .modal[data-modal-type="fixed-btn-ver"] .fixed.btn {border-radius:0;}
+  .modal[data-modal-type="fixed-btn-ver"] .fixed.chk {height:48px;border-radius:0;padding:0 12px;}
   .modal.pd-sm[data-modal-type="fixed-btn-ver"] .modal-body {padding:16px;}
 }
 

@@ -6,8 +6,9 @@
 .reference-list > li {padding-left:12px;position:relative;font-size:var(--txt-size01);font-weight:var(--fw-medium);color:var(--color-gray);}
 .reference-list > li + li {margin-top:2px;}
 .reference-list > li::before {content:'※';font-size:inherit;position:absolute;left:0;top:0;}
+.reference-list > li.c-red {color:var(--color-red);}
 
-/* 1-2. * 리스트 */
+  /* 1-2. * 리스트 */
 .star-list {}
 .star-txt,
 .star-list > li {padding-left:12px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-gray);}
