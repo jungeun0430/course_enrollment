@@ -532,7 +532,6 @@ const courseBundang = `
 const courseOlympic = `
       <!-- (올림픽 수영장) -->
         <div class="sub-content-box">
-          <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
           <div class="custom-info-table-wrap scroll">
             <div class="flex-wrap gap-auto col-ver">
               <div class="flex-wrap mo-col gap-auto">
@@ -692,92 +691,7 @@ const courseOlympic = `
             </div>
           </div>
           <ul class="reference-list mt-8">
-            <li>주말 및 어린이반(주2일반)은 각 과정이 4개월씩입니다.</li>
-          </ul>
-        </div>
-        <div class="sub-content-box">
-          <h4 class="sub-title2 c-gray">[성인(주 3일반)]</h4>
-          <div class="custom-info-table-wrap">
-            <div class="flex-wrap gap-auto col-ver">
-              <div class="flex-wrap mo-col gap-auto">
-                <div class="flex1 custom-info-table">
-                  <table>
-                    <caption class="visually-hidden">수영 수준별 진도표: 성인(주 3일반)</caption>
-                    <colgroup>
-                      <col style="width:50px;"/>
-                      <col style="width:70px" />
-                      <col style="width:70px;"/>
-                      <col style=""/>
-                    </colgroup>
-                    <thead>
-                    <tr>
-                      <th><div class="th-wrap">구분</div></th>
-                      <th><div class="th-wrap">반명</div></th>
-                      <th><div class="th-wrap">강습기간</div></th>
-                      <th class="no-br"><div class="th-wrap">강습내용</div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 기초 -->
-                    <tr>
-                      <th rowspan="3"><div class="th-wrap">기초</div></th>
-                      <th><div class="th-wrap">신기초</div></th>
-                      <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                      <td class="no-br"><div class="td-wrap">물 적응, 자유형 kick, 자유형 pull</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">기초1</div></th>
-                      <td class="no-br"><div class="td-wrap">킥판잡고 자유형, 배영 kick, pull</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">기초2</div></th>
-                      <td class="no-br"><div class="td-wrap">자유형 및 배영 combination</div></td>
-                    </tr>
-                    <!-- 초급 -->
-                    <tr>
-                      <th rowspan="3"><div class="th-wrap">초급</div></th>
-                      <th><div class="th-wrap">초급1</div></th>
-                      <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                      <td class="no-br"><div class="td-wrap">자유형, 배영 combi 숙달, 평영 kick</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">초급2</div></th>
-                      <td class="no-br"><div class="td-wrap">평영 kick, pull</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">초급3</div></th>
-                      <td class="no-br"><div class="td-wrap">평영 combination</div></td>
-                    </tr>
-                    <!-- 중급 -->
-                    <tr>
-                      <th rowspan="3"><div class="th-wrap">중급</div></th>
-                      <th><div class="th-wrap">중급1</div></th>
-                      <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                      <td class="no-br"><div class="td-wrap">평영 combi숙달, 접영 kick</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">중급2</div></th>
-                      <td class="no-br"><div class="td-wrap">접영 wave, 접영 pull, 자유형 팔꺽기</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">중급3</div></th>
-                      <td class="no-br"><div class="td-wrap">접영 combination</div></td>
-                    </tr>
-                    <!-- 상급 -->
-                    <tr>
-                      <th class="no-bb"><div class="th-wrap">상급</div></th>
-                      <th class="no-bb"><div class="th-wrap">교정/연수</div></th>
-                      <td class="no-bb"><div class="td-wrap">fin 숙달</div></td>
-                      <td class="no-bb no-br"><div class="td-wrap">자유형, 배영, 평영, 접영의 지구력 및 교정, 턴 스타트 등등</div></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <ul class="reference-list mt-8">
-            <li class="c-red">수준별 진도에 맞는 강습반 등록바람, 진도가 맞지 않을경우 수강이 어려울 수 있습니다.</li>
+            <li>별 목표치를 두어 각반의 마스터가 가능하도록 함.</li>
           </ul>
         </div>
 `
