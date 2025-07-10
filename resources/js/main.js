@@ -850,39 +850,6 @@ const courseIlsan = `
                   </table>
                 </div>
               </div>
-              <div class="flex1 custom-info-table pc-only">
-                <table aria-describedby="table-description">
-                  <caption class="visually-hidden">수영 수준별 진도표: 주5회, 주3회 강습반, 주2회 강습반의 상금 연수에 관한 표</caption>
-                  <colgroup>
-                    <!-- 첫 번째 열: 50px -->
-                    <col style="width:50px;"/>
-                    <!-- 두 번째 열: 3 부분 중 하나 -->
-                    <col style="width:316px;"/>
-                    <!-- 세 번째 열: 5 부분 중 하나 -->
-                    <col style="width:calc((100% - 50px) * 5 / 8);"/>
-                  </colgroup>
-                  <tbody>
-                  <!-- 1. 기초 -->
-                  <tr>
-                    <th><div class="th-wrap">상급</div></th>
-                    <td><div class="td-wrap">6개월</div></td>
-                    <td class="no-br pd-sm">
-                      <div class="td-wrap left">
-                        각 영법 숙달 및 지구력 강화, 자세교정, 턴, 스타트, 응용영법,
-                        각 영법별 물잡기 훈련, 핀수영 운동량 1000M 이상
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th class="no-bb"><div class="th-wrap">연수</div></th>
-                    <td class="no-bb"><div class="td-wrap">24개월 이상</div></td>
-                    <td class="no-br no-bb pd-sm">
-                      <div class="td-wrap left">잠영, 입영, 스타트, 핀수영 운동량 1400M 이상</div>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
           <ul class="reference-list mt-8">
