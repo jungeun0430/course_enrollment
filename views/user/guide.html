@@ -766,7 +766,7 @@
 
       <h5>1-1. 강습 수준별 진도표(분당 스포츠 센터)</h5>
       <div class="box">
-        <!-- 여기서부터 복사 -->
+        <!-- (분당 스포츠 센터) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
           <div class="custom-info-table-wrap">
@@ -1281,7 +1281,7 @@
 
       <h5>1-2. 강습 수준별 진도표(일산 스포츠 센터)</h5>
       <div class="box">
-        <!-- 여기서부터 복사 -->
+        <!-- (일산 스포츠 센터) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
           <div class="custom-info-table-wrap">
@@ -1477,7 +1477,7 @@
 
       <h5>1-3. 강습 수준별 진도표(올림픽 수영장)</h5>
       <div class="box">
-        <!-- 여기서부터 복사 -->
+        <!-- (올림픽 수영장) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
           <div class="custom-info-table-wrap scroll">
@@ -3733,7 +3733,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         <button type="button" class="btn outlined" onclick="showModal('modal5');">[X]5. 선택한 강좌를 삭제하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-onlineUserCard');">[바코드]6. 온라인 회원카드</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-centerJoin');">7. 센터 중복 가입 안내</button>
-        <button type="button" class="btn outlined" onclick="showModal('modal-curriculum');">8. 강습 수준별 진도표</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-curriculum');" data-content="">8. 강습 수준별 진도표</button>
         <!-- 결제내역 -->
         <button type="button" class="btn outlined" onclick="showModal('modal-courseChange');">[결제내역] 9. 수강변경</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-courseCancellation');">[결제내역] 10. 수강취소</button>
@@ -3753,7 +3753,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         </div>
         <button type="button" class="btn outlined" onclick="showModal('modal8');">[X]16. 조회 결과 할인 대상이 아닙니다.</button>
         <!-- 카드 자동이체 -->
-        <button type="button" class="btn outlined" onclick="showModal('modal-automaticPayment');">[결제내역] 카드자동이체</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-automaticPayment'); setTimeout(() => { initializeCustomSelect(document.querySelector('.custom-select[data-options=\'test3\']'), selectOptions3, { placeholder: '선택하세요' }); }, 10);">[결제내역] 카드자동이체</button>
       </div>
       <!-- [모달] 1. 가입하신 센터가 없습니다. -->
       <div id="modal1" class="modal" data-modal-type="confirm-ver">
@@ -7501,9 +7501,6 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
   initializeCustomSelect(document.querySelector('.custom-select[data-options="2"]'), selectOptions2);
   initializeCustomSelect(document.querySelector('.custom-select[data-options="test1"]'), selectOptions2);
   initializeCustomSelect(document.querySelector('.custom-select[data-options="test2"]'), selectOptions2);
-  initializeCustomSelect(document.querySelector('.custom-select[data-options="test3"]'), selectOptions3, {
-    placeholder: '선택하세요'
-  });
 
   /* [푸터] ------------------- */
   /* 푸터 (패밀리사이트/관련사이트) */
