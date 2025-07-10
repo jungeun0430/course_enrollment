@@ -13,11 +13,10 @@
 * 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 (function)
 * 13. [수강신청내역] 수강신청탭 안의 체크박스 수 제한 (실행문)
 * 14. [공통] button/a 중복클릭 방지 (function, 실행문)
-* 15. 강의 수준별 진도표 변수 모음 (변수, function)
 *  */
 /*-----------------------------------------------------------------------------------------------------*/
 /* --- [변수 모음 : 15] */
-const Bundang = `
+const courseBundang = `
  <!-- (분당 스포츠 센터) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
@@ -530,7 +529,7 @@ const Bundang = `
           <li>시간별 강습생 진도에 따라 급수별 차이가 있을 수 있습니다.</li>
         </ul>
 `
-const Olympic = `
+const courseOlympic = `
       <!-- (올림픽 수영장) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
@@ -782,7 +781,7 @@ const Olympic = `
           </ul>
         </div>
 `
-const Ilsan = `
+const courseIlsan = `
         <!-- (일산 스포츠 센터) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
@@ -1439,8 +1438,51 @@ function showModal(modalId,options={}) {
 
   // 3-1. 모달별
   if (modalId === 'modal-curriculum') {
+    const insertContent = modal.querySelector('.insert-content');
+    if (!insertContent) {
+      // console.error('모달 내에 .insert-content 요소를 찾을 수 없습니다.');
+      return;
+    }
 
+    // courseName 가져오기 (options에서 먼저 확인, 없으면 버튼에서 확인)
+    let courseName = '';
+    if (options.courseName) {
+      courseName = options.courseName;
+    } else if (options.triggerElement) {
+      courseName = options.triggerElement.getAttribute('data-course');
+    }
+
+    // console.log('코스 이름:', courseName);
+
+    // courseName이 있을 때만 처리
+    if (courseName) {
+      let courseHtml = '';
+
+      if (courseName === 'courseBundang') {
+        console.log('분당 코스 선택됨');
+        courseHtml = courseBundang;
+      } else if (courseName === 'courseOlympic') {
+        console.log('올림픽 코스 선택됨');
+        courseHtml = courseOlympic;
+      } else if (courseName === 'courseIlsan') {
+        console.log('일산 코스 선택됨');
+        courseHtml = courseIlsan;
+      }
+
+      // HTML이 제대로 생성되었는지 확인
+      console.log('생성된 HTML:', courseHtml);
+
+      // HTML 직접 삽입
+      if (courseHtml) {
+        insertContent.innerHTML = courseHtml;
+      } else {
+        console.warn(`${courseName}에 해당하는 HTML을 찾을 수 없습니다.`);
+      }
+    } else {
+      console.warn('courseName이 제공되지 않았습니다.');
+    }
   }
+
 
 
   // 4. 모달 위치 조정 (옵션에 따라 스타일 변경)
@@ -3142,164 +3184,6 @@ function initializeCustomSelect(selectElement, selectOptions, options = {}) {
   };
 }
 
-// 초기화 함수
-// function initializeCustomSelect(selectElement, selectOptions, options = {}) {
-//   const button = selectElement.querySelector('.select-toggle');
-//   const list = selectElement.querySelector('.select-list');
-//   const selectedText = button.querySelector('.selected-text');
-//
-//   const {
-//     up = false,
-//     placeholder = selectElement.dataset.placeholder || '선택하세요',
-//     preventSelectionOnLink = false,
-//     initialValue = null, // ← 여기에 추가
-//   } = options;
-//
-//   if (up) {
-//     selectElement.classList.add('up');
-//   }
-//
-//   selectedText.textContent = placeholder;
-//   list.setAttribute('aria-hidden', 'true');
-//
-//   // 옵션 DOM 생성
-//   selectOptions.forEach(opt => {
-//     const li = document.createElement('li');
-//     li.setAttribute('role', 'option');
-//     li.setAttribute('data-value', opt.value);
-//
-//     const discountClass = opt.discount?.startsWith('-') ? 'c-red' : (opt.discount ? 'c-blue' : '');
-//     if (opt.tag === 'a') {
-//       li.innerHTML = `
-//         <a href="${opt.href}" target="_blank" class="flex-wrap gap-auto al-center" tabindex="0">
-//           <span class="txt-sm fw-medium">${opt.value}</span>
-//           ${opt.discount ? `<span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>` : ''}
-//         </a>
-//       `;
-//     } else if (opt.tag === 'button') {
-//       li.innerHTML = `
-//         <button type="button" class="flex-wrap gap-auto al-center"  tabindex="0">
-//           <span class="txt-sm fw-medium">${opt.value}</span>
-//           ${opt.discount ? `<span class="txt-sm fw-medium ${discountClass} ml-4">${opt.discount}</span>` : ''}
-//         </button>
-//       `;
-//     }
-//
-//     list.appendChild(li);
-//   });
-//
-//   // Focus 업데이트
-//   const items = list.querySelectorAll('li');
-//
-//   const closeList = () => {
-//     list.setAttribute('aria-hidden', 'true');
-//     button.setAttribute('aria-expanded', 'false');
-//     selectElement.classList.remove('active');
-//   };
-//
-//   const openList = () => {
-//     list.setAttribute('aria-hidden', 'false');
-//     button.setAttribute('aria-expanded', 'true');
-//     selectElement.classList.add('active');
-//   };
-//
-//   const toggleList = () => {
-//     const expanded = button.getAttribute('aria-expanded') === 'true';
-//     expanded ? closeList() : openList();
-//   };
-//
-//   const selectItem = item => {
-//     const selectedButton = item.querySelector('button');
-//     const selectedAnchor = item.querySelector('a');
-//
-//     if (selectedButton) {
-//       const div = document.createElement('div');
-//       div.classList.add('selected-item');
-//       div.innerHTML = selectedButton.innerHTML;
-//       selectedText.innerHTML = '';
-//       selectedText.appendChild(div);
-//     } else if (selectedAnchor && !preventSelectionOnLink) {
-//       const div = document.createElement('div');
-//       div.classList.add('selected-item');
-//       div.innerHTML = selectedAnchor.innerHTML;
-//       selectedText.innerHTML = '';
-//       selectedText.appendChild(div);
-//     }
-//
-//     items.forEach(i => i.setAttribute('aria-selected', 'false'));
-//     item.setAttribute('aria-selected', 'true');
-//     closeList();
-//     button.focus();
-//   };
-//
-//   // 초기값이 있을 경우 해당 항목을 선택
-//   if (initialValue !== null) {
-//     const initialItem = Array.from(items).find(item => item.dataset.value === initialValue);
-//     if (initialItem) {
-//       selectItem(initialItem);
-//     }
-//   }
-//
-//   // 이벤트
-//   button.addEventListener('click', toggleList);
-//
-//   items.forEach((item, index) => {
-//     item.addEventListener('keydown', e => {
-//       const isAnchor = !!item.querySelector('a');
-//       if ((e.key === 'Enter' || e.key === ' ') && isAnchor && !preventSelectionOnLink) {
-//         // 링크는 이동만 하고, 선택 텍스트는 업데이트 안 함
-//         closeList();  // 링크를 클릭하면 리스트는 닫아줘야 함
-//         return;
-//       }
-//
-//       if (e.key === 'Tab') {
-//         if (e.shiftKey) {
-//           const prev = items[index - 1] || items[items.length - 1];
-//           prev.focus();
-//         } else {
-//           const next = items[index + 1] || items[0];
-//           next.focus();
-//         }
-//       } else if (e.key === 'ArrowDown') {
-//         e.preventDefault();
-//         const next = items[index + 1] || items[0];
-//         next.focus();
-//       } else if (e.key === 'ArrowUp') {
-//         e.preventDefault();
-//         const prev = items[index - 1] || items[items.length - 1];
-//         prev.focus();
-//       } else if ((e.key === 'Enter' || e.key === ' ') && isAnchor) {
-//         if (preventSelectionOnLink) {
-//           closeList();
-//         } else {
-//           e.preventDefault();
-//           closeList();
-//         }
-//       } else if (e.key === 'Escape') {
-//         closeList();
-//         button.focus();
-//       }
-//     });
-//
-//
-//     item.addEventListener('click', () => {
-//       const isAnchor = !!item.querySelector('a');
-//       if (isAnchor && preventSelectionOnLink) {
-//         closeList(); // 텍스트 변경 안 하고 리스트만 닫기
-//         return;
-//       }
-//
-//       selectItem(item);
-//     });
-//   });
-//
-//   document.addEventListener('click', e => {
-//     if (!selectElement.contains(e.target)) {
-//       closeList();
-//     }
-//   });
-// }
-
 /* 11. [결제내역] 주민등록번호 : 가상키패드 */
 // 랜덤 활성화 클래스 효과 함수
 function activateRandomButton() {
@@ -3357,7 +3241,6 @@ function applyClickInterval(elements, delay) {
     };
   });
 }
-
 /*-----------------------------------------------------------------------------------------------------*/
 
 /* *************************************************************************************************** */
