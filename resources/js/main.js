@@ -648,8 +648,8 @@ const courseOlympic = `
                     </tr>
                     <!-- 연수 -->
                     <tr>
-                      <th colspan="2"><div class="th-wrap">연수</div></th>
-                      <td><div class="td-wrap">18개월 이상</div></td>
+                      <th colspan="2" class="no-bb"><div class="th-wrap">연수</div></th>
+                      <td class="no-bb"><div class="td-wrap">18개월 이상</div></td>
                       <td colspan="3" class="no-bb no-br"><div class="td-wrap">고급반 +입영, 잠영,핀수영 운동량 1400M 이상(FIN수영 어린이반&주부반)</div></td>
                     </tr>
                     </tbody>
