@@ -28,7 +28,7 @@
       .guide-box > h5 {font-size:var(--txt-size05);font-weight:700;color:var(--color-black);margin-bottom:12px;}
       .guide-box > h5 > span {font-size:var(--txt-size03);}
       .guide-box .box + h5 {margin-top:32px;}
-      .box {background: #fff!important;}
+      .box2 {border:1px solid var(--border-color);border-radius:8px;padding:12px;background-color:var(--color-transparent);}
 
       @media (max-width:767px) {
         .inner-wrap {width: 100%;padding:16px;}
@@ -138,7 +138,7 @@
     <div class="guide-box">
       <h2>가. 텍스트 관련</h2>
       <h5>1. 타이틀랩 <span>(서브페이지 ver)</span></h5>
-      <div class="box">
+      <div class="box2">
         <div class="title-wrap sub-ver">
           <h2>센터가입</h2>
           <p>센터 이름을 클릭하시면 온라인 회원카드를 확인하실 수 있습니다.</p>
@@ -146,7 +146,7 @@
       </div>
 
       <h5>1-2. 서브타이틀 <span>(서브페이지 ver)</span></h5>
-      <div class="box">
+      <div class="box2">
         <div class="sub-content-box">
           <h3 class="sub-title">서브타이틀 제목 : 단독으로 쓰일 경우 margin bottom없음</h3>
         </div>
@@ -154,7 +154,7 @@
       </div>
 
       <h5>1-3. 테이블에 들어가는 텍스트 관련</h5>
-      <div class="box">
+      <div class="box2">
         <ul>
           <li>
             <span class="txt-xs fw-bold c-blue">검도</span>
@@ -191,7 +191,7 @@
       <hr style="margin:20px 0;"/>
 
       <h5>2-1. 리스트 관련 <span>(※ ver)</span></h5>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 리스트 형식일 경우</p>
         <ul class="reference-list">
           <li>수강신청시 반드시 본인 수준과 진도표에 맞게 수강신청 해주시기 바라며 강습레벨이 맞지 않아 환불을 진행하는 경우에는 10%
@@ -210,7 +210,7 @@
       </div>
 
       <h5>2-2. 리스트 관련 <span>(* ver)</span></h5>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 리스트 형식일 경우</p>
         <ul class="star-list">
           <li>수강신청시 반드시 본인 수준과 진도표에 맞게 수강신청 해주시기 바라며 강습레벨이 맞지 않아 환불을 진행하는 경우에는 10%
@@ -232,7 +232,7 @@
       <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
       vertical-bar-list의 첫 li는 제목을 담당하고 나머지는 내용을 담당하는 형식임.
       </p>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 가로 나열</p>
         <ul class="vertical-bar-list">
           <li>예시 입니다.</li>
@@ -241,7 +241,7 @@
       </div>
 
       <h5>2-4. 리스트 관련<span>(- ver)</span></h5>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 가로 나열</p>
         <ul class="dash-list">
           <li>16폰트 예시 입니다.</li>
@@ -257,7 +257,7 @@
     <div class="guide-box">
       <h2>나. 커스텀 테이블 관련</h2>
       <h5>1. 강습 수준별 진도표</h5>
-      <div class="box">
+      <div class="box2">
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
           <div class="custom-info-table-wrap">
@@ -765,7 +765,7 @@
       </div>
 
       <h5>1-1. 강습 수준별 진도표(분당 스포츠 센터)</h5>
-      <div class="box">
+      <div class="box2 mb-12">
         <!-- (분당 스포츠 센터) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[수영 수준별 진도표]</h4>
@@ -1280,7 +1280,7 @@
       </div>
 
       <h5>1-2. 강습 수준별 진도표(일산 스포츠 센터)</h5>
-      <div class="box">
+      <div class="box2 mb-12">
         <!-- (일산 스포츠 센터) -->
         <div class="sub-content-box">
           <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
@@ -1476,10 +1476,9 @@
       </div>
 
       <h5>1-3. 강습 수준별 진도표(올림픽 수영장)</h5>
-      <div class="box">
+      <div class="box2">
         <!-- (올림픽 수영장) -->
         <div class="sub-content-box">
-          <h4 class="sub-title2 c-gray">[성인(주 5일반)]</h4>
           <div class="custom-info-table-wrap scroll">
             <div class="flex-wrap gap-auto col-ver">
               <div class="flex-wrap mo-col gap-auto">
@@ -1642,91 +1641,6 @@
             <li>주말 및 어린이반(주2일반)은 각 과정이 4개월씩입니다.</li>
           </ul>
         </div>
-        <div class="sub-content-box">
-          <h4 class="sub-title2 c-gray">[성인(주 3일반)]</h4>
-          <div class="custom-info-table-wrap">
-            <div class="flex-wrap gap-auto col-ver">
-              <div class="flex-wrap mo-col gap-auto">
-                <div class="flex1 custom-info-table">
-                  <table>
-                    <caption class="visually-hidden">수영 수준별 진도표: 성인(주 3일반)</caption>
-                    <colgroup>
-                      <col style="width:50px;"/>
-                      <col style="width:70px" />
-                      <col style="width:70px;"/>
-                      <col style=""/>
-                    </colgroup>
-                    <thead>
-                    <tr>
-                      <th><div class="th-wrap">구분</div></th>
-                      <th><div class="th-wrap">반명</div></th>
-                      <th><div class="th-wrap">강습기간</div></th>
-                      <th class="no-br"><div class="th-wrap">강습내용</div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- 기초 -->
-                    <tr>
-                      <th rowspan="3"><div class="th-wrap">기초</div></th>
-                      <th><div class="th-wrap">신기초</div></th>
-                      <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                      <td class="no-br"><div class="td-wrap">물 적응, 자유형 kick, 자유형 pull</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">기초1</div></th>
-                      <td class="no-br"><div class="td-wrap">킥판잡고 자유형, 배영 kick, pull</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">기초2</div></th>
-                      <td class="no-br"><div class="td-wrap">자유형 및 배영 combination</div></td>
-                    </tr>
-                    <!-- 초급 -->
-                    <tr>
-                      <th rowspan="3"><div class="th-wrap">초급</div></th>
-                      <th><div class="th-wrap">초급1</div></th>
-                      <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                      <td class="no-br"><div class="td-wrap">자유형, 배영 combi 숙달, 평영 kick</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">초급2</div></th>
-                      <td class="no-br"><div class="td-wrap">평영 kick, pull</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">초급3</div></th>
-                      <td class="no-br"><div class="td-wrap">평영 combination</div></td>
-                    </tr>
-                    <!-- 중급 -->
-                    <tr>
-                      <th rowspan="3"><div class="th-wrap">중급</div></th>
-                      <th><div class="th-wrap">중급1</div></th>
-                      <td rowspan="3"><div class="td-wrap">3개월</div></td>
-                      <td class="no-br"><div class="td-wrap">평영 combi숙달, 접영 kick</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">중급2</div></th>
-                      <td class="no-br"><div class="td-wrap">접영 wave, 접영 pull, 자유형 팔꺽기</div></td>
-                    </tr>
-                    <tr>
-                      <th><div class="th-wrap">중급3</div></th>
-                      <td class="no-br"><div class="td-wrap">접영 combination</div></td>
-                    </tr>
-                    <!-- 상급 -->
-                    <tr>
-                      <th class="no-bb"><div class="th-wrap">상급</div></th>
-                      <th class="no-bb"><div class="th-wrap">교정/연수</div></th>
-                      <td class="no-bb"><div class="td-wrap">fin 숙달</div></td>
-                      <td class="no-bb no-br"><div class="td-wrap">자유형, 배영, 평영, 접영의 지구력 및 교정, 턴 스타트 등등</div></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <ul class="reference-list mt-8">
-            <li class="c-red">수준별 진도에 맞는 강습반 등록바람, 진도가 맞지 않을경우 수강이 어려울 수 있습니다.</li>
-          </ul>
-        </div>
       </div>
 
       <hr style="margin:40px 0">
@@ -1737,7 +1651,7 @@
       </p>
 
       <h5>2. 장바구니 등 공통 테이블 디자인 && [공통 로딩]</h5>
-      <div class="box">
+      <div class="box2">
         <div class="flex-wrap between al-center mb-12">
           <p class="txt-md fw-medium c-gray"><em class="txt-md fw-bold c-blue">10</em>개의 강좌가 있습니다.</p>
           <button type="button" class="btn sm outlined c-red">선택 삭제</button>
@@ -2106,7 +2020,7 @@
       </div>
 
       <h5>2-2. 수강신청 등 공통 테이블 디자인</h5>
-      <div class="box">
+      <div class="box2">
         <div class="flex-wrap between al-center mb-12">
           <p class="txt-md fw-medium c-gray"><em class="txt-md fw-bold c-blue">10</em>개의 강좌가 있습니다.</p>
           <button type="button" class="btn sm outlined">장바구니 담기</button>
@@ -2444,7 +2358,7 @@
       </div>
 
       <h5>2-3. 결제내역 등 공통 테이블 디자인</h5>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">
           결제내역 표 (pc)버전의 경우 rowspan을 사용하고 있어<br>
           hover시 색상 적용을 위해 스크립트를 사용하고 있음 (main.js에서 주석 8번 항목에서 확인 가능)
@@ -3078,7 +2992,7 @@
         기존에 표 에서는 td-wrap안에 텍스트를 입력하면 정해진 글자크기 폰트로 들어가나<br>
         결제내역 팝업 테이블에서는 취소선 간편 설정을 위해 텍스트를 p 태그에 감싸서 표현해야 함.
       </p>
-      <div class="box">
+      <div class="box2">
         <!-- 수강취소 뎁스 : active 클래스 추가 -->
         <!-- 완료시에 active,complete (이중 클래스) / complete (단일클래스) 로 넣어도 동일 모양 나오니 편하게 작업가능 -->
         <div class="depth-box">
@@ -3410,7 +3324,7 @@
     <div class="guide-box">
       <h2>다. 버튼 관련</h2>
       <h5>1. 텍스트형 버튼</h5>
-      <div class="box">
+      <div class="box2">
         <div class="flex-wrap mo-col">
           <button type="button" class="btn outlined">센터 가입하기</button>
           <button type="button" class="btn">센터 가입하기</button>
@@ -3450,13 +3364,13 @@
 
       <hr style="margin:20px 0">
       <h5>2. 아이콘형 버튼</h5>
-      <div class="box">
+      <div class="box2">
         <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
       </div>
 
       <hr style="margin:20px 0">
       <h5>3. 모달 안 버튼</h5>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 기본</p>
         <button type="button" class="custom-btn">
           <span class="float txt-xs fw-bold">미사용</span>
@@ -3520,7 +3434,7 @@
     <div class="guide-box">
       <h2>라. 폼 관련 (input, textarea, radio, checkbox)</h2>
       <h5>1-1. 체크박스 (글자 존재)</h5>
-      <div class="box">
+      <div class="box2">
         <label class="checkbox-wrap">
           <input type="checkbox" aria-checked="false">
           <span class="checkmark" aria-hidden="true"></span>
@@ -3528,14 +3442,14 @@
         </label>
       </div>
       <h5>1-2. 체크박스 (글자 X)</h5>
-      <div class="box">
+      <div class="box2">
         <label class="checkbox-wrap">
           <input type="checkbox" aria-checked="false">
           <span class="checkmark" aria-hidden="true"></span>
         </label>
       </div>
       <h5>1-3. 체크박스 (뱃지모양)</h5>
-      <div class="box">
+      <div class="box2">
         <label class="checkbox-badge-wrap">
           <input type="checkbox" aria-checked="false">
           <span>신규등록</span>
@@ -3549,7 +3463,7 @@
       <hr style="margin:20px 0"/>
 
       <h5>2-1. 라디오 버튼 (글자 존재)</h5>
-      <div class="box">
+      <div class="box2">
         <label class="radio-wrap">
           <input type="radio" aria-checked="false">
           <span class="radiomark" aria-hidden="true"></span>
@@ -3557,14 +3471,14 @@
         </label>
       </div>
       <h5>2-2. 라디오 버튼 (글자 X)</h5>
-      <div class="box">
+      <div class="box2">
         <label class="radio-wrap">
           <input type="radio" aria-checked="false">
           <span class="radiomark" aria-hidden="true"></span>
         </label>
       </div>
       <h5>2-3. 라디오 버튼 (탭 디자인)</h5>
-      <div class="box">
+      <div class="box2">
         <div class="radio-tab-wrap">
           <label class="radio-tab">
             <input type="radio" aria-checked="true" checked="true" name="radioGroup">
@@ -3591,7 +3505,7 @@
         </div>
       </div>
       <h5>2-4. 라디오 버튼(결제내역 아이콘 디자인)</h5>
-      <div class="box">
+      <div class="box2">
         <label class="radio-ico-tab credit">
           <input type="radio" aria-checked="true" checked="true" name="radioGroup">
           <span>신용카드</span>
@@ -3609,7 +3523,7 @@
       <hr style="margin:20px 0"/>
 
       <h5>3-1. 인풋</h5>
-      <div class="box">
+      <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 기본사이즈</p>
         <label class="input-wrap">
           <input type="text" placeholder="예) 01오0000">
@@ -3629,7 +3543,7 @@
       <hr style="margin:20px 0"/>
 
       <h5>4-1. 데이트 피커</h5>
-      <div class="box">
+      <div class="box2">
         <fieldset class="calendar">
           <legend>기간 선택</legend>
           <div class="calendar-wrap flex-wrap al-center">
@@ -3690,7 +3604,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
           </pre>
         </li>
       </ul>
-      <div class="box">
+      <div class="box2">
         <div class="custom-select" data-options="1">
           <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
             <span class="selected-text"></span>
@@ -3715,7 +3629,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     <div class="guide-box">
       <h2>마. 뱃지 관련</h2>
       <h5>1. 일반 뱃지</h5>
-      <div class="box">
+      <div class="box2">
         <span class="badge red">마감</span>
         <span class="badge blue">접수중</span>
       </div>
@@ -3724,7 +3638,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     <div class="guide-box">
       <h2>바. 확인창</h2>
       <h5>1. 일반 모달창</h5>
-      <div class="box flex-wrap col-ver">
+      <div class="box2 flex-wrap col-ver">
         <button type="button" class="btn outlined" onclick="this.__applyClickHandler__(() => alert('f'))">연타방지</button>
         <button type="button" class="btn outlined" onclick="this.__applyClickHandler__(() => showModal('modal1'))">[느낌표]1. 정말 선택하신 회원번호를 사용하시겠습니까?</button>
         <button type="button" class="btn outlined" onclick="showModal('modal2');">[X]2. 센터가입 정보입력을 중단하시겠습니까?</button>
@@ -5367,386 +5281,18 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         pc / mobile 탭 모양 같을경우 : data-tab="twin"
       </p>
       <h5>1. 탭 (fraternal 버전)</h5>
-      <div class="box">
+      <div class="box2 mb-12">
         <div class="tab-wrap" id="ffff" data-tab="fraternal">
           <ul class="first-depth">
             <li class="active">
               <button type="button" class="tab"><span>스포츠교실</span></button>
-              <div class="tab-box">fsdfsd</div>
-<!--              <div class="tab-box"  >
-                <div class="flex-wrap between al-center mb-12">
-                  <p class="txt-md fw-medium c-gray"><em class="txt-md fw-bold c-blue">10</em>개의 강좌가 있습니다.</p>
-                  <button type="button" class="btn sm outlined c-red"   onclick="removeItem('ffff', 'tris1')">선택 삭제</button>
-                </div>
-
-                <div class="custom-table pc-only">
-                  <table>
-                    <caption class="visually-hidden">장바구니 표</caption>
-                    <colgroup>
-                      <col style="width:50px;"/>
-                      <col style=""/>
-                      <col style="width:80px;"/>
-                      <col style="width:100px;"/>
-                      <col style="width:100px;"/>
-                      <col style="width:200px;"/>
-                    </colgroup>
-                    <thead>
-                    <tr id="tris1">
-                      <th>
-                        <div class="th-wrap">
-                          <span class="visually-hidden">선택</span>
-                          <label class="checkbox-wrap">
-                            <input type="checkbox" aria-checked="false">
-                            <span class="checkmark" aria-hidden="true"></span>
-                          </label>
-                        </div>
-                      </th>
-                      <th><div class="th-wrap">내용</div></th>
-                      <th><div class="th-wrap">강습반</div></th>
-                      <th><div class="th-wrap">강사</div></th>
-                      <th><div class="th-wrap">인원수<br>(인원/정원)</div></th>
-                      <th><div class="th-wrap">수강료(원)</div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>
-                        <div class="td-wrap center">
-                          <label class="checkbox-wrap">
-                            <input type="checkbox" aria-checked="false">
-                            <span class="checkmark" aria-hidden="true"></span>
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver gap-auto">
-                            <span class="txt-xs fw-bold c-blue mb-4">검도</span>
-                            <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">강습일정</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          성인반
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          홍길동
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <p class="txt-sm fw-medium c-blue">29/30</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver al-center gap-auto">
-                            <div class="flex-wrap al-center center gap-auto gap4 mb-4">
-                              <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                              <span class="txt-rgl fw-medium">55,800</span>
-                            </div>
-                            <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="td-wrap center">
-                          <label class="checkbox-wrap">
-                            <input type="checkbox" aria-checked="false">
-                            <span class="checkmark" aria-hidden="true"></span>
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver gap-auto">
-                            <span class="txt-xs fw-bold c-blue mb-4">검도</span>
-                            <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">강습일정</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          성인반
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          홍길동
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <p class="txt-sm fw-medium c-blue">29/30</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver al-center gap-auto">
-                            <div class="flex-wrap al-center center gap-auto gap4 mb-4">
-                              <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                              <span class="txt-rgl fw-medium">55,800</span>
-                            </div>
-                            <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="td-wrap center">
-                          <label class="checkbox-wrap">
-                            <input type="checkbox" aria-checked="false">
-                            <span class="checkmark" aria-hidden="true"></span>
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver gap-auto">
-                            <span class="txt-xs fw-bold c-blue mb-4">검도</span>
-                            <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">강습일정</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          성인반
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          홍길동
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <p class="txt-sm fw-medium c-blue">29/30</p>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver al-center gap-auto">
-                            <div class="flex-wrap al-center center gap-auto gap4 mb-4">
-                              <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                              <span class="txt-rgl fw-medium">55,800</span>
-                            </div>
-                            <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    &lt;!&ndash; 비어있을 경우 &ndash;&gt;
-                    <tr class="empty">
-                      <td colspan="6">
-                        <div class="td-wrap">
-                          <img src="../../resources/images/common/loading.gif" alt="조회중" />
-                        </div>
-                      </td>
-                    </tr>
-                    &lt;!&ndash; 로딩 &ndash;&gt;
-                    <tr class="loading">
-                      <td colspan="6">
-                        <div class="td-wrap">
-                          <p class="empty-txt shop">장바구니에 담은 강좌가 없습니다.</p>
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                      <td colspan="6">
-                        <div class="td-wrap">
-                          <div class="total-wrap">
-                            <div class="flex-wrap col-ver al-center center gap-auto mb-8">
-                              <p class="txt-rgl fw-medium c-gray">총 강좌수 1건</p>
-                              <span class="txt-lg fw-bold">62,000원</span>
-                            </div>
-                            <span class="ico-box minus"><span class="visually-hidden">빼기</span></span>
-                            <div class="flex-wrap col-ver al-center center gap-auto mb-8">
-                              <p class="txt-rgl fw-medium c-gray">강좌할인금액</p>
-                              <span class="txt-lg fw-bold c-red">20,000원</span>
-                            </div>
-                            <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
-                            <div class="flex-wrap col-ver al-center center gap-auto mb-8">
-                              <p class="txt-rgl fw-medium c-gray">입회비</p>
-                              <span class="txt-lg fw-bold">10,000원</span>
-                            </div>
-                            <span class="ico-box equal"><span class="visually-hidden">는</span></span>
-                            <div class="flex-wrap center gap12">
-                              <span class="txt-lg fw-bold">총 수강료</span>
-                              <span class="txt-lg fw-bold c-blue">160,000원</span>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                <div class="custom-table mobile-only">
-                  <table>
-                    <caption class="visually-hidden">장바구니 표</caption>
-                    <colgroup>
-                      <col style="width:50px;"/>
-                      <col style=""/>
-                    </colgroup>
-                    <thead>
-                    <tr id="tr2">
-                      <th>
-                        <div class="th-wrap">
-                          <span class="visually-hidden">선택</span>
-                          <label class="checkbox-wrap">
-                            <input type="checkbox" aria-checked="false">
-                            <span class="checkmark" aria-hidden="true"></span>
-                          </label>
-                        </div>
-                      </th>
-                      <th><div class="th-wrap">강좌명</div></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td class="al-start">
-                        <div class="td-wrap center">
-                          <label class="checkbox-wrap">
-                            <input type="checkbox" aria-checked="false">
-                            <span class="checkmark" aria-hidden="true"></span>
-                          </label>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver gap-auto">
-                            <span class="txt-xs fw-bold c-blue mb-4">검도</span>
-                            <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">강습반</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium">성인반</span>
-                              </li>
-                            </ul>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">강사</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium">홍길동</span>
-                              </li>
-                            </ul>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">강습일정</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
-                              </li>
-                            </ul>
-                            <ul class="vertical-bar-list">
-                              <li>
-                                <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
-                              </li>
-                              <li>
-                                <span class="txt-sm fw-medium c-blue">29/30</span>
-                              </li>
-                            </ul>
-                            <div class="flex-wrap end">
-                              <div class="flex-wrap col-ver al-end gap-auto">
-                                <div class="flex-wrap al-center end gap-auto gap4 mb-4">
-                                  <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                                  <span class="txt-rgl fw-medium">55,800</span>
-                                </div>
-                                <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    &lt;!&ndash; 비어있을 경우 &ndash;&gt;
-                    <tr class="empty">
-                      <td colspan="2">
-                        <div class="td-wrap">
-                          <p class="empty-txt shop">장바구니에 담은 강좌가 없습니다.</p>
-                        </div>
-                      </td>
-                    </tr>
-                    &lt;!&ndash; 로딩 &ndash;&gt;
-                    <tr class="empty">
-                      <td colspan="2">
-                        <div class="td-wrap">
-                          <img src="../../resources/images/common/loading.gif" alt="조회중" />
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                      <td colspan="2">
-                        <div class="td-wrap">
-                          <div class="flex-wrap col-ver gap-auto">
-                            <div class="flex-wrap al-center between mb-6">
-                              <span class="txt-md fw-medium c-gray">총 강좌수 1건</span>
-                              <span class="txt-md fw-bold">62,000원</span>
-                            </div>
-                            <div class="flex-wrap al-center between mb-6">
-                              <span class="txt-md fw-medium c-gray">강좌할인금액</span>
-                              <span class="txt-md fw-bold">- 20,000원</span>
-                            </div>
-                            <div class="flex-wrap al-center between mb-6">
-                              <span class="txt-md fw-medium c-gray">입회비</span>
-                              <span class="txt-md fw-bold">+ 10,000원</span>
-                            </div>
-                            <div class="flex-wrap al-center between mt-12">
-                              <span class="txt-xlg fw-bold">총 수강료</span>
-                              <span class="txt-xlg fw-bold c-blue">160,000원</span>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    </tfoot>
-                  </table>
-                </div>
-              </div>-->
+              <div class="tab-box">임시내용 / fraternal 모드에서 한개 li 존재시 탭박스 안보임</div>
             </li>
           </ul>
           <div class="clear"></div>
         </div>
       </div>
-      <div style="width:100%;height:80px;background:red;"></div>
-      <div class="box">
+      <div class="box2 mb-12">
         <div class="tab-wrap" data-tab="fraternal">
           <ul class="first-depth">
             <li class="">
@@ -6231,7 +5777,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     <div class="guide-box">
       <h2>아. 개인정보</h2>
       <h5>1. 개인정보</h5>
-      <div class="box">
+      <div class="box2">
         <div class="sub-content-box">
           <h3 class="sub-title">[개인정보 수집, 이용 등에 대한 안내 및 동의서]</h3>
           <div class="gray-box">
@@ -6388,7 +5934,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
       </div>
 
       <h5>2. 스포츠센터 이용약관 동의서</h5>
-      <div class="box">
+      <div class="box2">
         <div class="sub-content-box">
           <h3 class="sub-title">[스포츠센터 이용약관 동의서]</h3>
           <div class="gray-box">
@@ -6656,7 +6202,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     <div class="guide-box">
       <h2>자. 수강신청 체크박스</h2>
       <h5>1. 단독 커스텀 버전</h5>
-      <div class="box">
+      <div class="box2">
         <button type="button" class="mobile-only-f2" onclick="openTab()">탭열기</button>
         <div class="f-modal">
           <div class="f-modal-content">
@@ -6899,7 +6445,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
     <div class="guide-box">
       <h2>차. 페이징처리</h2>
       <h5>페이징 처리</h5>
-      <div class="box">
+      <div class="box2">
         <div class="pagination-wrap">
           <div class="pagination">
             <button type="button" class="pg_first"><span class="visually-hidden">처음으로 가기</span></button>

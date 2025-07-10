@@ -273,6 +273,7 @@
 
 @media (max-width: 1200px) {
   .select-toggle {height:40px;}
+  .select-list[aria-hidden="false"] {top:40px;}
 }
 
 /* 위로 열리기 */
