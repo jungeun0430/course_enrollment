@@ -850,7 +850,11 @@ span.title-wrap > .h4,
 .ui-datepicker td > a.ui-state-active {background-color:var(--color-primary)!important;color:var(--color-white)!important;}
 /* 오늘 날짜 */
 .ui-datepicker td.ui-datepicker-today a {color:var(--color-primary)!important;}
-
+/* 다음달 이전달 버튼 */
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {display:none!important;/*top:6px;*/}
+/*.ui-datepicker .ui-datepicker-prev > .ui-icon,*/
+/*.ui-datepicker .ui-datepicker-next > .ui-icon {width:100%;height:100%;background:url('../images/ico/ico_calendar_arrow.svg') center center no-repeat;transform:rotate(90deg);position:static;margin:0; }*/
+/*.ui-datepicker .ui-datepicker-next > .ui-icon {transform: rotate(-90deg);}*/
 /* pagination */
 .pagination-wrap {width:100%;display:flex;justify-content:center;padding:20px 0;}
 .pagination {display:flex;align-items:center;}
