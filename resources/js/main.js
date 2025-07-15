@@ -3286,6 +3286,11 @@ $(document).ready(function(){
   // 시작일과 종료일 선택 필드
   let startDateInput = $(".dates").eq(0);
   let endDateInput = $(".dates").eq(1);
+  /* 날짜 유효성 검사 */
+  const isValidDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return !isNaN(date.getTime()) && dateStr === date.toISOString().slice(0, 10);
+  }
   // 공통 옵션
   let dateOptions = {
     changeMonth: true,
@@ -3322,6 +3327,12 @@ $(document).ready(function(){
       // 종료일이 선택되면 시작일의 최대 날짜를 종료일로 설정
       startDateInput.datepicker("option", "maxDate", selectedDate);
     }
+  });
+
+  // 입력 제한 설정 (직접 타이핑 or 붙여넣기 막기)
+  [startDateInput, endDateInput].forEach($input => {
+    $input.attr('readonly', true); // 직접 입력 불가 (마우스 클릭만 가능)
+    $input.on('keydown paste input', (e) => e.preventDefault()); // 붙여넣기, 키 입력 차단
   });
 
   /* 8. [결제내역]테이블 rowspan 존재시 hover색상 지정 */
