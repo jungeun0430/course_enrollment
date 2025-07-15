@@ -64,6 +64,19 @@ body:not(.loading) {visibility: visible; /* 초기화 후 화면 표시 */}
     .txt-size-btn.lg {width:100%;height:100%;background:url(../images/common/txt-lg-mo.svg)center center no-repeat;background-size:contain;}
 }
 
+/* [공통] 바로가기 */
+.fixed-direct-link-wrap {position:fixed;top:272px;right:0;z-index:9999;}
+.fixed-direct-link-wrap > ul {display:flex;flex-direction:column;gap:4px;}
+.fixed-direct-link-wrap > ul > li {min-width:88px;background-color:var(--color-primary);border-radius:20px 0 0 20px;transition: background-color 0.3s;}
+.fixed-direct-link-wrap > ul > li:hover{background-color:var(--color-primary-dark);}
+.fixed-direct-link-wrap > ul > li > a {display:flex;justify-content:center;align-items:center;padding:12px;font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-white);text-align:center;}
+
+@media (max-width:767px) {
+    .fixed-direct-link-wrap {top:124px;}
+    .fixed-direct-link-wrap > ul > li {min-width:60px;border-radius:8px 0 0 8px;}
+    .fixed-direct-link-wrap > ul > li > a {padding:8px 4px;}
+}
+
 /* 로그인 */
 main.login {display:flex;align-items:center;justify-content:center;height:100%;background-color:var(--color-primary-light);}
 .login-box {max-width:520px;width:100%;padding:60px;border:1px solid var(--border-color);border-radius:4px;background-color:var(--color-white);}
@@ -638,6 +651,7 @@ span.title-wrap > .h4,
 
 /* 신규 */
 .search-box {border:1px solid var(--border-color);background-color:var(--color-primary-light);border-radius:8px;padding:12px 24px;}
+.search-box .flex-wrap {flex-wrap:wrap;}
 .box {border:1px solid var(--border-color);border-radius:8px;padding:12px;background-color:var(--color-primary-light);}
 .label-wrap {display:flex;align-items:center;gap:8px;}
 .label-wrap > label {min-width:86px;}
