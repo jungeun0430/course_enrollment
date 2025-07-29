@@ -114,6 +114,7 @@ header .btn-wrap {display:flex;align-items:center;gap:16px;}
 header .btn-wrap > a {display:inline-flex;justify-content:center;padding-top:32px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:#666666;}
 header a.ico-user {min-width:42px;background:url(../images/ico/ico_login.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
 header a.ico-bag {position:relative;min-width:56px;background:url(../images/ico/ico_bag.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
+header a.ico-btn.ico-bag{min-width:42px;background-size:28px;}
 header a.ico-bag .shop_count{display:inline-flex;justify-content:center;align-items:center;padding:3px;min-width:16px;height:16px;border-radius:16px;position:absolute;right:7px;bottom:0;background-color:var(--color-primary);color:var(--color-white);text-align:center;font-size:var(--txt-size00);font-weight:var(--fw-bold);}
 header a.ico-pay {min-width:56px;background:url(../images/ico/ico_paper.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
 header a.ico-logout {min-width:56px;background:url(../images/ico/ico_logout.svg) center top no-repeat;background-size:contain;width:28px;height:28px;}
