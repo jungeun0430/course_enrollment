@@ -2464,6 +2464,470 @@ class CheckTabManager {
     this.allWrapBtns = this.wrap.querySelectorAll('.check-tab-btn');
     this.closeBtn = this.mobileWrap.querySelector('.close-btn');
 
+    // 탭별 체크박스 선택 상태를 추적하는 배열 추가
+    this.tabCheckedState = Array(this.tabItems.length).fill(false);
+
+    // 포커스 제어를 위한 변수 추가
+    this.focusableElements = null;
+    this.firstFocusableElement = null;
+    this.lastFocusableElement = null;
+
+    this.BUTTON_HEIGHT = 48;
+
+    // PC 환경에서의 높이 값
+    this.CONTENT_HEIGHT = 222;
+    this.COLLAPSED_CONTENT_HEIGHT = 52;
+
+    this.init();
+
+    // 창 크기 변경 시 모바일 상태 업데이트
+    window.addEventListener('resize', () => {
+      const wasMobile = this.isMobile;
+      this.isMobile = window.innerWidth < 768;
+
+      // 모바일 <-> PC 전환 시 UI 상태 업데이트
+      if (wasMobile !== this.isMobile) {
+        this.updateUIForDeviceChange();
+      }
+
+      // 모바일 -> PC 전환 시
+      if (wasMobile === true && this.isMobile === false) {
+        this.mobileWrap.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+
+    // 모달 배경 클릭 시 모달 닫기 이벤트 추가
+    this.mobileWrap.addEventListener('click', (event) => {
+      // 클릭된 요소가 f-modal 자체인 경우에만 닫기 (내부 요소 클릭 시 닫지 않음)
+      if (event.target === this.mobileWrap) {
+        this.mobileWrap.classList.remove('active');
+        document.body.classList.remove('no-scroll');
+        this.tabItems.forEach(tabItem => {
+          tabItem.classList.remove('active');
+        });
+      }
+    });
+
+    // 모달이 활성화될 때 포커스 트랩 설정
+    this.mobileWrap.addEventListener('transitionend', () => {
+      if (this.mobileWrap.classList.contains('active') && this.isMobile) {
+        setupFocusTrap();
+      }
+    });
+
+    // 키보드 이벤트 리스너 추가
+    // document.addEventListener('keydown', this.handleKeyDown.bind(this));
+  }
+
+  init() {
+    // 모든 check-tab-btn에 이벤트 리스너 추가
+    this.allWrapBtns.forEach(btn => {
+      btn.classList.remove('active'); // 초기에 active 제거
+
+      // 초기 텍스트를 '닫힘'으로 설정
+      const visibilityText = btn.querySelector('.isOpen .visually-hidden');
+      if (visibilityText) {
+        visibilityText.textContent = '열림';
+      }
+
+      btn.addEventListener('click', (event) => {
+        // 모바일 환경에서도 클릭 이벤트가 작동하도록 수정
+        if (this.isMobile) {
+          this.toggleMobileTab(event);
+        } else {
+          this.toggleAllTabs();
+        }
+      });
+    });
+
+    this.closeBtn.addEventListener('click', () => {
+      this.mobileWrap.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      this.tabItems.forEach(tabItem => {
+        tabItem.classList.remove('active');
+      });
+    });
+
+    this.tabItems.forEach((tabItem, index) => {
+      const content = tabItem.querySelector('.sub-tab-content');
+
+      // content가 null인 경우 건너뛰기
+      if (!content) {
+        console.warn('sub-tab-content 요소를 찾을 수 없습니다.');
+        return;
+      }
+
+      // 초기 상태 설정
+      tabItem.classList.remove('active'); // 초기에 active 제거
+      content.dataset.expanded = 'true';
+
+      // 모바일/PC에 따라 다른 초기 높이 설정
+      if (this.isMobile) {
+        this.setMobileInitialHeight(content);
+      } else {
+        this.setPCInitialHeight(content);
+      }
+
+      // 체크박스 변경 이벤트
+      content.addEventListener('change', (e) => {
+        if (!this.isMobile && e.target.type === 'checkbox' && this.isActive(tabItem)) {
+          // PC 환경에서 체크박스 필터링
+          this.showOnlyCheckedItems(content);
+        } else if (this.isMobile && e.target.type === 'checkbox') {
+          // 모바일 환경에서 체크박스 선택 시
+          // 이전에 체크된 항목이 없는 경우에만 다음 탭으로 이동
+          const wasChecked = this.tabCheckedState[index];
+
+          // 현재 탭의 체크 상태 업데이트
+          this.tabCheckedState[index] = this.hasCheckedCheckbox(content);
+
+          // 이전에 체크된 항목이 없었을 때만 다음 탭으로 이동
+          if (!wasChecked && this.tabCheckedState[index]) {
+            this.moveToNextTabAfterSelection(index);
+          }
+        }
+      });
+    });
+
+    // 초기 체크 상태 설정
+    this.updateAllTabsCheckedState();
+  }
+
+  // 모든 탭의 체크 상태 업데이트
+  updateAllTabsCheckedState() {
+    this.tabItems.forEach((tabItem, index) => {
+      const content = tabItem.querySelector('.sub-tab-content');
+      if (content) {
+        this.tabCheckedState[index] = this.hasCheckedCheckbox(content);
+      }
+    });
+  }
+
+  // 모바일 환경에서 체크박스 선택 후 다음 탭으로 이동
+  moveToNextTabAfterSelection(currentIndex) {
+    // 다음 탭이 존재하는 경우에만 다음 탭으로 이동
+    if (currentIndex < this.tabItems.length - 1) {
+      // 0.5초 후 다음 탭으로 이동 (애니메이션과 사용자 인식을 위한 딜레이)
+      setTimeout(() => {
+        // 현재 탭 닫기
+        const currentTabItem = this.tabItems[currentIndex];
+        const currentContent = currentTabItem.querySelector('.sub-tab-content');
+
+        currentTabItem.classList.remove('active');
+        if (currentContent) {
+          currentContent.style.height = '0';
+          currentTabItem.style.height = `${this.BUTTON_HEIGHT}px`;
+        }
+
+        // 다음 탭 버튼 가져오기
+        const nextTabItem = this.tabItems[currentIndex + 1];
+        const nextTabBtn = nextTabItem.querySelector('.check-tab-btn');
+
+        // 다음 탭 버튼 클릭 이벤트 트리거
+        if (nextTabBtn) {
+          nextTabBtn.click();
+        }
+      }, 500);
+    }
+  }
+
+  // 탭 내에 체크된 체크박스가 있는지 확인
+  hasCheckedCheckbox(content) {
+    if (!content) return false;
+
+    const checkboxes = content.querySelectorAll('input[type="checkbox"]');
+    for (const checkbox of checkboxes) {
+      if (checkbox.checked) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // 디바이스 변경 시 UI 업데이트
+  updateUIForDeviceChange() {
+    this.tabItems.forEach((item, index) => {
+      const content = item.querySelector('.sub-tab-content');
+      if (!content) return;
+
+      const isActive = item.classList.contains('active');
+
+      if (this.isMobile) {
+        // PC -> 모바일 전환 시
+        // 높이를 auto로 설정하고 transition 제거
+        content.style.transition = 'none';
+        item.style.transition = 'none';
+
+        // 모바일에서는 auto 높이 적용
+        if (isActive) {
+          content.style.height = 'calc(80vh - 96px)';
+          // 버튼 높이는 유지하면서 컨텐츠 높이는 auto로 설정
+          item.style.height = '';
+          this.showAllItemsMobile(content);
+        } else {
+          // 닫힌 상태일 때는 최소 높이 설정
+          content.style.height = '0';
+          item.style.height = `${this.BUTTON_HEIGHT}px`;
+        }
+      } else {
+        // 모바일 -> PC 전환 시
+        // PC 환경으로 복원
+        content.style.transition = 'height 0.3s ease-in-out';
+        item.style.transition = 'height 0.3s ease-in-out';
+
+        this.setPCInitialHeight(content);
+
+        // 모든 탭 닫기
+        this.isExpanded = false;
+        item.classList.remove('active');
+        const btn = item.querySelector('.check-tab-btn');
+        if (btn) btn.classList.remove('active');
+
+        // 모든 항목 표시 (필터링 해제)
+        this.showAllItems(content);
+      }
+    });
+
+    // 체크 상태 업데이트
+    this.updateAllTabsCheckedState();
+  }
+
+  // PC 환경에서의 초기 높이 설정
+  setPCInitialHeight(content) {
+    if (!content) return;
+
+    const li = content.closest('li');
+    if (!li) return;
+
+    content.style.transition = 'height 0.3s ease-in-out';
+    li.style.transition = 'height 0.3s ease-in-out';
+
+    content.style.height = `${this.CONTENT_HEIGHT}px`;
+    li.style.height = `${this.CONTENT_HEIGHT + this.BUTTON_HEIGHT}px`;
+  }
+
+  // 모바일 환경에서의 초기 높이 설정
+  setMobileInitialHeight(content) {
+    if (!content) return;
+
+    const li = content.closest('li');
+    if (!li) return;
+
+    // 모바일에서는 transition 제거 (부드러운 애니메이션 대신 즉시 변경)
+    content.style.transition = 'none';
+    li.style.transition = 'none';
+
+    // 초기 상태에서는 접혀있도록 설정
+    content.style.height = '0';
+    li.style.height = `${this.BUTTON_HEIGHT}px`;
+  }
+
+  // 모바일 환경에서 탭 토글
+  toggleMobileTab(event) {
+    const clickedBtn = event.currentTarget;
+    const tabItem = clickedBtn.closest('li');
+
+    if (!tabItem) return;
+
+    const isActive = tabItem.classList.contains('active');
+    const content = tabItem.querySelector('.sub-tab-content');
+    // 열림/닫힘 텍스트 요소 찾기
+    const visibilityText = clickedBtn.querySelector('.isOpen .visually-hidden');
+
+    if (!content) return;
+
+    // 다른 모든 탭 닫기 (아코디언 방식)
+    this.tabItems.forEach(item => {
+      if (item !== tabItem && item.classList.contains('active')) {
+        const itemContent = item.querySelector('.sub-tab-content');
+        if (itemContent) {
+          itemContent.style.height = '0';
+          item.style.height = `${this.BUTTON_HEIGHT}px`;
+        }
+        item.classList.remove('active');
+        const btn = item.querySelector('.check-tab-btn');
+        if (btn) {
+          btn.classList.remove('active');
+          // 다른 버튼의 텍스트도 '닫힘'으로 변경
+          const otherVisibilityText = btn.querySelector('.isOpen .visually-hidden');
+          if (otherVisibilityText) {
+            otherVisibilityText.textContent = '닫힘';
+          }
+        }
+      }
+    });
+
+    // 현재 클릭한 탭 토글
+    // 현재 버튼이 활성 상태이고, 이를 닫으려고 하는 경우 활성 상태 유지
+    if (isActive) {
+      return; // **활성화된 버튼은 닫히지 않도록 방지**
+    } else {
+      // 열기
+      content.style.height = 'auto';
+      const autoHeight = content.offsetHeight;
+
+      // 애니메이션을 위해 초기화 후 높이 설정
+      content.style.height = '0';
+      content.offsetHeight;
+      content.style.transition = 'height 0.3s ease-in-out';
+      content.style.height = `${autoHeight}px`;
+      tabItem.style.height = `${autoHeight + this.BUTTON_HEIGHT}px`;
+
+      this.showAllItemsMobile(content);
+
+      tabItem.classList.add('active');
+      clickedBtn.classList.add('active');
+
+      if (visibilityText) {
+        visibilityText.textContent = '열림';
+      }
+
+      // transition 후 높이 auto 유지
+      setTimeout(() => {
+        content.style.height = 'auto';
+        tabItem.style.height = 'auto';
+      }, 300);
+    }
+  }
+
+  // PC 환경에서 모든 탭 토글
+  toggleAllTabs() {
+    this.isExpanded = !this.isExpanded;
+
+    // 모든 탭 컨테이너의 상태 변경
+    this.tabItems.forEach(item => {
+      this.updateTabHeight(item, this.isExpanded);
+      item.classList.toggle('active', this.isExpanded);
+
+      // 열림/닫힘 텍스트 업데이트
+      const btn = item.querySelector('.check-tab-btn');
+      if (btn) {
+        const visibilityText = btn.querySelector('.isOpen .visually-hidden');
+        if (visibilityText) {
+          visibilityText.textContent = this.isExpanded ? '닫힘' : '열림';
+        }
+      }
+    });
+
+    // 모든 버튼의 상태 변경
+    this.allWrapBtns.forEach(btn => {
+      btn.classList.toggle('active', this.isExpanded);
+    });
+  }
+
+  // PC 환경에서 탭 높이 업데이트
+  updateTabHeight(item, isActive) {
+    if (!item) return;
+
+    const content = item.querySelector('.sub-tab-content');
+    if (content) {
+      const contentHeight = isActive ? this.COLLAPSED_CONTENT_HEIGHT : this.CONTENT_HEIGHT;
+
+      content.style.transition = 'height 0.3s ease-in-out';
+      item.style.transition = 'height 0.3s ease-in-out';
+
+      content.style.height = `${contentHeight}px`;
+      item.style.height = `${contentHeight + this.BUTTON_HEIGHT}px`;
+
+      if (isActive) {
+        // PC 환경에서는 체크된 항목만 표시
+        this.showOnlyCheckedItems(content);
+
+        // display: none인 checkbox-badge-wrap의 상위 li에서 active 제거
+        const hiddenItems = content.querySelectorAll('.checkbox-badge-wrap[style*="display: none"]');
+        hiddenItems.forEach(hiddenItem => {
+          const parentLi = hiddenItem.closest('li');
+          if (parentLi) {
+            parentLi.classList.remove('active');
+          }
+        });
+      } else {
+        this.showAllItems(content);
+      }
+    }
+  }
+
+  // 모바일 환경에서 모든 항목 표시 (체크박스 필터링 없음)
+  showAllItemsMobile(content) {
+    if (!content) return;
+    const items = content.querySelectorAll('.checkbox-badge-wrap');
+    items.forEach(item => {
+      item.style.display = '';
+      const listItem = item.closest('li');
+      if (listItem) {
+        listItem.style.display = '';
+        // 모바일에서는 모든 항목 활성화
+        listItem.classList.add('active');
+      }
+
+      // 체크박스 활성화 상태 유지
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (checkbox) {
+        checkbox.disabled = false;
+      }
+    });
+  }
+
+  isActive(item) {
+    return item.classList.contains('active');
+  }
+
+  showOnlyCheckedItems(content) {
+    if (!content) return;
+
+    const items = content.querySelectorAll('.checkbox-badge-wrap');
+    items.forEach(item => {
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      const listItem = item.closest('li');
+
+      if (!checkbox || !listItem) return;
+
+      if (checkbox && checkbox.checked) {
+        listItem.style.display = '';        // 보여주기
+        listItem.classList.add('active');
+      } else {
+        listItem.classList.remove('active');
+        listItem.style.display = 'none';    // 숨기기
+      }
+      checkbox.disabled = true;
+    });
+  }
+
+  showAllItems(content) {
+    if (!content) return;
+
+    const items = content.querySelectorAll('.checkbox-badge-wrap');
+    items.forEach(item => {
+      item.style.display = '';
+      const listItem = item.closest('li');
+      if (!listItem) return;
+
+      listItem.classList.remove('active');
+      listItem.style.display = '';
+      const checkbox = item.querySelector('input[type="checkbox"]');
+      if (checkbox) checkbox.disabled = false;
+    });
+  }
+}
+/*class CheckTabManager {
+  constructor() {
+    this.mobileWrap = document.querySelector('.f-modal');
+    this.wrap = document.querySelector('.check-tab-wrap');
+
+    // .check-tab-wrap 요소가 없는 경우 초기화 중단
+    if (!this.wrap) {
+      console.warn('CheckTabManager: .check-tab-wrap 요소를 찾을 수 없습니다.');
+      return;
+    }
+
+    this.modalBody = document.querySelector('.f-modal-body');
+    this.tabItems = this.wrap.querySelectorAll('.check-scroll > ul > li');
+    this.isExpanded = false;
+    this.isMobile = window.innerWidth < 768;
+    this.allWrapBtns = this.wrap.querySelectorAll('.check-tab-btn');
+    this.closeBtn = this.mobileWrap.querySelector('.close-btn');
+
     // 포커스 제어를 위한 변수 추가
     this.focusableElements = null;
     this.firstFocusableElement = null;
@@ -2838,7 +3302,7 @@ class CheckTabManager {
       if (checkbox) checkbox.disabled = false;
     });
   }
-}
+}*/
 
 /* 7. 데이트 피커 */
 function formatYearOptions() {
