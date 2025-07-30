@@ -13,7 +13,8 @@
 * 12. [결제내역] 주민등록번호 : 앞자리 유효성 검사 (function)
 * 13. [수강신청내역] 수강신청탭 안의 체크박스 수 제한 (실행문)
 * 14. [공통] button/a 중복클릭 방지 (function, 실행문)
-* 15. [변수 모음 : 강의 수준별 진도표 관련: 분당/일산/올림픽] 
+* 15. [변수 모음 : 강의 수준별 진도표 관련: 분당/일산/올림픽]
+* 16. 아코디언 토글
 *  */
 /*-----------------------------------------------------------------------------------------------------*/
 /* --- [변수 모음 : 15] */
@@ -3123,6 +3124,24 @@ function applyClickInterval(elements, delay) {
     };
   });
 }
+/* 16. 아코디언 토글 */
+function toggleAccordion(button) {
+  const targetKey = button.getAttribute('data-accordion');
+  const box = document.querySelector(`.accordion-box[data-accordion="${targetKey}"]`);
+  const isActive = button.classList.contains('active');
+
+  if (isActive) {
+    button.classList.remove('active');
+    box.classList.remove('active');
+  } else {
+    // 현재 버튼과 해당 박스에만 active 토글
+    button.classList.add('active');
+    if (box) {
+      box.classList.add('active');
+    }
+  }
+}
+
 /*-----------------------------------------------------------------------------------------------------*/
 
 /* *************************************************************************************************** */

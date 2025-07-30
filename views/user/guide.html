@@ -3581,6 +3581,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
       <div class="box2">
         <span class="badge red">마감</span>
         <span class="badge blue">접수중</span>
+        <span class="badge gray">미신청</span>
       </div>
     </div>
 
@@ -5026,9 +5027,44 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                 </div>
 
               </div>
+              <!-- 동의여부 -->
+              <div class="agree-box bg-ver">
+                <p class="ag-tit txt-sm fw-bold">[필수] 개인정보 수집 · 이용 동의</p>
+                <div>
+                  <div class="flex-wrap al-center between">
+                    <p class="accordion txt-sm fw-medium c-gray">
+                      개인정보 수집 및 이용에 대한 약관을 읽고 동의합니다.
+                      <button type="button" class="ico-btn sm-ver accordion" data-accordion="accordion1" onclick="toggleAccordion(this)"><span class="visually-hidden">자세히 보기(열기)</span></button>
+                    </p>
+                    <div class="flex-wrap w-auto agree-radio-wrap ">
+                      <label class="radio-wrap">
+                        <input type="radio" name="accordion1" aria-checked="false">
+                        <span class="radiomark" aria-hidden="true"></span>
+                        <span>동의안함</span>
+                      </label>
+                      <label class="radio-wrap">
+                        <input type="radio" name="accordion1"  aria-checked="false">
+                        <span class="radiomark" aria-hidden="true"></span>
+                        <span>동의함</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="accordion-box" data-accordion="accordion1">
+                    <div>
+                      <ul class="dot-list">
+                        <li>[필수] 개인정보 수집·이용 동의</li>
+                        <li>수집·이용 목적: 수강료 카드 자동이체 서비스</li>
+                        <li>수집항목: 성명, 연락처, 카드사, 카드번호, 유효기간, 카드명의인</li>
+                        <li>보유기간: 신청서는 2년, 신용카드 정보는 카드 자동이체 해지 시까지</li>
+                        <li>카드 자동이체 신청에 따른 개인정보 수집·이용 동의를 거부할 수 있습니다. 단, 동의 거부 시 카드 자동이체 서비스를 받으실 수 없습니다.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="flex-wrap end gap4">
-                <button type="button" class="btn sm outlined" disabled>저장</button>
                 <button type="button" class="btn sm outlined" disabled>삭제</button>
+                <button type="button" class="btn sm outlined" disabled>저장</button>
               </div>
             </div>
 
@@ -5045,6 +5081,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                     <col style="width:100px;"/>
                     <col style="width:100px;"/>
                     <col style="width:200px;"/>
+                    <col style="width:100px;"/>
                     <col style="width:130px;"/>
                   </colgroup>
                   <thead>
@@ -5054,6 +5091,7 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                     <th><div class="th-wrap center">강습반</div></th>
                     <th><div class="th-wrap center">강사</div></th>
                     <th><div class="th-wrap">금액(원)</div></th>
+                    <th><div class="th-wrap">신청구분</div></th>
                     <th><div class="th-wrap center">카드자동이체</div></th>
                   </tr>
                   </thead>
@@ -5093,6 +5131,61 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                           </div>
                           <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
                         </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
+                        <span class="badge gray">미신청</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
+                        <div class="flex-wrap col-ver al-center gap4">
+                          <button type="button" class="btn sm outlined">신청</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver al-center gap-auto">
+                          <div class="flex-wrap al-center center gap-auto gap4 mb-4">
+                            <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
+                            <span class="txt-rgl fw-medium">55,800</span>
+                          </div>
+                          <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
+                        <span class="badge blue">신청완료</span>
                       </div>
                     </td>
                     <td>
@@ -5215,6 +5308,37 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                     </div>
                   </li>
                 </ul>
+              </div>
+              <!-- 동의여부 -->
+              <div class="agree-box bg-ver">
+                <p class="ag-tit txt-sm fw-bold">[필수] 카드 자동이체 등록 및 해지 신청 확인서</p>
+                <div>
+                  <div class="flex-wrap al-center between">
+                    <p class="accordion txt-sm fw-medium c-gray">
+                      카드자동이체 등록 및 해지 신청 확인서를 읽고 이해했습니다.
+                      <button type="button" class="ico-btn sm-ver accordion" data-accordion="accordion2" onclick="toggleAccordion(this)"><span class="visually-hidden">자세히 보기(열기)</span></button>
+                    </p>
+                    <div class="flex-wrap w-auto agree-radio-wrap ">
+                      <label class="radio-wrap">
+                        <input type="radio" name="accordion2"  aria-checked="false">
+                        <span class="radiomark" aria-hidden="true"></span>
+                        <span>확인함</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="accordion-box" data-accordion="accordion2">
+                    <div>
+                      <ul class="dot-list">
+                        <li>카드 자동이체는 매월 22일, 월 1회 이체되며 22일이 휴일인 경우 익일 이체됩니다.</li>
+                        <li>카드 자동이체 신청 및 변경·해지는 매월 1일~15일까지입니다.</li>
+                        <li>해지 신청을 하지 않을 경우 익월 수강을 요청한 것으로 간주하여 수강료가 자동 출금됩니다.</li>
+                        <li>15일 이후 해지 신청은 불가하며 이에 따른 환불 시 10%의 위약금이 발생합니다.</li>
+                        <li>연기 및 환불 시에는 카드 자동이체가 해지되오니 재신청 바랍니다.</li>
+                        <li>결제에 필요한 정보(카드번호, 유효기간)는 자동이체 해지 시 즉시 삭제됩니다.</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

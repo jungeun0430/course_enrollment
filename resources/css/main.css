@@ -543,7 +543,16 @@ span.title-wrap > .h4,
 /* 개인정보 처리방침 페이지 이용약관 */
 .gray-box + .agree-box {margin-top:12px;}
 .agree-box {display:flex;flex-direction:column;gap:8px;}
+.agree-box.bg-ver {margin-top:12px;gap:12px;padding:16px;background-color:var(--color-light-gray4);}
+.agree-box > .ag-tit {}
 .agree-radio-wrap {gap:8px;}
+.agree-box .accordion {display:flex;align-items:center;gap:8px;}
+.accordion-box{max-height:0;overflow:hidden;margin-top:12px;background-color:var(--color-white);border-radius:4px;transition:all 0.3s;}
+.accordion-box.active{max-height:1000px;}
+.accordion-box > div {border:1px solid var(--border-color2);padding:12px;}
+.agree-box button.accordion.active{transform:rotate(90deg);}
+.agree-box + .flex-wrap {margin-top:12px;}
+
 
 /* 결제내역 */
 .payment-wrap {gap:6px;}

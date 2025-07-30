@@ -32,6 +32,13 @@
 .dash-list.sm > li + li {margin-top:0;}
 .dash-list.sm > li::before {content:'-';font-size:inherit;position:absolute;left:0;top:-1px;}
 
+/* 1-5. . 리스트 */
+.dot-list {}
+.dot-list > li {padding-left:12px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-gray3);}
+.dot-list > li + li {margin-top:0;}
+.dot-list > li::before {content:'•';font-size:inherit;position:absolute;left:0;top:-1px;}
+
+
 /* 리스트 공통 */
 .dash-list > li.c-red {color:var(--color-red);}
 
@@ -124,9 +131,12 @@
 
 /* 아이콘 버튼 */
 .ico-btn {display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;position:relative;transition:border-color 0.3s;cursor:pointer;}
+.ico-btn.sm-ver{width:20px;height:20px;}
 .ico-btn.outlined {border-radius:8px;border:2px solid var(--border-color);}
 .ico-btn:hover {border-color:var(--color-primary);}
 .ico-btn.shop {background:var(--color-white) url('../images/ico/ico_shop_plus.svg') no-repeat center center;background-size:28px;}
+.ico-btn.accordion {background:var(--color-transparent) url('../images/ico/ico_accordion_arrow.svg') no-repeat center center;background-size:20px;transition:all 0.3s;}
+.ico-btn.accordion.open {transform:rotate(90deg);}
 
 /* 해당 아이콘은 모바일에서만 존재하여 고정함 */
 .ico-btn.ico-bc{width:28px;height:28px;background:url(../images/ico/ico_bc.svg) center top no-repeat;background-size:28px;}
@@ -299,6 +309,7 @@
 .badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
 .badge.red {background-color:var(--bg-light-red);color:var(--color-red);text-decoration:none!important;}
 .badge.blue {background-color:var(--bg-light-blue);color:var(--color-primary-dark);text-decoration:none!important;}
+.badge.gray {background-color:var(--color-disabled);color:var(--color-gray2);text-decoration:none!important;}
 
 /* 텍스트 관련 (기본) */
 .relative-box {position:relative;}
