@@ -551,7 +551,8 @@ span.title-wrap > .h4,
 .accordion-box{margin:0;max-height:0;overflow:hidden;background-color:var(--color-white);border-radius:4px;transition:all 0.3s;}
 .accordion-box.active{max-height:1000px;margin:12px 0 ;}
 .accordion-box > div {border:1px solid var(--border-color2);padding:12px;}
-.agree-box .accordion > p {display:inline-flex;align-items:center;gap:20px;}
+.agree-box .accordion > div {display:inline-flex;align-items:center;gap:20px;}
+.agree-box .accordion > div > p {}
 .agree-box button.accordion > span.txt{font-size:var(--txt-size01);color:#999999;}
 .agree-container {display: flex;flex-wrap: wrap;align-items: flex-start;gap: 8px;}
 /* 문구 + 버튼 */
@@ -564,10 +565,11 @@ span.title-wrap > .h4,
 @media (max-width:767px) {
     .agree-container {flex-direction: column;gap:0;}
     .agree-container > .accordion {order: 1;width:100%;}
-    .agree-container > .accordion > p{width:100%;align-items:flex-start;justify-content:space-between;flex: 1;word-break: break-word;gap:4px;}
+    .agree-container > .accordion > div {width:100%;flex-direction:column;align-items:flex-start;flex: 1;word-break: break-word;gap:4px;}
+    .agree-container > .accordion > div > p{width:100%;}
+    .agree-container > .accordion > div > .btn-wrap {width:100%;display:flex;justify-content:flex-start;}
     .agree-container > .accordion-box {order: 2;}
     .agree-container > .accordion-box.active {margin-bottom:0;}
-    .agree-box button.accordion.active{transform:rotate(90deg);}
     .agree-container > .agree-radio-wrap {width:100%;order: 3;justify-content:flex-end;margin-top:12px;}
 }
 
