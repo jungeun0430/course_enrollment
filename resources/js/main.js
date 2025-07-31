@@ -1427,14 +1427,11 @@ const handleFocusTrap = (modal) => {
         .custom-select .select-list[aria-hidden="false"] li a
       `)
     ).filter((el) => {
-      const style = window.getComputedStyle(el);
-      return (
-        style.display !== 'none' &&
-        style.visibility !== 'hidden' &&
-        style.opacity !== '0'
-      );
+      // const style                       = window.getComputedStyle(el);
+      return isVisible(el);
     });
   };
+  console.log(getFocusableElements())
 
   // 모달별 isEnforcingFocus 상태를 추가
   if (!modal._isEnforcingFocus) {
@@ -1512,6 +1509,16 @@ const handleFocusTrap = (modal) => {
     firstFocusable?.focus();
   }, 0);
 };
+function isVisible(el) {
+  if (!el) return false;
+  if (el === document.body) return true;
+
+  const style = window.getComputedStyle(el);
+  if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+    return false;
+  }
+  return isVisible(el.parentElement);
+}
 // 모달 숨기기 함수
 function hideModal(modalId) {
   const modal = document.getElementById(modalId);
@@ -2310,6 +2317,7 @@ function setupFocusTrap(modal) {
   let focusableElements = Array.from(modal.querySelectorAll(
     'button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"]), .check-tab-btn'
   ));
+  console.log(focusableElements);
   focusableElements = focusableElements.filter(el => {
     const style = window.getComputedStyle(el);
     if (
