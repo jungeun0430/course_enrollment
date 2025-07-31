@@ -39,6 +39,9 @@
   --table-border-color: #DBDBDB;
   --table-cell-bg: #F9FAFB;
   --table-cell-td-bg: #ffffff;
+
+  /* hr */
+  --hr-color: #eaeaea;
 }
 body[data-text-size='large'] {
   /* fonts size (크게) */
