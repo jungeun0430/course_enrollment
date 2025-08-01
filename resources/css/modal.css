@@ -93,8 +93,9 @@
 .confirm-box .c-desc {font-size:var(--txt-size04);font-weight:var(--fw-medium);color:var(--color-gray);text-align:center;}
 .confirm-box .c-em + .c-desc {margin-top: 8px;}
 .confirm-box + .flex-wrap {margin-top: 28px;}
+.confirm-box + .flex-wrap > * {flex:1;}
 
-/* 바코드 */
+  /* 바코드 */
 .bc-box > * {flex:1;width:100%;}
 .bc-pl-tit {display:flex;justify-content:space-between;align-items:flex-end;font-size:var(--txt-size05);font-weight:var(--fw-medium);color:#0189FF;}
 .bc-pl-tit img {width: 180px;height:32px;object-fit:contain;}
