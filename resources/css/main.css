@@ -182,6 +182,7 @@ main > .sec{width:100%;margin:0 auto;}
 
 /* 공통 */
 .flex-wrap {width:100%;display:flex;gap:20px;}
+.flex-wrap.wrap{flex-wrap:wrap;}
 .flex-wrap.w-auto {width:auto;}
 .flex-wrap.between {justify-content:space-between;}
 .flex-wrap.end {justify-content:flex-end;}
