@@ -3317,7 +3317,7 @@
         <button type="button" class="ico-btn outlined shop"><span class="visually-hidden">장바구니 바로담기 버튼</span></button>
       </div>
 
-      <hr style="margin:20px 0">
+      <hr style="margin:20px 0">v
       <h5>3. 모달 안 버튼</h5>
       <div class="box2">
         <p style="font-size:18px;margin-bottom:4px;">a. 기본</p>
@@ -3378,6 +3378,30 @@
           </span>
         </button>
       </div>
+
+      <h5>4. 툴팁 버튼</h5>
+      <div class="box2">
+        <div class="tooltip-wrap">
+          <button type="button" class="ico-btn tooltip"><span class="visually-hidden">소득 공제율 별 결제안내 관련 내용</span></button>
+          <div class="tooltip-box">
+            <ul class="dot-list">
+              <li>
+                <p class="txt-xs fw-medium c-red">100%</p>
+                <p class="txt-xs fw-medium c-gray">① 문화비 소득공제 대상 결제 단계에서 전액 결제</p>
+              </li>
+              <li>
+                <p class="txt-xs fw-medium c-blue">50%</p>
+                <p class="txt-xs fw-medium c-gray">① 문화비 소득공제 대상 결제 단계에서 절반 금액 결제</p>
+                <p class="txt-xs fw-medium c-gray">→ ② 일반 항목 결제 단계에서 나머지 결제</p>
+              </li>
+              <li>
+                <p class="txt-xs fw-medium">미해당</p>
+                <p class="txt-xs fw-medium c-gray">② 일반 항목 결제 단계에서 전액 결제</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="guide-box">
@@ -3387,7 +3411,7 @@
         <label class="checkbox-wrap">
           <input type="checkbox" aria-checked="false">
           <span class="checkmark" aria-hidden="true"></span>
-          <span>동의합니다</span>
+          <span>동의합니다</span>ㅁ
         </label>
       </div>
       <h5>1-2. 체크박스 (글자 X)</h5>
@@ -3620,6 +3644,10 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         <button type="button" class="btn outlined" onclick="showModal('modal8');">[X]16. 조회 결과 할인 대상이 아닙니다.</button>
         <!-- 카드 자동이체 -->
         <button type="button" class="btn outlined" onclick="showModal('modal-automaticPayment'); setTimeout(() => { initializeCustomSelect(document.querySelector('.custom-select[data-options=\'test3\']'), selectOptions3, { placeholder: '선택하세요' }); }, 10);">[결제내역] 카드자동이체</button>
+        <!-- 문화비소득공제 (결제대기 페이지) -->
+        <button type="button" class="btn outlined" onclick="showModal('modal-culturalExpenses');">18. [문화비소득공제] / 결제대기</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal-culturalExpensesDepth1');">19. [문화비소득공제] 결제단계(진행중) - 문화비 소득공제 대상 결제</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal9');">20. [문화비소득공제] 문화비 소득공제 대상 결제 여부</button>
       </div>
       <!-- [모달] 1. 가입하신 센터가 없습니다. -->
       <div id="modal1" class="modal" data-modal-type="confirm-ver">
@@ -5361,8 +5389,790 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
           <button type="button" class="btn fixed" onclick="hideModal('modal-automaticPayment')" >닫기</button>
         </div>
       </div>
-  </div>
 
+      <!-- [문화비소득공제] 결제대기 -->
+      <div id="modal-culturalExpenses" class="modal pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content lg ">
+          <div class="title-wrap">
+            <h3>결제</h3>
+            <button type="button" onclick="hideModal('modal-culturalExpenses')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="sub-content-box ver2 pd-ver">
+              <div class="flex-wrap al-center gap-auto comment">
+                <div class="tooltip-wrap">
+                  <button type="button" class="ico-btn tooltip sm"><span class="visually-hidden">소득 공제율 별 결제안내 관련 내용</span></button>
+                  <div class="tooltip-box">
+                    <ul class="dot-list">
+                      <li>
+                        <p class="txt-xs fw-medium c-red">100%</p>
+                        <p class="txt-xs fw-medium c-gray">① 문화비 소득공제 대상 결제 단계에서 전액 결제</p>
+                      </li>
+                      <li>
+                        <p class="txt-xs fw-medium c-blue">50%</p>
+                        <p class="txt-xs fw-medium c-gray">① 문화비 소득공제 대상 결제 단계에서 절반 금액 결제</p>
+                        <p class="txt-xs fw-medium c-gray">→ ② 일반 항목 결제 단계에서 나머지 결제</p>
+                      </li>
+                      <li>
+                        <p class="txt-xs fw-medium">미해당</p>
+                        <p class="txt-xs fw-medium c-gray">② 일반 항목 결제 단계에서 전액 결제</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <span class="txt-sm fw-medium c-gray">소득 공제율별 결제 안내</span>
+              </div>
+              <!-- 소득 공제율 (pc)-->
+              <div class="custom-table pd-sm fixed-ver pc-only mt-0">
+                <table>
+                  <caption class="visually-hidden">소득공제율 테이블</caption>
+                  <colgroup>
+                    <col style="width:100px;"/>
+                    <col style="width:100px;"/>
+                    <col />
+                    <col style="width:100px;"/>
+                    <col style="width:200px;"/>
+                    <col style="width:100px;"/>
+                    <col style="width:130px;"/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th><div class="th-wrap center">소득공제율</div></th>
+                    <th><div class="th-wrap center">센터명</div></th>
+                    <th><div class="th-wrap center">내용</div></th>
+                    <th><div class="th-wrap center">강습반</div></th>
+                    <th><div class="th-wrap">강사</div></th>
+                    <th><div class="th-wrap">인원수<br/>(현원/정원)</div></th>
+                    <th><div class="th-wrap center">금액(원)</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <span class="badge red">100%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <p class="txt-sm fw-medium c-blue">29/30</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        55,800
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <span class="badge blue">50%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <p class="txt-sm fw-medium c-blue">29/30</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        55,800
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <span class="badge gray">미해당</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <p class="txt-sm fw-medium c-blue">29/30</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        55,800
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                  <!-- 수강 변경 -->
+                </table>
+              </div>
+              <!-- 소득 공제율 (mo)-->
+              <div class="custom-table mobile-only mt-0">
+                <table>
+                  <caption class="visually-hidden">소득 공제율별 결제 표</caption>
+                  <colgroup>
+                    <col style="width:50px;"/>
+                    <col style=""/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th><div class="th-wrap">내용</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="badge red">100% 소득공제</span>
+                          <span class="txt-xs fw-bold c-blue mb-4 mt-10">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습반</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">성인반</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강사</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">홍길동</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium c-blue">29/30</span>
+                            </li>
+                          </ul>
+                          <div class="flex-wrap end">
+                            <span class="txt-rgl fw-bold">55,800 원</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="badge blue">500% 소득공제</span>
+                          <span class="txt-xs fw-bold c-blue mb-4 mt-10">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습반</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">성인반</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강사</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">홍길동</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium c-blue">29/30</span>
+                            </li>
+                          </ul>
+                          <div class="flex-wrap end">
+                            <span class="txt-rgl fw-bold">55,800 원</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="badge gray">미해당</span>
+                          <span class="txt-xs fw-bold c-blue mb-4 mt-10">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습반</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">성인반</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강사</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">홍길동</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium c-blue">29/30</span>
+                            </li>
+                          </ul>
+                          <div class="flex-wrap end">
+                            <span class="txt-rgl fw-bold">55,800 원</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- 비어있을 경우 -->
+                  <!--<tr class="empty">
+                    <td>
+                      <div class="td-wrap">
+                        <p class="empty-txt course">조회된 강좌가 없습니다.</p>
+                      </div>
+                    </td>
+                  </tr>-->
+                  </tbody>
+                </table>
+              </div>
+              <!-- 총 결제 예정 금액(공통)-->
+              <!-- 결제 진행중의 경우에는 total-wrap-custom "line" 추가 필요 -->
+              <div class="total-wrap-custom">
+                <div class="tw-box"><!-- 진행중인 부분에 대해서 ing 추가: tw-box ing -->
+                  <p>문화비소득공제 대상 항목</p>
+                  <span>83,700원</span>
+                </div>
+                <div class="calc-box">
+                  <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                </div>
+                <div class="tw-box">
+                  <p>일반 항목</p>
+                  <span>+55,800원</span>
+                </div>
+                <div class="calc-box">
+                  <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                </div>
+                <div class="tw-box total">
+                  <p>총 결제 예정 금액</p>
+                  <span>139,500원</span>
+                </div>
+              </div>
+          </div>
+          <button type="button" class="btn fixed" onclick="hideModal('modal-culturalExpenses')" >닫기</button>
+        </div>
+      </div>
+      </div>
+      <!-- [문화비소득공제] 결제단계(진행중) - 문화비 소득공제 대상 결제 -->
+      <div id="modal-culturalExpensesDepth1" class="modal pd-sm" data-modal-type="fixed-btn-ver">
+        <div class="modal-content lg ">
+          <div class="title-wrap">
+            <h3>결제</h3>
+            <button type="button" onclick="hideModal('modal-culturalExpensesDepth1')" class="close-btn"><span class="visually-hidden">닫기</span></button>
+          </div>
+          <div class="modal-body">
+            <div class="sub-content-box ver2 pd-ver">
+              <!-- 소득공제율 결제 단계 -->
+              <div class="depth-box ver2">
+                <ul class="depth-list">
+                  <!-- 완료시 active complete || complete추가 -->
+                  <li class="active complete">
+                    <div class="depth"><span>문화비 소득공제 대상 결제</span></div>
+                  </li>
+                  <li class="active complete">
+                    <div class="depth"><span>일반 항목 결제</span></div>
+                  </li>
+                  <li class="active">
+                    <div class="depth"><span>결제 완료</span></div>
+                  </li>
+                </ul>
+              </div>
+              <!-- 소득공제율 안내 -->
+              <div class="flex-wrap al-center gap-auto comment">
+                <div class="tooltip-wrap">
+                  <button type="button" class="ico-btn tooltip sm"><span class="visually-hidden">소득 공제율 별 결제안내 관련 내용</span></button>
+                  <div class="tooltip-box">
+                    <ul class="dot-list">
+                      <li>
+                        <p class="txt-xs fw-medium c-red">100%</p>
+                        <p class="txt-xs fw-medium c-gray">① 문화비 소득공제 대상 결제 단계에서 전액 결제</p>
+                      </li>
+                      <li>
+                        <p class="txt-xs fw-medium c-blue">50%</p>
+                        <p class="txt-xs fw-medium c-gray">① 문화비 소득공제 대상 결제 단계에서 절반 금액 결제</p>
+                        <p class="txt-xs fw-medium c-gray">→ ② 일반 항목 결제 단계에서 나머지 결제</p>
+                      </li>
+                      <li>
+                        <p class="txt-xs fw-medium">미해당</p>
+                        <p class="txt-xs fw-medium c-gray">② 일반 항목 결제 단계에서 전액 결제</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <span class="txt-sm fw-medium c-gray">소득 공제율별 결제 안내</span>
+              </div>
+              <!-- 소득 공제율 (pc)-->
+              <div class="custom-table pd-sm fixed-ver pc-only mt-0">
+                <table>
+                  <caption class="visually-hidden">소득공제율 테이블</caption>
+                  <colgroup>
+                    <col style="width:100px;"/>
+                    <col style="width:100px;"/>
+                    <col />
+                    <col style="width:100px;"/>
+                    <col style="width:200px;"/>
+                    <col style="width:100px;"/>
+                    <col style="width:130px;"/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th><div class="th-wrap center">소득공제율</div></th>
+                    <th><div class="th-wrap center">센터명</div></th>
+                    <th><div class="th-wrap center">내용</div></th>
+                    <th><div class="th-wrap center">강습반</div></th>
+                    <th><div class="th-wrap">강사</div></th>
+                    <th><div class="th-wrap">인원수<br/>(현원/정원)</div></th>
+                    <th><div class="th-wrap center">금액(원)</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <span class="badge red">100%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <p class="txt-sm fw-medium c-blue">29/30</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        55,800
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <span class="badge blue">50%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <p class="txt-sm fw-medium c-blue">29/30</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        55,800
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="disabled">
+                    <td>
+                      <div class="td-wrap">
+                        <span class="badge gray">미해당</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">성인반</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">홍길동</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <p class="txt-sm fw-medium c-blue">29/30</p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        55,800
+                      </div>
+                    </td>
+                  </tr>
+                  </tbody>
+                  <!-- 수강 변경 -->
+                </table>
+              </div>
+              <!-- 소득 공제율 (mo)-->
+              <div class="custom-table mobile-only mt-0">
+                <table>
+                  <caption class="visually-hidden">소득 공제율별 결제 표</caption>
+                  <colgroup>
+                    <col style="width:50px;"/>
+                    <col style=""/>
+                  </colgroup>
+                  <thead>
+                  <tr>
+                    <th><div class="th-wrap">내용</div></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="badge red">100% 소득공제</span>
+                          <span class="txt-xs fw-bold c-blue mb-4 mt-10">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습반</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">성인반</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강사</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">홍길동</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium c-blue">29/30</span>
+                            </li>
+                          </ul>
+                          <div class="flex-wrap end">
+                            <span class="txt-rgl fw-bold">55,800 원</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="badge blue">500% 소득공제</span>
+                          <span class="txt-xs fw-bold c-blue mb-4 mt-10">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습반</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">성인반</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강사</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">홍길동</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium c-blue">29/30</span>
+                            </li>
+                          </ul>
+                          <div class="flex-wrap end">
+                            <span class="txt-rgl fw-bold">55,800 원</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="disabled">
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="badge gray">미해당</span>
+                          <span class="txt-xs fw-bold c-blue mb-4 mt-10">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습반</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">성인반</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강사</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">홍길동</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium c-blue">29/30</span>
+                            </li>
+                          </ul>
+                          <div class="flex-wrap end">
+                            <span class="txt-rgl fw-bold">55,800 원</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- 비어있을 경우 -->
+                  <!--<tr class="empty">
+                    <td>
+                      <div class="td-wrap">
+                        <p class="empty-txt course">조회된 강좌가 없습니다.</p>
+                      </div>
+                    </td>
+                  </tr>-->
+                  </tbody>
+                </table>
+              </div>
+              <!-- 총 결제 예정 금액(공통)-->
+              <div class="total-wrap-custom line">
+                <div class="tw-box ing">
+                  <p>문화비소득공제 대상 항목</p>
+                  <span>83,700원</span>
+                </div>
+                <div class="calc-box">
+                  <span class="ico-box plus"><span class="visually-hidden">더하기</span></span>
+                </div>
+                <div class="tw-box">
+                  <p>일반 항목</p>
+                  <span>55,800원</span>
+                </div>
+                <div class="calc-box">
+                  <span class="ico-box equal"><span class="visually-hidden">는</span></span>
+                </div>
+                <div class="tw-box total">
+                  <p>총 결제 예정 금액</p>
+                  <span>139,500원</span>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn fixed" onclick="hideModal('modal-culturalExpensesDepth1')" >문화비 소득공제 대상 항목 83,700원 결제하기</button>
+          </div>
+        </div>
+      </div>
+      <!-- [모달] 9: [문화비소득공제] 문화비 소득공제 대상 항목이 포함되어있습니다. 대상 항목을 먼저 결제하시겠습니까? -->
+      <div id="modal9" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_exp.svg" alt="" />
+            <p class="c-em">문화비 소득공제 대상 항목이<br class="mobile-only-inline2"> 포함되어 있습니다.<br>대상 항목을 먼저 결제하시겠습니까? </p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn outlined size-sm auto-pd" onclick="hideModal('modal9')">공제 없이 결제하기</button>
+            <button type="button" class="btn size-sm" onclick="hideModal('modal9')">먼저 결제하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="guide-box">
       <h2>사. 탭 관련</h2>
       <p style="font-size:18px;margin-bottom:4px;color:var(--color-red)">

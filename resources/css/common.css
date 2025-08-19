@@ -36,7 +36,8 @@
 .dot-list {}
 .dot-list > li {padding-left:12px;position:relative;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-gray3);}
 .dot-list > li + li {margin-top:0;}
-.dot-list > li::before {content:'•';font-size:inherit;position:absolute;left:0;top:-1px;}
+.dot-list > li::before {content:'•';font-size:inherit;position:absolute;left:0;top:-2px;}
+
 
 
 /* 리스트 공통 */
@@ -118,6 +119,7 @@
 @media (max-width: 767px) {
   /* 버튼 : 기본 (배경색 존재) */
   .btn {padding:12px 14px;border-width:1px;}
+  .btn.auto-pd{padding-left:10px;padding-right:10px;}
 
   /* 버튼 너비 관련 */
   .btn.size-sm {min-width:auto; max-width:100%;width:100%;flex:1;}
@@ -131,12 +133,14 @@
 
 /* 아이콘 버튼 */
 .ico-btn {display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;position:relative;transition:border-color 0.3s;cursor:pointer;}
+.ico-btn.sm {width:16px;height:16px;}
 .ico-btn.txt-ver {min-width:68px;height:auto;}
 .ico-btn.txt-ver > span.txt{display:inline-block;font-size:var(--txt-size01);}
 .ico-btn.outlined {border-radius:8px;border:2px solid var(--border-color);}
 .ico-btn:hover {border-color:var(--color-primary);}
 .ico-btn.shop {background:var(--color-white) url('../images/ico/ico_shop_plus.svg') no-repeat center center;background-size:28px;}
 .ico-btn.accordion {padding-right:18px;background:var(--color-transparent) url('../images/ico/ico_accordion_arrow.svg') no-repeat right 0 center;background-size:16px;transition:all 0.3s;}
+.ico-btn.tooltip {background:var(--color-white) url('../images/ico/ico_tooltip.svg') no-repeat center center}
 
 @media(max-width:767px) {
   .ico-btn.txt-ver > span.txt{display:inline-block;}
@@ -311,6 +315,12 @@
   .direct-link::after {width:12px;height:12px;background-size: 16px;}
 }
 
+/* 툴팁 */
+.tooltip-wrap {position:relative;display:flex;}
+.tooltip-wrap + *{margin-left:2px;}
+.tooltip-wrap > button.tooltip:hover + .tooltip-box {display:block;}
+.tooltip-box {z-index:1;width:347px;display:none;position:absolute;left:0;top:16px;padding:16px 20px;border-radius:16px;border:1px solid var(--border-color2);background-color:var(--color-white);}
+.tooltip-box > .dot-list > li + li {margin-top:12px}
 /* ------------------------------------------------------- */
 /* 뱃지 */
 .badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
