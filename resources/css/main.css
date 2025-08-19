@@ -386,7 +386,9 @@ span.title-wrap > .h4,
     .total-wrap-custom.line .tw-box.total > p {font-size:var(--txt-size03);font-weight:var(--fw-medium);color:var(--color-gray);}
     .total-wrap-custom.line .tw-box.total > span {font-size:var(--txt-size05);font-weight:var(--fw-bold);color:var(--color-black);}
     .total-wrap-custom.line .tw-box.ing {background-color:var(--color-transparent);}
+    .total-wrap-custom.line .tw-box.ing.total > p,
     .total-wrap-custom.line .tw-box.ing > p {font-weight:var(--fw-bold);color:var(--color-black);}
+    .total-wrap-custom.line .tw-box.ing.total > span,
     .total-wrap-custom.line .tw-box.ing > span {color:var(--color-red);}
 }
 
