@@ -46,6 +46,7 @@
 body[data-text-size='large'] {
   /* fonts size (크게) */
   --txt-footer-size:14px;
+  --txt-sizesm : 13px;
   --txt-size00 : 14px;
   --txt-size01 : 16px;
   --txt-size02 : 18px;
@@ -76,6 +77,7 @@ body[data-text-size='large'] {
   }
   @media (max-width: 767px) {
     --txt-footer-size:13px;
+    --txt-sizesm : 12px;
     --txt-size00 : 13px;
     --txt-size01 : 14px;
     --txt-size02 : 18px;
@@ -99,6 +101,7 @@ body[data-text-size='large'] {
 body[data-text-size='normal'] {
   /* fonts size (보통) */
   --txt-footer-size:13px;
+  --txt-sizesm : 12px;
   --txt-size00: 13px;
   --txt-size01: 14px;
   --txt-size02: 16px;
@@ -115,6 +118,7 @@ body[data-text-size='normal'] {
   /* 너비조정 */
   @media (max-width: 767px) {
     --txt-footer-size:11px;
+    --txt-sizesm : 12px;
     --txt-size00: 11px;
     --txt-size01: 12px;
     --txt-size02: 14px;
@@ -134,6 +138,7 @@ body[data-text-size='normal'] {
 body[data-text-size='small'] {
   /* fonts size (보통) */
   --txt-footer-size:13px;
+  --txt-sizesm : 12px;
   --txt-size00 : 12px;
   --txt-size01 : 13px;
   --txt-size02 : 14px;
@@ -148,6 +153,7 @@ body[data-text-size='small'] {
   --txt-size11 : 48px;
   @media (max-width: 767px) {
     --txt-footer-size:11px;
+    --txt-sizesm : 11px;
     --txt-size00 : 11px;
     --txt-size01 : 12px;
     --txt-size02 : 13px;
