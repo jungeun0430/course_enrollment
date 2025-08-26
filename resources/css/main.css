@@ -71,6 +71,7 @@ body:not(.loading) {visibility: visible; /* 초기화 후 화면 표시 */}
 .fixed-direct-link-wrap > ul > li {min-width:88px;background-color:var(--color-primary);border-radius:20px 0 0 20px;transition: background-color 0.3s;}
 .fixed-direct-link-wrap > ul > li:hover{background-color:var(--color-primary-dark);}
 .fixed-direct-link-wrap > ul > li > a {display:flex;justify-content:center;align-items:center;padding:12px;font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-white);text-align:center;}
+.fixed-direct-link-wrap > ul > li.lightgreen{background-color:var(--color-light-green)}
 
 @media (max-width:767px) {
     .fixed-direct-link-wrap {top:124px;}
