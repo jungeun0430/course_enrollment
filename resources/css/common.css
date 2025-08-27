@@ -125,7 +125,6 @@ a.btn {width: auto;}
   /* 버튼 : 기본 (배경색 존재) */
   .btn {padding:12px 14px;border-width:1px;}
   .btn.auto-pd{padding-left:10px;padding-right:10px;}
-
   /* 버튼 너비 관련 */
   .btn.size-sm {min-width:auto; max-width:100%;width:100%;flex:1;}
   .btn.size-nm {min-width:auto; max-width:100%;width:100%;flex:1;}
@@ -144,7 +143,9 @@ a.btn {width: auto;}
 .ico-btn.outlined {border-radius:8px;border:2px solid var(--border-color);}
 .ico-btn:hover {border-color:var(--color-primary);}
 .ico-btn.shop {background:var(--color-white) url('../images/ico/ico_shop_plus.svg') no-repeat center center;background-size:28px;}
-.ico-btn.accordion {padding-right:18px;background:var(--color-transparent) url('../images/ico/ico_accordion_arrow.svg') no-repeat right 0 center;background-size:16px;transition:all 0.3s;}
+.ico-btn.accordion {position:relative;padding-right:18px;}
+.ico-btn.accordion::after{content:'';width:16px;height:16px;position:absolute;right:0;top:50%;transform:translateY(-50%);background:var(--color-white) url('../images/ico/ico_accordion_arrow.svg') no-repeat center center;background-size:16px;transition:all 0.3s;}
+.ico-btn.accordion.active::after {transform:translateY(-50%) rotate(90deg);}
 .ico-btn.tooltip {background:var(--color-white) url('../images/ico/ico_tooltip.svg') no-repeat center center}
 
 @media(max-width:767px) {
@@ -325,8 +326,10 @@ a.btn {width: auto;}
 .tooltip-wrap + *{margin-left:2px;}
 .tooltip-wrap > button.tooltip:focus + .tooltip-box,
 .tooltip-wrap > button.tooltip:hover + .tooltip-box {display:block;}
-.tooltip-box {z-index:1;width:347px;display:none;position:absolute;left:0;top:16px;padding:16px 20px;border-radius:16px;border:1px solid var(--border-color2);background-color:var(--color-white);}
+.tooltip-box {z-index:10;width:347px;display:none;position:absolute;left:0;top:16px;padding:16px 20px;border-radius:16px;border:1px solid var(--border-color2);background-color:var(--color-white);}
 .tooltip-box > .dot-list > li + li {margin-top:12px}
+.tooltip-box .tooltip-comment {margin-bottom:12px;}
+.tooltip-box .tooltip-comment.line {margin-bottom:0;padding-top:12px;margin-top:12px;border-top:1px solid var(--border-color);}
 /* ------------------------------------------------------- */
 /* 뱃지 */
 .badge {text-decoration:none!important;width: fit-content;display:inline-flex;padding:4px 8px;border-radius:8px;font-size:var(--txt-size01);font-weight:var(--fw-bold);}
@@ -335,6 +338,10 @@ a.btn {width: auto;}
 .badge.gray {background-color:var(--color-disabled);color:var(--color-gray2);text-decoration:none!important;}
 
 /* 텍스트 관련 (기본) */
+.border{position:relative;padding-top:10px;margin-top:10px;background-color:var(--table-cell-bg);}
+.border > span {z-index: 1;}
+.border::after{content:'';width:calc(100% + 24px);height:calc(100% + 10px);background-color:var(--table-cell-bg);position:absolute;left:-12px;top:0;border-radius:0 0 4px 4px;}
+.border::before {content:'';width:calc(100% + 24px);height:1px;background-color:var(--border-color);position:absolute;left:-12px;top:0;z-index:1;}
 .relative-box {position:relative;}
 .ds-block {display: block!important;}
 .txt-xlg {font-size:var(--txt-size07);color:var(--color-black);}
@@ -356,6 +363,7 @@ a.btn {width: auto;}
 .c-purple{color:var(--color-purple);}
 .c-gray{color:var(--color-gray);}
 .c-gray2{color:var(--color-gray2);}
+.c-gray3{color:var(--color-gray4);}
 .c-light-gray{color:var(--color-light-gray);}
 
   /* 간격 (고정) - media 변경 없음 */
@@ -364,6 +372,7 @@ a.btn {width: auto;}
 .mb-4 {margin-bottom:4px!important;}
 .mb-6 {margin-bottom:6px!important;}
 .mb-8 {margin-bottom:8px!important;}
+.mb-10 {margin-bottom:10px!important;}
 .mb-12 {margin-bottom:12px!important;}
 .mt-10 {margin-top:10px!important;}
 .mt-12 {margin-top:12px!important;}

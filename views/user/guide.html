@@ -3657,6 +3657,11 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
         <button type="button" class="btn outlined" onclick="showModal('modal8');">[X]16. 조회 결과 할인 대상이 아닙니다.</button>
         <!-- 카드 자동이체 -->
         <button type="button" class="btn outlined" onclick="showModal('modal-automaticPayment'); setTimeout(() => { initializeCustomSelect(document.querySelector('.custom-select[data-options=\'test3\']'), selectOptions3, { placeholder: '선택하세요' }); }, 10);">[결제내역] 카드자동이체</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal10');">[?] 문화비 소득공제 대상 항목입니다.
+          소득공제를 적용하여 신청하시겠습니까?</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal11');">[체크] 선택하신 항목의 자동이체 신청이 완료되었습니다.</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal12');">[느낌표] 선택하신 항목의 자동이체를 해지하시겠습니까?</button>
+        <button type="button" class="btn outlined" onclick="showModal('modal13');">[체크] 선택하신 항목의 자동이체 해지가 완료되었습니다.</button>
         <!-- 문화비소득공제 (결제대기 페이지) -->
         <button type="button" class="btn outlined" onclick="showModal('modal-culturalExpenses');">18. [문화비소득공제] / 결제대기</button>
         <button type="button" class="btn outlined" onclick="showModal('modal-culturalExpensesDepth1');">19. [문화비소득공제] 결제단계(진행중) - 문화비 소득공제 대상 결제</button>
@@ -5022,7 +5027,13 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
           <div class="modal-body">
             <!-- 신용/체크카드 정보(국내카드만 가능합니다.) -->
             <div class="sub-content-box ver2 pd-ver">
-              <h3 class="sub-title2">신용/체크카드 정보 (국내카드만 가능합니다.)</h3>
+              <h3 class="sub-title2 col-ver">
+                <span class="fw-bold c-blue">[올림픽 수영장]</span>
+                <span class="tit">
+                   신용/체크카드 정보
+                  <span class="small">(국내카드만 가능합니다.)</span>
+                </span>
+              </h3>
               <div class="custom-ui-table">
                 <div class="c-row col3">
                   <div class="c-col">
@@ -5116,69 +5127,70 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
 
             <!-- 자동이체 신청/해지 -->
             <div class="sub-content-box ver2 pd-ver">
-              <h3 class="sub-title2">자동이체 신청/해지</h3>
+              <div class="flex-wrap al-center gap-8 insert-margin mo-col mo-al-start">
+                <h3 class="sub-title2 no-mb">자동이체 신청/해지</h3>
+                <div class="flex-wrap al-center gap-auto w-auto">
+                  <div class="tooltip-wrap">
+                    <button type="button" class="ico-btn tooltip sm"><span class="visually-hidden">소득 공제율 별 결제안내 관련 내용</span></button>
+                    <div class="tooltip-box">
+                      <div class="tooltip-comment">
+                        <span class="txt-xs fw-bold">소득공제 적용시</span>
+                        <p class="txt-xs fw-regular">
+                          소득공제 해당 금액과, 미해당 금액으로 구분되어
+                          2번 결제될 수 있습니다.
+                        </p>
+                      </div>
+                      <ul class="dot-list">
+                        <li>
+                          <p class="txt-xs fw-medium c-red">100%</p>
+                          <p class="txt-xs fw-medium c-gray">전액 문화비 소득공제 대상인 항목입니다.</p>
+                        </li>
+                        <li>
+                          <p class="txt-xs fw-medium c-blue">50%</p>
+                          <p class="txt-xs fw-medium c-gray">금액의 절반만 문화비 소득공제 대상으로,
+                            소득공제 적용 신청시 절반 금액씩 나누어 결제됩니다. </p>
+                        </li>
+                        <li>
+                          <p class="txt-xs fw-medium">미해당</p>
+                          <p class="txt-xs fw-medium c-gray">전액 해당없는 항목입니다.</p>
+                        </li>
+                      </ul>
+                      <div class="tooltip-comment line">
+                        <span class="txt-xs fw-bold">소득공제 미적용시</span>
+                        <p class="txt-xs fw-regular">
+                          전액 미해당 금액으로 적용되어 일괄 결제됩니다.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="txt-sm fw-medium c-gray">소득 공제율별 결제 안내</span>
+                </div>
+              </div>
+
               <!-- 자동이체 신청/해지 (pc)-->
               <div class="custom-table fixed-ver pc-only mt-0">
                 <table>
                   <caption class="visually-hidden">결제 테이블</caption>
                   <colgroup>
                     <col style="width:100px;"/>
+                    <col style="width:100px;"/>
+                    <col style="width:100px;"/>
                     <col />
-                    <col style="width:100px;"/>
-                    <col style="width:100px;"/>
-                    <col style="width:200px;"/>
-                    <col style="width:100px;"/>
-                    <col style="width:130px;"/>
+                    <col style="width:120px;"/>
+                    <col style="width:120px;"/>
                   </colgroup>
                   <thead>
                   <tr>
+                    <th><div class="th-wrap center">신청구분</div></th>
+                    <th><div class="th-wrap center">소득공제율</div></th>
                     <th><div class="th-wrap center">센터명</div></th>
-                    <th><div class="th-wrap center">내용</div></th>
-                    <th><div class="th-wrap center">강습반</div></th>
-                    <th><div class="th-wrap center">강사</div></th>
-                    <th><div class="th-wrap">금액(원)</div></th>
-                    <th><div class="th-wrap">신청구분</div></th>
-                    <th><div class="th-wrap center">카드자동이체</div></th>
+                    <th><div class="th-wrap">내용</div></th>
+                    <th><div class="th-wrap">문화비 소득공제<br/>적용 여부</div></th>
+                    <th><div class="th-wrap center">카드자동이체<br/>신청/해지</div></th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td>
-                      <div class="td-wrap">스포츠교실</div>
-                    </td>
-                    <td>
-                      <div class="td-wrap">
-                        <div class="flex-wrap col-ver gap-auto">
-                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
-                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
-                          <ul class="vertical-bar-list">
-                            <li>
-                              <span class="txt-sm fw-medium c-gray">강습일정</span>
-                            </li>
-                            <li>
-                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="td-wrap">성인반</div>
-                    </td>
-                    <td>
-                      <div class="td-wrap">홍길동</div>
-                    </td>
-                    <td>
-                      <div class="td-wrap">
-                        <div class="flex-wrap col-ver al-center gap-auto">
-                          <div class="flex-wrap al-center center gap-auto gap4 mb-4">
-                            <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                            <span class="txt-rgl fw-medium">55,800</span>
-                          </div>
-                          <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
-                        </div>
-                      </div>
-                    </td>
                     <td>
                       <div class="td-wrap center">
                         <span class="badge gray">미신청</span>
@@ -5186,13 +5198,9 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                     </td>
                     <td>
                       <div class="td-wrap center">
-                        <div class="flex-wrap col-ver al-center gap4">
-                          <button type="button" class="btn sm outlined">신청</button>
-                        </div>
+                        <span class="badge red">100%</span>
                       </div>
                     </td>
-                  </tr>
-                  <tr>
                     <td>
                       <div class="td-wrap">스포츠교실</div>
                     </td>
@@ -5213,22 +5221,17 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                       </div>
                     </td>
                     <td>
-                      <div class="td-wrap">성인반</div>
+                      <div class="td-wrap c-gray"><span class="c-gray3">미적용</span></div>
                     </td>
                     <td>
-                      <div class="td-wrap">홍길동</div>
-                    </td>
-                    <td>
-                      <div class="td-wrap">
-                        <div class="flex-wrap col-ver al-center gap-auto">
-                          <div class="flex-wrap al-center center gap-auto gap4 mb-4">
-                            <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                            <span class="txt-rgl fw-medium">55,800</span>
-                          </div>
-                          <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
+                      <div class="td-wrap center">
+                        <div class="flex-wrap col-ver al-center gap4">
+                          <button type="button" class="btn sm outlined">신청</button>
                         </div>
                       </div>
                     </td>
+                  </tr>
+                  <tr>
                     <td>
                       <div class="td-wrap center">
                         <span class="badge blue">신청완료</span>
@@ -5236,8 +5239,76 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                     </td>
                     <td>
                       <div class="td-wrap center">
+                        <span class="badge blue">50%</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap"><span class="c-blue">적용</span></div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
                         <div class="flex-wrap col-ver al-center gap4">
                           <button type="button" class="btn sm outlined">신청</button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="td-wrap center">
+                        <span class="badge blue">신청완료</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
+                        <span class="badge gray">미해당</span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">스포츠교실</div>
+                    </td>
+                    <td>
+                      <div class="td-wrap">
+                        <div class="flex-wrap col-ver gap-auto">
+                          <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                          <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                          <ul class="vertical-bar-list">
+                            <li>
+                              <span class="txt-sm fw-medium c-gray">강습일정</span>
+                            </li>
+                            <li>
+                              <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="td-wrap c-gray"><span class="c-gray3">미해당</span></div>
+                    </td>
+                    <td>
+                      <div class="td-wrap center">
+                        <div class="flex-wrap col-ver al-center gap4">
+                          <button type="button" class="btn sm outlined">해지</button>
                         </div>
                       </div>
                     </td>
@@ -5256,11 +5327,20 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                           <p class="txt-sm fw-bold c-gray">카드자동이체</p>
                           <span class="badge gray">미신청</span>
                         </div>
-                        <button type="button" class="btn sm mo-sm outlined">해지</button>
+                        <button type="button" class="btn sm mo-sm outlined">신청</button>
                       </div>
                       <div class="flex-wrap col-ver gap-auto">
+                        <span class="badge red mb-10">100% 소득공제</span>
                         <span class="txt-xs fw-bold c-blue mb-4">검도</span>
                         <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">센터명</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">스포츠교실</span>
+                          </li>
+                        </ul>
                         <ul class="vertical-bar-list">
                           <li>
                             <span class="txt-sm fw-medium c-gray">강습반</span>
@@ -5285,22 +5365,9 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                             <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
                           </li>
                         </ul>
-                        <ul class="vertical-bar-list">
-                          <li>
-                            <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
-                          </li>
-                          <li>
-                            <span class="txt-sm fw-medium c-blue">29/30</span>
-                          </li>
-                        </ul>
-                        <div class="flex-wrap end">
-                          <div class="flex-wrap col-ver al-end gap-auto">
-                            <div class="flex-wrap al-center end gap-auto gap4">
-                              <span class="txt-xs fw-medium c-light-gray deco-line">62,000</span>
-                              <span class="txt-rgl fw-bold">55,800</span>
-                            </div>
-                            <span class="txt-sm fw-medium c-red">[여성보건할인 -10% ↓]</span>
-                          </div>
+                        <div class="flex-wrap between al-center border">
+                          <span class="txt-sm fw-bold c-gray">문화비 소득공제 적용여부</span>
+                          <span class="txt-sm fw-medium c-gray3">미적용</span>
                         </div>
                       </div>
                     </div>
@@ -5315,8 +5382,17 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                         <button type="button" class="btn sm mo-sm outlined">해지</button>
                       </div>
                       <div class="flex-wrap col-ver gap-auto">
+                        <span class="badge blue mb-10">50% 소득공제</span>
                         <span class="txt-xs fw-bold c-blue mb-4">검도</span>
                         <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">센터명</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">스포츠교실</span>
+                          </li>
+                        </ul>
                         <ul class="vertical-bar-list">
                           <li>
                             <span class="txt-sm fw-medium c-gray">강습반</span>
@@ -5341,20 +5417,61 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
                             <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
                           </li>
                         </ul>
+                        <div class="flex-wrap between al-center border">
+                          <span class="txt-sm fw-bold c-gray">문화비 소득공제 적용여부</span>
+                          <span class="txt-sm fw-medium c-blue">적용</span>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="card">
+                      <div class="flex-wrap between al-center">
+                        <div class="flex-wrap gap8 al-center">
+                          <p class="txt-sm fw-bold c-gray">카드자동이체</p>
+                          <span class="badge blue">신청완료</span>
+                        </div>
+                        <button type="button" class="btn sm mo-sm outlined">해지</button>
+                      </div>
+                      <div class="flex-wrap col-ver gap-auto">
+                        <span class="badge gray mb-10">미해당</span>
+                        <span class="txt-xs fw-bold c-blue mb-4">검도</span>
+                        <p class="txt-rgl fw-bold mb-8">검도 06:00~07:30(월화목금)성인</p>
                         <ul class="vertical-bar-list">
                           <li>
-                            <span class="txt-sm fw-medium c-gray">인원수(현원/정원)</span>
+                            <span class="txt-sm fw-medium c-gray">센터명</span>
                           </li>
                           <li>
-                            <span class="txt-sm fw-medium c-blue">29/30</span>
+                            <span class="txt-sm fw-medium">스포츠교실</span>
                           </li>
                         </ul>
-                        <div class="flex-wrap end">
-                          <div class="flex-wrap col-ver al-end gap-auto">
-                            <div class="flex-wrap al-center end gap-auto gap4 mb-4">
-                              <span class="txt-rgl fw-bold">20,000원</span>
-                            </div>
-                          </div>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습반</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">성인반</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강사</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">홍길동</span>
+                          </li>
+                        </ul>
+                        <ul class="vertical-bar-list">
+                          <li>
+                            <span class="txt-sm fw-medium c-gray">강습일정</span>
+                          </li>
+                          <li>
+                            <span class="txt-sm fw-medium">월,화 20:00 ~ 20:50</span>
+                          </li>
+                        </ul>
+                        <div class="flex-wrap between al-center border">
+                          <span class="txt-sm fw-bold c-gray">문화비 소득공제 적용여부</span>
+                          <span class="txt-sm fw-medium c-gray3">미해당</span>
                         </div>
                       </div>
                     </div>
@@ -5400,6 +5517,57 @@ initializeCustomSelect(document.querySelector('.custom-select[data-options="1"]'
             </div>
           </div>
           <button type="button" class="btn fixed" onclick="hideModal('modal-automaticPayment')" >닫기</button>
+        </div>
+      </div>
+      <!-- [모달] 10. 문화비 소득공제 대상 항목입니다.소득공제를 적용하여 신청하시겠습니까? -->
+      <div id="modal10" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_question.svg" alt="" />
+            <p class="c-em">문화비 소득공제 대상 항목입니다. <br> 소득공제를 적용하여 신청하시겠습니까?</p>
+            <p class="c-desc">문화비 적용 금액과 미적용 금액으로 나뉘어<br>각각 자동이체 될 수 있습니다.</p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn outlined size-sm" onclick="hideModal('modal10')">예</button>
+            <button type="button" class="btn size-sm" onclick="hideModal('modal10')">아니오</button>
+          </div>
+        </div>
+      </div>
+      <!-- [모달] 11. 선택하신 항목의 자동이체 신청이 완료되었습니다. -->
+      <div id="modal11" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_checked.svg" alt="" />
+            <p class="c-em">선택하신 항목의 자동이체 신청이<br class="mobile-only-inline2"/> 완료되었습니다.</p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn size-sm" onclick="hideModal('modal11')">확인</button>
+          </div>
+        </div>
+      </div>
+      <!-- [모달] 12. 선택하신 항목의 자동이체를 해지하시겠습니까? -->
+      <div id="modal12" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_exp.svg" alt="" />
+            <p class="c-em">선택하신 항목의 자동이체를<br class="mobile-only-inline2"/> 해지하시겠습니까?</p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn outlined size-sm" onclick="hideModal('modal12')">취소</button>
+            <button type="button" class="btn size-sm" onclick="hideModal('modal12')">확인</button>
+          </div>
+        </div>
+      </div>
+      <!-- [모달] 13. 선택하신 항목의 자동이체를 해지하시겠습니까? -->
+      <div id="modal13" class="modal" data-modal-type="confirm-ver">
+        <div class="modal-content sm pd-auto">
+          <div class="confirm-box">
+            <img src="../../resources/images/ico/ico_checked.svg" alt="" />
+            <p class="c-em">선택하신 항목의 자동이체 해지가<br class="mobile-only-inline2"/>완료되었습니다.</p>
+          </div>
+          <div class="flex-wrap center">
+            <button type="button" class="btn size-sm" onclick="hideModal('modal13')">확인</button>
+          </div>
         </div>
       </div>
 

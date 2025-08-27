@@ -230,12 +230,15 @@ span.title-wrap > .h4,
 .sub-content-box + .sub-content-box {margin-top:40px;}
 .sub-content-box [class^="sub-title"] {margin-bottom:8px;}
 /* 모달 내부에서 주로 쓰이는 간격 */
+.sub-content-box.ver2 .insert-margin,
 .sub-content-box.ver2 [class^="sub-title"] {margin-bottom:12px;}
 .sub-content-box.ver2 + .sub-content-box.ver2 {margin-top:40px;}
 .sub-content-box.ver2 .comment {margin-bottom:4px;}
 .sub-content-box.ver2.mt-only {margin-top:40px;}
+.sub-content-box.ver2 .sub-title2.no-mb {margin-bottom:0;}
 .sub-title {font-size:var(--txt-size05);font-weight:var(--fw-bold);}
 .sub-title2 {font-size:var(--txt-size04);font-weight:var(--fw-bold);}
+.sub-title2 > .small {display:inline-block;}
 .sub-content-box.ver2.pd-ver {padding-bottom:20px;}
 .sub-content-box.ver2.pd-ver + .sub-content-box.ver2.pd-ver{margin-top:0;padding-top:20px;border-top:1px solid var(--hr-color)}
 
@@ -344,9 +347,17 @@ span.title-wrap > .h4,
 .tw-box.ing > span {color:var(--color-red);}
 @media (max-width:1200px) {
     .custom-table + .custom-table {margin-top:20px;}
+    .tw-box.total {flex-direction:column;}
+    .tw-box.total > p {font-size:var(--txt-size03);}
+    .tw-box.total > span {color:var(--color-primary);}
 }
 
 @media (max-width:767px) {
+    .sub-title2 .small {font-size:var(--txt-sizesm);font-weight:var(--fw-regular);}
+    .sub-title2 > .tit {display:flex;align-items:flex-end;}
+    .sub-title2.col-ver {display:flex;flex-direction:column;align-items:flex-start;}
+    .sub-content-box.ver2 .insert-margin{gap:8px;}
+    .sub-content-box.ver2 .insert-margin {margin-bottom:8px;}
     .custom-table tfoot td {padding:16px 12px;}
     .custom-table tr.empty td {padding:35px 12px;}
     .empty-txt {font-size:var(--txt-size03);font-weight:var(--fw-bold);color:var(--color-gray);padding-top:48px;background-size:40px;}
@@ -384,6 +395,7 @@ span.title-wrap > .h4,
     .total-wrap-custom.line .tw-box.ing > p {font-weight:var(--fw-bold);color:var(--color-black);}
     .total-wrap-custom.line .tw-box.ing.total > span,
     .total-wrap-custom.line .tw-box.ing > span {color:var(--color-red);}
+    .tw-box.total {flex-direction:row;}
 }
 
 /* 커스텀 테이블 (폼 입력) */
@@ -922,6 +934,7 @@ span.title-wrap > .h4,
 
     /* 개인정보 처리방침 페이지 이용약관 */
     .agree-box {display:flex;flex-direction:column;gap:12px;}
+    .agree-box.bg-ver{padding:12px;}
     .agree-box > .flex-wrap {flex-direction:column;align-items:flex-end;gap:8px;}
     .agree-box > .flex-wrap > p {width: 100%;}
     .agree-radio-wrap {gap:8px;}
