@@ -324,6 +324,7 @@ a.btn {width: auto;}
 /* 툴팁 */
 .tooltip-wrap {position:relative;display:flex;}
 .tooltip-wrap + *{margin-left:2px;}
+.tooltip-hover-box:hover .tooltip-box,
 .tooltip-wrap > button.tooltip:focus + .tooltip-box,
 .tooltip-wrap > button.tooltip:hover + .tooltip-box {display:block;}
 .tooltip-box {z-index:10;width:347px;display:none;position:absolute;left:0;top:16px;padding:16px 20px;border-radius:16px;border:1px solid var(--border-color2);background-color:var(--color-white);}

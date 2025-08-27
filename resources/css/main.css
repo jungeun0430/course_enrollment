@@ -288,7 +288,7 @@ span.title-wrap > .h4,
 .custom-table.pd-sm thead th{padding:4px 8px;}
 /* 호버했을 경우 */
 .custom-table[data-table="rowspan-ver"] tr.table-row-hover td,
-.custom-table:not(.form-ver) tbody tr:not(.disabled-chkbox):hover td{background-color:var(--color-primary-light);}
+.custom-table:not(.form-ver) tbody tr:not(.disabled-chkbox):not(.disabled):hover td{background-color:var(--color-primary-light);}
 .custom-table .th-wrap {display:flex;justify-content:center;font-size:var(--txt-size02);font-weight:var(--fw-bold);color:var(--color-gray);}
 .custom-table .th-wrap.important::after {content:'*';font-size:var(--txt-size02);font-weight:var(--fw-bold);color:var(--color-red);}
 .custom-table .th-wrap.center {justify-content:center;text-align:center;}
