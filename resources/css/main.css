@@ -223,7 +223,7 @@ span.title-wrap > .h4,
 /* sub-ver title */
 .title-wrap.sub-ver {display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:60px;}
 .title-wrap.sub-ver > h2 {font-size:var(--txt-size09);font-weight:var(--fw-bold);color:#333333;}
-.title-wrap.sub-ver > p {font-size: var(--txt-size05);font-weight:var(--fw-medium);color:#666666;}
+.title-wrap.sub-ver > p {font-size: var(--txt-size05);font-weight:var(--fw-medium);color:#666666;text-align:center;}
 
 /* sub-ver subTitle4 */
 .sub-content-box {width:100%;}
@@ -898,6 +898,7 @@ span.title-wrap > .h4,
 
     /* sub-ver title */
     .title-wrap.sub-ver {gap:8px;margin-bottom:16px;padding:0 16px;}
+    .title-wrap.sub-ver > p > .sm-mo {font-size:var(--txt-size02);font-weight:var(--fw-bold);}
     .title-wrap.sub-ver.lg {margin-bottom:28px;}
 
     /* main-con-box 색상 박스 */
