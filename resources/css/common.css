@@ -355,6 +355,7 @@ a.btn {width: auto;}
 .ellipsis {display:block;width:100%;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .ellipsis2 {display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break: break-word;}
 .deco-line {text-decoration:line-through;}
+.under-line {text-decoration:underline;}
 .fw-bold {font-weight:var(--fw-bold);}
 .fw-medium {font-weight:var(--fw-medium);}
 .fw-regular {font-weight:var(--fw-regular);}
