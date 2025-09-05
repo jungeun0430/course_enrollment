@@ -287,6 +287,10 @@ span.title-wrap > .h4,
 /* 너비가 작을 경우 */
 .custom-table.pd-sm thead th{padding:4px 8px;}
 /* 호버했을 경우 */
+.custom-table td.no-h {padding:0;height: 0;}
+.custom-table td.no-h .td-wrap {height:100%;}
+.custom-table td.no-h .td-wrap > .flex-wrap + .flex-wrap {border-top:1px solid var(--table-border-color)}
+.custom-table td.no-h .td-wrap > .flex-wrap {align-items:center;justify-content:center;}
 .custom-table[data-table="rowspan-ver"] tr.table-row-hover td,
 .custom-table:not(.form-ver) tbody tr:not(.disabled-chkbox):not(.disabled):hover td{background-color:var(--color-primary-light);}
 .custom-table .th-wrap {display:flex;justify-content:center;font-size:var(--txt-size02);font-weight:var(--fw-bold);color:var(--color-gray);}
@@ -295,6 +299,8 @@ span.title-wrap > .h4,
 .custom-table .td-wrap {display:flex;justify-content:center;align-items:center;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);}
 .custom-table .td-wrap.start{justify-content:flex-start;}
 .custom-table .td-wrap.center{justify-content:center;text-align:center;}
+.custom-table .td-wrap.al-col {flex-direction:column;}
+.custom-table .td-wrap.al-col > .flex-wrap{flex:1;}
 .custom-table td.al-start{vertical-align: super;}
 .custom-table tfoot {border-top:1px solid var(--table-border-color);background-color:var(--color-primary-light);}
 .custom-table tfoot td {padding:31px 12px;}
