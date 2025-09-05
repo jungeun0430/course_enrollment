@@ -143,10 +143,11 @@ footer > .content-wrap {max-width:1760px;width:100%;margin:0 auto;}
     /* header */
     header .ico-hamburger {min-width:28px;}
     header a.ico-user {width:100%;background-position:0 center;background-size: 24px;}
-    header a.ico-bag {width:100%;background-position:0 center;background-size: 24px;}
+    header a.ico-bag {padding-top:0;background:none;width:100%;background-position:0 center;background-size: 24px;}
+    header a.ico-membership-card {width:100%;background-position:0 center;background-size: 24px;}
     header a.ico-pay {width:100%;background-position:0 center;background-size: 24px;}
     header a.ico-logout {width:100%;background-position:0 center;background-size: 24px;}
-
+    header a.ico-bag .shop_count {bottom:-4px;right:4px;}
     /* footer */
     footer{padding:20px 20px 28px 20px;}
     footer > .content-wrap > .flex-wrap {width:100%;}
@@ -290,7 +291,7 @@ span.title-wrap > .h4,
 .custom-table td.no-h {padding:0;height: 0;}
 .custom-table td.no-h .td-wrap {height:100%;}
 .custom-table td.no-h .td-wrap > .flex-wrap + .flex-wrap {border-top:1px solid var(--table-border-color)}
-.custom-table td.no-h .td-wrap > .flex-wrap {align-items:center;justify-content:center;}
+.custom-table td.no-h .td-wrap > .flex-wrap {align-items:center;justify-content:center;padding:12px;}
 .custom-table[data-table="rowspan-ver"] tr.table-row-hover td,
 .custom-table:not(.form-ver) tbody tr:not(.disabled-chkbox):not(.disabled):hover td{background-color:var(--color-primary-light);}
 .custom-table .th-wrap {display:flex;justify-content:center;font-size:var(--txt-size02);font-weight:var(--fw-bold);color:var(--color-gray);}
@@ -861,6 +862,7 @@ span.title-wrap > .h4,
     header  h1 > a {display:flex;border:1px solid transparent;}
     header  h1  > a > img {width: 100%;}
     header .btn-wrap > a.ico-user,
+    header .btn-wrap > a.ico-membership-card,
     header .btn-wrap > a.ico-pay {padding-top:0;border:1px solid transparent;background:none;min-width:28px;}
     header .btn-wrap > a.ico-user > img,
     header .btn-wrap > a.ico-pay > img {object-fit: contain;}
