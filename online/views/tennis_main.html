@@ -48,30 +48,53 @@
                 <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
             </div>
             <div class="sidebar-menu-wrap">
+                <!-- Top section: Main navigation -->
                 <ul class="sidebar-list mobile-only">
-                    <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
-                    <li><a href="../user/cs_center_join.html">센터가입</a></li>
-                    <li><a href="../user/cs_course_registration.html">수강신청</a></li>
-                    <li><a href="../user/cs_shopping_cart.html">장바구니</a></li>
-                    <li><a href="../user/cs_payment_history.html">결제내역</a></li>
-                    <li><a href="#">이용안내</a></li>
+                    <li><a href="../user/cs_center_join.html" class="menu-reservation">일일입장 예약신청</a></li>
+                    <li><a href="../user/cs_course_registration.html" class="menu-guide">신청방법안내</a></li>
+                    <li><a href="../user/cs_mobile_user_card.html" class="menu-facility">시설이용안내</a></li>
+                    <li><a href="#" class="menu-location">오시는길</a></li>
+                </ul>
+
+                <!-- Divider -->
+                <div class="sidebar-divider"></div>
+
+                <!-- Bottom section: Utility links -->
+                <ul class="sidebar-list sidebar-list-secondary mobile-only">
+                    <li><a href="tennis_main.html" class="menu-home">메인으로</a></li>
+                    <li><a href="../user/cs_shopping_cart.html" class="menu-cart">장바구니</a></li>
+                    <li><a href="../user/cs_payment_history.html" class="menu-history">신청내역</a></li>
+                    <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                    <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
                 </ul>
             </div>
         </nav>
 
         <div class="btn-wrap pc-only-f">
             <a href="../user/login.html" class="ico-user"><span>로그인</span></a>
-            <a href="../user/login.html" class="ico-house"><span>메인으로</span></a>
+            <a href="tennis_main.html" class="ico-house"><span>메인으로</span></a>
             <a href="../user/cs_shopping_cart.html" class="ico-bag"><span>장바구니</span></a>
             <a href="../user/cs_payment_history.html" class="ico-pay"><span>신청내역</span></a>
-            <a href="../user/cs_payment_history.html" class="ico-list"><span>메뉴</span></a>
+            <button type="button" class="ico-list"><span>메뉴</span></button>
+        </div>
+        <!-- Desktop dropdown menu -->
+        <div class="desktop-menu-dropdown">
+            <ul class="desktop-menu-list">
+                <li><a href="../user/cs_center_join.html" class="menu-reservation">일일입장 예약신청</a></li>
+                <li><a href="../user/cs_course_registration.html" class="menu-guide">신청방법안내</a></li>
+                <li><a href="../user/cs_mobile_user_card.html" class="menu-facility">시설이용안내</a></li>
+                <li><a href="#" class="menu-location">오시는길</a></li>
+                <li class="menu-divider"></li>
+                <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+            </ul>
         </div>
         <div class="btn-wrap sm mobile-only-f">
-            <a href="../user/login.html" class="ico-btn ico-user" aria-label="사용자 계정">
-                <img src="../resources/images/ico/ico_login.svg" alt="로그인 페이지 이동"/>
+            <a href="../user/login.html" class="ico-btn ico-user" aria-label="로그인">
+                <img src="../resources/images/ico/ico_login.svg" alt="로그인"/>
             </a>
-            <a href="../user/cs_payment_history.html" class="ico-btn ico-pay" aria-label="결제내역">
-                <img src="../resources/images/ico/ico_bc.svg" alt="신청내역 페이지 이동"/>
+            <a href="../user/cs_shopping_cart.html" class="ico-btn ico-bag" aria-label="장바구니">
+                <img src="../resources/images/ico/ico_bag.svg" alt="장바구니"/>
             </a>
             <button type="button" class="ico-btn ico-hamburger">
                 <span class="visually-hidden">메뉴 열기</span>

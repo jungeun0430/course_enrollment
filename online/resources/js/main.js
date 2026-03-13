@@ -3623,12 +3623,53 @@ function toggleAccordion(button) {
 /* ---- [ 실행문 모음 : 1,2,3,6,7,8,9,11]--------------------------------------------------------------- */
 $(document).ready(function(){
   /* 1. [공통]사이드바 */
+  // 햄버거 버튼 클릭 - 사이드바 열기
+  $('.ico-hamburger').on('click', function() {
+    openSideBar();
+  });
+
+  // 사이드바 닫기 버튼 클릭
+  $('.sidebar .close-btn').on('click', function() {
+    closeSidebar();
+  });
+
+  // Dim 오버레이 클릭 - 사이드바 닫기
+  $('#dim-overlay').on('click', function() {
+    closeSidebar();
+  });
+
   // 윈도우 리사이즈 이벤트
   $(window).on('resize', function () {
     if ($(window).width() >= 1200) {
-      // PC 모드로 전환되면 초기화
+      // PC 모드로 전환되면 모바일 사이드바 초기화
       removeActiveClasses();
+    } else {
+      // 모바일/태블릿 모드로 전환되면 데스크탑 드롭다운 닫기
+      $('.desktop-menu-dropdown').removeClass('active');
+      $('.ico-list').removeClass('active');
     }
+  });
+
+  /* 1-2. [공통]데스크탑 메뉴 드롭다운 */
+  // 데스크탑 메뉴 버튼 클릭 - 드롭다운 토글
+  $('.ico-list').on('click', function(e) {
+    e.stopPropagation();
+    $('.desktop-menu-dropdown').toggleClass('active');
+    $(this).toggleClass('active');
+  });
+
+  // 드롭다운 외부 클릭 시 닫기
+  $(document).on('click', function(e) {
+    if (!$(e.target).closest('.desktop-menu-dropdown, .ico-list').length) {
+      $('.desktop-menu-dropdown').removeClass('active');
+      $('.ico-list').removeClass('active');
+    }
+  });
+
+  // 드롭다운 메뉴 내부 클릭 시 닫기 (링크 클릭 후)
+  $('.desktop-menu-dropdown a').on('click', function() {
+    $('.desktop-menu-dropdown').removeClass('active');
+    $('.ico-list').removeClass('active');
   });
 
   /* 2. [공통]상단 글씨크기 변경 */
