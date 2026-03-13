@@ -234,6 +234,29 @@ footer > .content-wrap {max-width:1760px;width:100%;margin:0 auto;}
 @media (max-width:1300px) {
     header  h1 > a.img {width:180px;height:38px;}
 }
+/* 중간 사이즈 (1201px ~ 1400px) - 헤더 유동적 크기 조정 */
+@media (max-width:1400px) and (min-width:1201px) {
+    /* 헤더 네비게이션 간격 조정 */
+    nav > ul {gap:60px;}
+    nav > ul > li > * {padding:10px;font-size:var(--txt-size04);}
+
+    /* 로고 크기 약간 축소 */
+    header h1 > a {width:240px;}
+
+    /* 버튼 간격 축소 */
+    header .btn-wrap {gap:12px;}
+}
+
+/* 더 작은 중간 사이즈 (1201px ~ 1300px) - 추가 조정 */
+@media (max-width:1300px) and (min-width:1201px) {
+    /* 네비게이션 간격 더 축소 */
+    nav > ul {gap:48px;}
+    nav > ul > li > * {padding:8px;font-size:var(--txt-size03);}
+
+    /* 로고 크기 더 축소 */
+    header h1 > a {width:220px;}
+}
+
 @media (max-width:1200px) {
     /* header */
     header .ico-hamburger {min-width:28px;}
@@ -383,6 +406,8 @@ span.title-wrap > .h4,
 .custom-table thead {border-bottom:1px solid var(--table-border-color);}
 .custom-table thead th {padding:12px 8px;background-color:var(--table-cell-bg);}
 .custom-table thead th + th {border-left:1px solid var(--table-border-color);}
+.custom-table thead tr + tr {border-top:1px solid var(--table-border-color);} /* thead 내부 여러 행 구분선 */
+.custom-table thead th[rowspan] {border-right:1px solid var(--table-border-color);} /* rowspan이 있는 th 우측 경계선 */
 .custom-table tbody td {padding:8px 8px;transition:background-color 0.3s}
 .custom-table tbody td + td {border-left:1px solid var(--table-border-color);}
 .custom-table tbody tr + tr {border-top:1px solid var(--table-border-color);}
