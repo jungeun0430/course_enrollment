@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+    <link rel="stylesheet" href="../../resources/lib/swiper/swiper.css">
+    <link rel="stylesheet" href="../../resources/css/main.css">
+
+    <!-- lib -->
+    <script src="../../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../../resources/lib/swiper/swiper.js"></script>
+
+    <!-- js -->
+    <script src="../../resources/js/main.js"></script>
+
+    <title>오시는길 - 수영장레인대여</title>
+    <style>
+        .map-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .map-image {
+            flex: 1;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .map-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .map-details {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+        }
+        .map-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .map-info .address {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .map-info .phone {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 25px;
+        }
+        .map-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .map-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .map-link:hover {
+            background-color: #0052a3;
+        }
+        .map-link.naver {
+            background-color: #03c75a;
+        }
+        .map-link.naver:hover {
+            background-color: #02a047;
+        }
+        .subway-section {
+            margin-bottom: 40px;
+        }
+        .subway-item {
+            margin-bottom: 30px;
+        }
+        .subway-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .subway-title.line5::before {
+            content: '5';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #996cad;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subway-title.line8::before {
+            content: '8';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #e51e6e;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subway-title.line9::before {
+            content: '9';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #c9a961;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subway-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .bus-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 2px solid #333;
+        }
+        .bus-table caption {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        .bus-table th,
+        .bus-table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .bus-table thead th {
+            background-color: #f5f5f5;
+            font-weight: 700;
+            color: #333;
+        }
+        .bus-table tbody th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+        .bus-table td.left {
+            text-align: left;
+        }
+        .bus-label {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #0066cc;
+            color: white;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-right: 5px;
+            font-weight: 500;
+        }
+        .bus-label.gyeonggi {
+            background-color: #4caf50;
+        }
+        @media (max-width: 768px) {
+            .map-section {
+                flex-direction: column;
+            }
+            .map-details {
+                padding: 30px 20px;
+            }
+            .bus-table th,
+            .bus-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body data-text-size="normal">
+<!-- [웹 접근성] : 본문 바로가기 -->
+<a href="#main" id="skip-nav">본문 바로가기</a>
+<!-- 헤더 -->
+<header>
+    <!-- [사이드바] dim 처리 영역 -->
+    <div id="dim-overlay" class="dim"></div>
+    <div class="content-wrap" id="main-content">
+        <h1>
+            <a href="swimming_main.html">
+                <img src="../../resources/images/common/kspo_logo_swimming.svg" alt="한국체육산업개발주식회사 올림픽수영장 레인대여"/>
+            </a>
+        </h1>
+        <nav class="sidebar" role="dialog" aria-model="true" aria-label="메뉴">
+            <!-- pc 에서의 gnb -->
+            <ul class="pc-only-f">
+                <li><a href="../../user/cs_center_join.html">예약신청</a></li>
+                <li><a href="application_guide.html">신청방법안내</a></li>
+                <li><a href="facility_guide.html">시설이용안내</a></li>
+                <li><a href="directions.html">오시는길</a></li>
+            </ul>
+            <!-- mobile 에서의 gnb -->
+            <div class="sidebar-title-wrap mobile-only-f">
+                <a href="../../user/login.html" class="user-btn">로그인</a>
+                <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="sidebar-menu-wrap">
+                <!-- Top section: Main navigation -->
+                <ul class="sidebar-list mobile-only">
+                    <li><a href="../../user/cs_center_join.html" class="menu-reservation">예약신청</a></li>
+                    <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                    <li><a href="facility_guide.html" class="menu-facility">시설이용안내</a></li>
+                    <li><a href="directions.html" class="menu-location">오시는길</a></li>
+                </ul>
+
+                <!-- Divider -->
+                <div class="sidebar-divider"></div>
+
+                <!-- Bottom section: Utility links -->
+                <ul class="sidebar-list sidebar-list-secondary mobile-only">
+                    <li><a href="swimming_main.html" class="menu-home">메인으로</a></li>
+                    <li><a href="../../user/cs_shopping_cart.html" class="menu-cart">장바구니</a></li>
+                    <li><a href="../../user/cs_payment_history.html" class="menu-history">신청내역</a></li>
+                    <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                    <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="btn-wrap pc-only-f">
+            <a href="../../user/login.html" class="ico-user"><span>로그인</span></a>
+            <a href="swimming_main.html" class="ico-house"><span>메인으로</span></a>
+            <a href="../../user/cs_shopping_cart.html" class="ico-bag"><span>장바구니</span></a>
+            <a href="../../user/cs_payment_history.html" class="ico-pay"><span>신청내역</span></a>
+            <button type="button" class="ico-list"><span>메뉴</span></button>
+        </div>
+        <!-- Desktop dropdown menu -->
+        <div class="desktop-menu-dropdown">
+            <ul class="desktop-menu-list">
+                <li><a href="../../user/cs_center_join.html" class="menu-reservation">예약신청</a></li>
+                <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                <li><a href="facility_guide.html" class="menu-facility">시설이용안내</a></li>
+                <li><a href="directions.html" class="menu-location">오시는길</a></li>
+                <li class="menu-divider"></li>
+                <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="btn-wrap sm mobile-only-f">
+            <a href="../../user/login.html" class="ico-btn ico-user" aria-label="로그인">
+                <img src="../../resources/images/ico/ico_login.svg" alt="로그인"/>
+            </a>
+            <a href="../../user/cs_shopping_cart.html" class="ico-btn ico-bag" aria-label="장바구니">
+                <img src="../../resources/images/ico/ico_bag.svg" alt="장바구니"/>
+            </a>
+            <button type="button" class="ico-btn ico-hamburger">
+                <span class="visually-hidden">메뉴 열기</span>
+            </button>
+        </div>
+    </div>
+</header>
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+    <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
+    <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
+    <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+</div>
+
+<!-- 메인 -->
+<main id="main">
+    <div class="inner-wrap">
+        <div class="title-wrap sub-ver lg">
+            <h2>오시는길</h2>
+        </div>
+        <div class="content-box no-pd">
+            <div class="tab-wrap" data-tab="fraternal">
+                <ul class="first-depth">
+                    <li class="active">
+                        <button type="button" class="tab"><span>찾아오시는 길</span></button>
+                        <div class="tab-box">
+                            <div class="map-section">
+                                <div class="map-image">
+                                    <img src="../../resources/images/content/map_swim.gif" alt="올림픽수영장 지도">
+                                </div>
+                                <div class="map-details">
+                                    <div class="map-info">
+                                        <h3>올림픽 수영장</h3>
+                                        <p class="address">(05540) 서울시 송파구 올림픽로 426(방이동) 올림픽공원 수영장 내</p>
+                                        <p class="phone">02-2180-3745, 3746</p>
+                                        <div class="map-links">
+                                            <a href="http://olympicpark.kspo.or.kr/jsp/homepage/contents/guide/pop_olparkmap_all.jsp" class="map-link" target="_blank" title="새창">올림픽공원 지도 보러가기</a>
+                                            <a href="https://map.naver.com/v5/entry/place/31786855?c=14151873.0948237,4511199.4583700,15,0,0,0,dh" class="map-link naver" target="_blank" title="새창">네이버지도 보러가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" class="tab"><span>대중교통 안내</span></button>
+                        <div class="tab-box">
+                            <div class="subway-section">
+                                <div class="subway-item">
+                                    <h3 class="subway-title line5">지하철 5호선</h3>
+                                    <p class="subway-description">올림픽공원역 3번 출구에서 도보 15분</p>
+                                </div>
+                                <div class="subway-item">
+                                    <h3 class="subway-title line8">지하철 8호선</h3>
+                                    <p class="subway-description">몽촌토성역 1번 출구에서 도보 15분</p>
+                                </div>
+                                <div class="subway-item">
+                                    <h3 class="subway-title line9">지하철 9호선</h3>
+                                    <p class="subway-description">한성백제역 5번 출구에서 도보 10분</p>
+                                </div>
+                            </div>
+
+                            <table class="bus-table">
+                                <caption>버스 이용 상세</caption>
+                                <colgroup>
+                                    <col style="width:14%;">
+                                    <col style="width:12%;">
+                                    <col style="width:30%;">
+                                    <col>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">출입구</th>
+                                        <th scope="col">버스번호</th>
+                                        <th scope="col">종점</th>
+                                        <th scope="col">경유지</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 동1문 -->
+                                    <tr>
+                                        <th rowspan="9">동1문<br />지하철<br />5, 9호선<br />올림픽공원역</th>
+                                        <td>3214</td>
+                                        <td class="left">마천동 ↔ 강변역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>방이역, 올림픽공원역, 둔촌동역, 천호역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3220</td>
+                                        <td class="left">오금동 ↔ 청량리</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>방이역, 올림픽공원역, 건대앞, 장한평역, 청량리</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3319</td>
+                                        <td class="left">장지공영차고지 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>방이역, 올림픽공원역, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3323</td>
+                                        <td class="left">강동공영차고지 ↔ 잠실새내역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>강일역, 상일동역, 중앙보훈병원역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3412</td>
+                                        <td class="left">강동공영차고지 ↔ 강남역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 둔촌동역, 올림픽공원역, 강남역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3413</td>
+                                        <td class="left">강동공영차고지 ↔ 수서경찰서</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 길동역, 올림픽공원역, 가락시장역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30-5</td>
+                                        <td class="left">하남시버스환승공영차고지·검단산입구 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남시청, 올림픽공원역, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>35</td>
+                                        <td class="left">감일교차로 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>감일교차로, 올림픽공원남2문, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6300</td>
+                                        <td class="left">미사강변18단지강일리버10단지 ↔ 인천공항</td>
+                                        <td class="left"><span class="bus-label gyeonggi">공항버스</span>인천공항, 잠실역, 방이역, 올림픽선수촌아파트</td>
+                                    </tr>
+                                    <!-- 남4문 -->
+                                    <tr>
+                                        <th rowspan="7">남4문<br />(올림픽공원<br />평화의문광장)<br />지하철 8호선<br />몽촌토성역<br />지하철 9호선<br />한성백제역</th>
+                                        <td>3412</td>
+                                        <td class="left">강동공영차고지 ↔ 강남역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 올림픽공원세계평화의문광장, 강남역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3413</td>
+                                        <td class="left">강동공영차고지 ↔ 수서경찰서</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 올림픽공원세계평화의문광장, 가락시장역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3323</td>
+                                        <td class="left">강동공영차고지 ↔ 잠실새내역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>강일역, 상일동역, 중앙보훈병원역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30</td>
+                                        <td class="left">상산곡동·공영차고지 ↔ 남한산성입구·양지파출소</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남, 올림픽회관, 올림픽공원세계평화의문광장, 남한산성</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30-5</td>
+                                        <td class="left">하남시버스환승공영차고지·검단산입구 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남, 올림픽공원세계평화의문광장, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>35</td>
+                                        <td class="left">감일교차로 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>감일교차로, 올림픽공원남2문, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>340</td>
+                                        <td class="left">강동공영차고지 ↔ 강남역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 천호역, 올림픽공원세계평화의문광장, 강남역</td>
+                                    </tr>
+                                    <!-- 올림픽회관 -->
+                                    <tr>
+                                        <th rowspan="12">올림픽회관</th>
+                                        <td>3318</td>
+                                        <td class="left">강동공영차고지 ↔ 마천동</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 천호역, 올림힉회관, 잠실역, 남한산성</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3319</td>
+                                        <td class="left">장지공영차고지 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>방이역, 올림픽회관, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3411</td>
+                                        <td class="left">강동공영차고지 ↔ 한티역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>강일역, 암사역, 천호역, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4318</td>
+                                        <td class="left">남태령역 ↔ 천호역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>남태령역, 고속터미널, 청담역, 삼성역, 잠실새내역, 잠실역, 잠실나루역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>N31</td>
+                                        <td class="left">강동공영차고지 ↔ 국민대</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 고덕역, 암사역, 천호역, 몽촌토성역, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td class="left">상산곡동·공영차고지 ↔ 일원본동주민센터</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남, 천호역, 올림픽회관, 가락시장, 삼성서울병원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30</td>
+                                        <td class="left">상산곡동·공영차고지 ↔ 남한산성입구·양지파출소</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남, 올림픽회관, 올림픽공원남4문, 남한산성</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30-3</td>
+                                        <td class="left">상산곡동·공영차고지 ↔ 잠실역</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남, 천호역, 올림픽회관, 잠실역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>340</td>
+                                        <td class="left">강동공영차고지 ↔ 강남역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 천호역, 올림픽회관, 강남역</td>
+                                    </tr>
+                                    <tr>
+                                        <td>341</td>
+                                        <td class="left">강동공영차고지 ↔ 우면동</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>하남, 천호역, 몽촌토성역, 역삼역, 올림픽회관</td>
+                                    </tr>
+                                    <tr>
+                                        <td>342</td>
+                                        <td class="left">강동공영차고지 ↔ 압구정로데오역</td>
+                                        <td class="left"><span class="bus-label">서울버스</span>상일동역, 천호역, 올림픽회관, 고속터미널</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6200</td>
+                                        <td class="left">황산 ↔ 인천공항</td>
+                                        <td class="left"><span class="bus-label gyeonggi">공항버스</span>천호역, 강동구청역, 잠실역</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<footer>
+    <div class="content-wrap">
+        <div class="flex-wrap al-start gap4 between mo-col">
+            <ul class="footer-terms-list">
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000" target="_blank"
+                       class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10703000000" target="_blank"
+                       class="txt-sm fw-medium c-gray">이용약관</a></li>
+            </ul>
+            <div class="footer-select-wrap flex-wrap al-center gap8 w-auto">
+                <!-- 패밀리 사이트 : select 참조 변수명 = familySite -->
+                <div class="custom-select" data-options="familySite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+                <!-- 관련사이트 : select 참조 변수명 = relatedSite -->
+                <div class="custom-select" data-options="relatedSite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="f-bottom flex-wrap al-end between mo-col mo-al-start">
+            <ul class="footer-info-list">
+                <li class="txt-sm fw-regular c-gray">사업자등록번호 : 215-81-12034</li>
+                <li class="txt-sm fw-regular c-gray">(05540) 서울특별시 송파구 올림픽로 424(방이동) 올림픽역도경기장 내</li>
+                <li class="copyright">COPYRIGHT 2025 © KSPO&CO ALL RIGHTS RESERVED.</li>
+            </ul>
+            <div class="certification-wrap">
+                <div class="img-box">
+                    <img src="../../resources/images/certification/certification_privacy_protection_certified_site.svg" alt="개인정보우수사이트 인증"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+// 초기화
+new TabManager();
+</script>
+</body>
+</html>

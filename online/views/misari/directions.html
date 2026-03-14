@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+    <link rel="stylesheet" href="../../resources/lib/swiper/swiper.css">
+    <link rel="stylesheet" href="../../resources/css/main.css">
+
+    <!-- lib -->
+    <script src="../../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../../resources/lib/swiper/swiper.js"></script>
+
+    <!-- js -->
+    <script src="../../resources/js/main.js"></script>
+
+    <title>오시는길 - 미사경정공원</title>
+    <style>
+        .map-section {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .map-image {
+            flex: 1;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .map-image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .map-details {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+        }
+        .map-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .map-info .address {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .map-info .phone {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 25px;
+        }
+        .map-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .map-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .map-link:hover {
+            background-color: #0052a3;
+        }
+        .map-link.naver {
+            background-color: #03c75a;
+        }
+        .map-link.naver:hover {
+            background-color: #02a047;
+        }
+        .subway-section {
+            margin-bottom: 40px;
+        }
+        .subway-item {
+            margin-bottom: 30px;
+        }
+        .subway-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+        }
+        .subway-title.line5::before {
+            content: '5';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #996cad;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subway-title.line8::before {
+            content: '8';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #e91c7c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .subway-description {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .bus-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-top: 2px solid #333;
+        }
+        .bus-table caption {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        .bus-table th,
+        .bus-table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .bus-table thead th {
+            background-color: #f5f5f5;
+            font-weight: 700;
+            color: #333;
+        }
+        .bus-table tbody th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+        }
+        .bus-table td.left {
+            text-align: left;
+        }
+        .bus-label {
+            display: inline-block;
+            padding: 2px 8px;
+            background-color: #0066cc;
+            color: white;
+            font-size: 12px;
+            border-radius: 3px;
+            margin-right: 5px;
+            font-weight: 500;
+        }
+        .bus-label.gyeonggi {
+            background-color: #4caf50;
+        }
+        @media (max-width: 768px) {
+            .map-section {
+                flex-direction: column;
+            }
+            .map-details {
+                padding: 30px 20px;
+            }
+            .bus-table th,
+            .bus-table td {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body data-text-size="normal">
+<!-- [웹 접근성] : 본문 바로가기 -->
+<a href="#main" id="skip-nav">본문 바로가기</a>
+<!-- 헤더 -->
+<header>
+    <!-- [사이드바] dim 처리 영역 -->
+    <div id="dim-overlay" class="dim"></div>
+    <div class="content-wrap" id="main-content">
+        <h1>
+            <a href="misari_main.html">
+                <img src="../../resources/images/common/kspo_logo_misari.svg" alt="한국체육산업개발주식회사 미사경정공원"/>
+            </a>
+        </h1>
+        <nav class="sidebar" role="dialog" aria-model="true" aria-label="메뉴">
+            <!-- pc 에서의 gnb -->
+            <ul class="pc-only-f">
+                <li><a href="../../user/cs_center_join.html">대관 예약신청</a></li>
+                <li><a href="application_guide.html">신청방법안내</a></li>
+                <li><a href="facility_guide.html">시설이용안내</a></li>
+                <li><a href="directions.html">오시는길</a></li>
+            </ul>
+            <!-- mobile 에서의 gnb -->
+            <div class="sidebar-title-wrap mobile-only-f">
+                <a href="../../user/login.html" class="user-btn">로그인</a>
+                <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="sidebar-menu-wrap">
+                <!-- Top section: Main navigation -->
+                <ul class="sidebar-list mobile-only">
+                    <li><a href="../../user/cs_center_join.html" class="menu-reservation">대관 예약신청</a></li>
+                    <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                    <li><a href="facility_guide.html" class="menu-facility">시설이용안내</a></li>
+                    <li><a href="directions.html" class="menu-location">오시는길</a></li>
+                </ul>
+
+                <!-- Divider -->
+                <div class="sidebar-divider"></div>
+
+                <!-- Bottom section: Utility links -->
+                <ul class="sidebar-list sidebar-list-secondary mobile-only">
+                    <li><a href="misari_main.html" class="menu-home">메인으로</a></li>
+                    <li><a href="../../user/cs_shopping_cart.html" class="menu-cart">장바구니</a></li>
+                    <li><a href="../../user/cs_payment_history.html" class="menu-history">신청내역</a></li>
+                    <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                    <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="btn-wrap pc-only-f">
+            <a href="../../user/login.html" class="ico-user"><span>로그인</span></a>
+            <a href="misari_main.html" class="ico-house"><span>메인으로</span></a>
+            <a href="../../user/cs_shopping_cart.html" class="ico-bag"><span>장바구니</span></a>
+            <a href="../../user/cs_payment_history.html" class="ico-pay"><span>신청내역</span></a>
+            <button type="button" class="ico-list"><span>메뉴</span></button>
+        </div>
+        <!-- Desktop dropdown menu -->
+        <div class="desktop-menu-dropdown">
+            <ul class="desktop-menu-list">
+                <li><a href="../../user/cs_center_join.html" class="menu-reservation">대관 예약신청</a></li>
+                <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                <li><a href="facility_guide.html" class="menu-facility">시설이용안내</a></li>
+                <li><a href="directions.html" class="menu-location">오시는길</a></li>
+                <li class="menu-divider"></li>
+                <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="btn-wrap sm mobile-only-f">
+            <a href="../../user/login.html" class="ico-btn ico-user" aria-label="로그인">
+                <img src="../../resources/images/ico/ico_login.svg" alt="로그인"/>
+            </a>
+            <a href="../../user/cs_shopping_cart.html" class="ico-btn ico-bag" aria-label="장바구니">
+                <img src="../../resources/images/ico/ico_bag.svg" alt="장바구니"/>
+            </a>
+            <button type="button" class="ico-btn ico-hamburger">
+                <span class="visually-hidden">메뉴 열기</span>
+            </button>
+        </div>
+    </div>
+</header>
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+    <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
+    <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
+    <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+</div>
+
+<!-- 메인 -->
+<main id="main">
+    <div class="inner-wrap">
+        <div class="title-wrap sub-ver lg">
+            <h2>오시는길</h2>
+        </div>
+        <div class="content-box no-pd">
+            <div class="tab-wrap" data-tab="fraternal">
+                <ul class="first-depth">
+                    <li class="active">
+                        <button type="button" class="tab"><span>찾아오시는 길</span></button>
+                        <div class="tab-box">
+                            <div class="map-section">
+                                <div class="map-image">
+                                    <img src="../../resources/images/content/map_misa.gif" alt="미사경정공원 지도">
+                                </div>
+                                <div class="map-details">
+                                    <div class="map-info">
+                                        <h3>미사경정공원</h3>
+                                        <p class="address">(12900) 경기도 하남시 미사대로 505 (신장동) 미사경정공원</p>
+                                        <p class="phone">031-790-8114, 8882, 8883</p>
+                                        <div class="map-links">
+                                            <a href="https://www.ksponco.or.kr/sports/map?placeNm=미사리조정경기장&placeId=exciting_4" class="map-link" target="_blank" title="새창">미사경정공원 지도 보러가기</a>
+                                            <a href="https://map.naver.com/p/entry/place/13491914" class="map-link naver" target="_blank" title="새창">네이버지도 보러가기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" class="tab"><span>대중교통 안내</span></button>
+                        <div class="tab-box">
+                            <div class="subway-section">
+                                <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #333;">지하철 이용</h3>
+                                <div class="subway-item">
+                                    <h4 class="subway-title line5">5호선 미사역</h4>
+                                    <p class="subway-description">4번 출구에서 도보 15분 또는 마을버스 이용</p>
+                                </div>
+                                <div class="subway-item">
+                                    <h4 class="subway-title line8">8호선 천호역</h4>
+                                    <p class="subway-description">1번 출구에서 버스 30, 30-3, 16번 이용</p>
+                                </div>
+                            </div>
+
+                            <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #333;">버스 이용</h3>
+                            <table class="bus-table">
+                                <caption>버스 이용 상세</caption>
+                                <colgroup>
+                                    <col style="width:20%;">
+                                    <col style="width:20%;">
+                                    <col style="width:60%;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">구분</th>
+                                        <th scope="col">버스번호</th>
+                                        <th scope="col">노선</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th rowspan="7">일반버스</th>
+                                        <td>30</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>상산곡동 ↔ 남한산성입구 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30-3</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>상산곡동 ↔ 잠실역 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30-5</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>하남시버스환승공영차고지 ↔ 잠실역 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>상산곡동 ↔ 일원본동 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>35</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>감일교차로 ↔ 잠실역 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>88</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>덕풍2동 ↔ 천호역 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>303</td>
+                                        <td class="left"><span class="bus-label gyeonggi">경기버스</span>미사강변11단지 ↔ 천호역 (미사경정공원 경유)</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2">마을버스</th>
+                                        <td>하남1</td>
+                                        <td class="left"><span class="bus-label gyeonggi">마을버스</span>미사역 ↔ 미사경정공원</td>
+                                    </tr>
+                                    <tr>
+                                        <td>하남3</td>
+                                        <td class="left"><span class="bus-label gyeonggi">마을버스</span>미사역 ↔ 미사경정공원</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+                                <h4 style="font-size: 16px; font-weight: 700; color: #333; margin-bottom: 10px;">주차 안내</h4>
+                                <ul style="padding-left: 20px; line-height: 1.8; color: #555;">
+                                    <li>주차장 운영시간 : 06:00 ~ 22:00</li>
+                                    <li>주차요금 : 경기도 조례에 의거 유료 운영</li>
+                                    <li>대관 이용시 주차권 지급 가능 (사전 문의)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<footer>
+    <div class="content-wrap">
+        <div class="flex-wrap al-start gap4 between mo-col">
+            <ul class="footer-terms-list">
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000" target="_blank"
+                       class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10703000000" target="_blank"
+                       class="txt-sm fw-medium c-gray">이용약관</a></li>
+            </ul>
+            <div class="footer-select-wrap flex-wrap al-center gap8 w-auto">
+                <!-- 패밀리 사이트 : select 참조 변수명 = familySite -->
+                <div class="custom-select" data-options="familySite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+                <!-- 관련사이트 : select 참조 변수명 = relatedSite -->
+                <div class="custom-select" data-options="relatedSite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="f-bottom flex-wrap al-end between mo-col mo-al-start">
+            <ul class="footer-info-list">
+                <li class="txt-sm fw-regular c-gray">사업자등록번호 : 215-81-12034</li>
+                <li class="txt-sm fw-regular c-gray">(05540) 서울특별시 송파구 올림픽로 424(방이동) 올림픽역도경기장 내</li>
+                <li class="copyright">COPYRIGHT 2025 © KSPO&CO ALL RIGHTS RESERVED.</li>
+            </ul>
+            <div class="certification-wrap">
+                <div class="img-box">
+                    <img src="../../resources/images/certification/certification_privacy_protection_certified_site.svg" alt="개인정보우수사이트 인증"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+// 초기화
+new TabManager();
+</script>
+</body>
+</html>

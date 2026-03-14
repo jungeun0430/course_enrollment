@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+    <link rel="stylesheet" href="../../resources/lib/swiper/swiper.css">
+    <link rel="stylesheet" href="../../resources/css/main.css">
+
+    <!-- lib -->
+    <script src="../../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../../resources/lib/swiper/swiper.js"></script>
+
+    <!-- js -->
+    <script src="../../resources/js/main.js"></script>
+
+    <title>신청방법안내 - 미사경정공원</title>
+</head>
+<body data-text-size="normal">
+<!-- [웹 접근성] : 본문 바로가기 -->
+<a href="#main" id="skip-nav">본문 바로가기</a>
+<!-- 헤더 -->
+<header>
+    <!-- [사이드바] dim 처리 영역 -->
+    <div id="dim-overlay" class="dim"></div>
+    <div class="content-wrap" id="main-content">
+        <h1>
+            <a href="misari_main.html">
+                <img src="../../resources/images/common/kspo_logo_misari.svg" alt="한국체육산업개발주식회사 미사경정공원"/>
+            </a>
+        </h1>
+        <nav class="sidebar" role="dialog" aria-model="true" aria-label="메뉴">
+            <!-- pc 에서의 gnb -->
+            <ul class="pc-only-f">
+                <li><a href="../../user/cs_center_join.html">대관 예약신청</a></li>
+                <li><a href="application_guide.html">신청방법안내</a></li>
+                <li><a href="facility_guide.html">시설이용안내</a></li>
+                <li><a href="directions.html">오시는길</a></li>
+            </ul>
+            <!-- mobile 에서의 gnb -->
+            <div class="sidebar-title-wrap mobile-only-f">
+                <a href="../../user/login.html" class="user-btn">로그인</a>
+                <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="sidebar-menu-wrap">
+                <!-- Top section: Main navigation -->
+                <ul class="sidebar-list mobile-only">
+                    <li><a href="../../user/cs_center_join.html" class="menu-reservation">대관 예약신청</a></li>
+                    <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                    <li><a href="facility_guide.html" class="menu-facility">시설이용안내</a></li>
+                    <li><a href="directions.html" class="menu-location">오시는길</a></li>
+                </ul>
+
+                <!-- Divider -->
+                <div class="sidebar-divider"></div>
+
+                <!-- Bottom section: Utility links -->
+                <ul class="sidebar-list sidebar-list-secondary mobile-only">
+                    <li><a href="misari_main.html" class="menu-home">메인으로</a></li>
+                    <li><a href="../../user/cs_shopping_cart.html" class="menu-cart">장바구니</a></li>
+                    <li><a href="../../user/cs_payment_history.html" class="menu-history">신청내역</a></li>
+                    <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                    <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="btn-wrap pc-only-f">
+            <a href="../../user/login.html" class="ico-user"><span>로그인</span></a>
+            <a href="misari_main.html" class="ico-house"><span>메인으로</span></a>
+            <a href="../../user/cs_shopping_cart.html" class="ico-bag"><span>장바구니</span></a>
+            <a href="../../user/cs_payment_history.html" class="ico-pay"><span>신청내역</span></a>
+            <button type="button" class="ico-list"><span>메뉴</span></button>
+        </div>
+        <!-- Desktop dropdown menu -->
+        <div class="desktop-menu-dropdown">
+            <ul class="desktop-menu-list">
+                <li><a href="../../user/cs_center_join.html" class="menu-reservation">대관 예약신청</a></li>
+                <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                <li><a href="facility_guide.html" class="menu-facility">시설이용안내</a></li>
+                <li><a href="directions.html" class="menu-location">오시는길</a></li>
+                <li class="menu-divider"></li>
+                <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="btn-wrap sm mobile-only-f">
+            <a href="../../user/login.html" class="ico-btn ico-user" aria-label="로그인">
+                <img src="../../resources/images/ico/ico_login.svg" alt="로그인"/>
+            </a>
+            <a href="../../user/cs_shopping_cart.html" class="ico-btn ico-bag" aria-label="장바구니">
+                <img src="../../resources/images/ico/ico_bag.svg" alt="장바구니"/>
+            </a>
+            <button type="button" class="ico-btn ico-hamburger">
+                <span class="visually-hidden">메뉴 열기</span>
+            </button>
+        </div>
+    </div>
+</header>
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+    <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
+    <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
+    <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+</div>
+
+<!-- 메인 -->
+<main id="main">
+    <div class="inner-wrap">
+        <div class="title-wrap sub-ver lg">
+            <h2>신청방법안내</h2>
+        </div>
+        <div class="content-box no-pd">
+            <div class="tab-wrap" data-tab="fraternal">
+                <ul class="first-depth">
+                    <li class="active">
+                        <button type="button" class="tab"><span>예약신청안내</span></button>
+                        <div class="tab-box">
+                            <h4 class="us_tit">[예약신청안내]</h4>
+                            <ul class="us-list">
+                                <li>
+                                    <p><span>01</span>로그인 후 '미사경정공원'내 '예약신청' 메뉴 클릭하여, 예약신청 화면으로 이동합니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/img_misa_type01.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/img_misa_type01_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><span>02</span>예약신청 화면에서 장소선택, 날짜, 시간을 선택합니다. 선택한 정보를 확인 하신 후 '대관신청' 클릭합니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/img_misa_type02.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/img_misa_type02_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><span>03</span>신청정보를 입력하고 예상대관료를 확인합니다. 약관동의 클릭 후 신청이 완료되며, 관리자 승인 후 결제가 가능합니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/img_misa_type03.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/img_misa_type03_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><span>04</span>관리자 승인 시 미사경정공원 '신청내역'에서 잔금과 계약금이 노출되며 결제가 가능해집니다. '결제하기'를 클릭하면 계약금과 잔금이 나눠서 결제되고, 예약이 완료됩니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/img_misa_type04.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/img_misa_type04_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" class="tab"><span>취소/환불안내</span></button>
+                        <div class="tab-box">
+                            <h4 class="us_tit">[취소/환불안내]</h4>
+                            <ul class="us-list">
+                                <li>
+                                    <p><span>01</span>로그인 후, 신청내역을 선택하여 이동합니다. 취소/환불 신청하실 내역의 선택박스를 선택 합니다. '결제취소' 를 클릭해 다음 단계로 진행합니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/misa01.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/misa01_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><span>02</span>개인정보 수집ㆍ제공 동의 내용에 '동의' 합니다. 신용정보 수집ㆍ제공 동의 내용에 '동의' 합니다. 진행 확인에 '동의' 버튼을 선택하여 다음단계로 진행합니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/misa02.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/misa02_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><span>03</span>관리자가 확인할 수 있는 취소사유를 입력합니다. 카드취소 처리시, 발행되는 위약금 및 일할계산금 결제를 위한 카드정보(카드정보 및 카드유효기간)를 입력합니다. 모든 정보 입력 후 '확인' 버튼을 클릭합니다. ※ 잘못된 카드정보 입력시, 업무에 지연이 발생될 수 있으니 신중히 확인 후 정확히 입력바랍니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/misa03.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/misa03_mo.jpg" alt=""/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><span>04</span>취소신청 완료 직후, '신청내역' 에서, '관리자승인중' 상태의 내역을 확인할 수 있습니다. 관리자 승인완료 시, 상태가 '취소완료'가 되며, 환불정보가 표기됩니다.</p>
+                                    <div>
+                                        <img class="pc-only2" src="../../resources/images/content/misa04.jpg" alt=""/>
+                                        <img class="mobile-only2" src="../../resources/images/mobile/misa04_mo.jpg" alt=""/>
+                                    </div>
+                                    <div class="us-inner">
+                                        <p>카드번호/유효기간 입력 오류 등의 이유로 실패한 경우, 상태란에 '재승인실패' 또는 '환불실패' 의 오류내용이 표기됩니다. 이때, 1Step부터 재시도 하여 다시 취소진행을 하실 수 있습니다.</p>
+                                        <p>취소/환불진행 중 문의는 031-790-8114, 8882, 8883 으로 문의바랍니다.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 푸터 -->
+<footer>
+    <div class="content-wrap">
+        <div class="flex-wrap al-start gap4 between mo-col">
+            <ul class="footer-terms-list">
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000" target="_blank"
+                       class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10703000000" target="_blank"
+                       class="txt-sm fw-medium c-gray">이용약관</a></li>
+            </ul>
+            <div class="footer-select-wrap flex-wrap al-center gap8 w-auto">
+                <!-- 패밀리 사이트 : select 참조 변수명 = familySite -->
+                <div class="custom-select" data-options="familySite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+                <!-- 관련사이트 : select 참조 변수명 = relatedSite -->
+                <div class="custom-select" data-options="relatedSite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="f-bottom flex-wrap al-end between mo-col mo-al-start">
+            <ul class="footer-info-list">
+                <li class="txt-sm fw-regular c-gray">사업자등록번호 : 215-81-12034</li>
+                <li class="txt-sm fw-regular c-gray">(05540) 서울특별시 송파구 올림픽로 424(방이동) 올림픽역도경기장 내</li>
+                <li class="copyright">COPYRIGHT 2025 © KSPO&CO ALL RIGHTS RESERVED.</li>
+            </ul>
+            <div class="certification-wrap">
+                <div class="img-box">
+                    <img src="../../resources/images/certification/certification_privacy_protection_certified_site.svg" alt="개인정보우수사이트 인증"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+// 초기화
+new TabManager();
+</script>
+</body>
+</html>
