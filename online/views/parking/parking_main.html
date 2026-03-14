@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+    <link rel="stylesheet" href="../../resources/lib/swiper/swiper.css">
+    <link rel="stylesheet" href="../../resources/css/main.css">
+    <script src="../../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../../resources/lib/swiper/swiper.js"></script>
+    <script src="../../resources/js/main.js"></script>
+    <title>월주차 메인</title>
+</head>
+<body data-text-size="normal">
+<a href="#main" id="skip-nav">본문 바로가기</a>
+<header>
+    <div id="dim-overlay" class="dim"></div>
+    <div class="content-wrap" id="main-content">
+        <h1>
+            <a href="parking_main.html">
+                <img src="../../resources/images/common/kspo_logo_tennis.svg" alt="한국체육산업개발주식회사 월주차"/>
+            </a>
+        </h1>
+        <nav class="sidebar" role="dialog" aria-model="true" aria-label="메뉴">
+            <ul class="pc-only-f">
+                <li><a href="../../user/cs_center_join.html">예약신청</a></li>
+                <li><a href="application_guide.html">신청방법안내</a></li>
+            </ul>
+            <div class="sidebar-title-wrap mobile-only-f">
+                <a href="../../user/login.html" class="user-btn">로그인</a>
+                <button type="button" class="close-btn"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="sidebar-menu-wrap">
+                <ul class="sidebar-list mobile-only">
+                    <li><a href="../../user/cs_center_join.html" class="menu-reservation">예약신청</a></li>
+                    <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                </ul>
+                <div class="sidebar-divider"></div>
+                <ul class="sidebar-list sidebar-list-secondary mobile-only">
+                    <li><a href="parking_main.html" class="menu-home">메인으로</a></li>
+                    <li><a href="../../user/cs_payment_history.html" class="menu-history">신청내역</a></li>
+                    <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                    <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="btn-wrap pc-only-f">
+            <a href="../../user/login.html" class="ico-user"><span>로그인</span></a>
+            <a href="parking_main.html" class="ico-house"><span>메인으로</span></a>
+            <a href="../../user/cs_payment_history.html" class="ico-pay"><span>신청내역</span></a>
+            <button type="button" class="ico-list"><span>메뉴</span></button>
+        </div>
+        <div class="desktop-menu-dropdown">
+            <ul class="desktop-menu-list">
+                <li><a href="../../user/cs_center_join.html" class="menu-reservation">예약신청</a></li>
+                <li><a href="application_guide.html" class="menu-guide">신청방법안내</a></li>
+                <li class="menu-divider"></li>
+                <li><a href="https://www.ksponco.or.kr/sports/" target="_blank" class="menu-notice">공지사항</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10104000000" target="_blank" class="menu-signup">회원가입</a></li>
+            </ul>
+        </div>
+        <div class="btn-wrap sm mobile-only-f">
+            <a href="../../user/login.html" class="ico-btn ico-user" aria-label="로그인">
+                <img src="../../resources/images/ico/ico_login.svg" alt="로그인"/>
+            </a>
+            <button type="button" class="ico-btn ico-hamburger">
+                <span class="visually-hidden">메뉴 열기</span>
+            </button>
+        </div>
+    </div>
+</header>
+<div class="fixed-btn-wrap">
+    <button type="button" class="txt-size-btn sm"><span class="visually-hidden">글씨 크게 보기</span></button>
+    <button type="button" class="txt-size-btn rg active"><span class="visually-hidden">글씨 보통 보기</span></button>
+    <button type="button" class="txt-size-btn lg"><span class="visually-hidden">글씨 크게 보기</span></button>
+</div>
+
+<main id="main">
+    <section id="sec1" class="sec">
+        <div class="content-wrap">
+            <div class="flex-wrap mo-col">
+                <div class="flex-wrap col-ver first">
+                    <div class="title-wrap">
+                        <p>월주차</p>
+                        <h2>결제시스템</h2>
+                    </div>
+                    <div class="notice-wrap">
+                        <p class="txt-lg fw-bold">매일 23:50부터 00:10까지 시스템 점검으로 서비스 이용이 제한됩니다.</p>
+                        <p class="txt-md c-gray">안정적인 서비스 제공을 위한 조치이니 양해 부탁드립니다.</p>
+                    </div>
+                    <a href="../../user/cs_course_registration.html" class="main-con-box blue type1"
+                       aria-label="예약신청 페이지 이동">
+                        <div class="title-wrap">
+                            <p>월주차</p>
+                            <h4 class="txt-big">예약신청</h4>
+                            <span class="link-btn"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex-wrap col-ver">
+                    <div class="flex-wrap">
+                        <div class="main-con-box gray type6">
+                            <div class="flex-wrap between">
+                                <div class="title-wrap">
+                                    <h4 class="txt-sm">공지사항</h4>
+                                    <a href="#" class="notice-item txt-sm">월주차 신청 안내</a>
+                                    <a href="#" class="notice-item txt-sm">고객센터: 02-2180-3696~7</a>
+                                </div>
+                                <a href="https://www.ksponco.or.kr/sports/" target="_blank" class="link-btn" aria-label="공지사항 전체 보기"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-wrap">
+                        <a href="application_guide.html" class="main-con-box orange type2" aria-label="예약 신청 안내 페이지 이동">
+                            <div class="title-wrap">
+                                <h4>예약 신청 안내</h4>
+                                <p class="txt-sm pc-only">예약 신청이 어려우신가요?<br>안내 페이지에서 자세하게<br>설명드립니다.</p>
+                                <span class="link-btn"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="content-wrap">
+        <div class="flex-wrap al-start gap4 between mo-col">
+            <ul class="footer-terms-list">
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10701000000" target="_blank"
+                       class="txt-sm fw-bold c-blue">개인정보처리방침</a></li>
+                <li><a href="https://www.ksponco.or.kr/menu.es?mid=a10703000000" target="_blank"
+                       class="txt-sm fw-medium c-gray">이용약관</a></li>
+            </ul>
+            <div class="footer-select-wrap flex-wrap al-center gap8 w-auto">
+                <div class="custom-select" data-options="familySite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+                <div class="custom-select" data-options="relatedSite" data-select="footer">
+                    <button type="button" class="select-toggle" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="selected-text"></span>
+                    </button>
+                    <ul class="select-list" role="listbox" aria-hidden="true"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="f-bottom flex-wrap al-end between mo-col mo-al-start">
+            <ul class="footer-info-list">
+                <li class="txt-sm fw-regular c-gray">사업자등록번호 : 215-81-12034</li>
+                <li class="txt-sm fw-regular c-gray">(05540) 서울특별시 송파구 올림픽로 424 올림픽공원</li>
+                <li class="copyright">COPYRIGHT 2025 © KSPO&CO ALL RIGHTS RESERVED.</li>
+            </ul>
+            <div class="certification-wrap">
+                <div class="img-box">
+                    <img src="../../resources/images/certification/certification_privacy_protection_certified_site.svg" alt="개인정보우수사이트 인증"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
