@@ -75,22 +75,7 @@ body[data-text-size='large'] {
     --txt-size09 : 48px;
     --txt-size10 : 60px;
     --txt-size11 : 68px;
-    /* [커스텀] lg */
-    header .btn-wrap > a.ico-user {min-width:56px;}
-    header .btn-wrap > a.ico-bag {min-width:64px;}
-    header .btn-wrap > a.ico-pay {min-width:64px;}
 
-    /* custom-info-table */
-    .body-lg-only-tc {display:table-column!important;}
-
-    /* date */
-    .date {width:165px;}
-
-    @media (max-width:1200px) {
-        .body-lg-only-tc {display:none!important;}
-        /* date */
-        .date {width:100%;}
-    }
     @media (max-width: 767px) {
         --txt-footer-size:13px;
         --txt-sizesm : 12px;
