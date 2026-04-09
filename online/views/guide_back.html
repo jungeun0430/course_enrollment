@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang=ko>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- css -->
+    <link rel="stylesheet" href="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+    <link rel="stylesheet" href="../../resources/lib/swiper/swiper.css">
+    <link rel="stylesheet" href="../../online/resources/css/main.css">
+
+    <!-- lib -->
+    <script src="../../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../../resources/lib/swiper/swiper.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js'></script>
+
+    <!-- js -->
+    <script src="../../online/resources/js/main.js"></script>
+
+    <title>가이드</title>
+    <style>
+        .inner-wrap {width:100%;max-width:1570px;margin:0 auto;}
+        .guide-comment {font-size:var(--txt-size03);color:red;margin-bottom:24px;}
+        .guide-box {border:1px solid var(--border-color);border-radius:8px;padding:24px;}
+        .guide-box + .guide-box {margin-top:24px;}
+        .guide-box > h2 {font-size:var(--txt-size07);font-weight:var(--fw-bold);margin-bottom:12px;padding:4px 8px;background-color:var(--color-light-blue);border-radius:4px;}
+        .guide-box > h5 {font-size:var(--txt-size05);font-weight:700;color:var(--color-black);margin-bottom:12px;}
+        .guide-box > h5 > span {font-size:var(--txt-size03);}
+        .guide-box .box2 + h5 {margin-top:32px;}
+        .box2 {border:1px solid var(--border-color);border-radius:8px;padding:12px;background-color:var(--color-transparent);}
+        /* 캘린더 */
+        .fc .fc-view-harness {height:auto!important;}
+        .fc .fc-scroller-liquid-absolute {position:relative!important;}
+        .fc .fc-scrollgrid-sync-table {height:auto!important;}
+        .fc .fc-daygrid-day {height: 150px !important;}
+        @media (max-width:767px) {
+            .inner-wrap {width: 100%;padding:16px;}
+            .guide-box{padding:16px;}
+        }
+    </style>
+    <script>
+        $(function() {
+            const savedSize = localStorage.getItem('textSize') || 'normal';
+            const sizes = ['small', 'normal', 'lg'];
+            const idx = sizes.indexOf(savedSize);
+
+            if (idx !== -1) {
+                $('.txt-size-btn').removeClass('active').eq(idx).addClass('active');
+                $('body').attr('data-text-size', savedSize);
+            }
+        });
+    </script>
+</head>
+<body data-text-size="normal">
+<!-- [웹 접근성] : 본문 바로가기 -->
+<a href="#main" id="skip-nav">본문 바로가기</a>
+
+<!-- 헤더 -->
+<header>
+    <!-- [사이드바] dim 처리 영역 -->
+    <div id="dim-overlay" class="dim" onclick="closeSidebar();"></div>
+    <div class="content-wrap"  id="main-content">
+        <h1>
+            <a class="img" href="../user/main.html">
+                <img src="../../resources/images/common/kspo_logo.svg" alt="한국체육산업개발주식회사 수강신청" />
+            </a>
+            <a href="#" target="_blank" class="btn rounded pc-only">KSPO&CO 바로가기</a>
+        </h1>
+        <nav class="sidebar" role="dialog" aria-model="true" aria-label="메뉴">
+            <!-- pc 에서의 gnb -->
+            <ul class="pc-only-f">
+                <li><a href="../user/cs_center_join.html">센터가입</a></li>
+                <li><a href="../user/cs_course_registration.html">수강신청</a></li>
+                <!-- 온라인 회원카드 종류가 1개일 경우 버튼 / 아닐 경우 a태그 -->
+                <!--<li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>-->
+                <li><button type="button">온라인 회원카드</button></li>
+                <li><a href="#">이용안내</a></li>
+            </ul>
+            <!-- mobile 에서의 gnb -->
+            <div class="sidebar-title-wrap mobile-only-f">
+                <a href="../user/login.html" class="txt-xs c-white fw-medium" >KSPO&CO 바로가기</a>
+                <button type="button" class="close-btn" onclick="closeSidebar();"><span class="visually-hidden">닫기</span></button>
+            </div>
+            <div class="sidebar-menu-wrap">
+                <ul class="top-sidebar-list mobile-only-f">
+                    <li><a href="../user/login.html" class="ico-user"><span>로그인</span></a></li>
+                    <li><a href="../user/login.html" class="ico-logout"><span>로그아웃</span></a></li>
+                    <li>
+                        <a href="../user/cs_shopping_cart.html" class="ico-bag">
+                            <span class="shop_count">1</span>
+                            <span>장바구니</span>
+                        </a>
+                    </li>
+                    <li><a href="../user/cs_payment_history.html" class="ico-pay"><span>결제내역</span></a></li>
+                </ul>
+                <ul class="sidebar-list mobile-only">
+                    <li><a href="../user/cs_center_join.html">센터가입</a></li>
+                    <li><a href="../user/cs_course_registration.html">수강신청</a></li>
+                    <!-- 온라인 회원카드 종류가 1개일 경우 버튼 / 아닐 경우 a태그 -->
+                    <li><a href="../user/cs_mobile_user_card.html">온라인 회원카드</a></li>
+                    <li><button type="button" onclick="showModal('modal1');">온라인 회원카드</button></li>
+                    <li><a href="#">이용안내</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="btn-wrap pc-only-f">
+            <!--<a href="../user/login.html" class="ico-logout"><span>로그아웃</span></a>-->
+            <a href="../user/login.html" class="ico-user"><span>로그인</span></a>
+            <a href="../user/cs_shopping_cart.html" class="ico-bag">
+                <span class="shop_count">2</span>
+                <span>장바구니</span>
+            </a>
+            <a href="../user/cs_payment_history.html" class="ico-pay"><span>결제내역</span></a>
+        </div>
+        <div class="btn-wrap sm mobile-only-f">
+            <a href="../user/login.html" class="ico-btn ico-user" aria-label="로그아웃"><img src="../../resources/images/ico/ico_logout.svg" alt="로그인 페이지 이동"/></a>
+            <a href="../user/login.html" class="ico-btn ico-user" aria-label="사용자 계정"><img src="../../resources/images/ico/ico_login.svg" alt="로그인 페이지 이동"/></a>
+            <!-- 온라인 회원카드 추가 -->
+            <a href="../user/login.html" class="ico-btn ico-membership-card" aria-label="온라인회원카드"><img src="../../resources/images/ico/ico_member_card.svg" alt="온라인 회원카드 이동"/></a>
+            <!-- 장바구니 추가 -->
+            <a href="../user/cs_shopping_cart.html" class="ico-btn ico-bag">
+                <img src="../../resources/images/ico/ico_bag.svg" alt="장바구니"/>
+                <span class="shop_count">2</span>
+            </a>
+            <a href="../user/cs_payment_history.html" class="ico-btn ico-pay" aria-label="결제내역"><img src="../../resources/images/ico/ico_bc.svg" alt="결제내역 페이지 이동"/></a>
+            <button type="button" class="ico-btn ico-hamburger" onclick="openSideBar()"><span class="visually-hidden">메뉴 열기</span></button>
+        </div>
+    </div>
+</header>
+
+
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+    <button type="button" class="txt-size-btn sm" onclick="changeTextSize('small')">
+        <span class="visually-hidden">글씨 작게</span>
+    </button>
+    <button type="button" class="txt-size-btn rg" onclick="changeTextSize('normal')">
+        <span class="visually-hidden">글씨 보통</span>
+    </button>
+    <button type="button" class="txt-size-btn lg" onclick="changeTextSize('large')">
+        <span class="visually-hidden">글씨 크게</span>
+    </button>
+</div>
+<!-- [공통] : 바로가기-->
+<div class="fixed-direct-link-wrap">
+    <ul>
+        <li>
+            <a href="https://www.ksponco.or.kr/online/swimming/index.do" target="_blank">
+                수영장<br>
+                레인대여<br>
+            </a>
+        </li>
+        <li class="lightgreen">
+            <a href="https://www.ksponco.or.kr/spm/reservationStatus/tennis/waitList.do" target="_blank">
+                테니스<br>
+                강습대기<br>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<main id="main">
+    <!--  -->
+    <section id="sec1" class="sec">
+        <div class="content-wrap">
+            <div class="flex-wrap mo-col">
+                <div class="flex-wrap col-ver first">
+                    <div class="title-wrap">
+                        <p>미사경정공원</p>
+                        <h2>온라인 예약 시스템</h2>
+                    </div>
+                    <div class="notice-wrap">
+                        <p class="txt-lg fw-bold">매일 23:50부터 00:10까지 시스템 점검으로 서비스 이용이 제한됩니다.</p>
+                        <p class="txt-md c-gray">안정적인 서비스 제공을 위한 조치이니 양해 부탁드립니다.</p>
+                    </div>
+                    <a href="#" class="main-con-box blue type1" aria-label="수강신청 페이지 이동">
+                        <div class="title-wrap">
+                            <p>수강신청</p>
+                            <h4 class="txt-big">미사경정공원<br>예약신청</h4>
+                            <span class="link-btn"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex-wrap col-ver">
+                    <div class="flex-wrap">
+                        <a href="#" class="main-con-box gray type6" aria-label="공지사항 페이지로 이동">
+                            <div class="flex-wrap al-start between">
+                                <div>
+                                    <div class="title-wrap">
+                                        <h4>공지사항</h4>
+                                    </div>
+                                    <ul class="main_sub_list">
+                                        <li>2026년 4월 대관일정 오픈 안내</li>
+                                        <li>2026년 2차 미사경정공원 수시대관 공모 안내</li>
+                                        <li>2026년 3월 대관일정 오픈 안내</li>
+                                    </ul>
+                                </div>
+
+                                <span class="link-btn"></span>
+                            </div>
+
+                        </a>
+                    </div>
+                    <div class="flex-wrap">
+                        <a href="#" class="main-con-box orange type2" aria-label="예약 신청 안내 페이지로 이동">
+                            <div class="title-wrap">
+                                <h4>예약 신청 안내</h4>
+                                <p class="txt-sm pc-only">수강신청이 어려우신가요?<br>안내 페이지에서 자세하게 설명드립니다.</p>
+                                <span class="link-btn"></span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="flex-wrap">
+                        <a href="#" class="main-con-box skyblue type3" aria-label="시설이용안내 페이지 이동">
+                            <div class="title-wrap">
+                                <h4>시설이용안내</h4>
+                                <span class="link-btn"></span>
+                            </div>
+                        </a>
+                        <a href="#" class="main-con-box purple type4" aria-label="오시는 길 페이지 이동">
+                            <div class="title-wrap">
+                                <h4>오시는 길</h4>
+                                <span class="link-btn"></span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="inner-wrap">
+        <p class="guide-comment">가이드의 모든 기준은 글씨크기 '보통' 기준으로 작성되었습니다.</p>
+
+        <!-- 1. 페이지 관련 -->
+        <div class="guide-box">
+            <h2>가. 제목</h2>
+            <div class="title-wrap sub-ver lg">
+                <h2>장바구니</h2>
+                <p>장바구니에 담긴 예약 항목은 1시간동안 보관되며, 1시간이 경과할 경우 자동 취소됩니다.</p>
+            </div>
+
+            <h2>나. Breadcrumb </h2>
+            <div class="flex-wrap end">
+                <ul class="breadcrumb">
+                    <li class="home">메인</li>
+                    <li>올림픽테니스장</li>
+                    <li class="active">일일입장 예약신청</li>
+                </ul>
+            </div>
+
+            <h2>다. 진행도 (예약신청)</h2>
+            <div class="flex-wrap center">
+                <ul class="progress-bar">
+                    <li class="done">
+                        <div class="bar-wrap">
+                            <span class="point"></span>
+                            <span class="label">예약선택</span>
+                        </div>
+                    </li>
+                    <li class="done">
+                        <div class="bar-wrap">
+                            <span class="point"></span>
+                            <span class="label">약관동의</span>
+                        </div>
+                    </li>
+                    <li class="half">
+                        <div class="bar-wrap">
+                            <span class="point"></span>
+                            <span class="label">신청완료</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- 2. 버튼 -->
+        <div class="guide-box">
+            <h2>다. 버튼 관련</h2>
+            <h5>1. 텍스트형 버튼</h5>
+            <div class="box2">
+                <div class="flex-wrap mo-col">
+                    <button type="button" class="btn outlined">센터 가입하기</button>
+                    <button type="button" class="btn">센터 가입하기</button>
+                    <button type="button" class="btn outlined" disabled>센터 가입하기</button>
+                </div>
+                <div class="flex-wrap" style="margin-top:20px;">
+                    <button type="button" class="btn sm outlined">회원번호발급</button>
+                    <button type="button" class="btn sm outlined c-red">결제취소</button>
+                    <button type="button" class="btn sm outlined" disabled>취소불가</button>
+                </div>
+                <div class="flex-wrap" style="margin-top:20px;">
+                    <button type="button" class="btn sm mo-sm outlined">모바일 전환시 크기가 더 작은 버튼</button>
+                </div>
+
+                <div class="flex-wrap pc-only-f" style="margin-top:20px;">
+                    <button type="button" class="btn size-sm outlined">너비(size-sm) 버전 (min-120px)</button>
+                    <button type="button" class="btn size-nm outlined" disabled>너비(size-nm) 버전 (min-160px)</button>
+                    <button type="button" class="btn size-md">너비(size-md) 버전 (min-200px)</button>
+                </div>
+
+                <div class="flex-wrap" style="margin-top:20px;">
+                    <button type="button" class="btn size-full">너비(size-full) 버전</button>
+                </div>
+
+                <div class="flex-wrap" style="margin-top:20px;">
+                    <button type="button" class="btn blink size-full">깜빡이는 버튼 버전</button>
+                </div>
+
+                <div class="flex-wrap" style="margin-top:20px;">
+                    <button type="button" class="btn sm outlined c-red blink">깜빡이는 버튼 버전</button>
+                    <button type="button" class="btn sm outlined blink">깜빡이는 버튼 버전</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. 테이블 (검색/테이블/페이지네이션) -->
+        <div class="guide-box"></div>
+
+        <!-- 4. 탭 -->
+        <div class="guide-box">
+            <div class="tab-wrap" data-tab="fraternal">
+                <ul class="first-depth">
+                    <li class="active">
+                        <button type="button" class="tab"><span>테니스 운영현황</span></button>
+                        <div class="tab-box">
+                            테니스 운영현황
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" class="tab"><span>일일입장 이용안내</span></button>
+                        <div class="tab-box">
+                            <a href="#">일일입장 이용안내</a>
+                        </div>
+                    </li>
+                    <li>
+                        <button type="button" class="tab"><span>사용 준수 사항 및<br class="pc-tablet-only">연기/환불규청 안내</span></button>
+                        <div class="tab-box">
+                            <a href="#">사용 준수 사항 및
+                                연기/환불규청 안내</a>
+                        </div>
+                    </li>
+
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 캘린더 -->
+    <div class="calendar-wrap">
+        <div id="calendar"></div>
+    </div>
+</main>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        // fullcalendar 실행문
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            locale: 'ko',
+            initialView: 'dayGridTwoWeek',
+            initialDate: '2026-03-25',
+            selectConstraint: {
+                start: '2026-03-12'
+            },
+            views: {
+                dayGridTwoWeek: {
+                    type: 'dayGrid',
+                    duration: { weeks: 2 },  // 노출하고 싶은 주의 수
+                }
+            },
+            displayEventTime: false, // 시간 글자 숨김
+            events: [
+                {
+                    id: 'possible-2026-03-12',
+                    title: '가능 - 12건',
+                    start: '2026-03-12',
+                    classNames: ['calendar-unit', 'blue']
+                },
+                {
+                    id: 'progress-2026-03-12',
+                    title: '진행 - 3건',
+                    start: '2026-03-12',
+                    classNames: ['calendar-unit']
+                },
+                {
+                    id: 'closed-2026-03-12',
+                    title: '마감 - 9건',
+                    start: '2026-03-12',
+                    classNames: ['calendar-unit', 'gray']
+                }
+            ],
+            dateClick: function(info) {
+                alert('Date: ' + info.dateStr);
+                alert('Resource ID: ' + info.resource.id);
+            }
+        });
+        calendar.render();
+    });
+    /* 실행문 */
+    document.addEventListener("DOMContentLoaded", () => {
+        new TabManager();
+    });
+</script>
+</body>
+</html>

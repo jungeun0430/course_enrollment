@@ -203,7 +203,7 @@ main > .sec{width:100%;margin:0 auto;}
 .flex-wrap.gap8 {gap:8px;}
 .flex-wrap.gap12 {gap:12px;}
 .flex-wrap.gap-pc-8 {gap:8px;}
-.flex-wrap .flex1 {flex:1;}
+.flex-wrap .flex1 {flex:1;}ㅊ
 span.title-wrap{display:block;}
 span.title-wrap span {display:block;text-align:left;}
 .title-wrap > h2 {font-size:var(--txt-size11);font-weight:var(--fw-bold);color:#0189FF;}
