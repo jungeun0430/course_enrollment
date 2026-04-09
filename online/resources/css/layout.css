@@ -179,9 +179,9 @@ footer > .content-wrap {max-width:1760px;width:100%;margin:0 auto;}
 /* [반응형] : 모바일 */
 @media (max-width: 767px) {
     /* footer */
-    .footer-terms-list {flex-direction:column;align-items:flex-start;}
-    .footer-terms-list > li {padding:0;}
-    .footer-terms-list > li + li::before {display:none;}
+    /*.footer-terms-list {flex-direction:column;align-items:flex-start;}*/
+    /*.footer-terms-list > li {padding:0;}*/
+    /*.footer-terms-list > li + li::before {display:none;}*/
 }
 
 
