@@ -5,8 +5,8 @@
 @import "../layout.css";
 @import "../common.css";
 @import "../responsive.css";
-
-/* main_intro 페이지 입니다. */
+/*-------------------------------------------------------------------*/
+/* main_intro */
 /* #sec1 */
 #sec1 {width:100%;padding:26px 0 60px;}
 #sec1 > .content-wrap{width:100%;max-width:1760px;margin:0 auto;display:flex;align-items:stretch;}

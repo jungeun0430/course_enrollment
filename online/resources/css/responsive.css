@@ -9,6 +9,7 @@
 .pc-inline-only { display: inline !important; }
 .pc-tablet-only { display: block !important; }
 .pc-tablet-flex-only { display: flex !important; }
+.pc-tablet-table-only {display: table !important;}
 
 /* 기본적으로 숨길 요소들 */
 .tablet-only,
@@ -26,7 +27,8 @@
 .tablet-inline-only,
 .mo-inline-only,
 .tablet-mo-inline-only,
-.pc-mo-inline-only {
+.pc-mo-inline-only,
+.mo-table-only{
   display: none !important;
 }
 
@@ -77,7 +79,8 @@
   .pc-tablet-only,
   .pc-tablet-flex-only,
   .pc-tablet-inline-flex-only,
-  .pc-tablet-inline-only {
+  .pc-tablet-inline-only,
+  .pc-tablet-table-only {
     display: none !important;
   }
 
@@ -86,6 +89,7 @@
   .mo-flex-only { display: flex !important; }
   .mo-inline-flex-only { display: inline-flex !important; }
   .mo-inline-only { display: inline !important; }
+  .mo-table-only { display: table !important; }
 
   /* PC + Mobile 조합 표시 */
   .pc-mo-only { display: block !important; }

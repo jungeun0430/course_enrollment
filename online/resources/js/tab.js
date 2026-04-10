@@ -24,7 +24,11 @@ class TabManager {
                 }
             });
 
-            this.updateHeight();
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    this.updateHeight();
+                });
+            });
         });
     }
 
@@ -321,46 +325,29 @@ class TabManager {
 
         setTimeout(() => this.updateHeight(), 0);
     }
+    getOuterHeight(el) {
+        const style = window.getComputedStyle(el);
+        return el.getBoundingClientRect().height
+            + parseFloat(style.marginTop)
+            + parseFloat(style.marginBottom);
+    }
 
     updateHeight(modalId = null) {
-        // 대상 선택: modalId가 있으면 특정 모달 내부의 tab-wrap만 선택
-        const tabWrapSelector = modalId
-            ? `#${modalId} .tab-wrap` // 특정 모달 안의 .tab-wrap
-            : '.tab-wrap';            // 모든 .tab-wrap
-
-        console.log(tabWrapSelector)
-        // 선택된 tab-wrap 요소
+        const tabWrapSelector = modalId ? `#${modalId} .tab-wrap` : '.tab-wrap';
         const tabWraps = document.querySelectorAll(tabWrapSelector);
 
-        // tab-wrap이 존재하지 않으면 아무 작업도 하지 않음
-        if (!tabWraps.length) {
-            console.log('tab-wrap 요소가 없습니다.');
-            return;
-        }
-
-        // 각 tab-wrap의 높이 계산 및 업데이트
         tabWraps.forEach(wrap => {
-            const activeTab = wrap.querySelector('.first-depth > li.active .tab-box'); // 활성화된 탭 찾기
-            if (activeTab) {
-                const tabBoxHeight = activeTab.offsetHeight; // 활성 탭의 높이
-                // modal 내부인지 확인하는 조건
-                const isInModal = modalId && wrap.closest(`#${modalId}`);
-                const listLength = wrap.querySelectorAll('.first-depth > li').length;
+            const firstDepth = wrap.querySelector('.first-depth');
+            const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
 
-                /* tab의 수가 1이하인 경우 상단에 버튼을 가리기위해 0 높이 더함 /
-                *  나머지의 경우 pc / mobile 에 따라 차등을 두어 값 적용
-                *  */
-                const topSpacing =
-                    listLength <= 1
-                        ? 0
-                        : isInModal
-                            ? 84
-                            : this.isMobile
-                                ? 84
-                                : 104;
+            if (!firstDepth || !activeTabBox) return;
 
-                wrap.style.height = `${tabBoxHeight + topSpacing}px`; // 계산된 높이 설정
-            }
+            const tabHeaderHeight = this.getOuterHeight(firstDepth);
+            const tabBoxHeight = this.getOuterHeight(activeTabBox);
+
+            console.log(tabHeaderHeight)
+            console.log(activeTabBox)
+            wrap.style.height = `${Math.ceil(tabHeaderHeight + tabBoxHeight)}px`;
         });
     }
 }

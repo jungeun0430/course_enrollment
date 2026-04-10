@@ -1,0 +1,69 @@
+@charset "UTF-8";
+@import "../variable.css";
+@import "../font.css";
+@import "../reset.css";
+@import "../layout.css";
+@import "../common.css";
+@import "../table.css";
+@import "../responsive.css";
+/*-------------------------------------------------------------------*/
+/* 프로그래스 바 */
+.progress-bar {display: flex;margin: 0;padding: 0;list-style: none;max-width:100%;width:100%;}
+.progress-bar > li {position: relative;flex: 1;text-align: center;}
+.progress-bar > li:nth-child(2) {position: relative;flex: 1;}
+.progress-bar .bar-wrap {display: flex;flex-direction: column;align-items: center;position: relative;}
+.progress-bar .point {position: relative;z-index: 2;display: block;width: 16px;height: 16px;border-radius: 50%;background:var(--border-color2);}
+.progress-bar > li.done .point {background: var(--color-primary);}
+.progress-bar .label {margin-top: 8px;font-size: var(--txt-size04);font-weight:var(--fw-bold);line-height: 1.4;color: var(--color-text);white-space: nowrap;}
+.progress-bar > li::before {content: "";position: absolute;top: 7px;left: -50%;width: 100%;height: 2px;background: var(--border-color2);}
+.progress-bar > li:first-child::before {display: none;}
+.progress-bar > li::after {content: "";position: absolute;top: 7px;left: -50%;width: 0;height: 2px;background: var(--color-primary);}
+.progress-bar > li:first-child::after {display: none;}
+.progress-bar > li.done::after {width: 100%;}
+.progress-bar > li.half::after {width: 50%;}
+/* step1 */
+
+/* step2 */
+/* 이용약관 _ 올팍축구장 */
+.agree-sub-wrap + .agree-sub-wrap {margin-top:24px;}
+.line-text {min-height:28px;padding-left:8px;position:relative;font-size:var(--txt-size04);color:var(--color-black);font-weight:var(--fw-bold);}
+.line-text::before {content: "";width:2px;height:20px;background-color:var(--color-primary);position:absolute;left:0;top:4px;}
+.gray-line-box {background-color:var(--bg-light);padding:40px;border:1px solid var(--border-color);border-radius:4px;}
+.agree-list > li + li {margin-top:24px;}
+.agree-box + .agree-form-wrap {margin-top:20px;}
+.agree-box {padding:40px;border:1px solid var(--border-color);border-radius:4px;background-color:var(--color-white);}
+.agree-box .line-text {margin-bottom:16px;}
+.agree-form-list > li {display:flex;flex-direction:column;gap:12px;}
+.agree-form-list > li + li {padding-top:16px;margin-top:16px;border-top:1px solid var(--border-color);}
+.agree-form-list > li > span {font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-text);}
+
+/* 버튼 */
+.progress-mb {margin-bottom:40px;}
+.progress-mt-sm {margin-top:24px;}
+.submit-btn-wrap {display:flex;justify-content:center;gap:12px;margin-top:40px;}
+
+@media (max-width:767px) {
+    .progress-bar {max-width:100%;}
+    .progress-bar .point {width: 14px;height: 14px;border-radius: 50%;}
+    .progress-bar .label {font-size: var(--txt-size02);}
+    .progress-bar > li::before {content: "";position: absolute;top: 7px;left: -50%;width: 100%;height: 2px;background: var(--border-color2);}
+}
+
+@media (max-width:767px) {
+    /* 이용약관 */
+    .agree-sub-wrap + .agree-sub-wrap {margin-top:20px;}
+    .line-text {min-height:22px;}
+    .line-text::before {top:2px;}
+    .gray-line-box {padding:8px;}
+    .agree-list > li + li {margin-top:24px;}
+    .agree-box + .agree-form-wrap {margin-top:12px;}
+    .agree-box {padding:8px;}
+    .agree-box .line-text {margin-bottom:8px;}
+    .agree-form-list > li + li {padding-top:12px;margin-top:12px;}
+    .agree-form-list .form-box > .input-wrap {width:100%;}
+    /* 버튼 */
+    .progress-mb {margin-bottom:28px;}
+    .progress-mt-sm {margin-top:12px;}
+    .submit-btn-wrap {gap:8px;margin-top:28px;width:100%;}
+    .submit-btn-wrap > .btn {flex:1;}
+}
