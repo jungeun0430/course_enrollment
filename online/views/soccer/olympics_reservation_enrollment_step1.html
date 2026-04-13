@@ -562,7 +562,17 @@
             ]
         };
 
+        var selectedDate1 = null;
+        var selectedDate2 = null;
+
+        function showScheduleForCalendar(calendarEl, dateStr) {
+            var scheduleList = calendarEl.closest('.enrollment-wrap').querySelector('.schedule-check-list');
+            if (scheduleList && dateStr) {
+                renderScheduleList(scheduleList, dateStr);
+            }
+        }
         function renderScheduleList(scheduleListEl, dateStr) {
+            alert('fdsjkdsj')
             var data = scheduleData[dateStr];
             var parts = dateStr.split('-');
             var month = parseInt(parts[1], 10);
@@ -658,10 +668,8 @@
                 var dateStr = info.dateStr;
                 if (dateStr < ACTIVE_START || dateStr > ACTIVE_END) return;
 
-                var scheduleList = calendarEl.closest('.enrollment-wrap').querySelector('.schedule-check-list');
-                if (scheduleList) {
-                    renderScheduleList(scheduleList, dateStr);
-                }
+                selectedDate1 = dateStr;
+                showScheduleForCalendar(calendarEl, selectedDate1);
             },
             eventResize: function(info) {
                 alert(info.event.title + " end is now " + info.event.end.toISOString());
@@ -737,10 +745,8 @@
                 var dateStr = info.dateStr;
                 if (dateStr < ACTIVE_START2 || dateStr > ACTIVE_END2) return;
 
-                var scheduleList2 = calendarEl2.closest('.enrollment-wrap').querySelector('.schedule-check-list');
-                if (scheduleList2) {
-                    renderScheduleList(scheduleList2, dateStr);
-                }
+                selectedDate2 = dateStr;
+                showScheduleForCalendar(calendarEl2, selectedDate2);
             },
             eventResize: function(info) {
                 alert(info.event.title + " end is now " + info.event.end.toISOString());
@@ -758,11 +764,6 @@
         renderProgress(0);
 
         /* 날짜 클릭 전 schedule-check-list 숨김 */
-        document.querySelectorAll('.schedule-check-list').forEach(function(el) {
-            el.style.display = 'none';
-        });
-
-
         function resetCalendar(calEl, cal) {
             cal.unselect();
             var scheduleList = calEl.closest('.enrollment-wrap').querySelector('.schedule-check-list');
@@ -776,6 +777,7 @@
         new TabManager({
             tabActions: {
                 0: ({ index }) => {
+                    alert('df')
                     renderProgress(index);
                     resetCalendar(calendarEl2, calendar2);
                     setTimeout(function () {
@@ -783,6 +785,7 @@
                     }, 0);
                 },
                 1: ({ index }) => {
+                    alert('3e')
                     renderProgress(index);
                     resetCalendar(calendarEl, calendar);
                     setTimeout(function () {
