@@ -63,8 +63,6 @@ body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-act
 /* 버튼 disabled */
 .btn:disabled,
 .btn.outlined:disabled {color:var(--color-gray2);background-color:var(--color-disabled);font-weight:var(--fw-medium);cursor: default;transition:none;border-color:var(--color-transparent);}
-
-}
 /* 깜빡이는 효과 */
 @keyframes blink {
     0% {
@@ -108,11 +106,13 @@ body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-act
 
 @media (max-width:767px) {
     /* 버튼 너비 관련 */
+    .btn {font-size:var(--txt-size03);padding:7px;font-weight: var(--fw-medium)}
     .btn.size-sm {min-width:82px;}
 
     /* 버튼 전체적 크기 관련 */
     .btn.sm {}
     .btn.md {padding:11px 10px;height:42px;}
+    .btn.size-nm {min-width:92px;}
     /* 버튼 변경 */
     .btn.xsm.mo-turn-close-btn {width:20px;height:20px;font-size:0;background:var(--bg-light) url("../images/ico/ico_close_gray.svg") center center no-repeat;background-size:20px;border:0;}
 
@@ -356,7 +356,7 @@ span.title-wrap > .h4,
 .radio-wrap .radiomark + span {font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);}
 .radio-wrap input:focus:checked + .radiomark,
 .radio-wrap input:checked + .radiomark {
-    background: url('../images/ico/ico_radio_active.svg') no-repeat center / contain;
+    /*background: url('../images/ico/ico_radio_active.svg') no-repeat center / contain;*/
 }
 
 /* b. 라디오 (탭 디자인) */
@@ -398,7 +398,7 @@ span.title-wrap > .h4,
 .select-wrap > select {width:100%;height:48px;padding:13px 40px 13px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);color:var(--color-black);border:1px solid var(--border-color2);border-radius:4px;background:url('../images/ico/ico_select_arrow.svg') right 12px center no-repeat;background-size:20px;appearance: none}
 
 @media (max-width:767px) {
-    .select-wrap > select {height:42px;padding:11px 2px 11px 10px;}
+    .select-wrap > select {height:42px;padding:11px 36px 11px 10px;}
 }
 
 /* 15. 인풋 */

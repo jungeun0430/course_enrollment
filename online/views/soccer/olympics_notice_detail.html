@@ -152,6 +152,18 @@
     </div>
   </div>
 </header>
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+  <button type="button" class="txt-size-btn sm" onclick="changeTextSize('small')">
+    <span class="visually-hidden">글씨 작게</span>
+  </button>
+  <button type="button" class="txt-size-btn rg" onclick="changeTextSize('normal')">
+    <span class="visually-hidden">글씨 보통</span>
+  </button>
+  <button type="button" class="txt-size-btn lg" onclick="changeTextSize('large')">
+    <span class="visually-hidden">글씨 크게</span>
+  </button>
+</div>
 <main id="main">
   <!--  -->
   <div class="inner-wrap sub-ver">
@@ -205,9 +217,24 @@
           </div>
         </div>
         <div class="notice-foot">
-          <div class="attachment-wrap"></div>
+          <div class="attachment-wrap">
+            <dl>
+              <dt>첨부파일</dt>
+              <dd>
+                <ul class="file-list">
+                  <li><a href="#" download="xxx.tsx">공지사항_안내문.pdf</a></li>
+                  <li>첨부파일이 없습니다.</li>
+                </ul>
+              </dd>
+            </dl>
+          </div>
         </div>
       </article>
+
+      <!-- 목록 -->
+      <div class="flex-wrap center">
+        <button type="button" class="btn size-nm bg-black">목록</button>
+      </div>
     </div>
   </div>
 

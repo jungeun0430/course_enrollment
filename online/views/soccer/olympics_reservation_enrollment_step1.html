@@ -152,6 +152,18 @@
     </div>
   </div>
 </header>
+<!-- [공통] 글자 텍스트 아이콘 -->
+<div class="fixed-btn-wrap">
+  <button type="button" class="txt-size-btn sm" onclick="changeTextSize('small')">
+    <span class="visually-hidden">글씨 작게</span>
+  </button>
+  <button type="button" class="txt-size-btn rg" onclick="changeTextSize('normal')">
+    <span class="visually-hidden">글씨 보통</span>
+  </button>
+  <button type="button" class="txt-size-btn lg" onclick="changeTextSize('large')">
+    <span class="visually-hidden">글씨 크게</span>
+  </button>
+</div>
 <main id="main">
   <!--  -->
   <div class="inner-wrap sub-ver no-pd">
@@ -857,6 +869,7 @@
 
         /* 초기 실행 */
         calendar.render();
+        calendar2.render();
         renderProgress(0);
 
 
@@ -864,14 +877,16 @@
         new TabManager({
             tabActions: {
                 0: ({ index }) => {
-                    calendar2.destroy();
-                    calendar.render();
                     renderProgress(index);
+                    setTimeout(function () {
+                        calendar.updateSize();
+                    }, 0);
                 },
                 1: ({ index }) => {
-                    calendar.destroy();
-                    calendar2.render();
                     renderProgress(index);
+                    setTimeout(function () {
+                        calendar2.updateSize();
+                    }, 0);
                 }
             }
         });

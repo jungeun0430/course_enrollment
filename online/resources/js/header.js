@@ -118,8 +118,6 @@ function trapFocus(container) {
             closeSidebar();
         }
     }
-
-    document.addEventListener('keydown', handleKeydown);
 }
 
 // 상태 초기화 함수

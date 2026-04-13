@@ -68,6 +68,8 @@ header .btn-wrap.sm {gap:8px;}
 .h-pop-menu {display:flex;align-items:flex-start;}
 .h-pop-menu > * {flex:1;}
 .h-pop-menu > *:last-child {border-left:1px solid var(--border-color);}
+.header-popup .close-btn {width:28px;height:28px;background:url(../images/ico/ico_close_black.svg) no-repeat center/20px;}
+.header-popup .close-btn >  span {position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0;white-space: nowrap;}
 
 @media (max-width:1760px) {
     header > .content-wrap {max-width:100%;padding:0 30px;}
@@ -87,7 +89,7 @@ header .btn-wrap.sm {gap:8px;}
     header a.ico-pay {background-size:24px;}
     header a.ico-logout {min-width:48px;background-size:24px;}
     header .header-left {gap:36px;}
-    nav > ul > li > * {font-size:var(--txt-size03);padding:12px;}
+    nav > ul > li > * {font-size:var(--txt-size03);.header-pop .close-btn {}adding:12px;}
 }
 @media (max-width:1024px) {
     header {height:80px;}
