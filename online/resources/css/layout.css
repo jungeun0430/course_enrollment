@@ -170,7 +170,7 @@ footer > .content-wrap {max-width:1780px;width:100%;margin:0 auto;}
 @media (max-width:1200px) {
     /* footer */
     footer{padding:20px 20px 28px 20px;}
-    footer > .content-wrap > .flex-wrap {width:100%;}
+    footer > .content-wrap > .flex-wrap {width:100%;flex-wrap:wrap;}
     .f-bottom {margin-top:16px;}
     .certification-wrap > .img-box{width:104px;}
     .footer-select-wrap.flex-wrap.w-auto {width:100%;}

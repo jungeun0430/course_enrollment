@@ -21,22 +21,6 @@
 .td-wrap.gap-sm {gap:12px;}
 .td-wrap a {display:block;width:100%}
 
-/* 합산 */
-.custom-table tfoot {border-top:1px solid var(--table-border-color);border-bottom:1px solid var(--table-border-color);}
-.total-wrap {background-color:var(--table-cell-bg);}
-.sum-wrap {display:flex;align-items:center;gap:8px;}
-.sum {display:flex;align-items:center;gap:4px;}
-
-/* 검색 */
-.search-wrap {display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:16px;}
-.search-box {display:flex;align-items:center;gap:8px;}
-.search-wrap .select-wrap {width:120px;}
-.search-box .input-wrap {width:320px;}
-
-/* 합계 색상 */
-.bg-total {position:relative;z-index:1;}
-.bg-total::after {content:'';width:calc(100% + 40px);height:100%;background-color:var(--table-border-color);position:absolute;left:-20px;top:0;z-index:-1;}
-.bg-total td {background-color:var(--table-border-color);}
 @media (max-width:767px) {
     /* 테이블 */
     .custom-table td {padding:16px 0;}

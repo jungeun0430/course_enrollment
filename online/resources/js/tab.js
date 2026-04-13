@@ -1,55 +1,95 @@
 /* 기능: 탭 함수 */
 class TabManager {
-    constructor() {
+    constructor(options = {}) {
         this.isMobile = window.innerWidth <= 767;
-        this.tabSets = new Map(); // Map을 명시적으로 초기화
+        this.tabSets = new Map();
+        this.observers = new Map();
+        this.tabSetSeq = 0;
+        this.isPointerInteracting = false;
+
+        this.options = {
+            onTabChange: null,
+            tabActions: {},
+            ...options
+        };
+
+        this.handleResize = this.handleResize.bind(this);
+        this.handleDocumentClick = this.handleDocumentClick.bind(this);
+
         this.init();
 
-        window.addEventListener('resize', () => {
-            const wasMobile = this.isMobile;
-            this.isMobile = window.innerWidth <= 767;
+        window.addEventListener('resize', this.handleResize);
+        document.addEventListener('click', this.handleDocumentClick);
+    }
 
-            document.querySelectorAll('.tab-wrap').forEach(wrap => {
-                const tabType = wrap.getAttribute('data-tab');
-                const firstDepth = wrap.querySelector('.first-depth');
+    handleResize() {
+        const wasMobile = this.isMobile;
+        this.isMobile = window.innerWidth <= 767;
 
-                if (!firstDepth) return;
+        document.querySelectorAll('.tab-wrap').forEach(wrap => {
+            const tabType = wrap.getAttribute('data-tab');
+            const firstDepth = wrap.querySelector('.first-depth');
 
-                if (tabType === 'fraternal') {
-                    if (!wasMobile && this.isMobile) {
-                        this.moveActiveTabToTop(wrap);
-                    } else if (wasMobile && !this.isMobile) {
-                        this.restoreOriginalOrder(wrap);
-                    }
+            if (!firstDepth) return;
+
+            if (tabType === 'fraternal') {
+                if (!wasMobile && this.isMobile) {
+                    this.moveActiveTabToTop(wrap);
+                } else if (wasMobile && !this.isMobile) {
+                    this.restoreOriginalOrder(wrap);
                 }
-            });
 
+                this.updateTabindexes(wrap);
+            }
+        });
+
+        requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    this.updateHeight();
-                });
+                this.updateHeight();
             });
         });
     }
 
-    // 각 탭 세트의 ID 생성
+    handleDocumentClick(e) {
+        if (!this.isMobile) return;
+
+        document.querySelectorAll('.tab-wrap[data-tab="fraternal"]').forEach(wrap => {
+            const firstDepth = wrap.querySelector('.first-depth');
+            if (!firstDepth) return;
+
+            if (!wrap.contains(e.target)) {
+                firstDepth.classList.remove('opened');
+                this.updateTabindexes(wrap);
+            }
+        });
+    }
+
     getTabSetId(wrap) {
-        // 이미 ID가 있으면 사용, 없으면 data-tab 속성과 랜덤 값을 합쳐 고유 ID 생성
         if (!wrap.dataset.tabSetId) {
-            const tabType = wrap.getAttribute('data-tab') || 'unknown';
-            wrap.dataset.tabSetId = `${tabType}-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+            this.tabSetSeq += 1;
+            wrap.dataset.tabSetId = `tab-set-${this.tabSetSeq}`;
         }
         return wrap.dataset.tabSetId;
     }
 
-    // 탭 세트별로 초기 순서 저장
+    setOriginIndex(firstDepth) {
+        Array.from(firstDepth.children).forEach((li, index) => {
+            li.dataset.tabOriginIndex = String(index);
+        });
+    }
+
+    getOriginalIndex(tabItem, fallbackList = []) {
+        const originIndex = tabItem?.dataset?.tabOriginIndex;
+        if (originIndex !== undefined) {
+            return Number(originIndex);
+        }
+        return fallbackList.indexOf(tabItem);
+    }
+
     saveOriginalOrder(wrap, firstDepth) {
         if (!firstDepth) return;
 
-        // this.tabSets가 정의되어 있는지 확인
-        if (!this.tabSets) {
-            this.tabSets = new Map();
-        }
+        this.setOriginIndex(firstDepth);
 
         const id = this.getTabSetId(wrap);
 
@@ -60,62 +100,59 @@ class TabManager {
         }
     }
 
-    // 탭 세트별로 원래 순서 복원
     restoreOriginalOrder(wrap) {
-        // this.tabSets가 정의되어 있는지 확인
-        if (!this.tabSets) {
-            console.warn('tabSets가 초기화되지 않았습니다.');
-            return;
-        }
-
         const id = this.getTabSetId(wrap);
         const tabSetData = this.tabSets.get(id);
-
-        if (!tabSetData || !tabSetData.originalOrder) {
-            console.warn(`저장된 탭 세트 데이터가 없습니다. ID: ${id}`);
-            return;
-        }
-
         const firstDepth = wrap.querySelector('.first-depth');
-        if (!firstDepth) return;
 
-        if (wrap.getAttribute('data-tab') === 'fraternal') {
-            console.log(`${id} 탭 세트의 초기 순서 복원 중...`);
+        if (!tabSetData || !tabSetData.originalOrder || !firstDepth) return;
+        if (wrap.getAttribute('data-tab') !== 'fraternal') return;
 
-            // 현재 활성화된 탭 찾기
-            const currentActiveTab = wrap.querySelector('.first-depth > li.active .tab');
-            const currentActiveTabId = currentActiveTab ? currentActiveTab.textContent.trim() : null;
+        const currentActiveItem = wrap.querySelector('.first-depth > li.active');
+        const currentActiveOriginIndex = currentActiveItem
+            ? currentActiveItem.dataset.tabOriginIndex
+            : null;
 
-            firstDepth.innerHTML = '';
+        firstDepth.innerHTML = '';
 
-            // 원래 순서로 복원하지만 active 클래스는 모두 제거
-            tabSetData.originalOrder.forEach(li => {
-                const newLi = li.cloneNode(true);
-                newLi.classList.remove('active'); // 모든 active 클래스 제거
-                firstDepth.appendChild(newLi);
-            });
+        tabSetData.originalOrder.forEach(li => {
+            const newLi = li.cloneNode(true);
+            newLi.classList.remove('active');
 
-            // 현재 활성화된 탭 텍스트와 일치하는 탭을 찾아 active로 설정
-            if (currentActiveTabId) {
-                const tabs = wrap.querySelectorAll('.first-depth > li .tab');
-                for (const tab of tabs) {
-                    if (tab.textContent.trim() === currentActiveTabId) {
-                        const tabItem = tab.closest('li');
-                        tabItem.classList.add('active');
-
-                        // 해당 tab-box 표시
-                        const tabBox = tabItem.querySelector('.tab-box');
-                        if (tabBox) {
-                            tabBox.style.display = 'block';
-                        }
-                        break;
-                    }
-                }
+            const tabBox = newLi.querySelector('.tab-box');
+            if (tabBox) {
+                tabBox.style.display = 'none';
             }
 
-            this.reattachEventListeners();
-            this.updateHeight();
+            firstDepth.appendChild(newLi);
+        });
+
+        if (currentActiveOriginIndex !== null) {
+            const restoredActiveItem = firstDepth.querySelector(
+                `li[data-tab-origin-index="${currentActiveOriginIndex}"]`
+            );
+
+            if (restoredActiveItem) {
+                restoredActiveItem.classList.add('active');
+
+                const tabBox = restoredActiveItem.querySelector('.tab-box');
+                if (tabBox) {
+                    tabBox.style.display = 'block';
+                }
+            }
+        } else {
+            const firstItem = firstDepth.querySelector('li');
+            if (firstItem) {
+                firstItem.classList.add('active');
+                const tabBox = firstItem.querySelector('.tab-box');
+                if (tabBox) {
+                    tabBox.style.display = 'block';
+                }
+            }
         }
+
+        this.updateTabindexes(wrap);
+        this.updateHeight();
     }
 
     moveActiveTabToTop(wrap) {
@@ -132,155 +169,163 @@ class TabManager {
         const firstDepth = wrap.querySelector('.first-depth');
         if (!firstDepth) return;
 
-        const tabs = wrap.querySelectorAll('.first-depth > li .tab');
-        const tabType = wrap.getAttribute('data-tab');
-        const tabSingle = wrap.getAttribute('data-single');
+        if (wrap.dataset.tabEventsAttached === 'true') return;
 
-        // 모바일 환경에서 탭 키 네비게이션을 위한 tabindex 설정
+        const tabType = wrap.getAttribute('data-tab');
+
+        const markPointerInteracting = (e) => {
+            if (e.target.closest('.tab')) {
+                this.isPointerInteracting = true;
+            }
+        };
+
+        const resetPointerInteracting = () => {
+            this.isPointerInteracting = false;
+        };
+
+        firstDepth.addEventListener('pointerdown', markPointerInteracting);
+        firstDepth.addEventListener('mousedown', markPointerInteracting);
+        firstDepth.addEventListener('pointerup', resetPointerInteracting);
+        firstDepth.addEventListener('mouseup', resetPointerInteracting);
+        firstDepth.addEventListener('pointercancel', resetPointerInteracting);
+        firstDepth.addEventListener('mouseleave', resetPointerInteracting);
+
+        firstDepth.addEventListener('click', (e) => {
+            const tab = e.target.closest('.tab');
+            if (!tab || !firstDepth.contains(tab)) {
+                resetPointerInteracting();
+                return;
+            }
+
+            if (tabType === 'fraternal' && this.isMobile) {
+                if (firstDepth.classList.contains('opened')) {
+                    this.activateTab(tab, tabType);
+                    firstDepth.classList.remove('opened');
+                    this.updateTabindexes(wrap);
+
+                    setTimeout(() => {
+                        tab.focus();
+                    }, 0);
+                } else {
+                    firstDepth.classList.add('opened');
+                    this.updateTabindexes(wrap);
+                }
+            } else {
+                this.activateTab(tab, tabType);
+            }
+
+            resetPointerInteracting();
+        });
+
+        firstDepth.addEventListener('focusin', (e) => {
+            const tab = e.target.closest('.tab');
+            if (!tab || !firstDepth.contains(tab)) return;
+
+            // 클릭/터치로 인해 발생한 focus는 click에서 이미 처리하므로 무시
+            if (this.isPointerInteracting) return;
+
+            // 원본 동작 유지:
+            // fraternal + mobile 에서는 focus만으로는 선택되지 않음
+            if (tabType !== 'fraternal' || !this.isMobile) {
+                this.activateTab(tab, tabType);
+            }
+        });
+
         if (tabType === 'fraternal') {
             this.updateTabindexes(wrap);
 
-            // opened 클래스가 변경될 때마다 tabindex 업데이트
+            const observerKey = this.getTabSetId(wrap);
+            const prevObserver = this.observers.get(observerKey);
+            if (prevObserver) {
+                prevObserver.disconnect();
+            }
+
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
-                    if (mutation.type === 'attributes' &&
+                    if (
+                        mutation.type === 'attributes' &&
                         mutation.attributeName === 'class' &&
-                        firstDepth === mutation.target) {
+                        mutation.target === firstDepth
+                    ) {
                         this.updateTabindexes(wrap);
                     }
                 });
             });
 
             observer.observe(firstDepth, { attributes: true });
+            this.observers.set(observerKey, observer);
         }
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                if (tabType === 'fraternal' && this.isMobile) {
-                    if (firstDepth.classList.contains('opened')) {
-                        console.log('activate1')
-
-                        this.activateTab(tab);
-                        firstDepth.classList.remove('opened');
-
-                        // 클릭한 탭에 포커스 유지 (이 부분만 추가)
-                        setTimeout(() => {
-                            tab.focus();
-                        }, 0);
-                    } else {
-                        firstDepth.classList.add('opened');
-                    }
-                } else if(tabSingle === 'aa') {
-
-                    this.activateTab(tab, tabType,tabSingle);
-
-
-                } else
-                {
-                    this.activateTab(tab, tabType);
-                }
-            });
-
-            tab.addEventListener('focus', () => {
-                if (tabType !== 'fraternal' || !this.isMobile) {
-                    this.activateTab(tab, tabType);
-                }
-            });
-        });
+        wrap.dataset.tabEventsAttached = 'true';
     }
 
-// 탭의 tabindex를 업데이트하는 새로운 메서드
     updateTabindexes(wrap) {
         const firstDepth = wrap.querySelector('.first-depth');
         if (!firstDepth) return;
 
-        const isOpened = firstDepth.classList.contains('opened');
         const tabType = wrap.getAttribute('data-tab');
+        if (tabType !== 'fraternal' || !this.isMobile) return;
 
-        if (tabType === 'fraternal' && this.isMobile) {
-            const tabs = wrap.querySelectorAll('.first-depth > li .tab');
+        const isOpened = firstDepth.classList.contains('opened');
+        const tabs = wrap.querySelectorAll('.first-depth > li .tab');
 
-            if (isOpened) {
-                // 열린 상태에서는 모든 탭에 탭 포커스 활성화
-                tabs.forEach(tab => {
-                    tab.setAttribute('tabindex', '0');
-                });
-            } else {
-                // 닫힌 상태에서는 활성화된 탭만 탭 포커스 활성화
-                tabs.forEach(tab => {
-                    const isActive = tab.closest('li').classList.contains('active');
-                    tab.setAttribute('tabindex', isActive ? '0' : '-1');
-                });
-            }
+        if (isOpened) {
+            tabs.forEach(tab => {
+                tab.setAttribute('tabindex', '0');
+            });
+        } else {
+            tabs.forEach(tab => {
+                const isActive = tab.closest('li').classList.contains('active');
+                tab.setAttribute('tabindex', isActive ? '0' : '-1');
+            });
         }
-    }
-
-// init 함수의 끝부분에 다음 코드 추가
-    reattachEventListeners() {
-        document.querySelectorAll('.tab-wrap').forEach(wrap => {
-            this.attachEventListeners(wrap);
-        });
     }
 
     init() {
-        // Map 초기화 확인
-        if (!this.tabSets) {
-            this.tabSets = new Map();
-        }
-
         const tabWraps = document.querySelectorAll('.tab-wrap');
 
-        tabWraps.forEach((wrap, index) => {
+        tabWraps.forEach((wrap) => {
             const tabType = wrap.getAttribute('data-tab');
-
             const firstDepth = wrap.querySelector('.first-depth');
-            /*if (!firstDepth) {
-              console.warn(`탭 랩 #${index}에 .first-depth 요소가 없습니다!`);
-              return;
-            }*/
+            if (!firstDepth) return;
 
-            // 초기 순서 저장 - 수정된 메서드 호출
             this.saveOriginalOrder(wrap, firstDepth);
 
             const tabs = wrap.querySelectorAll('.first-depth > li .tab');
             if (tabs.length <= 1) {
-                // 탭 버튼이 하나라면 숨기기
                 firstDepth.classList.add('only');
             } else {
                 firstDepth.classList.remove('only');
             }
 
             const tabBoxes = wrap.querySelectorAll('.tab-box');
+            tabBoxes.forEach(box => {
+                box.style.display = 'none';
+            });
 
-            // 초기에 모든 tab-box 숨기기
-            tabBoxes.forEach(box => box.style.display = 'none');
-
-            // 활성 탭의 tab-box 보이기
-            const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
-            if (activeTabBox) {
-                activeTabBox.style.display = 'block';
-
-                // fraternal 타입 모바일일 경우만 초기에 활성 탭을 최상단으로 이동
-                if (tabType === 'fraternal' && this.isMobile) {
-                    const activeTab = activeTabBox.closest('li');
-                    firstDepth.insertBefore(activeTab, firstDepth.firstChild);
+            let activeItem = wrap.querySelector('.first-depth > li.active');
+            if (!activeItem) {
+                activeItem = wrap.querySelector('.first-depth > li');
+                if (activeItem) {
+                    activeItem.classList.add('active');
                 }
-            } else {
-                console.log(`활성 탭 박스를 찾을 수 없음`);
             }
 
-            // 각 탭 랩에 이벤트 리스너 부착
+            if (activeItem) {
+                const activeTabBox = activeItem.querySelector('.tab-box');
+                if (activeTabBox) {
+                    activeTabBox.style.display = 'block';
+                }
+
+                if (tabType === 'fraternal' && this.isMobile) {
+                    firstDepth.insertBefore(activeItem, firstDepth.firstChild);
+                }
+            }
+
             this.attachEventListeners(wrap);
-
-            // 모바일에서 외부 클릭 시 목록 닫기 (fraternal 타입만)
-            if (tabType === 'fraternal') {
-                document.addEventListener('click', (e) => {
-                    if (this.isMobile && !wrap.contains(e.target)) {
-                        firstDepth.classList.remove('opened');
-                    }
-                });
-            }
+            this.updateTabindexes(wrap);
         });
+
         this.updateHeight();
     }
 
@@ -291,45 +336,80 @@ class TabManager {
         const firstDepth = wrap.querySelector('.first-depth');
         if (!firstDepth) return;
 
-        const allTabs = wrap.querySelectorAll('.first-depth > li');
+        const allTabItems = Array.from(wrap.querySelectorAll('.first-depth > li'));
+        const activeTabItem = selectedTab.closest('li');
+        if (!activeTabItem) return;
+
         tabType = tabType || wrap.getAttribute('data-tab');
 
-        // 모든 탭 비활성화 및 tab-box 숨기기
-        allTabs.forEach(tab => {
-            tab.classList.remove('active');
-            const tabBox = tab.querySelector('.tab-box');
-            if (tabBox) {
-                tabBox.style.display = 'none';
+        const currentActiveItem = wrap.querySelector('.first-depth > li.active');
+        const isSameTab = currentActiveItem === activeTabItem;
+
+        if (!isSameTab) {
+            allTabItems.forEach(tabItem => {
+                tabItem.classList.remove('active');
+
+                const tabBox = tabItem.querySelector('.tab-box');
+                if (tabBox) {
+                    tabBox.style.display = 'none';
+                }
+            });
+
+            activeTabItem.classList.add('active');
+
+            const activeTabBox = activeTabItem.querySelector('.tab-box');
+            if (activeTabBox) {
+                activeTabBox.style.display = 'block';
             }
-        });
-
-        // 선택된 탭 활성화 및 tab-box 보이기
-        const activeTabItem = selectedTab.closest('li');
-        activeTabItem.classList.add('active');
-        if(activeTabItem.dataset.selectedTab === 'cancel') {
-            changeButtonStateAndEvent('modal-courseChange','cancel')
-        } else if(activeTabItem.dataset.selectedTab === 'delay') {
-            changeButtonStateAndEvent('modal-courseChange','delay')
         }
 
-        const activeTabBox = activeTabItem.querySelector('.tab-box');
-        if (activeTabBox) {
-            activeTabBox.style.display = 'block';
-        }
+        const index = this.getOriginalIndex(activeTabItem, allTabItems);
 
-        // fraternal 타입의 모바일에서만 선택된 탭을 최상단으로 이동
         if (tabType === 'fraternal' && this.isMobile) {
             const parent = activeTabItem.parentNode;
-            parent.insertBefore(activeTabItem, parent.firstChild);
+            if (parent && parent.firstChild !== activeTabItem) {
+                parent.insertBefore(activeTabItem, parent.firstChild);
+            }
         }
 
-        setTimeout(() => this.updateHeight(), 0);
+        this.updateTabindexes(wrap);
+
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    this.updateHeight();
+                });
+            });
+
+            // 같은 탭을 다시 클릭/포커스한 경우 콜백 중복 실행 방지
+            if (isSameTab) return;
+
+            const payload = {
+                index,
+                wrap,
+                activeTabItem,
+                selectedTab,
+                tabType,
+                isMobile: this.isMobile
+            };
+
+            if (typeof this.options.onTabChange === 'function') {
+                this.options.onTabChange(payload);
+            }
+
+            const action = this.options.tabActions[index];
+            if (typeof action === 'function') {
+                action(payload);
+            }
+        }, 0);
     }
+
     getOuterHeight(el) {
         const style = window.getComputedStyle(el);
-        return el.getBoundingClientRect().height
-            + parseFloat(style.marginTop)
-            + parseFloat(style.marginBottom);
+        const marginTop = parseFloat(style.marginTop) || 0;
+        const marginBottom = parseFloat(style.marginBottom) || 0;
+
+        return el.getBoundingClientRect().height + marginTop + marginBottom;
     }
 
     updateHeight(modalId = null) {
@@ -340,14 +420,26 @@ class TabManager {
             const firstDepth = wrap.querySelector('.first-depth');
             const activeTabBox = wrap.querySelector('.first-depth > li.active .tab-box');
 
-            if (!firstDepth || !activeTabBox) return;
+            if (!firstDepth) return;
+
+            if (!activeTabBox) {
+                wrap.style.height = '';
+                return;
+            }
 
             const tabHeaderHeight = this.getOuterHeight(firstDepth);
             const tabBoxHeight = this.getOuterHeight(activeTabBox);
 
-            console.log(tabHeaderHeight)
-            console.log(activeTabBox)
             wrap.style.height = `${Math.ceil(tabHeaderHeight + tabBoxHeight)}px`;
         });
+    }
+
+    destroy() {
+        window.removeEventListener('resize', this.handleResize);
+        document.removeEventListener('click', this.handleDocumentClick);
+
+        this.observers.forEach(observer => observer.disconnect());
+        this.observers.clear();
+        this.tabSets.clear();
     }
 }

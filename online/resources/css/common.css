@@ -31,6 +31,7 @@ body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-act
 
 /* 버튼 전체적 크기 관련 */
 /*.btn.fixed-xs {padding:6px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}*/
+.btn.xsm {padding:6px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
 .btn.sm {padding:7px 12px;font-size:var(--txt-size02);font-weight:var(--fw-medium);border-width:1px;}
 .btn.md {padding:12px;font-size:var(--txt-size02);height:48px;}
 .btn.fixed-md {height:48px;padding:12px;}
@@ -62,6 +63,8 @@ body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-act
 /* 버튼 disabled */
 .btn:disabled,
 .btn.outlined:disabled {color:var(--color-gray2);background-color:var(--color-disabled);font-weight:var(--fw-medium);cursor: default;transition:none;border-color:var(--color-transparent);}
+
+}
 /* 깜빡이는 효과 */
 @keyframes blink {
     0% {
@@ -110,6 +113,9 @@ body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-act
     /* 버튼 전체적 크기 관련 */
     .btn.sm {}
     .btn.md {padding:11px 10px;height:42px;}
+    /* 버튼 변경 */
+    .btn.xsm.mo-turn-close-btn {width:20px;height:20px;font-size:0;background:var(--bg-light) url("../images/ico/ico_close_gray.svg") center center no-repeat;background-size:20px;border:0;}
+
 }
 /* 아이콘 버튼 */
 .ico-btn {display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;position:relative;transition:border-color 0.3s;cursor:pointer;}
@@ -307,11 +313,14 @@ span.title-wrap > .h4,
 .sub-content-wrap.no-pd {padding:0;}
 .sub-content-wrap + .sub-content-wrap {margin-top:80px;}
 .sub-content-box {width: 100%;}
+.sub-content-box.bg-gray {background-color: var(--bg-light);}
+.sub-content-box.pd-ver {padding:40px;}
 
 @media (max-width:767px) {
     .sub-list {gap:4px;}
     .sub-content-wrap{padding:20px 0;}
     .sub-content-wrap + .sub-content-wrap {margin-top:0;}
+    .sub-content-box.pd-ver {padding:0;}
 }
 
 /* 11. 체크박스 */
@@ -320,10 +329,10 @@ span.title-wrap > .h4,
 .checkbox-wrap input {position: absolute;width: 1px;height: 1px;overflow: hidden;clip: rect(0 0 0 0);white-space: nowrap;clip-path: inset(50%);}
 /* 체크박스 스타일 */
 .checkbox-wrap {display:inline-flex;align-items: center;gap: 8px;cursor: pointer;}
-.checkbox-wrap .checkmark {width: 28px;height: 28px;background: url('../images/ico/ico_checked_empty.svg') no-repeat center / contain;display: inline-block;transition: all 0.3s;}
+.checkbox-wrap .checkmark {width: 28px;height: 28px;background: url('../images/ico/ico_checked_empty.svg') no-repeat center / 24px;display: inline-block;transition: all 0.3s;}
 .checkbox-wrap .checkmark + span {font-size:var(--txt-size02);font-weight:var(--fw-semi-bold);color:var(--color-black);}
 .checkbox-wrap input:focus:checked + .checkmark,
-.checkbox-wrap input:checked + .checkmark {background: url('../images/ico/ico_checked_active.svg') no-repeat center / contain;}
+.checkbox-wrap input:checked + .checkmark {background: url('../images/ico/ico_checked_active.svg') no-repeat center / 24px;}
 @media (max-width:767px) {
  /* 체크박스 스타일 */
     .checkbox-wrap {gap:4px;}
@@ -432,6 +441,8 @@ span.title-wrap > .h4,
 .badge.ico-ver.bg-subway9 {background-image:url("../images/ico/ico_subway9.svg");background-color:#FAF4E6;color:#CC8F04;}
 
 @media (max-width:767px) {
+    /* 뱃지 크기 */
+    .badge.rgl {padding:4px 6px;}
     /* 지하철 노선 */
     .badge.ico-ver {padding:4px 6px 4px 28px;background-size:16px 16px;background-position:6px center;}
 }
@@ -439,6 +450,7 @@ span.title-wrap > .h4,
 /* 20. 커스텀 셀렉트박스 */
 .custom-select {width:200px;position:relative;font-family:inherit;overflow:hidden;}
 .custom-select.active {overflow:initial;}
+.selected-text {display:inline-block;width:calc(100% - 24px);white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
 .select-toggle {width:100%;height:48px;padding: 10px;text-align: left;border: 1px solid var(--border-color);border-radius:4px;background:var(--color-white) url("../images/ico/ico_select_arrow.svg") right 12px center no-repeat;background-size:14px;cursor: pointer;transition:background 0.2s;}
 .select-toggle:disabled{background:#fff!important;}
 .select-toggle[aria-expanded="true"] {background:var(--color-white) url("../images/ico/ico_select_arrow_active.svg") right 12px center no-repeat;}
@@ -491,58 +503,11 @@ span.title-wrap > .h4,
 }
 
     /*--------------------*/
-/* 캘린더 */
-.fc .fc-toolbar.fc-header-toolbar {height:66px;margin-bottom:0;position:relative;padding:16px;background-color:var(--color-primary-dark);text-align:center;}
-.fc .fc-toolbar-title {font-size:var(--txt-size05);color:var(--color-white);font-weight:var(--fw-bold);}
-.fc .fc-toolbar-chunk:first-child {width:100%;}
-.fc .fc-toolbar-chunk:last-child {position:absolute;right:16px;top:50%;transform:translateY(-50%);}
-.fc .fc-view-harness {height:auto!important;}
-.fc .fc-scroller-liquid-absolute {position:relative!important;}
-.fc .fc-scrollgrid-sync-table {height:auto!important;}
-.fc .fc-daygrid-day {height: 196px !important;}
-
-/* 셀 날짜 */
-.fc-theme-standard .fc-scrollgrid,
-.fc-theme-standard td, .fc-theme-standard th {border-color:var(--border-color);height:46px;}
-.fc-theme-standard th .fc-scrollgrid-sync-inner {height:100%;}
-.fc .fc-col-header-cell-cushion {height:100%;font-size:var(--txt-size02);color:var(--color-black);font-weight:var(--fw-medium);line-height:1.4;padding:10px;}
-.fc-theme-standard th.fc-day-sat .fc-col-header-cell-cushion {color:var(--color-primary);}
-.fc-theme-standard th.fc-day-sun .fc-col-header-cell-cushion {color:var(--color-red);}
-.fc .fc-daygrid-day-top {justify-content:center;margin-top:20px;}
-/* 일요일 */
-.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {min-height:0;position:absolute;left:12px;bottom:20px;width:calc(100% - 24px);}
-.fc .fc-daygrid-day.fc-day-sun .fc-daygrid-day-number{color:var(--color-red);}
-.fc .fc-daygrid-day-number {font-size:var(--txt-size04);font-weight:var(--fw-medium);}
-.fc .fc-daygrid-event-harness + .fc-daygrid-event-harness {margin-top:4px!important;}
-/* 오늘날짜 */
-.fc .fc-daygrid-day.fc-day-today {background-color:inherit;}
-.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number{position:relative;color:var(--color-white)!important;font-weight:var(--fw-bold);}
-.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number::after {content:'';width:44px;height:44px;border-radius:50%;background-color:var(--color-primary-dark);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:-1;}
-/* 비활성화 날짜 */
-.fc .fc-daygrid-day.is-disabled {pointer-events:none!important;}
-.fc .fc-daygrid-day.is-disabled .fc-daygrid-day-number,
-.fc .fc-daygrid-day.fc-day-sun.is-disabled .fc-daygrid-day-number{color:var(--color-gray);}
-/* 뱃지 */
-.calendar-unit {font-size:var(--txt-size01);font-weight:var(--fw-medium);padding:4px;border-radius:4px;border-style:solid;border-width:1px;background-color:var(--color-white);}
-.calendar-unit .fc-event-title {width:100%;text-align:center;}
-.calendar-unit.blue {border-color:var(--color-primary);}
-.calendar-unit.blue .fc-event-title {color:var(--color-primary);font-weight:var(--fw-medium)!important;}
-.calendar-unit.gray {border-color:var(--color-gray5);}
-.calendar-unit.gray .fc-event-title {color:var(--color-gray5);font-weight:var(--fw-medium)!important;}
-.calendar-unit.disabled {border-color:var(--color-light-gray3);background-color:var(--color-light-gray3);}
-.calendar-unit.disabled .fc-event-title {color:var(--color-gray);font-weight:var(--fw-medium)!important;}
 
 @media (max-width:767px) {
     .inner-wrap {width: 100%;padding:16px;}
     .guide-box{padding:16px;}
 }
-
-/* 이건 개별페이지 */
-.enrollment-wrap {display:flex;align-items:stretch;}
-#calendar {flex:1;}
-.schedule-check-list {border-width:1px 1px 1px 0;border-style:solid;border-color:var(--border-color);width:360px;height: 506px;overflow-y:auto;}
-.schedule-check-list > ul > li {display:flex;align-items:center;justify-content:space-between;gap:4px;padding:18px 20px;}
-.schedule-check-list > ul > li + li {border-top:1px solid var(--border-color);}
 
 
 /* 숫자 설명리스트 */
@@ -664,3 +629,21 @@ span.title-wrap > .h4,
 @media (max-width:767px) {
     .gray-img-box {padding:0;}
 }
+
+
+/* 합산 */
+.custom-table tfoot {border-top:1px solid var(--table-border-color);border-bottom:1px solid var(--table-border-color);}
+.total-wrap {background-color:var(--table-cell-bg);}
+.sum-wrap {display:flex;align-items:center;gap:8px;}
+.sum {display:flex;align-items:center;gap:4px;}
+
+/* 검색 */
+.search-wrap {display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:16px;}
+.search-box {display:flex;align-items:center;gap:8px;}
+.search-wrap .select-wrap {width:120px;}
+.search-box .input-wrap {width:320px;}
+
+/* 합계 색상 */
+.bg-total {position:relative;z-index:1;}
+.bg-total::after {content:'';width:calc(100% + 40px);height:100%;background-color:var(--table-border-color);position:absolute;left:-20px;top:0;z-index:-1;}
+.bg-total td {background-color:var(--table-border-color);}

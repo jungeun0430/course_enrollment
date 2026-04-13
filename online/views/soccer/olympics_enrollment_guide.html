@@ -432,9 +432,6 @@
 </footer>
 <script>
   $(function () {
-      /* 탭 실행 */
-      new TabManager();
-
       /* 스파이 스크롤 실행문 */
       const scrollOffset = 120;
 
@@ -489,14 +486,19 @@
       // 스크롤 시 active 갱신
       $(window).on('scroll load', updateSpyActive);
 
-      // 탭 클릭 후 active 탭이 바뀐 다음 spy 다시 계산
-      $(document).on('click', '.tab-wrap .first-depth > li > .tab', function () {
-          setTimeout(function () {
-              updateSpyActive();
-          }, 0);
-      });
-
       updateSpyActive();
+
+      /* 탭 실행 (제일 하단) */
+      new TabManager({
+          tabActions: {
+              0: ({ index }) => {
+                  updateSpyActive();
+              },
+              1: ({ index }) => {
+                  updateSpyActive();
+              }
+          }
+      });
   });
 </script>
 </body>
