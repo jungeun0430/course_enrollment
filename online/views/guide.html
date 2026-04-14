@@ -797,10 +797,10 @@
         <!-- 8.캘린더 -->
         <div class="guide-box">
             <div class="enrollment-wrap">
-                <div id="calendar"></div>
+                <div id="calendar" class="fc-calender-ver"></div>
                 <div class="schedule-check-list">
                     <ul>
-                        <li>
+                        <!--<li>
                             <label class="checkbox-wrap">
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
@@ -887,7 +887,7 @@
                                 <span>3월 19일(06:00~07:00)</span>
                             </label>
                             <span class="badge rgl bg-primary">신청가능</span>
-                        </li>
+                        </li>-->
                     </ul>
                 </div>
             </div>
@@ -1039,11 +1039,88 @@
 <script>
     /* 캘린더 */
     document.addEventListener('DOMContentLoaded', function() {
+        /* 캘린더 목 데이터 */
+        var scheduleData = {
+            '2026-04-12': [
+                { time: '06:00~07:00', status: 'disabled', label: '신청마감' },
+                { time: '07:00~08:00', status: 'disabled', label: '신청마감' },
+                { time: '08:00~09:00', status: 'primary', label: '신청가능' },
+                { time: '09:00~10:00', status: 'disabled', label: '신청마감' },
+                { time: '10:00~11:00', status: 'primary', label: '신청가능' },
+                { time: '11:00~12:00', status: 'primary', label: '신청가능' }
+            ],
+            '2026-04-13': [
+                { time: '06:00~07:00', status: 'primary', label: '신청가능' },
+                { time: '07:00~08:00', status: 'primary', label: '신청가능' },
+                { time: '08:00~09:00', status: 'disabled', label: '신청마감' },
+                { time: '09:00~10:00', status: 'primary', label: '신청가능' }
+            ],
+            '2026-04-14': [
+                { time: '06:00~07:00', status: 'disabled', label: '신청마감' },
+                { time: '07:00~08:00', status: 'disabled', label: '신청마감' },
+                { time: '08:00~09:00', status: 'disabled', label: '신청마감' }
+            ],
+            '2026-04-15': [
+                { time: '06:00~07:00', status: 'primary', label: '신청가능' },
+                { time: '07:00~08:00', status: 'primary', label: '신청가능' },
+                { time: '08:00~09:00', status: 'primary', label: '신청가능' },
+                { time: '09:00~10:00', status: 'disabled', label: '신청마감' },
+                { time: '10:00~11:00', status: 'primary', label: '신청가능' }
+            ],
+            '2026-04-16': [
+                { time: '06:00~07:00', status: 'disabled', label: '신청마감' },
+                { time: '07:00~08:00', status: 'primary', label: '신청가능' },
+                { time: '08:00~09:00', status: 'primary', label: '신청가능' },
+                { time: '09:00~10:00', status: 'disabled', label: '신청마감' }
+            ]
+        };
+
+        var selectedDate1 = null;
+        var selectedDate2 = null;
+
+        function showScheduleForCalendar(calendarEl, dateStr) {
+            var scheduleList = calendarEl.closest('.enrollment-wrap').querySelector('.schedule-check-list');
+            if (scheduleList && dateStr) {
+                renderScheduleList(scheduleList, dateStr);
+            }
+        }
+        function renderScheduleList(scheduleListEl, dateStr) {
+            alert('fdsjkdsj')
+            var data = scheduleData[dateStr];
+            var parts = dateStr.split('-');
+            var month = parseInt(parts[1], 10);
+            var day = parseInt(parts[2], 10);
+            var ul = scheduleListEl.querySelector('ul');
+
+            // ul.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                // scheduleListEl.style.display = 'none';
+                return;
+            }
+
+            data.forEach(function(item) {
+                var li = document.createElement('li');
+                li.innerHTML =
+                        '<label class="checkbox-wrap">' +
+                        '<input type="checkbox">' +
+                        '<span class="checkmark"></span>' +
+                        '<span>' + month + '월 ' + day + '일(' + item.time + ')</span>' +
+                        '</label>' +
+                        '<span class="badge rgl bg-' + item.status + '">' + item.label + '</span>';
+                ul.appendChild(li);
+            });
+
+            scheduleListEl.style.display = 'block';
+        }
+
+        /* 캘린더 */
+        /* 1. 축구장 캘린더 */
         var calendarEl = document.getElementById('calendar');
 
-        var INITIAL_DATE = '2026-03-13';/* 활성화 날짜, 처음 세팅되는 달력 위치 */
-        var ACTIVE_START = '2026-03-12';/* 범위 지정 (start) */
-        var ACTIVE_END = '2026-03-16';/* 범위 지정 (end) */
+        var INITIAL_DATE = '2026-04-13';/* 활성화 날짜, 처음 세팅되는 달력 위치 */
+        var ACTIVE_START = '2026-04-12';/* 범위 지정 (start) */
+        var ACTIVE_END = '2026-04-16';/* 범위 지정 (end) */
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
             locale: 'ko',
@@ -1077,38 +1154,55 @@
                 return { html: arg.date.getDate().toString() };
             },
             dayCellClassNames: function(arg) {
-                var dateStr = arg.date.toISOString().slice(0, 10);
+                var d = arg.date; var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
                 return (dateStr >= ACTIVE_START && dateStr <= ACTIVE_END) ? ['is-active'] : ['is-disabled'];
             },
             events: [
                 {
-                    id: 'possible-2026-03-12',
+                    id: 'possible-2026-04-16',
                     title: '가능 - 12건',
-                    start: '2026-03-12',
+                    start: '2026-04-16',
                     classNames: ['calendar-unit', 'blue']
                 },
                 {
-                    id: 'progress-2026-03-12',
+                    id: 'progress-2026-04-16',
                     title: '진행 - 3건',
-                    start: '2026-03-12',
+                    start: '2026-04-16',
                     classNames: ['calendar-unit', 'disabled']
                 },
                 {
-                    id: 'closed-2026-03-12',
+                    id: 'closed-2026-04-16',
                     title: '마감 - 9건',
-                    start: '2026-03-12',
+                    start: '2026-04-16',
                     classNames: ['calendar-unit', 'gray']
                 }
             ],
             dateClick: function(info) {
-                var dateStr = info.date.toISOString().slice(0, 10);
+                var dateStr = info.dateStr;
                 if (dateStr < ACTIVE_START || dateStr > ACTIVE_END) return;
 
-                alert('Date: ' + info.dateStr);
+                selectedDate1 = dateStr;
+                showScheduleForCalendar(calendarEl, selectedDate1);
+            },
+            eventResize: function(info) {
+                alert(info.event.title + " end is now " + info.event.end.toISOString());
+
+                if (!confirm("is this okay?")) {
+                    info.revert();
+                }
             }
         });
 
         calendar.render();
+
+        function resetCalendar(calEl, cal) {
+            cal.unselect();
+            var scheduleList = calEl.closest('.enrollment-wrap').querySelector('.schedule-check-list');
+            if (scheduleList) {
+                // scheduleList.querySelector('ul').innerHTML = '';
+                // scheduleList.style.display = 'none';
+            }
+        }
     });
     /* 실행문 */
     document.addEventListener("DOMContentLoaded", () => {

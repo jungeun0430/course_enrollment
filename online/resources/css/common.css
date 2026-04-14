@@ -320,6 +320,7 @@ span.title-wrap > .h4,
     .sub-content-wrap{padding:20px 0;}
     .sub-content-wrap + .sub-content-wrap {margin-top:0;}
     .sub-content-box.pd-ver {padding:0;}
+    .sub-content-box.bg-gray.mo-transparent{background-color:var(--color-transparent);}
 }
 
 /* 11. 체크박스 */
@@ -630,7 +631,7 @@ span.title-wrap > .h4,
 
 @media (max-width:767px) {
     .gray-img-box {padding:0;}
-    .gray-img-box.mo-transparent {background-color:var(--color-transparent)}
+    .gray-img-box.mo-transparent {background-color:var(--color-transparent);border:0;}
 }
 
 

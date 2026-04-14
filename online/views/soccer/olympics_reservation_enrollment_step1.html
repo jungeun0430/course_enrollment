@@ -233,10 +233,10 @@
               <div class="sub-title-wrap">
                 <h4>날짜 / 시간 선택</h4>
               </div>
-              <div class="sub-content-box bg-gray pd-ver">
+              <div class="sub-content-box bg-gray pd-ver mo-transparent">
                 <div class="enrollment-wrap">
                   <div id="calendar" class="fc-calender-ver"></div>
-                  <div class="schedule-check-list">
+                  <div class="schedule-check-list" style="display:none;">
                     <ul>
 
                     </ul>
@@ -256,11 +256,35 @@
               <div class="sub-content-box">
                 <div class="enrollment-list">
                   <ul>
-
+                    <li>
+                      <button type="button" class="btn xsm outlined c-red mo-turn-close-btn">삭제<span class="visually-hidden mo-only">닫기</span></button>
+                      <div class="desc-wrap">
+                        <span class="date">2026.03.18 (수)</span>
+                        <span class="pc-tablet-inline-only"> / </span>
+                        <span class="key-text">평일축구장 11시 (11:00 ~ 13:00)</span>
+                        <span class="key-total"><span class="pc-tablet-inline-only">대여료 </span>165,000원</span>
+                      </div>
+                    </li>
+                    <li>
+                      <button type="button" class="btn xsm outlined c-red mo-turn-close-btn">삭제<span class="visually-hidden mo-only">닫기</span></button>
+                      <div class="desc-wrap">
+                        <span class="date">2026.03.18 (수)</span>
+                        <span class="pc-tablet-inline-only"> / </span>
+                        <span class="key-text">평일축구장 11시 (11:00 ~ 13:00)</span>
+                        <span class="key-total"><span class="pc-tablet-inline-only">대여료 </span>165,000원</span>
+                      </div>
+                    </li>
+                    <li>
+                      <button type="button" class="btn xsm outlined c-red mo-turn-close-btn">삭제<span class="visually-hidden mo-only">닫기</span></button>
+                      <div class="desc-wrap">
+                        <span class="date">2026.03.18 (수)</span>
+                        <span class="pc-tablet-inline-only"> / </span>
+                        <span class="key-text">평일축구장 11시 (11:00 ~ 13:00)</span>
+                        <span class="key-total"><span class="pc-tablet-inline-only">대여료 </span>165,000원</span>
+                      </div>
+                    </li>
                   </ul>
-
                 </div>
-
               </div>
             </div>
 
@@ -349,10 +373,10 @@
               <div class="sub-title-wrap">
                 <h4>날짜 / 시간 선택</h4>
               </div>
-              <div class="sub-content-box bg-gray pd-ver">
+              <div class="sub-content-box bg-gray pd-ver mo-transparent">
                 <div class="enrollment-wrap">
                   <div id="calendar2" class="fc-calender-ver"></div>
-                  <div class="schedule-check-list">
+                  <div class="schedule-check-list" style="display:none;">
                     <ul>
 
                     </ul>
@@ -792,6 +816,11 @@
                 }
             }
         });
+    });
+
+    /* 결제 내역 삭제 */
+    $(document).on('click', '.mo-turn-close-btn', function () {
+        $(this).closest('li').remove();
     });
 
 </script>

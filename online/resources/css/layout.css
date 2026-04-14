@@ -24,8 +24,8 @@ header a.ico-pay {min-width:48px;background:url(../images/ico/ico_paper.svg) cen
 header a.ico-logout {min-width:48px;background:url(../images/ico/ico_logout.svg) center top no-repeat;background-size:28px;}
 header button.ico-hamburger {min-width:48px;background:url(../images/ico/ico_menu_gray.svg) center top no-repeat;background-size:28px;}
 header .btn-wrap.sm {gap:8px;}
-.sidebar .pc-tablet-flex-only > li:hover > * {color:var(--color-primary);font-weight:var(--fw-bold);transition:color 0.3s;}
-.sidebar .pc-tablet-flex-only > li.active > * {color:var(--color-primary);font-weight:var(--fw-bold)}
+.sidebar .pc-tablet-flex-only > li:hover > * {color:var(--color-primary-dark);font-weight:var(--fw-bold);transition:color 0.3s;}
+.sidebar .pc-tablet-flex-only > li.active > * {color:var(--color-primary-dark);font-weight:var(--fw-bold)}
 
 /* dim */
 .dim {display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.25);z-index:1;opacity:1;transition:opacity 0.3s;}

@@ -154,23 +154,32 @@ class TabManager {
         if (!tabSetData || !tabSetData.originalOrder || !firstDepth) return;
         if (wrap.getAttribute('data-tab') !== 'fraternal') return;
 
-        const currentActiveItem = wrap.querySelector('.first-depth > li.active');
+        const currentActiveItem = firstDepth.querySelector('.first-depth > li.active');
         const currentActiveOriginIndex = currentActiveItem
             ? currentActiveItem.dataset.tabOriginIndex
             : null;
 
-        firstDepth.innerHTML = '';
+        // 현재 살아있는 li들을 origin index 기준으로 맵핑
+        const currentItemsMap = new Map();
+        Array.from(firstDepth.children).forEach(li => {
+            currentItemsMap.set(li.dataset.tabOriginIndex, li);
+        });
 
-        tabSetData.originalOrder.forEach(li => {
-            const newLi = li.cloneNode(true);
-            newLi.classList.remove('active');
+        // originalOrder 순서대로 "기존 노드" 다시 append
+        tabSetData.originalOrder.forEach(originalLi => {
+            const originIndex = originalLi.dataset.tabOriginIndex;
+            const currentLi = currentItemsMap.get(originIndex);
 
-            const tabBox = newLi.querySelector('.tab-box');
-            if (tabBox) {
-                tabBox.style.display = 'none';
+            if (currentLi) {
+                currentLi.classList.remove('active');
+
+                const tabBox = currentLi.querySelector('.tab-box');
+                if (tabBox) {
+                    tabBox.style.display = 'none';
+                }
+
+                firstDepth.appendChild(currentLi);
             }
-
-            firstDepth.appendChild(newLi);
         });
 
         if (currentActiveOriginIndex !== null) {
