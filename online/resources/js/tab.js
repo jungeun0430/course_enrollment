@@ -4,8 +4,17 @@ class TabManager {
         this.isMobile = window.innerWidth <= 767;
         this.tabSets = new Map();
         this.observers = new Map();
+
+        // [추가] 크기 변화 감지용 ResizeObserver 저장소
+        this.resizeObservers = new Map();
+        // [추가] 높이 재계산 debounce용 timer
+        this.heightTimer = null;
+
         this.tabSetSeq = 0;
         this.isPointerInteracting = false;
+
+        // [추가] 높이 재계산 예약용 RAF id
+        this.rafId = null;
 
         this.options = {
             onTabChange: null,
@@ -43,11 +52,48 @@ class TabManager {
             }
         });
 
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
+        // [수정] 직접 updateHeight 하지 않고 공통 예약 함수 사용
+        this.scheduleUpdateHeight();
+    }
+    // [추가] 높이 재계산을 한 프레임 늦춰 안정적으로 실행
+// [수정] 두 번 기다리지 말고 한 번만 기다렸다가 바로 높이 계산
+// [수정] 너무 즉시 반영하지 말고, 변화가 조금 안정된 뒤 1번만 반영
+    scheduleUpdateHeight() {
+        if (this.rafId) cancelAnimationFrame(this.rafId);
+        if (this.heightTimer) clearTimeout(this.heightTimer);
+
+        this.heightTimer = setTimeout(() => {
+            this.rafId = requestAnimationFrame(() => {
                 this.updateHeight();
+                this.rafId = null;
+                this.heightTimer = null;
             });
+        }, 40); // 30~60 사이에서 조절
+    }
+
+    // [추가] 탭 헤더(.first-depth), 탭 내용(.tab-box) 크기 변화 감지
+    observeSizeChanges(wrap) {
+        const observerKey = this.getTabSetId(wrap);
+
+        const prevResizeObserver = this.resizeObservers.get(observerKey);
+        if (prevResizeObserver) {
+            prevResizeObserver.disconnect();
+        }
+
+        const resizeObserver = new ResizeObserver(() => {
+            this.scheduleUpdateHeight();
         });
+
+        const firstDepth = wrap.querySelector('.first-depth');
+        if (firstDepth) {
+            resizeObserver.observe(firstDepth);
+        }
+
+        wrap.querySelectorAll('.tab-box').forEach(box => {
+            resizeObserver.observe(box);
+        });
+
+        this.resizeObservers.set(observerKey, resizeObserver);
     }
 
     handleDocumentClick(e) {
@@ -324,6 +370,9 @@ class TabManager {
 
             this.attachEventListeners(wrap);
             this.updateTabindexes(wrap);
+
+            // [추가] 글자 크기 변경 등으로 실제 높이가 바뀌는 경우 자동 감지
+            this.observeSizeChanges(wrap);
         });
 
         this.updateHeight();
@@ -373,13 +422,9 @@ class TabManager {
         }
 
         this.updateTabindexes(wrap);
-
         setTimeout(() => {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    this.updateHeight();
-                });
-            });
+            // [수정] 직접 updateHeight 하지 않고 공통 예약 함수 사용
+            this.scheduleUpdateHeight();
 
             // 같은 탭을 다시 클릭/포커스한 경우 콜백 중복 실행 방지
             if (isSameTab) return;
@@ -430,7 +475,12 @@ class TabManager {
             const tabHeaderHeight = this.getOuterHeight(firstDepth);
             const tabBoxHeight = this.getOuterHeight(activeTabBox);
 
-            wrap.style.height = `${Math.ceil(tabHeaderHeight + tabBoxHeight)}px`;
+            const nextHeight = `${Math.ceil(tabHeaderHeight + tabBoxHeight)}px`;
+
+// [추가] 기존 높이와 같으면 다시 쓰지 않음
+            if (wrap.style.height !== nextHeight) {
+                wrap.style.height = nextHeight;
+            }
         });
     }
 
@@ -439,7 +489,15 @@ class TabManager {
         document.removeEventListener('click', this.handleDocumentClick);
 
         this.observers.forEach(observer => observer.disconnect());
+
+        // [추가] ResizeObserver도 같이 해제
+        this.resizeObservers.forEach(observer => observer.disconnect());
+
         this.observers.clear();
+
+        // [추가]
+        this.resizeObservers.clear();
+
         this.tabSets.clear();
     }
 }

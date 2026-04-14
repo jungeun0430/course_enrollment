@@ -13,7 +13,7 @@ body.no-scroll {/*width:100%;position:fixed;left:0;*/overflow: hidden; touch-act
 
 /* 5. 버튼 */
 /* 버튼 : 기본 (배경색 존재) */
-.btn {display:flex;justify-content:center;align-items:center;flex: 0 0 auto;flex-shrink: 0;flex-grow: 0;padding:15px;font-size:var(--txt-size02);border:1px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);line-height:1.4;transition:all 0.3s;}
+.btn {display:flex;justify-content:center;align-items:center;flex: 0 0 auto;flex-shrink: 0;flex-grow: 0;padding:15px;font-size:var(--txt-size02);border:1px solid transparent;border-radius:4px;font-weight:var(--fw-bold);color:var(--color-white);background-color:var(--color-primary);line-height:1.4;}
 /*.btn.in-flex{display:inline-flex;}*/
 .btn:not(.outlined).blink {animation:blink 1s infinite;}
 /*.btn:hover.blink {animation: none;}*/
