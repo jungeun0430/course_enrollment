@@ -252,6 +252,7 @@ span.title-wrap{display:block;}
 span.title-wrap span {display:block;text-align:left;}
 .title-wrap > h2 {font-size:var(--txt-size11);font-weight:var(--fw-bold);color:var(--color-black);}
 span.title-wrap > .h4,
+.title-wrap > h3,
 .title-wrap > h4 {font-size:var(--txt-size07);font-weight:var(--fw-bold);color:#333333;}
 .title-wrap > p {font-size:var(--txt-size05);font-weight:var(--fw-medium);color:#666666;}
 .title-wrap > h4.txt-big {font-size:var(--txt-size10);}
