@@ -43,7 +43,7 @@ header .btn-wrap.sm {gap:8px;}
 .sidebar .sidebar-title-wrap .close-btn {width:20px;height:20px;background:url(../images/ico/ico_close.svg) center center no-repeat;background-size:16px;}
 .sidebar-title-wrap{width:100%;align-items:center;justify-content:space-between;padding:12px;position:absolute;left:0;top:0;height:48px;}
 .sidebar .sidebar-menu-wrap {width:100%;padding:0 0 8px;}
-.sidebar-list > li > * {display:block;width:100%;padding:13px 20px;font-size:var(--txt-size03);font-weight:var(--fw-medium);color:#333333;text-align:left;}
+.sidebar-list > li > * {display:block;width:100%;padding:12px 20px;font-size:var(--txt-size03);font-weight:var(--fw-medium);color:#333333;text-align:left;}
 .sidebar-list > li > *:focus,
 .sidebar-list > li.active > * {color:var(--color-primary);}
 /* ico */
@@ -61,15 +61,19 @@ header .btn-wrap.sm {gap:8px;}
 /* 메뉴 */
 .header-popup {display:none;width:480px;padding:28px 40px;background-color:var(--color-white);border-radius:4px;box-shadow: 0 0 16px 0 #00000012;position:absolute;right:0;top:60px;}
 .header-popup.active {display:block;}
-.h-pop-head {display:flex;align-items:center;justify-content:space-between}
+.h-pop-head {display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
 .h-pop-head > p {font-size:var(--txt-size04);font-weight:var(--fw-bold);color:var(--color-black);}
 .h-pop-body {margin-top:24px;}
-.h-pop-user {display:flex;align-items:center;justify-content:space-between;gap:4px;}
+.h-pop-user {display:flex;align-items:center;justify-content:space-between;gap:4px;padding:14px 20px;background-color:var(--bg-light);margin-bottom:12px;}
 .h-pop-menu {display:flex;align-items:flex-start;}
 .h-pop-menu > * {flex:1;}
 .h-pop-menu > *:last-child {border-left:1px solid var(--border-color);}
 .header-popup .close-btn {width:28px;height:28px;background:url(../images/ico/ico_close_black.svg) no-repeat center/20px;}
 .header-popup .close-btn >  span {position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0;white-space: nowrap;}
+.header-popup .sidebar-list + .sidebar-list {margin-top:0;padding-top:0;}
+.header-popup .sidebar-list + .sidebar-list::before {display:none;}
+.header-popup .sidebar-list > li > *,
+.sidebar-list.ico-ver > li {padding:12px 20px;}
 
 @media (max-width:1760px) {
     header > .content-wrap {max-width:100%;padding:0 30px;}
