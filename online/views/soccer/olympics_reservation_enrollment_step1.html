@@ -596,7 +596,6 @@
             }
         }
         function renderScheduleList(scheduleListEl, dateStr) {
-            alert('fdsjkdsj')
             var data = scheduleData[dateStr];
             var parts = dateStr.split('-');
             var month = parseInt(parts[1], 10);
@@ -802,14 +801,14 @@
             tabActions: {
                 0: ({ index }) => {
                     renderProgress(index);
-                    resetCalendar(calendarEl2, calendar2);
+                    // resetCalendar(calendarEl2, calendar2);
                     setTimeout(function () {
                         calendar.updateSize();
                     }, 0);
                 },
                 1: ({ index }) => {
                     renderProgress(index);
-                    resetCalendar(calendarEl, calendar);
+                    // resetCalendar(calendarEl, calendar);
                     setTimeout(function () {
                         calendar2.updateSize();
                     }, 0);

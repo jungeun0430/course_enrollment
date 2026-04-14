@@ -95,7 +95,7 @@ header .btn-wrap.sm {gap:8px;}
     header .header-left {gap:36px;}
     nav > ul > li > * {font-size:var(--txt-size03);.header-pop .close-btn {}adding:12px;}
 }
-@media (max-width:1024px) {
+@media (max-width:1200px) {
     header {height:80px;}
     header h1 > a.img {width:164px;height:auto;}
     header .btn-wrap {gap:6px;}
