@@ -2,7 +2,9 @@
 @import "../variable.css";
 @import "../font.css";
 @import "../reset.css";
+@import "../layout.css";
 @import "../common.css";
+@import "../table.css";
 @import "../responsive.css";
 
 /* 메인 페이지 입니다. */
@@ -48,8 +50,22 @@
     .online-box p {font-size: 20px;}
 }
 @media (max-width: 767px) {
+    .sec-intro {padding-top:80px;padding-bottom: 40px;}
+    #main.online-intro .title-wrap {margin-bottom:20px;}
+    #main.online-intro .title-wrap > span {font-size:14px;}
+    #main.online-intro .title-wrap > h1 {font-size:20px;}
     /* 올림픽공원 온라인예약 사이트 */
     .sec-tennis {width:100%;padding:60px 0;}
     .online-link-wrap {padding:0 20px;}
-    .online-link-wrap > ul {grid-template-columns:repeat(1,1fr);}
+    .online-box .image-wrap {width:74px;height:74px;margin-bottom:4px;}
+    .online-box .image-wrap > img {width:100%;}
+    .online-box p {font-size:16px;}
+    .online-box .desc-wrap {gap:8px;}
+    .online-link-wrap > ul {grid-template-columns:repeat(2,1fr);}
+}
+
+@media (max-width: 500px) {
+    .online-box .image-wrap {width:52px;height:52px;}
+    .online-box .image-wrap > img {width:100%;}
+    .online-link-wrap > ul {grid-gap: 8px;}
 }
