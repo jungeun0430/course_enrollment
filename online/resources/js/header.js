@@ -83,6 +83,9 @@ function closeMenu() {
 }
 
 // -------- 사이드바 열고 닫기 관련 함수 모음 -----------
+// 포커스 트랩 핸들러 (removeEventListener에서 참조하기 위해 외부 스코프에 선언)
+let handleKeydown = null;
+
 // 포커스 트랩 함수
 function trapFocus(container) {
     const focusableElements = Array.from(
@@ -101,7 +104,7 @@ function trapFocus(container) {
 
     firstEl.focus();
 
-    function handleKeydown(e) {
+    handleKeydown = function(e) {
         if (e.key === 'Tab') {
             if (e.shiftKey) {
                 if (document.activeElement === firstEl) {
@@ -117,7 +120,9 @@ function trapFocus(container) {
         } else if (e.key === 'Escape') {
             closeSidebar();
         }
-    }
+    };
+
+    document.addEventListener('keydown', handleKeydown);
 }
 
 // 상태 초기화 함수
