@@ -519,6 +519,7 @@ span.title-wrap > .h4,
 .us-list > li > div > img {width: 100%;}
 .us-list > li > div > .pc-only2 + .pc-only2 {margin-top:37px;}
 .us-list > li > div > .mobile-only2 + .mobile-only2 {margin-top:16px;}
+.us-list > li > div.guide-image-box {padding-left:0;}
 .us-inner > p {font-size:var(--txt-size04);font-weight:var(--fw-medium);color:var(--color-gray);margin-bottom:12px;}
 .us-inner.insert-list > p {margin-bottom:0;}
 .us-inner > p > span {color:var(--color-primary);font-weight:var(--fw-bold)}
