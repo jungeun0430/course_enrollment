@@ -105,6 +105,7 @@
 /* 셀 날짜 */
 .fc-theme-standard .fc-scrollgrid,
 .fc-theme-standard td, .fc-theme-standard th {border-color:var(--border-color);height:46px;}
+.fc-theme-standard td {background-color:var(--color-white);}
 .fc-theme-standard th .fc-scrollgrid-sync-inner {height:100%;}
 .fc .fc-col-header-cell-cushion {height:100%;font-size:var(--txt-size02);color:var(--color-black);font-weight:var(--fw-medium);line-height:1.4;padding:10px;}
 .fc-theme-standard th.fc-day-sat .fc-col-header-cell-cushion {color:var(--color-primary);}
