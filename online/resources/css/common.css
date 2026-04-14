@@ -291,11 +291,13 @@ span.title-wrap > .h4,
 /* sub-title */
 .sub-title-wrap {margin-bottom:16px;}
 .sub-title-wrap > h2,
-.sub-title-wrap > h4 {font-size:var(--txt-size05);font-weight:var(--fw-bold);color:var(--color-black);}
+.sub-title-wrap > h3,
+.sub-title-wrap > h4:not(.dot-text) {font-size:var(--txt-size05);font-weight:var(--fw-bold);color:var(--color-black);}
 @media (max-width:767px) {
     .sub-title-wrap {margin-bottom:12px;}
     .sub-title-wrap > h2,
-    .sub-title-wrap > h4 {font-size:var(--txt-size04);}
+    .sub-title-wrap > h3,
+    .sub-title-wrap > h4:not(.dot-text) {font-size:var(--txt-size04);}
 }
 
 /* sub-* */
