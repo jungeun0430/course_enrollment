@@ -719,7 +719,7 @@
             },
             dayCellClassNames: function(arg) {
                 var d = arg.date; var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-                return (dateStr >= AㅡCTIVE_START2 && dateStr <= ACTIVE_END2) ? ['is-active'] : ['is-disabled'];
+                return (dateStr >= ACTIVE_START2 && dateStr <= ACTIVE_END2) ? ['is-active'] : ['is-disabled'];
             },
             events: [
                 {
@@ -777,7 +777,6 @@
         new TabManager({
             tabActions: {
                 0: ({ index }) => {
-                    alert('df')
                     renderProgress(index);
                     resetCalendar(calendarEl2, calendar2);
                     setTimeout(function () {
@@ -785,7 +784,6 @@
                     }, 0);
                 },
                 1: ({ index }) => {
-                    alert('3e')
                     renderProgress(index);
                     resetCalendar(calendarEl, calendar);
                     setTimeout(function () {
