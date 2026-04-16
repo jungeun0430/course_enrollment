@@ -700,6 +700,22 @@
                 if (!confirm("is this okay?")) {
                     info.revert();
                 }
+            },
+
+            eventClick: function(info) {
+                info.jsEvent.preventDefault();
+
+                console.log('클릭한 뱃지 id:', info.event.id);
+                console.log('클릭한 뱃지 title:', info.event.title);
+                console.log('클릭한 날짜:', info.event.startStr);
+
+                if (info.event.id.indexOf('possible') === 0) {
+                    alert('가능 뱃지 클릭');
+                } else if (info.event.id.indexOf('progress') === 0) {
+                    alert('진행 뱃지 클릭');
+                } else if (info.event.id.indexOf('closed') === 0) {
+                    alert('마감 뱃지 클릭');
+                }
             }
         });
 
@@ -776,6 +792,22 @@
 
                 if (!confirm("is this okay?")) {
                     info.revert();
+                }
+            },
+
+            eventClick: function(info) {
+                info.jsEvent.preventDefault();
+
+                console.log('클릭한 뱃지 id:', info.event.id);
+                console.log('클릭한 뱃지 title:', info.event.title);
+                console.log('클릭한 날짜:', info.event.startStr);
+
+                if (info.event.id.indexOf('possible') === 0) {
+                    alert('가능 뱃지 클릭');
+                } else if (info.event.id.indexOf('progress') === 0) {
+                    alert('진행 뱃지 클릭');
+                } else if (info.event.id.indexOf('closed') === 0) {
+                    alert('마감 뱃지 클릭');
                 }
             }
         });
