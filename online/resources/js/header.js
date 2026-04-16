@@ -5,7 +5,7 @@ function openSideBar() {
     /* 1. 사이드바 */
     const $dimOverlay = $('#dim-overlay'); // Dim 처리 요소
     const $sidebar = $('.sidebar'); // 사이드바 메뉴
-    const breakpoint = 767; // PC와 모바일을 구분할 기준 너비
+    const breakpoint = 1200; // PC와 모바일을 구분할 기준 너비
 
     if ($(window).width() < breakpoint) {
         $dimOverlay.addClass('active');
@@ -193,7 +193,7 @@ $(document).ready(function() {
     /* 1. [공통]사이드바 */
     // 윈도우 리사이즈 이벤트
     $(window).on('resize', function () {
-        if ($(window).width() >= 767) {
+        if ($(window).width() >= 1200) {
             // PC 모드로 전환되면 초기화
             removeActiveClasses();
         }
